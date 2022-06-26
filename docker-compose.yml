@@ -259,27 +259,25 @@ services:
       - "traefik.http.routers.oauth-rtr.service=oauth-svc"
       - "traefik.http.services.oauth-svc.loadbalancer.server.port=4181"
 
-
-  expressvpn:
-    container_name: expressvpn
-    image: polkaned/expressvpn
-    environment:
-      - ACTIVATION_CODE=$EXPRESSVPN
-      - SERVER=Germany
-      - PREFERRED_PROTOCOL=auto
-      - LIGHTWAY_CIPHER=auto
-    cap_add:
-      - NET_ADMIN
-    devices: 
-      - /dev/net/tun
-    stdin_open: true
-    tty: true
-    command: /bin/bash
-    privileged: true
-    restart: unless-stopped
-    ports:
-      - "5050:5050"
-      - "9117:9117"
+  transmission-openvpn:
+      cap_add:
+          - NET_ADMIN
+      volumes:
+          - '$DOCKERDIR/appdata/transmission-vpn/:/data'
+      environment:
+          - OPENVPN_PROVIDER=PIA
+          - OPENVPN_CONFIG=france
+          - OPENVPN_USERNAME=user
+          - OPENVPN_PASSWORD=pass
+          - LOCAL_NETWORK=192.168.1.0/16
+      logging:
+          driver: json-file
+          options:
+              max-size: 10m
+      image: haugene/transmission-openvpn
+      ports:
+        - "5050:5050"
+        - "9117:9117"
 
   # Heimdall - Unified Frontend Alternative
   # Putting all services behind Oragnizr slows things down.
@@ -352,11 +350,11 @@ services:
     container_name: jackett
     restart: always
     depends_on:
-      - expressvpn
+      - transmission-openvpn
     # networks:
     #   t2_proxy:
     #     ipv4_address: 192.168.10.161
-    network_mode: service:expressvpn
+    network_mode: service:transmission-openvpn
     security_opt:
       - no-new-privileges:true
     # ports:
@@ -385,14 +383,14 @@ services:
   flexget:
     image: wiserain/flexget
     container_name: flexget
-    hostname: flexget
+    #hostname: flexget
     restart: unless-stopped
     depends_on:
-      - expressvpn
+      - transmission-openvpn
     # networks:
     #   t2_proxy:
     #     ipv4_address: 192.168.10.167
-    network_mode: service:expressvpn
+    network_mode: service:transmission-openvpn
     security_opt:
       - no-new-privileges:true
     # ports:
