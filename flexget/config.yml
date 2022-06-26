@@ -44,12 +44,10 @@ templates:
       from:
         entry_list: myanimelist-series
       settings:
-        identified_by: sequence
+        identified_by: auto
         timeframe: 4 hours
         target: 1080p
         quality: 720p-1080p
-        special_ids:
-          - OVA
     content_filter:
       require:
         - '*.mkv'
@@ -66,16 +64,16 @@ templates:
 ##### Movies config
 #
   movies-1080p:
-    tmdb_lookup: no
-    imdb_lookup: no
+    tmdb_lookup: yes
+    imdb_lookup: yes
     trakt_lookup: yes
     movie_list: movies
     quality: 1080p webrip+
 
 
   movies-720p:
-    tmdb_lookup: no
-    imdb_lookup: no
+    tmdb_lookup: yes
+    imdb_lookup: yes
     trakt_lookup: yes
     movie_list: movies
     quality: any
@@ -130,17 +128,17 @@ templates:
     free_space:
       path: "/{? folder.root ?}"
       space: 5000
-    # log_filter:
-    # - message: "is already marked seen in the task populate-series-db"
-    # - message: "is before begin value"
-    # - message: "because entity has already been downloaded"
-    # - message: "because quality already downloaded"
-    # - message: "appears to be an episode pack"
-    #   plugin: parser_internal
-    # - message: "rejecting"
-    #   plugin: content_size
-    # - message: "Field `title` is now "
-    #   plugin: manipulate
+    log_filter:
+     - message: "is already marked seen in the task populate-series-db"
+     - message: "is before begin value"
+     - message: "because entity has already been downloaded"
+     - message: "because quality already downloaded"
+     - message: "appears to be an episode pack"
+       plugin: parser_internal
+     - message: "rejecting"
+       plugin: content_size
+     - message: "Field `title` is now "
+       plugin: manipulate
 
 ##### Common torrents config
 #
@@ -261,8 +259,6 @@ tasks:
 #
   populate-series-db:
     priority: 1
-    proxy:
-      http: http://192.168.1.2:8888
     template:
       - series-metainfo
     seen: local
@@ -284,8 +280,6 @@ tasks:
 #
   get-series-nextep:
     priority: 2
-    proxy:
-      http: http://192.168.1.2:8888
     template:
       - disable-seen-retry
       - series-metainfo
@@ -305,8 +299,6 @@ tasks:
 #
   set-series-nextep:
     priority: 3
-    proxy:
-      http: http://192.168.1.2:8888
     template:
       - disable-seen-retry
       - series-metainfo
@@ -321,8 +313,6 @@ tasks:
 #
   fill-series-list:
     priority: 4
-    proxy:
-      http: http://192.168.1.2:8888
     template:
       - disable-seen-retry
       - series-metainfo
@@ -363,8 +353,6 @@ tasks:
 #
   download-series-rss:
     priority: 7
-    proxy:
-      http: http://192.168.1.2:8888
     template:
       - series
       - reject
@@ -372,7 +360,7 @@ tasks:
       - deluge-series
       - pushbullet
     inputs:
-      - rss: http://jackett:9117/api/v2.0/indexers/lostfilm/results/torznab/api?apikey=a78u7tszitt2r3c5x54hyhwxdiisqclt&t=search&cat=&q=
+      - rss: http://192.168.1.2:9117/api/v2.0/indexers/lostfilm/results/torznab/api?apikey=a78u7tszitt2r3c5x54hyhwxdiisqclt&t=search&cat=&q=
 
 
 
@@ -380,8 +368,6 @@ tasks:
 #
   download-seasons-discover:
     priority: 8
-    proxy:
-      http: http://192.168.1.2:8888
     template:
       - series
       - reject
@@ -400,7 +386,7 @@ tasks:
             from_start: yes
       from:
         - torznab:
-            website: http://jackett:9117/api/v2.0/indexers/lostfilm/results/torznab/
+            website: http://192.168.1.2:9117/api/v2.0/indexers/lostfilm/results/torznab/
             apikey: a78u7tszitt2r3c5x54hyhwxdiisqclt
             searcher: tv
 
@@ -409,8 +395,6 @@ tasks:
 #
   download-series-discover:
     priority: 9
-    proxy:
-      http: http://192.168.1.2:8888
     template:
       - series
       - reject
@@ -429,7 +413,7 @@ tasks:
             from_start: yes
       from:
         - torznab:
-            website: http://jackett:9117/api/v2.0/indexers/lostfilm/results/torznab/
+            website: http://192.168.1.2:9117/api/v2.0/indexers/lostfilm/results/torznab/
             apikey: a78u7tszitt2r3c5x54hyhwxdiisqclt
             searcher: tv
 
@@ -440,8 +424,6 @@ tasks:
 #
   fill-anime-series-list:
     priority: 11
-    proxy:
-      http: http://192.168.1.2:8888
     template:
       - disable-seen-retry
     metainfo_series: yes
@@ -450,10 +432,15 @@ tasks:
         - entry_list: myanimelist-series
     domain_delay:
       myanimelist.net: 5 seconds
-    myanimelist:
-      user_id: "{? myanimelist.id ?}"
-      list: both
-      type: shows
+    my_anime_list:
+      username: "{? myanimelist.id ?}"
+      status:
+        - watching
+        - plan_to_watch
+      airing_status:
+        - airing
+        - planned
+      type: tv
     accept_all: yes
     set:
       title: "{{myanimelist_name|re_replace('[-/:;.★](?=[a-zA-Z])', ' ')|re_replace('[:;](?![a-zA-Z])|[`´()]|TV|', '')|re_replace('Season ', 'S')|re_replace('  +', ' ')}}"
@@ -465,17 +452,20 @@ tasks:
 #
   fill-anime-movies-queue:
     priority: 13
-    proxy:
-      http: http://192.168.1.2:8888
     seen:
       fields:
         - myanimelist_name
     domain_delay:
       myanimelist.net: 5 seconds
-    myanimelist:
-      user_id: "{? myanimelist.id ?}"
-      list: both
-      type: movies
+    my_anime_list:
+      username: "{? myanimelist.id ?}"
+      status:
+        - watching
+        - plan_to_watch
+      airing_status:
+        - airing
+        - planned
+      type: movie
     accept_all: yes
     set:
       title: "{{myanimelist_name|re_replace('[-/:;.★](?=[a-zA-Z])', ' ')|re_replace('[:;](?![a-zA-Z])|[`´()]', '')}}"
@@ -504,8 +494,6 @@ tasks:
 #
   download-anime-series-rss:
     priority: 15
-    proxy:
-      http: http://192.168.1.2:8888
     template:
       - anime-series
       - anime-reject
@@ -514,31 +502,31 @@ tasks:
       - pushbullet
     inputs:
       - rss: https://nyaa.si/?page=rss&c=1_2&f=2
+      - rss: http://192.168.1.2:9117/api/v2.0/indexers/anidub/results/torznab/api?apikey=a78u7tszitt2r3c5x54hyhwxdiisqclt&t=search&cat=&q=
 
 
 ##### Download anime from RSS feed from all groups
 #
-  download-anime-series-all-rss:
-    priority: 16
-    proxy:
-      http: http://192.168.1.2:8888
-    delay: 2 days
-    template:
-      - anime-series
-      - anime-reject
-      - torrents
-      - deluge-anime-series
-      - pushbullet
-    inputs:
-      - rss: https://nyaa.si/?page=rss&c=1_2
+#  download-anime-series-all-rss:
+#    priority: 16
+#    proxy:
+#      http: http://192.168.1.2:8888
+#    delay: 2 days
+#    template:
+#      - anime-series
+#      - anime-reject
+#      - torrents
+#      - deluge-anime-series
+#      - pushbullet
+#    inputs:
+#      - rss: https://nyaa.si/?page=rss&c=1_2
+#      - rss: http://192.168.1.2:9117/api/v2.0/indexers/anidub/results/torznab/api?apikey=a78u7tszitt2r3c5x54hyhwxdiisqclt&t=search&cat=&q=
 
 
 ##### Discover and download anime from verified groups
 #
   download-anime-series-discover:
     priority: 18
-    proxy:
-      http: http://192.168.1.2:8888
     template:
       - anime-series
       - anime-reject
@@ -558,17 +546,15 @@ tasks:
             category: anime eng
             filter: trusted only
         - torznab:
-            website: http://jackett:9117/api/v2.0/indexers/anidub/results/torznab/
+            website: http://192.168.1.2:9117/api/v2.0/indexers/anidub/results/torznab/
             apikey: a78u7tszitt2r3c5x54hyhwxdiisqclt
-            searcher: tv
+            searcher: search
 
 
 ##### Discover and download anime from all groups
 #
   download-anime-series-all-discover:
     priority: 19
-    proxy:
-      http: http://192.168.1.2:8888
     delay: 2 days
     template:
       - anime-series
@@ -589,17 +575,15 @@ tasks:
             category: anime eng
             filter: all
         - torznab:
-            website: http://jackett:9117/api/v2.0/indexers/anidub/results/torznab/
+            website: http://192.168.1.2:9117/api/v2.0/indexers/anidub/results/torznab/
             apikey: a78u7tszitt2r3c5x54hyhwxdiisqclt
-            searcher: tv
+            searcher: search
 
 
 ##### Discover and download anime movies
 #
   download-anime-movies-discover:
     priority: 20
-    proxy:
-      http: http://192.168.1.2:8888
     template:
       - anime-movies
       - anime-reject
@@ -626,8 +610,6 @@ tasks:
 #
   clean-movies-queue:
     priority: 31
-    proxy:
-      http: http://192.168.1.2:8888
     template:
       - disable-seen-retry
       - movies-metainfo
@@ -648,8 +630,6 @@ tasks:
 ##### Fill the movie queue with movies from trakt list
 #
   fill-movies-queue:
-    proxy:
-      http: http://192.168.1.2:8888
     priority: 32
     trakt_list:
       account: "{? trakt.account ?}"
@@ -689,11 +669,8 @@ tasks:
 #
   download-movies-1080p-discover:
     priority: 37
-    proxy:
-      http: http://192.168.1.2:8888
     template:
       - movies-1080p
-      - disable-seen-retry
       - reject
       - torrents
       - deluge-movies
@@ -712,13 +689,9 @@ tasks:
         - movie_list: movies
       from:
         - torznab:
-            website: http://jackett:9117/api/v2.0/indexers/rutor/results/torznab/
+            website: http://192.168.1.2:9117/api/v2.0/indexers/all/results/torznab/
             apikey: a78u7tszitt2r3c5x54hyhwxdiisqclt
-            searcher: movie
-        - torznab:
-            website: http://jackett:9117/api/v2.0/indexers/gtorrentpro/results/torznab/
-            apikey: a78u7tszitt2r3c5x54hyhwxdiisqclt
-            searcher: movie
+            searcher: search
     list_match:
       from:
         - movie_list: movies
@@ -733,10 +706,7 @@ tasks:
 #
   download-movies-720p-discover:
     priority: 38
-    proxy:
-      http: http://192.168.1.2:8888
     template:
-      - disable-seen-retry
       - movies-720p
       - reject
       - torrents
@@ -756,13 +726,9 @@ tasks:
         - movie_list: movies
       from:
         - torznab:
-            website: https://jackett.akastav.com/api/v2.0/indexers/rutor/results/torznab/
+            website: http://192.168.1.2:9117/api/v2.0/indexers/all/results/torznab/
             apikey: a78u7tszitt2r3c5x54hyhwxdiisqclt
-            searcher: movie
-        - torznab:
-            website: https://jackett.akastav.com/api/v2.0/indexers/gtorrentpro/results/torznab/
-            apikey: a78u7tszitt2r3c5x54hyhwxdiisqclt
-            searcher: movie
+            searcher: search
     list_match:
       from:
         - movie_list: movies
@@ -779,8 +745,6 @@ tasks:
 #
   move-series:
     priority: 41
-    proxy:
-      http: http://192.168.1.2:8888
     template:
       - disable-seen-retry
       - series-metainfo
@@ -815,8 +779,6 @@ tasks:
 #
   move-anime:
     priority: 42
-    proxy:
-      http: http://192.168.1.2:8888
     template:
       - disable-seen-retry
       - series-guessit
@@ -848,8 +810,6 @@ tasks:
 # #
   move-movies:
     priority: 43
-    proxy:
-      http: http://192.168.1.2:8888
     template:
       - disable-seen-retry
       - movies-metainfo
@@ -865,7 +825,7 @@ tasks:
         - \bsample\b
     move:
       to: "/{? folder.root ?}{? folder.movies ?}"
-      rename: "{{trakt_name|pathscrub}} ({{trakt_year}}){% if quality|default(False) %} - [{{quality}}]{% endif %}"
+      rename: "{{tmdb_name|pathscrub}} ({{tmdb_year}}){% if quality|default(False) %} - [{{quality}}]{% endif %}"
       along:
         extensions:
           - srt
@@ -923,8 +883,6 @@ tasks:
 #
   update-series-list:
     priority: 51
-    proxy:
-      http: http://192.168.1.2:8888
     template:
       - disable-seen-retry
       - series-metainfo
@@ -950,8 +908,6 @@ tasks:
 #
   clean-series-list:
     priority: 53
-    proxy:
-      http: http://192.168.1.2:8888
     delay: 8 day
     template:
       - disable-seen-retry
