@@ -259,6 +259,28 @@ services:
       - "traefik.http.routers.oauth-rtr.service=oauth-svc"
       - "traefik.http.services.oauth-svc.loadbalancer.server.port=4181"
 
+
+  expressvpn:
+    container_name: expressvpn
+    image: polkaned/expressvpn
+    environment:
+      - ACTIVATION_CODE=$EXPRESSVPN
+      - SERVER=Germany
+      - PREFERRED_PROTOCOL=auto
+      - LIGHTWAY_CIPHER=auto
+    cap_add:
+      - NET_ADMIN
+    devices: 
+      - /dev/net/tun
+    stdin_open: true
+    tty: true
+    command: /bin/bash
+    privileged: true
+    restart: unless-stopped
+    ports:
+      - "5050:5050"
+      - "9117:9117"
+
   # Heimdall - Unified Frontend Alternative
   # Putting all services behind Oragnizr slows things down.
   heimdall:
@@ -329,13 +351,16 @@ services:
     image: linuxserver/jackett:latest
     container_name: jackett
     restart: always
-    networks:
-      t2_proxy:
-        ipv4_address: 192.168.10.161
+    depends_on:
+      - expressvpn
+    # networks:
+    #   t2_proxy:
+    #     ipv4_address: 192.168.10.161
+    network_mode: service:expressvpn
     security_opt:
       - no-new-privileges:true
-    ports:
-     - "9117:9117"
+    # ports:
+    #  - "9117:9117"
     volumes:
       - $DOCKERDIR/appdata/jackett:/config
       - $DATADIR/downloads:/data/downloads
@@ -362,13 +387,16 @@ services:
     container_name: flexget
     hostname: flexget
     restart: unless-stopped
-    networks:
-      t2_proxy:
-        ipv4_address: 192.168.10.167
+    depends_on:
+      - expressvpn
+    # networks:
+    #   t2_proxy:
+    #     ipv4_address: 192.168.10.167
+    network_mode: service:expressvpn
     security_opt:
       - no-new-privileges:true
-    ports:
-      - "5050:5050"
+    # ports:
+    #   - "5050:5050"
     volumes:
       - $DOCKERDIR/appdata/flexget:/config
       - $DATADIR:/plex
@@ -400,8 +428,8 @@ services:
   ############################# MEDIA
   # Plex - Media Server
   plexms:
-  #  image: plexinc/pms-docker:latest
-    image: lscr.io/linuxserver/plex
+    image: plexinc/pms-docker:latest
+    #image: lscr.io/linuxserver/plex
     container_name: plexms
     restart: "no"
     # profiles:
@@ -444,9 +472,10 @@ services:
       PLEX_GID: $PGID
       PUID: $PUID
       PGID: $PGID
-      #VIRTUAL_HOST: proxplex.$DOMAINNAME
-      #VIRTUAL_PORT: 443
-      #VIRTUAL_NETWORK: t2_proxy
+      ALLOWED_NETWORKS: "192.168.1.0/24,192.168.10.0/24,172.16.0.0/16"
+      VIRTUAL_HOST: plex.$DOMAINNAME
+      VIRTUAL_PORT: 443
+      VIRTUAL_NETWORK: t2_proxy
     secrets:
       - plex_claim
     labels:
