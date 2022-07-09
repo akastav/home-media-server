@@ -259,25 +259,61 @@ services:
       - "traefik.http.routers.oauth-rtr.service=oauth-svc"
       - "traefik.http.services.oauth-svc.loadbalancer.server.port=4181"
 
-  transmission-openvpn:
-      cap_add:
-          - NET_ADMIN
-      volumes:
-          - '$DOCKERDIR/appdata/transmission-vpn/:/data'
-      environment:
-          - OPENVPN_PROVIDER=PIA
-          - OPENVPN_CONFIG=france
-          - OPENVPN_USERNAME=user
-          - OPENVPN_PASSWORD=pass
-          - LOCAL_NETWORK=192.168.1.0/16
-      logging:
-          driver: json-file
-          options:
-              max-size: 10m
-      image: haugene/transmission-openvpn
-      ports:
-        - "5050:5050"
-        - "9117:9117"
+
+  expressvpn:
+    container_name: expressvpn
+    image: akastav/expressvpn
+    networks:
+      - default
+    environment:
+      - ACTIVATION_CODE=EEJS6X6ZND3AI4FJPBTJGPM
+      - SERVER=ussm
+      - PREFERRED_PROTOCOL=auto
+      - LIGHTWAY_CIPHER=auto
+    cap_add:
+      - NET_ADMIN
+    devices: 
+       - /dev/net/tun
+    stdin_open: true
+    tty: true
+    command: /bin/bash
+    privileged: true
+    restart: unless-stopped
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
+    ports:
+      - 9117:9117
+      - 5050:5050
+      - 8191:8191
+
+
+  #transmission-openvpn:
+  #    container_name: transmission-openvpn
+  #    networks:
+  #      - default
+  #    dns:
+  #      - 1.1.1.1
+  #      - 8.8.8.8
+  #    cap_add:
+  #        - NET_ADMIN
+  #    volumes:
+  #        - '$DOCKERDIR/appdata/transmission-vpn/:/etc/openvpn/custom'
+  #        - '$DATADIR/downloads/:/data'
+  #    environment:
+  #        - OPENVPN_PROVIDER=EXPRESSVPN
+  #        - OPENVPN_CONFIG=my_expressvpn_spain_-_barcelona_-_2_udp
+  #        - OPENVPN_USERNAME=ks1ykzxk3uzevwzdlsx7hnnt
+  #        - OPENVPN_PASSWORD=dluw7lfqlvshezu3ebxfwp4k
+  #        - LOCAL_NETWORK=192.168.1.0/24
+  #    logging:
+  #        driver: json-file
+  #        options:
+  #            max-size: 10m
+  #    image: haugene/transmission-openvpn
+  #    ports:
+  #      - "5050:5050"
+  #      - "9117:9117"
 
   # Heimdall - Unified Frontend Alternative
   # Putting all services behind Oragnizr slows things down.
@@ -343,6 +379,18 @@ services:
 
   ############################# INDEXERS
 
+  flaresolverr:
+    # DockerHub mirror flaresolverr/flaresolverr:latest
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    container_name: flaresolverr
+    network_mode: service:expressvpn
+    environment:
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+      - LOG_HTML=${LOG_HTML:-false}
+      - CAPTCHA_SOLVER=${CAPTCHA_SOLVER:-none}
+      - TZ=Europe/Moscow
+    restart: unless-stopped
+
   # Jackett - Torrent proxy
   # Set url_base in Jackett settings if using PathPrefix
   jackett:
@@ -350,14 +398,14 @@ services:
     container_name: jackett
     restart: always
     depends_on:
-      - transmission-openvpn
+      - expressvpn
     # networks:
     #   t2_proxy:
     #     ipv4_address: 192.168.10.161
-    network_mode: service:transmission-openvpn
+    network_mode: service:expressvpn
     security_opt:
       - no-new-privileges:true
-    # ports:
+    #ports:
     #  - "9117:9117"
     volumes:
       - $DOCKERDIR/appdata/jackett:/config
@@ -367,6 +415,7 @@ services:
       PUID: $PUID
       PGID: $PGID
       TZ: $TZ
+    #  RUN_OPTS: "--ProxyConnection=torproxy:8118"
     labels:
       - "traefik.enable=true"
       ## HTTP Routers
@@ -386,18 +435,18 @@ services:
     #hostname: flexget
     restart: unless-stopped
     depends_on:
-      - transmission-openvpn
+      - expressvpn
     # networks:
     #   t2_proxy:
     #     ipv4_address: 192.168.10.167
-    network_mode: service:transmission-openvpn
+    network_mode: service:expressvpn
     security_opt:
       - no-new-privileges:true
     # ports:
     #   - "5050:5050"
     volumes:
       - $DOCKERDIR/appdata/flexget:/config
-      - $DATADIR:/plex
+      - $DATADIR:/data
     environment:
       - PGID=$PGID
       - PUID=$PUID
