@@ -57,6 +57,7 @@ services:
   ############################# FRONTENDS
   majordomo:
     build: ./app-conf/debian/
+    container_name: majordomo
     networks:
       t2_proxy:
         ipv4_address: 192.168.10.220 # You can specify a static IP
@@ -66,17 +67,20 @@ services:
       - '/$DOCKERDIR/appdata/zigbee2mqtt/log:/opt/zigbee2mqtt/data/log'
     labels:
       - "traefik.enable=true"
-      ## HTTP Routers
-      - "traefik.http.routers.majordomo-rtr.entrypoints=https"
-      - "traefik.http.routers.majordomo-rtr.rule=Host(`home.$DOMAINNAME`)"
-      ## Middlewares
-      - "traefik.http.routers.majordomo-rtr.middlewares=chain-oauth@file"
-      ## HTTP Services
+      # HTTP Routers Auth Bypass
+      - "traefik.http.routers.majordomo-rtr-bypass.entrypoints=https"
+      - "traefik.http.routers.majordomo-rtr-bypass.rule=Host(`home.$DOMAINNAME`)"
+      - "traefik.http.routers.majordomo-rtr-bypass.priority=100"
+      # Middlewares
+      - "traefik.http.routers.majordomo-rtr-bypass.middlewares=chain-no-auth@file"
+      # HTTP Services
       - "traefik.http.routers.majordomo-rtr.service=majordomo-svc"
-      - "traefik.http.services.majordomo-svc.loadbalancer.server.port=80"
+      - "traefik.http.routers.majordomo-rtr-bypass.service=majordomo-svc"
+      - "traefik.http.services.majordomo-svc.loadbalancer.server.port=80" 
 
   mysql:
     image: mariadb
+    container_name: mysql
     networks:
       t2_proxy:
         ipv4_address: 192.168.10.221 # You can specify a static IP
