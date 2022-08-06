@@ -11,7 +11,7 @@ $(window).load(function() {
 	<div class="alert alert-success" id="alert_msg"><#LANG_DATA_SAVED#></div>
 [#endif OK#]
 [#if ERR#]
-	<div class="alert alert-danger" id="alert_msg"><#LANG_FILLOUT_REQURED#></div> 
+	<div class="alert alert-danger" id="alert_msg"><#LANG_FILLOUT_REQURED#></div>
 	<script>
 	$(window).load(function() {
 		[#if SETTINGS_CODEEDITOR_SHOWERROR == '1' AND SETTINGS_CODEEDITOR_TURNONSETTINGS == '1'#]
@@ -20,16 +20,16 @@ $(window).load(function() {
 			if(error_line == 0) error_line = 1;
 			find = $('div pre.CodeMirror-line:eq('+error_line_find+')');
 			find.attr('id', 'errorline_'+error_line);
-		
+
 			var newElems = $("<div class='cm-error' style='border-top: 1px solid red;font-weight: bold;font-style: italic;'>Ошибка компилятора -> [#ERRORS#]</div>");
 			$('div pre.CodeMirror-line:eq('+error_line_find+')').append(newElems);
 		[#endif#]
-		
+
 		[#if SETTINGS_CODEEDITOR_UPTOLINE == '1' AND SETTINGS_CODEEDITOR_TURNONSETTINGS == '1'#]
-			location.href='#errorline_'+error_line; 
+			location.href='#errorline_'+error_line;
 		[#endif#]
 	});
-			
+
 	</script>
 [#endif ERR#]
 <style>
@@ -38,7 +38,7 @@ $(window).load(function() {
 	border: 2px solid #f7f7f7;
 }
 </style>
-	
+
 <form action="?" method="get" class="form">
 	<select name="method" onchange="this.form.submit();" class="form-control">
 		[#begin METHODS#]
@@ -63,7 +63,7 @@ $(window).load(function() {
 					</div>
 					<textarea id="error_old_code" style="display:none;">[#ERR_OLD_CODE#]</textarea>
 				[#endif ERRORS#]
-				
+
                 [#module name="blockly_code" system_name="object<#OBJECT_ID#>_method<#METHOD_ID#>" code_field="code" action=""#]
                 <div id="code_area" style="padding-top: 10px">
 					[#if SETTINGS_CODEEDITOR_TURNONSETTINGS != 1#]
@@ -71,7 +71,7 @@ $(window).load(function() {
 							<#LANG_CODEEDITOR_NOTY_TURNOFF#>
 						</div>
 					[#endif SETTINGS_CODEEDITOR_TURNONSETTINGS#]
-					
+
 					<div id="autosave_code_in_time_div" style="color: gray;font-style: italic;font-size: 1rem;display:none;margin-left: 5px;margin-bottom: 4px;">
 						<i class="glyphicon glyphicon-floppy-saved" style="vertical-align: top;"></i> <#LANG_CODEEDITOR_AUTOSAVE_CODE#> <span id="autosave_code_in_time"></span>. <#LANG_CODEEDITOR_AUTOSAVE_CODE_HELP#>
 					</div>

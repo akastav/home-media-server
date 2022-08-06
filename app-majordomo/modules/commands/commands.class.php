@@ -1,6 +1,6 @@
 <?php
 /**
-* Commands 
+* Commands
 *
 * Commands
 *
@@ -317,7 +317,7 @@ function admin(&$out) {
    }
    endMeasure('getLabel '.$item['TITLE'], 1);
    endMeasure('getLabel',1);
-   exit;   
+   exit;
   }
 
   if ($op=='get_value') {
@@ -336,7 +336,7 @@ function admin(&$out) {
     echo json_encode($res);
    }
    endMeasure('getValue',1);
-   exit;   
+   exit;
   }
 
 
@@ -375,7 +375,7 @@ function admin(&$out) {
      runScriptSafe($item['SCRIPT_ID'], $params);
     }
     if ($item['CODE']) {
-     
+
                   try {
                    $code=$item['CODE'];
                    $success=eval($code);
@@ -883,7 +883,7 @@ function usual(&$out) {
    for($i=0;$i<$total;$i++) {
     $commands[$i]['CUR_VALUE']=$value;
     SQLUpdate('commands', $commands[$i]);
-   }  
+   }
  }
 
  /**
@@ -1032,7 +1032,7 @@ function usual(&$out) {
     }
 
     return $item;
-   
+
   }
 
 /**

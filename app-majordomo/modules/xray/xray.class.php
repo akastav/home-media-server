@@ -540,14 +540,14 @@ class xray extends module
                         } else {
 							$responce['LIST'][$i]['DESC'] = '';
 						}
-						
+
 						$responce['LIST'][$i]['VALUE'] = htmlspecialchars($res[$i]['VALUE']);
 						$responce['LIST'][$i]['UPDATE'] = $res[$i]['UPDATED'];
 						$responce['LIST'][$i]['SOURCE'] = $res[$i]['SOURCE'];
                     }
-					
+
 					$responce['LIST'] = array_reverse($responce['LIST']);
-					
+
 					echo json_encode($responce);
                 }
 
@@ -666,18 +666,18 @@ class xray extends module
 					$responce = [];
 					$responce['MODE'] = 'performance';
 					$responce['TOTAL'] = $total;
-					
+
 					for ($i = 0; $i < $total; $i++) {
 						$responce['LIST'][$i]['OPERATION'] = htmlspecialchars($res[$i]['OPERATION']);
 						$responce['LIST'][$i]['COUNTER'] = $res[$i]['TOTAL'];
 						$responce['LIST'][$i]['TIME'] = number_format($res[$i]['TIME_TOTAL'], 2);
 						$responce['LIST'][$i]['AVTIME'] = number_format($res[$i]['TIME_TOTAL'] / $res[$i]['TOTAL'], 2);
                     }
-					
+
 					$responce['LIST'] = array_reverse($responce['LIST']);
-					
+
 					echo json_encode($responce);
-					
+
                     SQLExec("DELETE FROM performance_log WHERE ADDED<'" . date('Y-m-d H:i:s', time() - 60 * 60) . "'");
                 }
 
@@ -688,32 +688,32 @@ class xray extends module
                     }
                     $res = SQLSelect("SELECT methods.*, objects.TITLE as OBJECT, objects.DESCRIPTION as OBJECT_DESCRIPTION, methods.DESCRIPTION FROM methods LEFT JOIN objects ON methods.OBJECT_ID=objects.ID WHERE $qry ORDER BY methods.EXECUTED DESC");//methods.OBJECT_ID<>0
                     $total = count($res);
-					
+
 					$responce = [];
 					$responce['MODE'] = 'methods';
 					$responce['TOTAL'] = $total;
-					
+
 					for ($i = 0; $i < $total; $i++) {
 						@$tmp = unserialize($res[$i]['EXECUTED_PARAMS']);
                         if ($tmp['ORIGINAL_OBJECT_TITLE'] && !$res[$i]['OBJECT']) {
                             $res[$i]['OBJECT'] = $tmp['ORIGINAL_OBJECT_TITLE'];
                             $res[$i]['EXECUTED_PARAMS'] = serialize($tmp);
                         }
-						
+
 						$responce['LIST'][$i]['METHOD'] = $res[$i]['OBJECT'] . '.' . $res[$i]['TITLE'];
 						if ($res[$i]['DESCRIPTION']) {
                             $responce['LIST'][$i]['DESC'] = $res[$i]['DESCRIPTION'];
                         } else {
 							$responce['LIST'][$i]['DESC'] = '';
 						}
-						
+
 						$responce['LIST'][$i]['PARAMS'] = htmlspecialchars(str_replace(',"', ', "', $res[$i]['EXECUTED_PARAMS']));
 						$responce['LIST'][$i]['EXECUTED'] = $res[$i]['EXECUTED'];
 						$responce['LIST'][$i]['SOURCE'] = $res[$i]['EXECUTED_SRC'];
                     }
-					
+
 					$responce['LIST'] = array_reverse($responce['LIST']);
-					
+
 					echo json_encode($responce);
                 }
 
@@ -724,11 +724,11 @@ class xray extends module
                     }
                     $res = SQLSelect("SELECT scripts.* FROM scripts WHERE $qry ORDER BY scripts.EXECUTED DESC");
                     $total = count($res);
-					
+
 					$responce = [];
 					$responce['MODE'] = 'scripts';
 					$responce['TOTAL'] = $total;
-					
+
 					for ($i = 0; $i < $total; $i++) {
 						if(!empty($res[$i]['EXECUTED'])) {
 							$responce['LIST'][$i]['ID'] = $res[$i]['ID'];
@@ -738,15 +738,15 @@ class xray extends module
 							} else {
 								$responce['LIST'][$i]['DESC'] = '';
 							}
-							
+
 							$responce['LIST'][$i]['PARAMS'] = str_replace(';', '; ', htmlspecialchars($res[$i]['EXECUTED_PARAMS']));
 							$responce['LIST'][$i]['EXECUTED'] = $res[$i]['EXECUTED'];
 							$responce['LIST'][$i]['SOURCE'] = $res[$i]['EXECUTED_SRC'];
 						}
                     }
-					
+
 					$responce['LIST'] = array_reverse($responce['LIST']);
-					
+
 					echo json_encode($responce);
 
                 }
@@ -755,7 +755,7 @@ class xray extends module
                     $qry = "OBJECT_ID=" . getObject('Computer.ThisComputer')->id . " AND TITLE LIKE 'cycle%Run'";
                     $res = SQLSelect("SELECT properties.* FROM properties WHERE $qry ORDER BY TITLE");
                     $total = count($res);
-					
+
                     $seen = array();
                     for ($i = 0; $i < $total; $i++) {
                         $title = $res[$i]['TITLE'];
@@ -779,19 +779,19 @@ class xray extends module
 
 
                     $total = count($res);
-					
+
 					$responce = [];
 					$responce['MODE'] = 'services';
 					$responce['TOTAL'] = $total;
 					$responce['TOTAL_ALIVE'] = 0;
 					$onDisabled = ' - ';
 					$onEnable = ' - ';
-					
+
 					for ($i = 0; $i < $total; $i++) {
 						$responce['LIST'][$i]['TITLE'] = preg_replace('/Run$/', '', $res[$i]['TITLE']);
-						
+
 						$url = ROOTHTML . 'panel/xray.html?view_mode=services&service=' . urlencode($responce['LIST'][$i]['TITLE']);
-						
+
 						$tm = (int)getGlobal($responce['LIST'][$i]['TITLE'] . 'Run');
                         if ($tm > 0) {
                             if ((time() - $tm) < 60) {
@@ -800,7 +800,7 @@ class xray extends module
                                 $responce['LIST'][$i]['WAIT'] = 1;
                             }
                             $responce['LIST'][$i]['UPDATE'] = date('d.m.Y H:i:s', $tm);
-							
+
 							$responce['LIST'][$i]['CNT_STOP'] = $url . '&cmd=stop';
 							$responce['LIST'][$i]['CNT_RESTART'] = $url . '&cmd=restart';
 							$responce['LIST'][$i]['ALIVE'] = 1;
@@ -812,9 +812,9 @@ class xray extends module
 							$onDisabled .= $responce['LIST'][$i]['TITLE'].', ';
                         }
                     }
-					
+
 					$responce['LIST'] = array_reverse($responce['LIST']);
-					
+
 					if($this->mode == 'chart') {
 						$chart = array(array(
 							'cycle' => $responce['TOTAL_ALIVE'],
@@ -841,24 +841,24 @@ class xray extends module
                     }
                     $res = SQLSelect("SELECT jobs.* FROM jobs WHERE EXPIRED!=1 AND PROCESSED!=1 AND $qry ORDER BY jobs.RUNTIME");
                     $total = count($res);
-					
+
 					$responce = [];
 					$responce['MODE'] = 'timers';
 					$responce['TOTAL'] = $total;
-					
+
 					for ($i = 0; $i < $total; $i++) {
 						$responce['LIST'][$i]['TITLE'] = $res[$i]['TITLE'];
 						$responce['LIST'][$i]['COMMAND'] = htmlspecialchars($res[$i]['COMMANDS']);
-						
+
 						$responce['LIST'][$i]['SCHEDULED'] = $res[$i]['RUNTIME'];
 						$url = ROOTHTML.'panel/xray.html?view_mode=timers&timer='.urlencode($res[$i]['TITLE']).'&cmd=stop';
 						$responce['LIST'][$i]['STOP_LINK'] = $url;
                     }
-					
+
 					$responce['LIST'] = array_reverse($responce['LIST']);
-					
+
 					echo json_encode($responce);
-					
+
                 }
 
                 if ($this->view_mode == 'dead') {
@@ -884,7 +884,7 @@ class xray extends module
                     $res = $found;
 
                     $total = count($res);
-					
+
 					$responce = [];
 					$responce['MODE'] = 'dead';
 					$responce['TOTAL'] = $total;
@@ -893,13 +893,13 @@ class xray extends module
 					for ($i = 0; $i < $total; $i++) {
 						$responce['LIST'][$i]['TITLE'] = $res[$i]['TITLE'];
 						$responce['LIST'][$i]['DESCRIPTION'] = htmlspecialchars($res[$i]['DESCRIPTION']);
-						
+
 						$responce['LIST'][$i]['LOCATIONTITLE'] = htmlspecialchars($res[$i]['LOCATIONTITLE']);
 						$responce['LIST'][$i]['UPDATED'] = htmlspecialchars($res[$i]['UPDATED']);
                     }
-					
+
 					$responce['LIST'] = array_reverse($responce['LIST']);
-					
+
 					echo json_encode($responce);
                 }
 
@@ -910,20 +910,20 @@ class xray extends module
                     }
                     $res = SQLSelect("SELECT events.* FROM events WHERE $qry ORDER BY events.ADDED DESC LIMIT 30");
                     $total = count($res);
-					
+
 					$responce = [];
 					$responce['MODE'] = 'events';
 					$responce['TOTAL'] = $total;
-					
+
 					for ($i = 0; $i < $total; $i++) {
 						$responce['LIST'][$i]['EVENT'] = $res[$i]['EVENT_NAME'];
 						$responce['LIST'][$i]['DETAILS'] = htmlspecialchars($res[$i]['DETAILS']);
-						
+
 						$responce['LIST'][$i]['ADDED'] = $res[$i]['ADDED'];
                     }
-					
+
 					$responce['LIST'] = array_reverse($responce['LIST']);
-					
+
 					echo json_encode($responce);
                 }
 
@@ -938,31 +938,31 @@ class xray extends module
                             if ($a['Rows'] > $b['Rows']) return -1;
                             return 1;
                         });
-						
-						
+
+
 						$responce = [];
 						$responce['MODE'] = 'database';
 						$responce['STATUS'] = 1;
-						
+
 						$i = 0;
 						foreach ($tables as $table) {
 							if ($filter != '' && !preg_match('/' . preg_quote($filter) . '/is', $table['Name'])) continue;
 							$responce['LIST'][$i]['NAME'] = $table['Name'];
 							$responce['LIST'][$i]['ENGINE'] = $table['Engine'];
-							
+
 							$responce['LIST'][$i]['ROWS'] = $table['Rows'];
 							$responce['LIST'][$i]['UPDATE_TIME'] = $table['Update_time'];
-							
+
 							$responce['LIST'][$i]['BTN_ANALYZE'] = ROOTHTML . "panel/xray.html?view_mode=database&analyze=" . urlencode($table['Name']);
 							$responce['LIST'][$i]['BTN_OPTIMIZE'] = ROOTHTML . "panel/xray.html?view_mode=database&optimize=" . urlencode($table['Name']);
 							$responce['LIST'][$i]['BTN_REPAIR'] = ROOTHTML . "panel/xray.html?view_mode=database&repair=" . urlencode($table['Name']);
 							$i++;
 						}
-						
+
 						$responce['LIST'] = array_reverse($responce['LIST']);
 						$responce['TOTAL'] = $i;
-						
-						
+
+
 						if($this->mode == 'chart') {
 							$arrayDB = array_slice(array_reverse($responce['LIST']), 0, 7);
 							echo json_encode($arrayDB);
@@ -971,7 +971,7 @@ class xray extends module
 							$DBstat = explode('  ', $DBstat);
 							$DBstat_PerSec = preg_replace('/[^0-9.]/', '', $DBstat[7]);
 							$DBstat_PerSecType = 'main';
-							
+
 							if(round($DBstat_PerSec) == 0) {
 								$select = SQLSelect("SHOW GLOBAL STATUS");
 								$array_sum = [
@@ -1019,15 +1019,15 @@ class xray extends module
 										}
 									}
 								}
-								
+
 								$DBstat_PerSec = $totalSum/$uptime;
-								
+
 								$DBstat_PerSecType = 'rezerv';
 							}
-							
+
 							echo json_encode(array(
-								'second' => round($DBstat_PerSec), 
-								'minute' => round($DBstat_PerSec*60), 
+								'second' => round($DBstat_PerSec),
+								'minute' => round($DBstat_PerSec*60),
 								'hours' => round($DBstat_PerSec*60*60),
 								'type' => $DBstat_PerSecType,
 							));

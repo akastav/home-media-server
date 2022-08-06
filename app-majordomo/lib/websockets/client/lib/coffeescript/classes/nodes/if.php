@@ -32,7 +32,7 @@ class yy_If extends yy_Base
     return $this;
   }
 
-  function body_node() 
+  function body_node()
   {
     return $this->body ? $this->body->unwrap() : NULL;
   }
@@ -72,7 +72,7 @@ class yy_If extends yy_Base
       $if_part = $this->tab.$if_part;
     }
 
-    if ( ! $this->else_body) 
+    if ( ! $this->else_body)
     {
       return $if_part;
     }
@@ -103,7 +103,7 @@ class yy_If extends yy_Base
   {
     return $node instanceof yy_Block ? $node : yy('Block', array($node));
   }
-  
+
   function is_chain()
   {
     return $this->is_chain;
@@ -112,13 +112,13 @@ class yy_If extends yy_Base
   function is_statement($options = array())
   {
     return (isset($options['level']) && $options['level'] === LEVEL_TOP) ||
-      $this->body_node()->is_statement($options) || 
+      $this->body_node()->is_statement($options) ||
       ( ($tmp = $this->else_body_node()) && $tmp && $tmp->is_statement($options));
   }
 
   function jumps($options = array())
   {
-    return $this->body->jumps($options) || 
+    return $this->body->jumps($options) ||
       (isset($this->else_body) && $this->else_body && $this->else_body->jumps($options));
   }
 

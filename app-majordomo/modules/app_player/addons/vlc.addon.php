@@ -5,21 +5,21 @@
 */
 
 class vlc extends app_player_addon {
-	
+
 	// Private properties
 	private $curl;
 	private $address;
-	
+
 	// Constructor
 	function __construct($terminal) {
 		$this->title = 'VLC (VideoLAN)';
 		$this->description = 'Управление VLC через GUI интерфейс. ';
 		$this->description .= 'В настоящее время доступно только для Windows. ';
 		$this->description .= 'Поддерживает ограниченный набор команд. ';
-		
+
 		$this->terminal = $terminal;
 		$this->reset_properties();
-		
+
 		// Curl
 		$this->curl = curl_init();
 		$this->address = 'http://'.$this->terminal['HOST'].':'.(empty($this->terminal['PLAYER_PORT'])?80:$this->terminal['PLAYER_PORT']);
@@ -29,7 +29,7 @@ class vlc extends app_player_addon {
 			curl_setopt($this->curl, CURLOPT_USERPWD, $this->terminal['PLAYER_USERNAME'].':'.$this->terminal['PLAYER_PASSWORD']);
 		}
 	}
-	
+
 	// Destructor
 	function destroy() {
 		curl_close($this->curl);
@@ -59,7 +59,7 @@ class vlc extends app_player_addon {
 			return NULL;
 		}
 	}
-	
+
 	// Compare programs versions
 	private function compare_programs_versions($first, $second) {
 		$fvc = substr_count($first, '.');
@@ -80,7 +80,7 @@ class vlc extends app_player_addon {
 		}
 		return FALSE;
 	}
-	
+
 	// Play
 	function play($input) {
 		$this->reset_properties();
@@ -120,7 +120,7 @@ class vlc extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Pause
 	function pause() {
 		$this->reset_properties();
@@ -158,7 +158,7 @@ class vlc extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Next
 	function next() {
 		$this->reset_properties();
@@ -177,7 +177,7 @@ class vlc extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Previous
 	function previous() {
 		$this->reset_properties();
@@ -240,7 +240,7 @@ class vlc extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 }
 
 ?>

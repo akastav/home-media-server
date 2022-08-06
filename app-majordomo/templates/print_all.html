@@ -39,7 +39,7 @@ padding: 20px 40px;
 [#if DESCRIPTION!=""#]<p>[#DESCRIPTION#]</p>[#endif#]
 
 <div id="tabs-scripts">
-[#if HAVE_SCRIPTS#] 
+[#if HAVE_SCRIPTS#]
 <h1><#LANG_SCRIPTS#></h1>
 
  <table border=0 cellpadding=5 cellspacing=1 width="100%">
@@ -74,19 +74,19 @@ padding: 20px 40px;
 [#end SCRIPTS#]
 [#else HAVE_SCRIPTS#]
 <#LANG_NOT_ADDED#>
-[#endif HAVE_SCRIPTS#]  
-</div> 
+[#endif HAVE_SCRIPTS#]
+</div>
 
 
 <hr>
 
 <div id="tabs-objects">
- [#if HAVE_OBJECTS#] 
+ [#if HAVE_OBJECTS#]
 <h1><#LANG_CLASSES#></h1>
  [#begin CLASSES#]
  <div>
  <a name="class[#INTERNAL_ID#]"></a>
- <#LANG_CLASS#> 
+ <#LANG_CLASS#>
  [#if PARENT_ID!="0"#]
  [#PARENT_TITLE#] &gt;
  [#endif#]
@@ -96,7 +96,7 @@ padding: 20px 40px;
 
  [#if PROPERTIES#]
  <p>
- <#LANG_CLASS_PROPERTIES#>: 
+ <#LANG_CLASS_PROPERTIES#>:
  [#begin PROPERTIES#]
  <div style="margin-left:30px">
  <b>[#TITLE#]</b>
@@ -120,7 +120,7 @@ padding: 20px 40px;
  [#end METHODS#]
  </p>
  [#endif METHODS#]
- 
+
  [#if OBJECTS#]
  <p>
  <#LANG_CLASS_OBJECTS#>:
@@ -145,7 +145,7 @@ padding: 20px 40px;
  </div>
  [#end OBJECTS#]
  </p>
- [#endif OBJECTS#] 
+ [#endif OBJECTS#]
 
  </div>
  [#if CLASSES#]
@@ -158,8 +158,8 @@ padding: 20px 40px;
 
  [#else HAVE_OBJECTS#]
  <#LANG_NOT_ADDED#>
- [#endif HAVE_OBJECTS#]  
-</div> 
+ [#endif HAVE_OBJECTS#]
+</div>
 
 <hr>
 
@@ -191,14 +191,14 @@ padding: 20px 40px;
         </tr>
    [#endif PATTERNS#]
   [#end PATTERNS#]
-  </table> 
- 
+  </table>
+
  [#else HAVE_PATTERNS#]
  <#LANG_NOT_ADDED#>
- [#endif HAVE_PATTERNS#]  
+ [#endif HAVE_PATTERNS#]
 </div>
 
- 
+
 </div>
 
 
@@ -259,7 +259,7 @@ padding: 20px 40px;
 
 
 
- 
+
  </td>
 
  </tr>

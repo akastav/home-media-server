@@ -1,6 +1,6 @@
 
 $(document).ready(function(){
-        var html = '';  
+        var html = '';
         html += '<div id="alert_overlay" onclick="$(\'#alert_overlay\').fadeOut(\'fast\'); $(\'#alert_outer\').fadeOut(\'fast\');"></div>';
         html += '<div id="alert_wrap">';
         html += '<div id="alert_outer" onclick="$(\'#alert_overlay\').fadeOut(\'fast\'); $(\'#alert_outer\').fadeOut(\'fast\');">';
@@ -12,7 +12,7 @@ $(document).ready(function(){
         html += '</div>';
         html += '</div>';
         $(html).appendTo("body");
-        
+
         $(document).keydown(function(e){
                 if ((e.which == 13 || e.which == 27) && $("#alert_outer").css("display") != "none")
                 {
@@ -40,16 +40,16 @@ function showAlertWindow(msg, type)
         case 'message':
           src = "/img/system/message.png";
           color = "blue";
-          break;  
+          break;
         default:
           return;
         }
-        
+
         var toShow = "<ul><li>";
         if (typeof(msg) == 'object' && (msg instanceof Array))
                 msg = msg.join("</li><li>");
         toShow = toShow + msg + "</li></ul>";
-        
+
         $("#alert_overlay").css("opacity", 0.3).fadeIn("normal");
         $("#alert_outer").fadeIn("normal");
         $("#alert_content").html("<img src=" + src + ">" + toShow);
@@ -124,7 +124,7 @@ $(document).ready(function(){
 */
 
         // show tips via betterTips
-        $('.tTip').betterTooltip({speed: 150, delay: 300});     
+        $('.tTip').betterTooltip({speed: 150, delay: 300});
 });
 
 

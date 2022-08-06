@@ -295,4 +295,3 @@ Blockly.utils.string.wrapToText_ = function(words, wordBreaks) {
   }
   return text.join('');
 };
-

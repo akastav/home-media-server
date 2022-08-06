@@ -37,14 +37,13 @@ function php_syntax_error($code)
 		exec($cmd, $out);
 		unlink($filePath);
 		$res = implode("\n", $out);
-		
-		if(preg_match("/\.php on line \b/i", $res)) 
+
+		if(preg_match("/\.php on line \b/i", $res))
 			return trim($res) . "\n";
-		if(preg_match("/\Errors parsing\b/i", $res)) 
+		if(preg_match("/\Errors parsing\b/i", $res))
 			return trim($res) . "\n";
 		if (preg_match("/welldone\b/i", $res)) {
 			return false;
 		}
 	}
 }
-

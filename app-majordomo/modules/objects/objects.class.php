@@ -1159,7 +1159,7 @@ class objects extends module
                ) ENGINE = MEMORY DEFAULT CHARSET=utf8;";
         SQLExec($sqlQuery);
 
-        $sqlQuery = "CREATE TABLE IF NOT EXISTS `operations_queue` 
+        $sqlQuery = "CREATE TABLE IF NOT EXISTS `operations_queue`
               (`TOPIC`   CHAR(255) NOT NULL,
                `DATANAME` CHAR(255) NOT NULL,
                `DATAVALUE` CHAR(255) NOT NULL,
@@ -1189,8 +1189,8 @@ class objects extends module
  properties: SYSTEM varchar(255) NOT NULL DEFAULT ''
  properties: TITLE varchar(255) NOT NULL DEFAULT ''
  properties: KEEP_HISTORY int(10) NOT NULL DEFAULT '0'
- properties: DATA_KEY int(3) NOT NULL DEFAULT '0' 
- properties: DATA_TYPE int(3) NOT NULL DEFAULT '0' 
+ properties: DATA_KEY int(3) NOT NULL DEFAULT '0'
+ properties: DATA_TYPE int(3) NOT NULL DEFAULT '0'
  properties: DESCRIPTION text
  properties: VALIDATION_TYPE int(3) NOT NULL DEFAULT '0'
  properties: VALIDATION_NUM_MIN varchar(20) NOT NULL DEFAULT ''
@@ -1200,7 +1200,7 @@ class objects extends module
  properties: ONCHANGE varchar(255) NOT NULL DEFAULT ''
  properties: INDEX (CLASS_ID)
  properties: INDEX (OBJECT_ID)
- 
+
  pvalues: ID int(10) unsigned NOT NULL auto_increment
  pvalues: PROPERTY_NAME varchar(100) NOT NULL DEFAULT ''
  pvalues: PROPERTY_ID int(10) NOT NULL DEFAULT '0'
@@ -1211,7 +1211,7 @@ class objects extends module
  pvalues: LINKED_MODULES varchar(255) NOT NULL DEFAULT ''
  pvalues: INDEX (PROPERTY_ID)
  pvalues: INDEX (OBJECT_ID)
- pvalues: INDEX (PROPERTY_NAME) 
+ pvalues: INDEX (PROPERTY_NAME)
 
  phistory: ID int(10) unsigned NOT NULL auto_increment
  phistory: VALUE_ID int(10) unsigned NOT NULL DEFAULT '0'

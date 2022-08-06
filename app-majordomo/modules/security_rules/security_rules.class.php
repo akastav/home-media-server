@@ -1,6 +1,6 @@
 <?php
 /**
-* Security_rules 
+* Security_rules
 *
 * Security_rules
 *
@@ -287,9 +287,9 @@ function usual(&$out) {
 
   $status=0;
 
-   if (($rec['CONDITION']==2 || $rec['CONDITION']==3) 
-       && $rec['CONDITION_VALUE']!='' 
-       && !is_numeric($rec['CONDITION_VALUE']) 
+   if (($rec['CONDITION']==2 || $rec['CONDITION']==3)
+       && $rec['CONDITION_VALUE']!=''
+       && !is_numeric($rec['CONDITION_VALUE'])
        && !preg_match('/^%/', $rec['CONDITION_VALUE'])) {
         $rec['CONDITION_VALUE']='%'.$rec['CONDITION_VALUE'].'%';
    }

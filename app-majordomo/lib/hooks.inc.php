@@ -120,7 +120,7 @@ function processSubscriptions($event_name, $details = '', $return_output = false
     }
     if (!is_array($details)) {
         $details = array();
-    } 
+    }
     if (!defined('SETTINGS_HOOK_EVENT_' . strtoupper($event_name))) {
         return 0;
     }

@@ -152,7 +152,7 @@ function addClassMethod($class_name, $method_name, $code = '', $key = '')
     $class_id = addClass($class_name);
 
     if ($class_id) {
-        $sqlQuery = "SELECT * 
+        $sqlQuery = "SELECT *
                      FROM methods
                     WHERE CLASS_ID = '" . $class_id . "'
                       AND TITLE = '" . DBSafe($method_name) . "'
@@ -1171,8 +1171,8 @@ function processTitle($title, $object = 0)
                     $property_name = $m[1][$i] . '.' . $m[2][$i];
                     $data = getGlobal($property_name);
                     $descr = $m[3][$i];
-                    $descr = preg_replace('#(?<!\\\)\;#', ";-;;-;", $descr); 
-                    $descr = preg_replace('#\\\;#', ";", $descr); 
+                    $descr = preg_replace('#(?<!\\\)\;#', ";-;;-;", $descr);
+                    $descr = preg_replace('#\\\;#', ";", $descr);
                     $tmp = explode(';-;;-;', $descr);
                     $totald = count($tmp);
                     $hsh = array();

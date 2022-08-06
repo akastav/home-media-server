@@ -50,5 +50,3 @@ abstract class Smarty_Internal_ParseTree
     }
 
 }
-
-

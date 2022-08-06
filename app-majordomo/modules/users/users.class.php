@@ -1,6 +1,6 @@
 <?php
 /**
-* Users 
+* Users
 *
 * Users
 *
@@ -209,7 +209,7 @@ function usual(&$out) {
 /*
 users - Users
 */
-   
+
  // update password for users
  $users=SQLSelect("SELECT * FROM users");
  foreach ($users as $user) {
@@ -218,7 +218,7 @@ users - Users
           SQLUpdate ('users', $user);
       }
   }
-   
+
   $data = <<<EOD
  users: ID int(10) unsigned NOT NULL auto_increment
  users: USERNAME varchar(255) NOT NULL DEFAULT ''

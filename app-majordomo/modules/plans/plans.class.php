@@ -270,7 +270,7 @@ class plans extends module
     {
         require(DIR_MODULES . $this->name . '/plans_edit.inc.php');
     }
-    
+
     function getPreview($id) {
         $out = array();
         $rec=SQLSelectOne("SELECT * FROM plans WHERE ID=".(int)$id);
@@ -376,7 +376,7 @@ class plans extends module
         }
         return $result;
     }
-    
+
     function checkState($id) {
         $rec = SQLSelectOne("SELECT * FROM plan_states WHERE ID=".(int)($id));
         if (!$rec['ID']) return 0;
@@ -599,7 +599,7 @@ class plans extends module
  plans: AUTO_ZOOM int(3) NOT NULL DEFAULT '0'
  plans: CUSTOM_CSS text
  plans: CUSTOM_JAVASCRIPT text
- 
+
  plan_states: ID int(10) unsigned NOT NULL auto_increment
  plan_states: TITLE varchar(255) NOT NULL DEFAULT ''
  plan_states: PLAN_ID int(10) NOT NULL DEFAULT '0'
@@ -609,9 +609,9 @@ class plans extends module
  plan_states: CONDITION int(3) NOT NULL DEFAULT '0'
  plan_states: CONDITION_VALUE varchar(255) NOT NULL DEFAULT ''
  plan_states: CONDITION_ADVANCED text
- plan_states: CSS_CLASS varchar(255) NOT NULL DEFAULT '' 
- plan_states: CSS_CLASS_INVERSE varchar(255) NOT NULL DEFAULT '' 
- 
+ plan_states: CSS_CLASS varchar(255) NOT NULL DEFAULT ''
+ plan_states: CSS_CLASS_INVERSE varchar(255) NOT NULL DEFAULT ''
+
  plan_states: ACTION_OBJECT varchar(255) NOT NULL DEFAULT ''
  plan_states: ACTION_METHOD varchar(255) NOT NULL DEFAULT ''
  plan_states: CODE text
@@ -619,13 +619,13 @@ class plans extends module
  plan_states: MENU_ITEM_ID int(10) NOT NULL DEFAULT '0'
  plan_states: HOMEPAGE_ID int(10) NOT NULL DEFAULT '0'
  plan_states: EXT_URL varchar(255) NOT NULL DEFAULT ''
- 
+
  plan_components: ID int(10) unsigned NOT NULL auto_increment
  plan_components: PLAN_ID int(10) NOT NULL DEFAULT '0'
  plan_components: TITLE varchar(255) NOT NULL DEFAULT ''
  plan_components: COMPONENT_NAME varchar(255) NOT NULL DEFAULT ''
  plan_components: REPLACE_NAME varchar(255) NOT NULL DEFAULT ''
- 
+
  plan_components: ACTION_OBJECT varchar(255) NOT NULL DEFAULT ''
  plan_components: ACTION_METHOD varchar(255) NOT NULL DEFAULT ''
  plan_components: CODE text
@@ -633,15 +633,15 @@ class plans extends module
  plan_components: MENU_ITEM_ID int(10) NOT NULL DEFAULT '0'
  plan_components: HOMEPAGE_ID int(10) NOT NULL DEFAULT '0'
  plan_components: EXT_URL varchar(255) NOT NULL DEFAULT ''
- 
- 
+
+
  plan_components_data: ID int(10) unsigned NOT NULL auto_increment
  plan_components_data: COMPONENT_ID int(10) NOT NULL DEFAULT '0'
  plan_components_data: PROPERTY_NAME varchar(255) NOT NULL DEFAULT ''
  plan_components_data: PROPERTY_VALUE varchar(255) NOT NULL DEFAULT ''
  plan_components_data: LINKED_OBJECT varchar(255) NOT NULL DEFAULT ''
  plan_components_data: LINKED_PROPERTY varchar(255) NOT NULL DEFAULT ''
- 
+
 EOD;
         parent::dbInstall($data);
     }

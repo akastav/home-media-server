@@ -56,7 +56,7 @@ if ($width) $w = (int)$width;
 if ($height) $h = (int)$height;
 if ($_GET['px']) $px_per_point = (int)$_GET['px'];
 
-// Dataset definition   
+// Dataset definition
 $DataSet = new pData;
 
 if (is_array($p)) {
@@ -488,7 +488,7 @@ if ($_GET['gcolor'] == 'red') {
 //$ColorPalete["Alpha"] = 100; //������������
 $DataSet->setPalette("Serie1", $ColorPalete);
 
-// Initialise the graph  
+// Initialise the graph
 /* Create a pChart object and associate your dataset */
 $Test = new pImage($w, $h, $DataSet);
 /* Define the boundaries of the graph area */

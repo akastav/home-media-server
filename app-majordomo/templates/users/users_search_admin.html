@@ -53,29 +53,29 @@
    <a href="#" onClick="return switchTo('[#USERNAME#]');"><img src="<#ROOTHTML#>cms/avatars/[#AVATAR#]" border="0" height="30"></a>
    [#else#]
    <a href="#" onClick="return switchTo('[#USERNAME#]');"><img src="<#ROOTHTML#>img/icons/user.png" border="0" height="30"></a>
-   [#endif#] 
+   [#endif#]
    [#USERNAME#]
  </td>
  <td
    >
   <b>
-   [#NAME#][#if COLOR!=""#] <span class="badge" style="background-color:[#COLOR#];"> </span>[#endif#] 
+   [#NAME#][#if COLOR!=""#] <span class="badge" style="background-color:[#COLOR#];"> </span>[#endif#]
   </a></b>
  </td>
  <td
-  
+
    >
    [#EMAIL#]
  </td>
  <td  width="100">
- 
+
   [#if "<#ACTION#>"=="admin"#]
-   
+
     <a class="btn btn-default btn-sm" href="?view_mode=edit_users&id=[#ID#]"><i class="glyphicon glyphicon-pencil"></i></a>
-   
-  
+
+
     <a class="btn btn-default btn-sm" href="?view_mode=delete_users&id=[#ID#]" onClick="return confirm('Delete record?')"><i class="glyphicon glyphicon-remove"></i></a>
-  
+
   [#endif ACTION#]
  &nbsp;
  </td>

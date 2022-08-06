@@ -358,7 +358,7 @@
         <select name="menu{$item.ID}_v" id="menu{$item.ID}_v" data-role="slider"  onChange="changedValue{$item.ID}();">
                 <option value="{$item.OFF_VALUE}"{if $item.CUR_VALUE!=$item.ON_VALUE} selected{/if}>{$smarty.const.LANG_OFF}</option>
                 <option value="{$item.ON_VALUE}"{if $item.CUR_VALUE==$item.ON_VALUE} selected{/if}>{$smarty.const.LANG_ON}</option>
-        </select> 
+        </select>
 </li>
 {/if}
 
@@ -451,7 +451,7 @@
 </script>
 <li data-role="fieldcontain"{if $item.VISIBLE_DELAY!='0'}  class='visible_delay'{/if} id='item{$item.ID}'>
 <label for="menu{$item.ID}_v" class="select"><span id="label_{$item.ID}">{$item.TITLE}</span><span id="processing_{$item.ID}"></span></label>
-<fieldset data-role="controlgroup" data-type="horizontal"> 
+<fieldset data-role="controlgroup" data-type="horizontal">
 <select name="menu{$item.ID}_v1" id="menu{$item.ID}_v1" onChange="changedValue{$item.ID}();">
  {foreach $item.OPTIONS1 as $i}
   <option value="{$i.VALUE}"{if $i.SELECTED=='1'} selected{/if}>{$i.VALUE}

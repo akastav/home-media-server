@@ -5,11 +5,11 @@
 */
 
 class vlcweb extends app_player_addon {
-	
+
 	// Private properties
 	private $curl;
 	private $address;
-	
+
 	// Constructor
 	function __construct($terminal) {
 		$this->title = 'VLC через HTTP';
@@ -18,10 +18,10 @@ class vlcweb extends app_player_addon {
 		$this->description .= 'Не забудьте активировать HTTP интерфейс в настройках VLC ';
 		$this->description .= '(Инструменты -> Настройки -> Все -> Основные интерфейсы -> Дополнительные модули интерфейса -> Web) ';
 		$this->description .= 'и установить для него пароль (Основные интерфейсы -> Lua -> HTTP -> Пароль).';
-		
+
 		$this->terminal = $terminal;
 		$this->reset_properties();
-		
+
 		// Curl
 		$this->curl = curl_init();
 		$this->address = 'http://'.$this->terminal['HOST'].':'.(empty($this->terminal['PLAYER_PORT'])?8080:$this->terminal['PLAYER_PORT']);
@@ -31,12 +31,12 @@ class vlcweb extends app_player_addon {
 			curl_setopt($this->curl, CURLOPT_USERPWD, $this->terminal['PLAYER_USERNAME'].':'.$this->terminal['PLAYER_PASSWORD']);
 		}
 	}
-	
+
 	// Destructor
 	function destroy() {
 		curl_close($this->curl);
 	}
-	
+
 	// Private: VLC-WEB request
 	private function vlcweb_request($path, $data=array()) {
 		$params = array();
@@ -72,7 +72,7 @@ class vlcweb extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Private: VLC-WEB parse XML
 	private function vlcweb_parse_xml($data) {
 		$this->reset_properties();
@@ -133,7 +133,7 @@ class vlcweb extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Pause
 	function pause() {
 		if($this->vlcweb_request('status.xml', array('command'=>'pl_pause'))) {
@@ -157,7 +157,7 @@ class vlcweb extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Next
 	function next() {
 		if($this->vlcweb_request('status.xml', array('command'=>'pl_next'))) {
@@ -169,7 +169,7 @@ class vlcweb extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Previous
 	function previous() {
 		if($this->vlcweb_request('status.xml', array('command'=>'pl_previous'))) {
@@ -181,7 +181,7 @@ class vlcweb extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Seek
 	function seek($position) {
 		$this->reset_properties();
@@ -218,7 +218,7 @@ class vlcweb extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Playlist: Get
 	function pl_get() {
 		if($this->vlcweb_request('playlist.xml')) {
@@ -257,7 +257,7 @@ class vlcweb extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Playlist: Delete
 	function pl_delete($id) {
 		$this->reset_properties();
@@ -275,7 +275,7 @@ class vlcweb extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Playlist: Empty
 	function pl_empty() {
 		if($this->vlcweb_request('status.xml', array('command'=>'pl_empty'))) {
@@ -287,7 +287,7 @@ class vlcweb extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Playlist: Play
 	function pl_play($id) {
 		$this->reset_properties();
@@ -305,7 +305,7 @@ class vlcweb extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Playlist: Sort
 	function pl_sort($order) {
 		$this->reset_properties();
@@ -332,7 +332,7 @@ class vlcweb extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Playlist: Random
 	function pl_random() {
 		if($this->vlcweb_request('status.xml', array('command'=>'pl_random'))) {
@@ -344,7 +344,7 @@ class vlcweb extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Playlist: Loop
 	function pl_loop() {
 		if($this->vlcweb_request('status.xml', array('command'=>'pl_loop'))) {
@@ -356,7 +356,7 @@ class vlcweb extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Playlist: Repeat
 	function pl_repeat() {
 		if($this->vlcweb_request('status.xml', array('command'=>'pl_repeat'))) {
@@ -368,7 +368,7 @@ class vlcweb extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Default command
 	function command($command, $parameter) {
 		if($this->vlcweb_request('vlm_cmd.xml', array('command'=>$command.(strlen($parameter)?' '.$parameter:'')))) {
@@ -386,7 +386,7 @@ class vlcweb extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 }
 
 ?>

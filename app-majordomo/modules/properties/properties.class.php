@@ -1,6 +1,6 @@
 <?php
 /**
-* Properties 
+* Properties
 *
 * Properties
 *
@@ -103,7 +103,7 @@ function run() {
   $out['ACTION']=$this->action;
   $out['TAB']=$this->tab;
   $out['CLASS_ID']=$this->class_id;
-  
+
   if (IsSet($this->class_id)) {
    $out['IS_SET_CLASS_ID']=1;
   }

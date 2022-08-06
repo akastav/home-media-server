@@ -34,32 +34,32 @@ function is_dir2($d)
 
     // none directory
     if (substr($d, -2) == DIRECTORY_SEPARATOR . "." || substr($d, -2) == "/.") {
-        return false; 
+        return false;
     }
-    
+
     // none directory
     if (substr($d, -3) == DIRECTORY_SEPARATOR . ".." ||  substr($d, -3) == "/..") {
-        return false; 
+        return false;
     }
 
     if (substr($d, -1) == "/" ) {
-        $d = substr($d,0,-1); 
+        $d = substr($d,0,-1);
     }
-    
+
     if (substr($d, -1) == DIRECTORY_SEPARATOR ) {
         $d = substr($d,0,-1);
     }
-    
+
     if ('NET:' == substr($d, 0, 4)) {
         $d = '//' . substr($d, 4);
     }
-    
+
     if (is_dir($d)) return true;
-    
+
     if ($node = @opendir($d)) {
         closedir($node);
         return true;
-    } 
+    }
 
    return false;
 }
@@ -159,9 +159,9 @@ function checkfile($path, $move)
    $tmdiff = 0;
    $dest   = (!$current_dest) ? $dirs[$current_dir] : $current_dest;
    $path   = str_replace('NET:', '//', $path);
-   
+
    $current_dir = str_replace('NET:', '//', $current_dir);
-   
+
    $mtime = filemtime($path);
 
    $dest      = str_replace('NET:', '//', $dest);
@@ -188,7 +188,7 @@ function checkfile($path, $move)
       $dest_size = filesize($dest);
       $src_size  = filesize($path);
       $tmdiff    = filemtime($path) - filemtime($dest);
-      
+
       if ($tmdiff > $acc || ($dest_size == 0 && $src_size != 0))
       {
          $status = "updated $tmdiff";
@@ -219,27 +219,27 @@ function checkfile($path, $move)
 function copyFile($src, $dst)
 {
    global $files_copied;
-   
+
    $size_limit = 2000 * 1024 * 1024;
-   
+
    $fs = filesize($src);
 
    if ($fs == 0)
       return;
 
    $fs_mb = round($fs / 1024 / 1024, 2);
-   
+
    if ($fs > $size_limit)
    {
       $k = basename($src) . '_' . $fs;
-      
+
       if ($files_copied[$k] == '')
       {
          echo "Size: " . $fs_mb . "Mb\n";
-         
+
          $src = str_replace('/', '\\', $src);
          $dst = str_replace('/', '\\', $dst);
-         
+
          system('copy "' . $src . '" "' . $dst . '"'); // long copy
          $files_copied[$k] = $dst;
       }
@@ -256,24 +256,24 @@ function copyFile($src, $dst)
    touch($dst, filemtime($src));
 }
 
-// function copy files from sourse directory to destination 
+// function copy files from sourse directory to destination
 function copyFiles($source, $destination, $over = 0, $patterns = 0)
 {
     $res = 1;
-	
+
     //Remove last slash '/' in source and destination - slash was added when copy
     if (substr($source, -1) == "/" ) {
-        $source = substr($source,0,-1); 
+        $source = substr($source,0,-1);
     } else if (substr($source, -1) == DIRECTORY_SEPARATOR ) {
         $source = substr($source,0,-1);
     }
-	
+
     if (substr($destination, -1) == "/" ) {
-        $destination = substr($destination,0,-1); 
+        $destination = substr($destination,0,-1);
     } else if (substr($destination, -1) == DIRECTORY_SEPARATOR ) {
         $destination = substr($destination,0,-1);
     }
-	
+
     if (!Is_Dir2($source)) {
         return false; // cannot create destination path
     }
@@ -281,7 +281,7 @@ function copyFiles($source, $destination, $over = 0, $patterns = 0)
     if (!Is_Dir2($destination)) {
         if (!mkdir($destination, 0777, true)) {
             // cannot create destination path
-            return false; 
+            return false;
         }
     }
 
@@ -323,10 +323,10 @@ function copyFiles($source, $destination, $over = 0, $patterns = 0)
 function walk_dir($dir, $callback, $move = 0)
 {
    global $ignores;
-   
+
    $dir  = str_replace('NET:', '//', $dir);
    $dir .= '/';
-   
+
    foreach ($ignores as $ptn)
    {
       if (preg_match("/" . $ptn . "/is", $dir))
@@ -342,19 +342,19 @@ function walk_dir($dir, $callback, $move = 0)
       return;
 
    $handle = opendir($dir);
-   
+
    while (false !== $thing = readdir($handle))
    {
       if ($thing == '.' || $thing == '..' ) continue;
-      
+
       $thing = $dir . $thing;
-      
+
       if (is_dir2($thing))
          walk_dir($thing, $callback , $move);
       elseif (is_file($thing))
          call_user_func($callback, $thing , $move);
    }
-   
+
    closedir($handle);
 }
 
@@ -398,14 +398,14 @@ function walk_dir2($dir, $callback, $move = 0)
    }
 
    $handle = opendir($dir);
-   
+
    while (false !== $thing = readdir($handle))
    {
       if ($thing == '.' || $thing == '..')
          continue;
-      
+
       $processed[$thing] = 1;
-      
+
       $thing = $dir . $thing;
 
       if (is_dir2($thing))
@@ -425,7 +425,7 @@ function walk_dir2($dir, $callback, $move = 0)
    {
       if ($thing == '.' || $thing == '..' )
          continue;
-      
+
       if (!$processed[$thing])
       {
          if (is_file($dest . $thing))
@@ -550,7 +550,7 @@ function processLines($data)
    $data  = str_replace("\r", '', $data);
    $lines = explode("\n", $data);
    $total = count($lines);
-   
+
    for ($i = 0; $i < $total; $i++)
       processLine($lines[$i], $hash);
 
@@ -574,7 +574,7 @@ function processLine($line, $hash = '')
 
    if (!is_array($hash))
       $hash = array();
-   
+
    $line = trim($line);
 
    foreach ($hash as $k => $v)
@@ -599,9 +599,9 @@ function processLine($line, $hash = '')
    elseif (preg_match('/^CLEAR (.+?) (\d+) DAYS OLD$/is', $line, $matches))
    {
       $from = trim($matches[1]);
-      
+
       $current_dir = $from;
-      
+
       $days = (int)($matches[2]);
 
       if ($days > 0)
@@ -611,19 +611,19 @@ function processLine($line, $hash = '')
    {
       $from = trim($matches[1]);
       $to   = trim($matches[2]);
-      
+
       $current_dir  = $from;
       $current_dest = $to;
 
       $days = (int)($matches[3]);
-      
+
       walk_dir($from, "copyNewFile", $days);
    }
    elseif (preg_match('/^(.+?)<\+(.+?) (\d+) DAYS OLD$/is', $line, $matches))
    {
       $to   = trim($matches[1]);
       $from = trim($matches[2]);
-      
+
       $current_dir  = $from;
       $current_dest = $to;
 
@@ -635,14 +635,14 @@ function processLine($line, $hash = '')
        */
 
       $days = (int)($matches[3]);
-      
+
       walk_dir($from, "copyNewFile", $days);
    }
    elseif (preg_match('/^(.+?)=>(.+?)$/is', $line, $matches))
    {
       $from = trim($matches[1]);
       $to   = trim($matches[2]);
-      
+
       $current_dir  = $from;
       $current_dest = $to;
 
@@ -660,7 +660,7 @@ function processLine($line, $hash = '')
    {
       $from = trim($matches[2]);
       $to   = trim($matches[1]);
-      
+
       $current_dir  = $from;
       $current_dest = $to;
 
@@ -676,7 +676,7 @@ function processLine($line, $hash = '')
    {
       $from = trim($matches[1]);
       $to   = trim($matches[2]);
-      
+
       $current_dir  = $from;
       $current_dest = $to;
 
@@ -692,7 +692,7 @@ function processLine($line, $hash = '')
    {
       $from = trim($matches[2]);
       $to   = trim($matches[1]);
-      
+
       $current_dir  = $from;
       $current_dest = $to;
 
@@ -708,7 +708,7 @@ function processLine($line, $hash = '')
    {
       $from = trim($matches[1]);
       $to   = trim($matches[2]);
-      
+
       $current_dir  = $from;
       $current_dest = $to;
 
@@ -724,7 +724,7 @@ function processLine($line, $hash = '')
    {
       $from = trim($matches[2]);
       $to   = trim($matches[1]);
-      
+
       $current_dir  = $from;
       $current_dest = $to;
 
@@ -748,11 +748,11 @@ function processLine($line, $hash = '')
 function UTF_Encode($str, $type)
 {
    static $conv = '';
-   
+
    if (!is_array($conv))
    {
       $conv = array();
-      
+
       for ($x = 128; $x <= 143; $x++)
       {
          $conv['utf'][] = chr(209) . chr($x);
@@ -788,26 +788,26 @@ function copyTree($source, $destination, $over = 0, $patterns = 0)
 {
     //Remove last slash '/' in source and destination - slash was added when copy
     if (substr($source, -1) == "/" ) {
-        $source = substr($source,0,-1); 
+        $source = substr($source,0,-1);
     } else if (substr($source, -1) == DIRECTORY_SEPARATOR ) {
         $source = substr($source,0,-1);
     }
-	
+
     if (substr($destination, -1) == "/" ) {
-        $destination = substr($destination,0,-1); 
+        $destination = substr($destination,0,-1);
     } else if (substr($destination, -1) == DIRECTORY_SEPARATOR ) {
         $destination = substr($destination,0,-1);
     }
-    
+
     if (!Is_Dir2($source)) {
         // cannot create destination path
-        return false; 
+        return false;
     }
 
     if (!Is_Dir2($destination)) {
         if (!mkdir($destination, 0777, true)) {
             // cannot create destination path
-            return false; 
+            return false;
         }
     }
 
@@ -966,7 +966,7 @@ function get_media_info($file)
 	$out['duration'] = $seconds + ($minutes * 60) + ($hours * 60 * 60);
 	// get all info about codec
 	preg_match("/Audio: (.+), (.\d+) Hz, (.\w+), (.+), (.\d+) kb/", $data, $format);
-    
+
 	if ($format) {
 		$out['Audio_format'] = $format[1];
 		$out['Audio_sample_rate'] = $format[2];
@@ -977,7 +977,7 @@ function get_media_info($file)
 			$out['Audio_chanel'] = 1;
 		} else {
 			$out['Audio_chanel'] = 2;
-		}	
+		}
 	}
     preg_match("/Video: (.+),\s(.\d+x.\d+) (.+), (.+), (.+), (.+), (.+), (.+) /", $data, $formatv);
     if ($formatv) {
@@ -1191,7 +1191,7 @@ function getDirFiles($dir, &$results = array()){
        $path = realpath($dir."/".$value);
        if(!is_dir($path) && $value != ".htaccess" && $value != "." && $value != "..") {
          $results[] = array('NAME'=>$value, 'FILENAME'=>$path,'DT'=>date('Y-m-d H:i:s',filemtime($path)),'TM'=>filemtime($path),'SIZE'=>filesize($path));
-       } 
+       }
      }
    }
    return $results;

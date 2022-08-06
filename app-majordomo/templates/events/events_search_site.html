@@ -23,7 +23,7 @@
 [#endif MODE#]
 <p align=center>
 <b>
-[#if MODE!="search_events"#]<a href="?mode=search_events"><#LANG_SEARCH#></a> 
+[#if MODE!="search_events"#]<a href="?mode=search_events"><#LANG_SEARCH#></a>
 &nbsp;&nbsp;&nbsp;
 [#endif#]
 //
@@ -58,7 +58,7 @@
  <td align=center bgcolor="#AAAAAA"><b><a href="#" onClick="return selectAll_events();"><#LANG_ALL#></a></b>
  <script language="javascript">
   function selectAll_events() {
-   var chkbox = document.forms['frmList_events'].elements['ids[]'];   
+   var chkbox = document.forms['frmList_events'].elements['ids[]'];
    var cnt = chkbox.length;
    for (i=0; i<cnt; i++) {
     if (chkbox[i].checked) {

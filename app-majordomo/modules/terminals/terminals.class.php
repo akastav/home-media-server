@@ -412,7 +412,7 @@ class terminals extends module
  terminals: CANPLAY int(3) NOT NULL DEFAULT '0'
  terminals: CANTTS int(3) NOT NULL DEFAULT '0'
  terminals: MIN_MSG_LEVEL varchar(255) NOT NULL DEFAULT ''
- terminals: TTS_TYPE char(20) NOT NULL DEFAULT '' 
+ terminals: TTS_TYPE char(20) NOT NULL DEFAULT ''
  terminals: PLAYER_TYPE char(20) NOT NULL DEFAULT ''
  terminals: PLAYER_PORT varchar(255) NOT NULL DEFAULT ''
  terminals: PLAYER_USERNAME varchar(255) NOT NULL DEFAULT ''
@@ -425,7 +425,7 @@ class terminals extends module
  terminals: LATEST_ACTIVITY datetime
  terminals: LINKED_OBJECT varchar(255) NOT NULL DEFAULT ''
  terminals: LEVEL_LINKED_PROPERTY varchar(255) NOT NULL DEFAULT ''
- terminals: LOCATION_ID int(5) NOT NULL DEFAULT '0' 
+ terminals: LOCATION_ID int(5) NOT NULL DEFAULT '0'
 EOD;
         parent::dbInstall($data);
 

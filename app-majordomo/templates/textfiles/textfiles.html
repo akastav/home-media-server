@@ -17,7 +17,7 @@
 
 
 <ul class="breadcrumb">
-<li> 
+<li>
 <a href="?"><#LANG_HOME#></a>
 </li>
 
@@ -49,23 +49,23 @@
 </div>
 
 
- 
 
- 
- 
+
+
+
 
 <div class="form-group">
      <div class="col-lg-offset-2 col-lg-5">
    <input type="submit" name="submit" value="<#LANG_SUBMIT#>" class="btn btn-primary">
    <a href="?" class="btn  btn-default"><#LANG_CANCEL#></a>
    [#if FILE!=""#]
-  
+
    <a href="?view_mode=delete_file&file=<#FILE_URL#>" class="btn  btn-default" onClick="return confirm('<#LANG_ARE_YOU_SURE#>')"><#LANG_DELETE#></a>
    [#endif FILE#]
   </div>
  </div>
- 
- 
+
+
 <input type="hidden" name="view_mode" value="<#VIEW_MODE#>">
 <input type="hidden" name="mode" value="update">
 </form>

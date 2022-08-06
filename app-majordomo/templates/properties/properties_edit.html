@@ -8,7 +8,7 @@
 				[#if ERR#]
 					<div class="alert alert-danger"><#LANG_FILLOUT_REQURED#></div>
 				[#endif ERR#]
-				
+
 				<div class="form-group " style="margin-right: 0px;margin-left: 0px;">
 					<label class="col-lg-2 col-md-4" style="max-width: 240px;float: left;padding: 5px 10px 0px 0px;text-align: right;"><#LANG_TITLE#>:<font color="red">*</font><#LANG_HCB#>title<#LANG_HCE#></label>
 					<div class="col-lg-10 col-md-8"><input type="input" class="form-control [#if ERR_TITLE#]alert-danger[#endif#]" placeholder="<#LANG_TITLE#>" name="title" value="[#TITLE#]" required="true"></div>
@@ -18,7 +18,7 @@
 					<label class="col-lg-2 col-md-4" style="max-width: 240px;float: left;padding: 5px 10px 0px 0px;text-align: right;"><#LANG_DESCRIPTION#>:<#LANG_HCB#>description<#LANG_HCE#></label>
 					<div class="col-lg-10 col-md-8"><textarea name="description" rows="3" class="form-control" style="width: 100%;min-height: 100px;resize: vertical;max-height: 500px;">[#DESCRIPTION#]</textarea></div>
 				</div>
-				
+
 				<div class="form-group " style="margin-right: 0px;margin-left: 0px;">
 					<label class="col-lg-2 col-md-4" style="max-width: 240px;float: left;padding: 5px 10px 0px 0px;text-align: right;"><#LANG_ONCHANGE_METHOD#>:<#LANG_HCB#>onchangemethod<#LANG_HCE#></label>
 					<div class="col-lg-10 col-md-8">
@@ -35,10 +35,10 @@
 				<div class="form-group " style="margin-right: 0px;margin-left: 0px;">
 					<label class="col-lg-2 col-md-4" style="max-width: 240px;float: left;padding: 5px 10px 0px 0px;text-align: right;"><#LANG_KEEP_HISTORY_DAYS#>:<#LANG_HCB#>keep_history<#LANG_HCE#></label>
 					<div class="col-lg-10 col-md-8">
-						<input type="number" name="keep_history" value="[#KEEP_HISTORY#]" size="10" placeholder="0 = <#LANG_DO_NOT_KEEP#>" class="form-control"> 
+						<input type="number" name="keep_history" value="[#KEEP_HISTORY#]" size="10" placeholder="0 = <#LANG_DO_NOT_KEEP#>" class="form-control">
 					</div>
 				</div>
-				
+
 				<div class="form-group " style="margin-right: 0px;margin-left: 0px;">
 					<label class="col-lg-2 col-md-4" style="max-width: 240px;float: left;padding: 5px 10px 0px 0px;text-align: right;"><#LANG_DATA_TYPE#>:<#LANG_HCB#>datatype<#LANG_HCE#></label>
 					<div class="col-lg-10 col-md-8">
@@ -48,7 +48,7 @@
 						</select>
 					</div>
 				</div>
-				
+
 				<script type="text/javascript">
 				function validationTypeUpdated() {
 					var vType=$('#validation_type').val();
@@ -81,7 +81,7 @@
 						</select>
 					</div>
 				</div>
-				
+
 				<div id="validation_min_max"[#if VALIDATION_TYPE!="1"#] style="display:none"[#endif#]>
 					<div class="form-group " style="margin-right: 0px;margin-left: 0px;">
 						<label class="col-lg-2 col-md-4" style="max-width: 240px;float: left;padding: 5px 10px 0px 0px;text-align: right;"><#LANG_MIN_VALUE#>:</label>
@@ -119,7 +119,7 @@
 					 <input type="radio" name="data_key" value="0"[#if DATA_KEY!="1"#] checked[#endif#]> <#LANG_NO#>
 					</div>
 				</div>
-				
+
 				<div class="form-group " style="margin-right: 0px;margin-left: 0px;">
 					 <div class="col-md-12 text-center">
 						[#if ID!=""#]
@@ -140,4 +140,3 @@
 		</div>
 	</div>
 </div>
-

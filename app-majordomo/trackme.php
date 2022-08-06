@@ -18,9 +18,8 @@ if ($_GET['a'] == 'upload')
    $_POST['speed']     = $_GET['sp'];
    $_POST['battlevel'] = $_GET["bs"];
    $_POST['deviceid']  = 'TrackMe';
- 
+
    include_once('./gps.php');
- 
+
    echo "Result:0";
 }
-

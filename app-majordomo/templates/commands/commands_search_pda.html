@@ -6,7 +6,7 @@
 
 [#if PARENT_TITLE!=""#]
             <div data-role="header"[#if "<#SETTINGS_THEME#>"=="dark"#] data-theme="b"[#endif#]>
-[#if IFRAME_MODE!="1"#]            
+[#if IFRAME_MODE!="1"#]
                 <h1 id="label_[#PARENT_ID#]">[#if PARENT_TITLE!=""#][#PARENT_TITLE#][#else#]MajorDoMo[#endif#]</h1>
 
                 [#if PARENT_ID!=""#]
@@ -70,7 +70,7 @@
 [#if SUB_PRELOAD="1"#]
 
  <div data-role="collapsible" data-iconpos="right">
-  
+
   <h2><span  id="label_[#ID#]">[#if ICON!=""#]<img src="<#ROOTHTML#>cms/icons/[#ICON#]" alt="" style="margin-right:10px;top:0.4em;max-height:32px;max-width:32px;height:32px;width:32px;vertical-align:middle;">[#endif#][#TITLE#]</span></h2>
   <ul data-role="listview" data-inset="true">
   [#tree RESULT#]
@@ -82,7 +82,7 @@
 <li[#if VISIBLE_DELAY!="0"#] class='visible_delay'[#endif#] id='item[#ID#]'>
 <a
  [#if !RESULT_TOTAL#]
- href="#" 
+ href="#"
  onClick="return menuClicked('[#ID#]', '[#PARENT_ID#]', '[#SUB_LIST#]', '[#WINDOW#]', '[#TITLE_SAFE#]', '[#COMMAND#]', '[#URL#]'[#if TYPE="window"#], '[#WIDTH#]', '[#HEIGHT#]'[#else#],0,0[#endif TYPE#]);"
  [#else RESULT_TOTAL#]
  href="<#ROOTHTML#>menu/[#ID#].html"
@@ -134,7 +134,7 @@
         <select name="menu[#ID#]_v" id="menu[#ID#]_v" data-role="slider"  onChange="changedValue[#ID#]();">
                 <option value="[#OFF_VALUE#]"[#if CUR_VALUE!="<#RESULT.ON_VALUE#>"#] selected[#endif#]><#LANG_OFF#></option>
                 <option value="[#ON_VALUE#]"[#if CUR_VALUE=="<#RESULT.ON_VALUE#>"#] selected[#endif#]><#LANG_ON#></option>
-        </select> 
+        </select>
 </li>
 [#endif TYPE#]
 
@@ -221,7 +221,7 @@
 </script>
 <li data-role="fieldcontain"[#if VISIBLE_DELAY!="0"#]  class='visible_delay'[#endif#] id='item[#ID#]'>
 <label for="menu[#ID#]_v" class="select"><span id="label_[#ID#]">[#TITLE#]</span><span id="processing_[#ID#]"></span></label>
-<fieldset data-role="controlgroup" data-type="horizontal"> 
+<fieldset data-role="controlgroup" data-type="horizontal">
 <select name="menu[#ID#]_v1" id="menu[#ID#]_v1" onChange="changedValue[#ID#]();">
  [#begin OPTIONS1#]
  <option value="[#VALUE#]"[#if SELECTED="1"#] selected[#endif#]>[#VALUE#]

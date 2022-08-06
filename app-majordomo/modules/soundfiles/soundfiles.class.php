@@ -1,6 +1,6 @@
 <?php
 /**
-* soundfiles 
+* soundfiles
 *
 * soundfiles
 *
@@ -128,7 +128,7 @@ function admin(&$out) {
     copy($file, ROOT.'cms/sounds/'.strtolower($file_name));
     $out['OK']=1;
    }
-  
+
  }
 
  if ($this->view_mode=='') {
@@ -137,12 +137,12 @@ function admin(&$out) {
 
  $dir=ROOT.'cms/sounds';
  $handle = opendir( $dir );
- while ( false !== $thing = readdir( $handle ) ) { 
+ while ( false !== $thing = readdir( $handle ) ) {
   if( $thing == '.' || $thing == '..' ) continue;
   if (preg_match('/(.+?)\.mp3$/', $thing, $m))  {
    $files[]=array('FILENAME'=>$m[1], 'FILENAME_URL'=>urlencode($m[1]));
   }
- } 
+ }
  closedir( $handle );
 
 

@@ -6,7 +6,7 @@ $(window).load(function() {
 	[#else#]
 		$('.breadcrumb:eq(0)').append('<li style="color: gray;"><#LANG_NEW_SCRIPT#></li>');
 	[#endif#]
-	
+
 	setTimeout(
 		function () {
 			$('#alert_msg').hide('slow');
@@ -20,7 +20,7 @@ $(window).load(function() {
 			<div class="alert alert-success" id="alert_msg"><#LANG_DATA_SAVED#></div>
 		[#endif OK#]
 		[#if ERR#]
-			<div class="alert alert-danger" id="alert_msg"><#LANG_FILLOUT_REQURED#></div> 
+			<div class="alert alert-danger" id="alert_msg"><#LANG_FILLOUT_REQURED#></div>
 			<script>
 			$(window).load(function() {
 				[#if SETTINGS_CODEEDITOR_SHOWERROR == '1' AND SETTINGS_CODEEDITOR_TURNONSETTINGS == '1'#]
@@ -29,16 +29,16 @@ $(window).load(function() {
 					if(error_line == 0) error_line = 1;
 					find = $('div pre.CodeMirror-line:eq('+error_line_find+')');
 					find.attr('id', 'errorline_'+error_line);
-				
+
 					var newElems = $("<div class='cm-error' style='border-top: 1px solid red;font-weight: bold;font-style: italic;'><#LANG_STRING_ERROR#> -> [#ERRORS#]</div>");
 					$('div pre.CodeMirror-line:eq('+error_line_find+')').append(newElems);
 				[#endif#]
-				
+
 				[#if SETTINGS_CODEEDITOR_UPTOLINE == '1' AND SETTINGS_CODEEDITOR_TURNONSETTINGS == '1'#]
-					location.href='#errorline_'+error_line; 
+					location.href='#errorline_'+error_line;
 				[#endif#]
 			});
-					
+
 			</script>
 		[#endif ERR#]
 
@@ -48,7 +48,7 @@ $(window).load(function() {
 			border: 2px solid #f7f7f7;
 		}
 		</style>
-		
+
 		<div class="form-group" style="margin-right: 0px;margin-left: 0px;">
 			<label class="col-lg-2 col-md-4" style="max-width: 240px;float: left;padding: 5px 10px 0px 0px;text-align: right;"><#LANG_TITLE#>:<font color="red">*</font><#LANG_HCB#>title<#LANG_HCE#></label>
 			<div class="col-lg-10 col-md-8"><input type="text" class="form-control [#if ERR_TITLE#]alert-danger[#endif#]"  name="title" value="[#TITLE#]" required="true"></div>
@@ -78,7 +78,7 @@ $(window).load(function() {
 			</div>
 			</div>
 		</div>
-		
+
 		[#if ID!=""#]
 			<div class="form-group" style="margin-right: 0px;margin-left: 0px;">
 				<label class="col-lg-2 col-md-4" style="max-width: 240px;float: left;padding: 5px 10px 0px 0px;text-align: right;"><#LANG_CODE#><#LANG_HCB#>code<#LANG_HCE#></label>
@@ -98,7 +98,7 @@ $(window).load(function() {
 								<#LANG_CODEEDITOR_NOTY_TURNOFF#>
 							</div>
 						[#endif SETTINGS_CODEEDITOR_TURNONSETTINGS#]
-						
+
 						<div id="autosave_code_in_time_div" style="color: gray;font-style: italic;font-size: 1rem;display:none;margin-left: 5px;margin-bottom: 4px;">
 							<i class="glyphicon glyphicon-floppy-saved" style="vertical-align: top;"></i> <#LANG_CODEEDITOR_AUTOSAVE_CODE#> <span id="autosave_code_in_time"></span>. <#LANG_CODEEDITOR_AUTOSAVE_CODE_HELP#>
 						</div>
@@ -125,7 +125,7 @@ $(window).load(function() {
 					<label><input type="checkbox" name="edit_run" id="chkRun" value="1" [#if EDIT_RUN#]checked[#endif#]> <#LANG_EXECUTE_SCRIPT_AFTER_UPDATE#></label>
 				</div>
 			</div>
-			
+
 			<div class="form-group" style="margin-right: 0px;margin-left: 0px;">
 				<div class="col-lg-8 col-lg-offset-2">
 				<label><input type="checkbox" name="run_periodically" value="1"[#if RUN_PERIODICALLY="1"#] checked[#endif#] onClick='$("#periocidally").toggle();'> <#LANG_RUN_PERIODICALLY#><#LANG_HCB#>script_runperiodically<#LANG_HCE#></label>
@@ -182,7 +182,7 @@ $(window).load(function() {
 	</form>
 
 	<hr>
-	
+
 	<div class="row">
 	[#if ID!=""#]
 	<div class="col-lg-8 col-lg-offset-2">

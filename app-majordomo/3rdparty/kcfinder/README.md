@@ -1,5 +1,5 @@
 # KCFinder web file manager
-http://kcfinder.sunhater.com  
+http://kcfinder.sunhater.com
 Pavel Tzonkov (sunhater@sunhater.com)
 
 ## Overview

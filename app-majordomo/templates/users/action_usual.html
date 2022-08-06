@@ -1,12 +1,12 @@
 <script language="javascript">
  function switchTo(username) {
-  $.ajax({                                      
-    url: ROOTHTML+'index.php',       
+  $.ajax({
+    url: ROOTHTML+'index.php',
     type: "POST",
-    data: { "username": username } 
+    data: { "username": username }
 }).done(function( msg ) {
     window.parent.location=ROOTHTML;
-  
+
 });
 }
 </script>

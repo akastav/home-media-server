@@ -82,7 +82,7 @@ function getParams() {
     echo json_encode($res);
     exit;
    }
-   
+
    if ($this->action=='getlatestnote') {
     header ("HTTP/1.0: 200 OK\n");
     header ('Content-Type: text/html; charset=utf-8');
@@ -99,7 +99,7 @@ function getParams() {
     header ('Content-Type: text/html; charset=utf-8');
 
     if ($dir = @opendir(ROOT."cms/cached/voice")) {
-       while (($file = readdir($dir)) !== false) { 
+       while (($file = readdir($dir)) !== false) {
        if (preg_match('/\.mp3$/', $file)) {
         $mtime=filemtime(ROOT."cms/cached/voice/".$file);
         /*
@@ -123,15 +123,15 @@ function getParams() {
        }
 
       }
-     closedir($dir); 
-    } 
+     closedir($dir);
+    }
 
     //print_r($files);exit;
 
     if (is_array($files)) {
      function sortFiles($a, $b) {
-         if ($a['MTIME'] == $b['MTIME']) return 0; 
-         return ($a['MTIME'] > $b['MTIME']) ? -1 : 1; 
+         if ($a['MTIME'] == $b['MTIME']) return 0;
+         return ($a['MTIME'] > $b['MTIME']) ? -1 : 1;
      }
      usort($files, 'sortFiles');
      echo '/cms/cached/voice/'.$files[0]['FILENAME'];
@@ -155,7 +155,7 @@ function getParams() {
    $out["DOC_NAME"]=$this->doc_name;
 
    global $username;
-   
+
    if ($username) {
        $user=SQLSelectOne("SELECT * FROM users WHERE USERNAME LIKE '".DBSafe($username)."'");
        if (hash('sha512', '') == $user['PASSWORD']) {
@@ -177,7 +177,7 @@ function getParams() {
                    echo 'Incorrect username/password!';
                    exit;
                }
-          }    
+          }
       }
    }
    global $terminal;
@@ -252,7 +252,7 @@ function getParams() {
      $out['USER_AVATAR']=$users[$i]['AVATAR'];
     } elseif (!$session->data['SITE_USERNAME'] && $users[$i]['HOST'] && $users[$i]['HOST']==$_SERVER['REMOTE_ADDR']) {
      $session->data['SITE_USERNAME']=$users[$i]['USERNAME'];
-     $session->data['SITE_USER_ID']=$users[$i]['ID'];     
+     $session->data['SITE_USER_ID']=$users[$i]['ID'];
      $out['USER_TITLE']=$users[$i]['NAME'];
      $out['USER_AVATAR']=$users[$i]['AVATAR'];
     }
@@ -335,9 +335,9 @@ function getParams() {
 
    $out['AJAX']=$this->ajax;
    $out['POPUP']=$this->popup;
-   
+
    $days=array(LANG_WEEK_SUN,LANG_WEEK_MON,LANG_WEEK_TUE,LANG_WEEK_WED,LANG_WEEK_THU,LANG_WEEK_FRI,LANG_WEEK_SAT);
-   
+
    $out['TODAY']=$days[date('w')].', '.date('d.m.Y');
    Define('TODAY', $out['TODAY']);
    $out['REQUEST_URI']=$_SERVER['REQUEST_URI'];
@@ -366,7 +366,7 @@ function getParams() {
    }
 
    if (!$this->action && defined('SETTINGS_GENERAL_START_LAYOUT') && SETTINGS_GENERAL_START_LAYOUT!='') {
-   
+
     if (SETTINGS_GENERAL_START_LAYOUT=='homepages') {
      $this->redirect(ROOTHTML.'pages.html');
     }
@@ -397,7 +397,7 @@ function getParams() {
      $code.=$obj."->run();\n";
      startMeasure("module_".$this->action);
      eval($code);
-     endMeasure("module_".$this->action); 
+     endMeasure("module_".$this->action);
 
     }
     return;

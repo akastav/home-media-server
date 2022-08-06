@@ -57,7 +57,7 @@ try
    $serial->confCharacterLength(8);
    $serial->confStopBits(1);
    $data = "";
-   
+
    if ($serial->deviceOpen())
    {
       DebMes("Open device " . end($tty) . ": " . basename(__FILE__));
@@ -69,7 +69,7 @@ try
          //GET /objects/?object=sensorGarage&op=m&m=statusChanged&status=%i HTTP/1.0
          $start = strpos($data, 'GET ');
          $end = strpos($data, ' HTTP/1.0');
-         
+
          if ($start !== false && $end)
          {
             $url = BASE_URL . trim(substr($data, $start + 4, $end - $start - 4));
@@ -86,7 +86,7 @@ try
             DebMes("Cycle running OK: " . basename(__FILE__));
             $updated_time = time();
          }
-         
+
          usleep($uSleep);
       }
       while(!file_exists('./reboot') || IsSet($_GET['onetime']));
@@ -102,4 +102,3 @@ catch (Exception $e)
 }
 
 DebMes("Unexpected close of cycle: " . basename(__FILE__));
-

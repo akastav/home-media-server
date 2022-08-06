@@ -18,7 +18,7 @@ class yy_Return extends yy_Base
 
   function compile($options, $level = NULL)
   {
-    $expr = (isset($this->expression) && $this->expression) ? 
+    $expr = (isset($this->expression) && $this->expression) ?
       $this->expression->make_return() : NULL;
 
     if ($expr && ! ($expr instanceof yy_Return))
@@ -33,7 +33,7 @@ class yy_Return extends yy_Base
 
   function compile_node($options)
   {
-    return $this->tab.'return'.(isset($this->expression) && $this->expression ? 
+    return $this->tab.'return'.(isset($this->expression) && $this->expression ?
       ' '.$this->expression->compile($options, LEVEL_PAREN) : '').';';
   }
 

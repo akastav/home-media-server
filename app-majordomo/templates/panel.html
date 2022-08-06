@@ -56,7 +56,7 @@
 		function filterSearch() {
 			$('#filter_add').show().html('<center><img src="<#ROOTHTML#>img/ajax-loader.gif"/> <#LANG_NEWDASH_LOADING#></center>');
 			$('.searchNoty').hide();
-			
+
 			var title = $('#filter_modules').val();
 			var urlFilter="?";
 
@@ -64,21 +64,21 @@
 				$('#filter_add').show().html('<div style="padding: 15px;text-align: center;"><i class="glyphicon glyphicon-info-sign"></i> Введите более 2-х символов для поиска...</div>');
 				return;
 			}
-			
+
 			urlFilter+='&ajax_panel=1&op=filter&title='+encodeURIComponent(title);
 
 			$.ajax({
 				url: urlFilter,
 				success: function(data){
 					$('#filter_add').show();
-					
+
 					if(data) {
 						$('#filter_add').html(data);
 					} else {
 						$('#filter_add').html('<div style="padding: 15px;text-align: center;"><i class="glyphicon glyphicon-info-sign"></i> Ничего не найдено :(</div>');
 					}
-					
-					
+
+
 				},
 				error: function(data){
 					$('#filter_add').show();
@@ -206,13 +206,13 @@
 				clearTimeout(consoleDebugTimer);
 				return;
 			}
-			
+
 			var urlDebug="<#ROOTHTML#>ajax/xray.html?op=getcontent&lines=10";
 			$.ajax({
 				url: urlDebug,
 			}).done(function(data) {
 				data = JSON.parse(data);
-				
+
 				if(data.CONTENT) {
 					$('#console_debug').html(data.CONTENT);
 				} else {
@@ -224,26 +224,26 @@
 
 		function consoleToggle() {
 			$("#console").toggle();
-			
+
 			if($("#console").is(':visible')) {
 				$('#partLoadContent').css('opacity', '0.3');
 			} else {
 				$('#partLoadContent').css('opacity', '1');
 			}
-			
+
 			return false;
 		}
-		
+
 		function consoleDebugToggle() {
 			$("#console_debug").toggle();
-			
+
 			//Запишем в куку, что консоль открыли
 			if ($('#console_debug').is(':visible')) {
 				$.cookie('debug', 'on', {expires: 1});
 			} else {
 				$.cookie('debug', 'off', {expires: 1});
 			}
-			
+
 			updateConsoleDebug();
 			return false;
 		}
@@ -360,7 +360,7 @@
 					$('#dashInfoIPSer').text();
 					$('#dashInfoOS').text(data.OS);
 					$('#dashInfoErrors').text(data.active_errors);
-					$('#dashInfoLastUpdate').text(data.LatestUpdateTimestamp);				
+					$('#dashInfoLastUpdate').text(data.LatestUpdateTimestamp);
 				},
 				error: function(data) {
 					console.log('error');
@@ -375,10 +375,10 @@
 					i = 0;
 					while (i < 6) {
 						dataCurr = list[i];
-						
+
 						(i != 0) ? scriptLastBlock = $('#scriptLast').html() : scriptLastBlock = '';
 						$('#scriptLast').html(scriptLastBlock + '<li class="list-group-item"><span class="badge">'+dataCurr.EXECUTED+'</span>'+dataCurr.SCRIPT+'</li>')
-						
+
 						i++;
 					}
 				},
@@ -394,7 +394,7 @@
 					$('#dashInfoDBReqS').html(data.second);
 					$('#dashInfoDBReqM').html(data.minute);
 					$('#dashInfoDBReqH').html(data.hours);
-					
+
 					//Секунды
 					if(data.second <= 170) {
 						$('#dashInfoDBReqS').attr('style', 'cursor: help;background: #5cb85c');
@@ -424,8 +424,8 @@
 					console.log('error');
 				}
 			});
-			
-			
+
+
 			return false;
 		}
 		[#endif#]
@@ -433,27 +433,27 @@
 			if(module == 0) {
 				$('#module_add').val('');
 				$('#methodsModule').hide();
-				
+
 				$('#console>div:eq(1)').removeClass('col-md-8');
 				$('#console>div:eq(1)').addClass('col-md-12');
-			
+
 				return;
 			}
-			
+
 			moduleStrCommand = "include(DIR_MODULES.'"+module+"/"+module+".class.php');PHP_EOL$"+module+" = new "+module+"();";
-			
+
 			$('#console>div:eq(1)').removeClass('col-md-12');
 			$('#console>div:eq(1)').addClass('col-md-8');
-			
+
 			$('#module_add').val(moduleStrCommand);
 			$('#methodsModule').show();
-			
+
 			sendConsoleCommand(moduleStrCommand + "PHP_EOLjson_encode(get_class_methods('"+module+"'));");
-			
+
 			//Отправляем в консоль
 			//$('#console_output').html('<i style="font-size: 7pt;" class="glyphicon glyphicon-usd"></i>: '+moduleStrCommand.replace(/PHP_EOL/g, '<br> &nbsp&nbsp '));
 		}
-		
+
 		function sendConsoleCommand(cmdCustom = '') {
 			if(cmdCustom != '') {
 				var cmd = cmdCustom;
@@ -461,7 +461,7 @@
 			} else {
 				var cmd = $('#command').val();
 			}
-			
+
 			if(cmdCustom == '' && $('#module_add').val()) {
 				parentModule = $('#module_add').val();
 				cmd = parentModule+cmd;
@@ -472,15 +472,15 @@
 				$('#console_output').html(data);
 				return false;
 			}
-			
+
 			if(cmd == '') {
 				$('#dangerAlertConsole').show();
 				return false;
 			}
 			var urlCommand="?";
-			
+
 			$('#loaderConsole').show();
-			
+
 			urlCommand+='ajax_panel=1&op=console&command='+encodeURIComponent(cmd);
 			$.ajax({
 				//url: urlCommand
@@ -493,13 +493,13 @@
 						$('#dangerAlertConsole').hide();
 						$('#error_console_request').remove();
 						$('#loaderConsoleModule').hide();
-						
+
 						data = JSON.parse(data);
-						
+
 						currModuleName = $('#currModuleName').val();
-						
+
 						$('#methodsModule>ul').html('');
-						
+
 						$('#methodsModule>ul').append('<li class="list-group-item"><a href="javascript://" onclick="$(\'input#command\').val($(\'input#command\').val() + $(this).text());">print_r($'+currModuleName+'->getConfig());</a></li>');
 						data.forEach(function(item, i) {
 							$('#methodsModule>ul').append('<li class="list-group-item"><a href="javascript://" onclick="$(\'input#command\').val($(\'input#command\').val() + $(this).text());">$'+currModuleName+'->'+item+'();</a></li>');
@@ -509,32 +509,32 @@
 						$('#console_output').html(data);
 						return;
 					}
-					
+
 					old_data = $('#console_output').html();
 
 					if(!data) {
 						data = '<i>Completed the request</i>';
 					}
-					
+
 					$('#console_output').html('<i style="font-size: 7pt;" class="glyphicon glyphicon-usd"></i>: <span style="white-space: pre-wrap;">'+data+ '</span><br><i style="font-size: 7pt;" class="glyphicon glyphicon-chevron-right"></i>: '+ cmd.replace(/PHP_EOL/g, '<br> &nbsp&nbsp ') + '<br>' + old_data);
 					$('#console_output_hintResize').show();
 					$('#loaderConsole').hide();
 					$('#dangerAlertConsole').hide();
 					//$('#warningAlertConsole').hide();
 					//$('#console_output').show();
-					
+
 					$('#error_console_request').remove();
 				},
 				error: function(data){
 					if(cmdCustom) {
 						return data;
 					}
-					
+
 					$('#dangerAlertConsole').hide();
 					//$('#warningAlertConsole').hide();
 					$('#loaderConsole').hide();
 					$('#console_output_hintResize').hide();
-					
+
 					//$('#console_output').show();
 					$('#console_output').html('<div id="error_console_request" style="min-width: 200px;padding: 10px;border: 3px solid #fa0000;border-radius: 10px;text-align: center;color: white;">Error sending request - sendConsoleCommand()</div>');
 				},
@@ -554,7 +554,7 @@
 			});
 			return false;
 		}
-	
+
 		function checkNews() {
 			var urlCheckNews = '<#ROOTHTML#>ajax/market.html?op=news';
 			$.ajax({
@@ -569,10 +569,10 @@
 					$('#news_body').html('<div style="min-width: 200px;padding: 10px;background: #ffafaf;border-radius: 10px;text-align: center;">Error sending request - checkNews()</div>');
 				},
 			});
-			
+
 			return false;
 		}
-		
+
 		function myBlockOnDash() {
 			var urlCheckNews = '<#ROOTHTML#>objects/?script=dash_my_block';
 			$.ajax({
@@ -598,7 +598,7 @@
 								if(i == 0) $('#more_myBlockOnDash_body').html('');
 								color = data.moreinfo[value].split('|color:');
 								(color[1]) ? color_bg = color[1] : color_bg = '#999';
-								
+
 								$('#more_myBlockOnDash_body').prepend('<li class="list-group-item">'+value+'<span class="badge" style="background:'+color_bg+';">'+color[0]+'</span></li>');
 								i++;
 							}
@@ -609,11 +609,11 @@
 					}
 				},
 			});
-			
+
 			return false;
 		}
-		
-		function checkConnectStatus() {	
+
+		function checkConnectStatus() {
 			var urlCheckUpdates = '<#ROOTHTML#>ajax/connect.html?op=status';
 			$.ajax({
 				url: urlCheckUpdates
@@ -624,15 +624,15 @@
 					$('#problemLinkToConnect').show();
 					return false;
 				}
-				
+
 				data = JSON.parse(data);
 				if (data.status == 0) {
 					$('#getConnect').show('fast');
 				}
 			});
 		}
-		
-		function checkUpdatesAvailable() {	
+
+		function checkUpdatesAvailable() {
 			var urlCheckUpdates = '<#ROOTHTML#>ajax/saverestore.html?op=check_updates';
 			$.ajax({
 				url: urlCheckUpdates
@@ -646,7 +646,7 @@
 				//$('#dashInfoBranch').html(data.currBranch.slice(0, -7));
 				$('#dashInfoVersion').html('<a style="color: white;text-decoration: none;" href="https://github.com/sergejey/majordomo/commit/'+data.current_version+'" target="_blank">'+data.currBranch + '_' + data.current_version.slice(0, -33)+'</a>');
 			});
-			
+
 			var urlCheckUpdatesMarket = '<#ROOTHTML#>ajax/market.html?op=check_updates';
 			$.ajax({
 				url: urlCheckUpdatesMarket
@@ -657,7 +657,7 @@
 					$('#problemLinkToConnect').show();
 					return false;
 				}
-				
+
 				data = JSON.parse(data);
 				if (data.status == '1') {
 					$('#updates-check-market').show();
@@ -666,7 +666,7 @@
 				}
 				$('#loadUpdate').hide()
 			});
-			
+
 			var urlCheckUpdatesSystem = '<#ROOTHTML#>ajax/system_errors.html?op=check';
 			$.ajax({
 				url: urlCheckUpdatesSystem
@@ -678,11 +678,11 @@
 				}
 				$('#loadUpdate').hide()
 			});
-			
+
 		}
 		[#endif#]
 	</script>
-	
+
 	<style>
 	.modal-lg {
 		width: 80%;
@@ -741,11 +741,11 @@
 			</button>
 			<a class="navbar-brand" style="margin-right: 20px;padding:0px" href="<#ROOTHTML#>admin.php"><img src="<#ROOTHTML#>img/logo-md.png" style="height: 54px;"></a>
 		</div>
-		
+
 		<div class="navbar-collapse collapse" id="responsive-menu">
 			<ul class="nav navbar-nav navbar-left" >
 				<li><a href="<#ROOTHTML#>"><i class="glyphicon glyphicon-home" style="vertical-align: top;font-size: 11pt;"></i> <#LANG_FRONTEND#></a></li>
-				
+
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-globe" style="vertical-align: top;font-size: 11pt;"></i> <#LANG_NEWDASH_MJDM_RESOURCE#> <b class="caret"></b></a>
 					<ul class="dropdown-menu">
@@ -806,19 +806,19 @@
 								$('#notyAddtimeBlock_'+id).hide();
 							}
 							</script>
-							
+
 							<div style='min-width: 25rem;'>
 							<div style='font-size: 1rem;float:left'>Уведомление от модуля <b>[#TITLE#]</b></div>
 							<div style='font-size: 1rem;float:right;cursor: pointer;color: red;' onclick='closePopover([#PLUGINS_ID#]);'><i class='glyphicon glyphicon-remove-circle'></i></div>
 							<div class='clearfix'></div>
 							<hr style='margin: 0px 0px 5px 0px;'>
 							</div>
-							
+
 							<div class='notyBody' id='notyBody_[#PLUGINS_ID#]' style='max-height: 200px;overflow-y: auto;overflow-x: hidden;'>
 							[#begin PLUGINS_NOTY#]
 							<div id='notyAlert_[#ID#]' class='plugNotyAlert alert alert-[#TYPE#]' onclick='readNoty([#ID#], [#PLUGINS_ID#])' style='padding: 5px 7px;margin: 0px 10px 5px 0px;font-size: 1.2rem;cursor:pointer;'>
 								<div style='float:left;display:none;' id='notyAddtimeBlock_[#ID#]'><i class='glyphicon glyphicon-time'></i> Создан [#ADD_HUMAN#]</div>
-								
+
 								<div style='float:left' id='notyMsgBlock_[#ID#]'><i class='glyphicon glyphicon-bullhorn'></i> [#MESSAGE#]</div>
 								<div style='float:right;cursor: pointer;' onmouseover='showNotyDate([#ID#]);' onmouseout='hideNotyDate([#ID#]);'><i class='glyphicon glyphicon-info-sign'></i></div>
 								<div class='clearfix'></div>
@@ -840,7 +840,7 @@
 				[#end SUB_MODULES#]
 
 				[#else#]
-				
+
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-dashboard" style="vertical-align: top;font-size: 11pt;"></i> <#LANG_SECTION_SYSTEM#> <b class="caret"></b></a>
 					<ul class="dropdown-menu">
@@ -865,7 +865,7 @@
 			</div>
 		</div>
 	</nav>
-	
+
 	<div class="modal fade" id="mdmGlobalSearchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
@@ -874,12 +874,12 @@
 						<i class="glyphicon glyphicon-exclamation-sign" style="font-weight: normal;font-size: 13pt;vertical-align: sub;margin-right: 10px;"></i>
 						<#LANG_NEWDASH_SEARCH_HINT#>
 					</div>
-					
+
 					<div class="input-group input-group-lg">
 						<span class="input-group-addon">Ищем:</span>
 						<input type="text" class="form-control input-group-lg" name="filter_modules" id="filter_modules" placeholder="<#LANG_SEARCH#>">
 					</div>
-					
+
 					<div id="filter_add" style="display:none;overflow-x: hidden;white-space: nowrap;border: 1px solid #ddd;padding: 5px;max-height: 300px;overflow-y: auto;border-radius: 5px;margin-top: 5px;">
 					</div>
 				</div>
@@ -889,18 +889,18 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<div class="row" id="console" style="display: none;padding: 10px;margin: 15px;border-radius: 5px;background: whitesmoke;box-shadow: 0px 1px 10px #4792d169;border: 2px solid #4792d1;">
 		<div class="col-xs-12 col-sm-12 col-md-12" style="padding-right: 0px;padding-left: 0px;">
 			<div class="alert alert-danger text-center" id="dangerAlertConsole" style="display: none;"><#LANG_NEWDASH_CONSOLE_ERROR_EMPTY#></div>
 			<div class="alert alert-warning text-center" id="warningAlertConsole" style="display: none;"><#LANG_NEWDASH_CONSOLE_ERROR_FAIL#></div>
 		</div>
-		
+
 		<form class="form-inline" role="form" action="?" method="post" onSubmit="return sendConsoleCommand();">
 			<div class="col-xs-12 col-sm-12 col-md-12">
 				<div class="input-group">
 					<input type="text" name="command" value="" id="command" class="form-control" placeholder="Code, method, expression...">
-					
+
 					<span class="input-group-btn">
 						<input type="submit" name="submit" value="<#LANG_SEND#>" class="btn btn-success ">
 						<input type="button" value="Подключить модуль" onclick="$('#currModuleName').toggle();" class="btn btn-info ">
@@ -909,16 +909,16 @@
 				</div>
 				<select class="form-control" id="currModuleName" style="display:none;margin-top: 10px;" onchange="insertModuleInConsole($(this).val());">
 					<option value="0"><#LANG_NEWDASH_CONSOLE_CHOOSE_MODULE#></option>
-					
+
 					[#begin SUB_MODULES#]
 						[#if NAME#]<option value="[#NAME#]">[#TITLE#]</option>[#endif#]
 					[#end SUB_MODULES#]
 				</select>
 			</div>
-			
+
 			<input type="hidden" id="module_add" name="module_add" value="">
 		</form>
-		
+
 		<div class="col-xs-12 col-sm-12 col-md-12" style="padding-right: 0px;padding-left: 0px;padding: 10px;margin-top: 10px;">
 			<div id="loaderConsole" style="display: none;" class="text-center"><img src="<#ROOTHTML#>img/ajax-loader.gif"/></div>
 			<div id="console_output" style="height: 150px;min-height: 150px;overflow: auto;padding: 10px;font-family: Consolas, Verdana;background: rgb(0, 0, 128);color: rgb(192, 192, 192);border-radius: 5px;resize: vertical;">
@@ -928,27 +928,27 @@
 				<span style="vertical-align: sub;color: gray;font-size: 1rem;"><#LANG_NEWDASH_CONSOLE_SIZE_HINT#></span> <img style="width: 40px;" src="<#ROOTHTML#>img/arrow_hint.png">
 			</div>
 		</div>
-		
+
 		<div class="col-xs-12 col-sm-12 col-md-4" id="methodsModule" style="display:none;padding: 10px;margin-top: 10px;height: 150px;min-height: 160px;overflow: auto;resize: vertical;">
 			<div id="loaderConsoleModule" style="display: none;" class="text-center"><img src="<#ROOTHTML#>img/ajax-loader.gif"/></div>
-			
+
 			<ul class="list-group" style="">
-				
+
 			</ul>
 		</div>
-		
+
 	</div>
 	[#endif PRINT#]
-	
+
 	<div class="row text-center" style="margin-top: 20px;display:none;" id="preloader">
 		<h4 style="font-weight: bold;"><#LANG_NEWDASH_PRELOAD_HEADER#></h4>
 		<img src="<#ROOTHTML#>img/system/loading.gif" style="max-width: 200px">
 		<p><#LANG_NEWDASH_PRELOAD_TEXT#></p>
-		
+
 		<a id="stopLoadBtnPreloader" href="" class="btn btn-success btn-md" role="button"><#LANG_NEWDASH_PRELOAD_BTN#></a>
 	</div>
 
-	
+
 	<script language="javascript">
 	function toggleCategory(id) {
 		var vl=$.cookie('sub_'+id);
@@ -958,15 +958,15 @@
 		} else {
 			$.cookie('sub_'+id, 'off', {expires: 180});
 		}
-		
+
 		$('#row_'+id).collapse("toggle");
-		
+
 		return false;
 	}
-	
+
 	function hideHintCookie(id, check = 0) {
 		var vl = $.cookie('hint_'+id);
-		
+
 		if (check == 0 && vl != 'off') {
 			$.cookie('hint_'+id, 'off', {expires: 180});
 			$('#hint_'+id).hide("fast");
@@ -975,21 +975,21 @@
 				$('#hint_'+id).show("fast");
 			}
 		}
-		
+
 		return false;
 	}
 
 	function checkCategory(id) {
 		var vl = $.cookie('sub_'+id);
-		
+
 		if (vl == 'on' || vl == null) {
 			$('#row_'+id).collapse("show");
 		}
 		return false;
 	}
 	</script>
-	
-	
+
+
 	<style>
 		#partLoadContent {
 			margin-bottom: 50px;
@@ -1016,7 +1016,7 @@
 							<div onclick="hideHintCookie('alert_hide_hint2');" style="cursor:pointer;text-align: center;font-size: 7pt;margin-top: 5px;color: gray;font-style: italic;margin-bottom:20px"><#LANG_NEWDASH_DONTSHOW_THIS_BLOCK#> <i class="glyphicon glyphicon-arrow-up"></i></div>
 						</div>
 					</div>
-					
+
 					[#begin SUB_MODULES#]
 					[#if NEW_CATEGORY#]
 					<div class="panel panel-default">
@@ -1031,7 +1031,7 @@
 									[#endif NEW_CATEGORY#]
 									[#if !DENIED#]
 										<li class="[#if SELECTED#]active[#endif#] category[#CATEGORY_ID#]" id="module_[#NAME#]_link">
-											<a class="leftmenutab" href="?action=[#NAME#]"><img src="[#ICON_SM#]" style="width: 20px;height: 20px;">&nbsp;[#TITLE#] 
+											<a class="leftmenutab" href="?action=[#NAME#]"><img src="[#ICON_SM#]" style="width: 20px;height: 20px;">&nbsp;[#TITLE#]
 											[#if PLUGINS_NOTY_COUNT != 0#]
 											<div id="plugNotyBtn_[#PLUGINS_ID#]" class="plugNotyBtn badge pull-right alert-[#PLUGINS_NOTY_COLOR#]" style="border: 1px solid;cursor: pointer;"  data-container="body" data-toggle="popover" data-trigger="manual" data-placement="right" data-html="true" data-content="
 											<script>
@@ -1044,19 +1044,19 @@
 												$('#notyAddtimeBlock_'+id).hide();
 											}
 											</script>
-											
+
 											<div style='min-width: 25rem;'>
 											<div style='font-size: 1rem;float:left'>Уведомление от модуля <b>[#TITLE#]</b></div>
 											<div style='font-size: 1rem;float:right;cursor: pointer;color: red;' onclick='closePopover([#PLUGINS_ID#]);'><i class='glyphicon glyphicon-remove-circle'></i></div>
 											<div class='clearfix'></div>
 											<hr style='margin: 0px 0px 5px 0px;'>
 											</div>
-											
+
 											<div class='notyBody' id='notyBody_[#PLUGINS_ID#]' style='max-height: 200px;overflow-y: auto;overflow-x: hidden;'>
 											[#begin PLUGINS_NOTY#]
 											<div id='notyAlert_[#ID#]' class='plugNotyAlert alert alert-[#TYPE#]' onclick='readNoty([#ID#], [#PLUGINS_ID#])' style='padding: 5px 7px;margin: 0px 10px 5px 0px;font-size: 1.2rem;cursor:pointer;'>
 												<div style='float:left;display:none;' id='notyAddtimeBlock_[#ID#]'><i class='glyphicon glyphicon-time'></i> Создан [#ADD_HUMAN#]</div>
-												
+
 												<div style='float:left' id='notyMsgBlock_[#ID#]'><i class='glyphicon glyphicon-bullhorn'></i> [#MESSAGE#]</div>
 												<div style='float:right;cursor: pointer;' onmouseover='showNotyDate([#ID#]);' onmouseout='hideNotyDate([#ID#]);'><i class='glyphicon glyphicon-info-sign'></i></div>
 												<div class='clearfix'></div>
@@ -1091,17 +1091,17 @@
 				<div class="row">
 					[#if ACTION!="" AND ACTION!='xray'#]
 					<div class="col-xs-12 col-sm-12 col-md-12" id="console_debug" style="display:none;overflow-wrap: anywhere;margin-bottom:20px;max-height: 150px;overflow: auto;padding: 10px;font-family: Consolas, Verdana;background: #000080;color: #c0c0c0;border-radius: 5px;">
-						
+
 					</div>
 					[#endif#]
-					
+
 					<div class="col-xs-12 col-sm-12 col-md-12" id="problemLinkToConnect" style="display:none;padding-left: 0px;padding-right: 0px;">
 						<div class="alert alert-danger" style="box-shadow: 0px 8px 0px 0px rgb(168 10 10);background-image: url(<#ROOTHTML#>img/icons/highAlertIcon.gif);background-repeat: no-repeat;background-size: contain;background-position: right center;">
 							<b><#LANG_NEWDASH_CONNECT_CONNECT_ERROR_1#></b>
 							<p style="font-size: 1rem;"><#LANG_NEWDASH_CONNECT_CONNECT_ERROR_2#></p>
 						</div>
-					</div> 
-					
+					</div>
+
 					<div class="col-md-[#if ACTION!=""#]8[#else#]5[#endif#]" style="padding-left: 0px;padding-right: 0px;">
 						<ol class="breadcrumb" id="hideMenuDiv" style="border-radius: 4px 0px 0px 4px;">
 							<li>
@@ -1137,9 +1137,9 @@
 					</div>
 					<div class="clearfix"></div>
 				</div>
-				
-				
-				
+
+
+
 				[#endif PRINT#]
 				<!--right_main-->
 				[#if ACTION!=""#]
@@ -1159,8 +1159,8 @@
 	if($.cookie('debug') == 'on' && $('#console_debug').is(':hidden')) {
 		consoleDebugToggle();
 	}
-	
-	
+
+
     var dynids='';
     var dynids_timer=0;
     function dynamicContentRefresh() {
@@ -1192,10 +1192,10 @@ function readNoty(id, plugins_id) {
 		data = JSON.parse(data);
 		if(data.status == true) {
 			countToEnd = Number($('#plugNotyBtn_'+plugins_id).text())-1;
-			
+
 			$('#plugNotyBtn_'+plugins_id).text(countToEnd);
 			$('#notyAlert_'+id).hide('slow');
-	
+
 			if(countToEnd == 0) {
 				$('#plugNotyBtn_'+plugins_id).popover('hide');
 				$('#plugNotyBtn_'+plugins_id).remove();
@@ -1224,7 +1224,7 @@ $(document).ready(function() {
 	}, function() {
 		//$(this).popover('hide');
 	});
-	
+
 	//Применяем тему
 	/*
 	if($.cookie('theme') == 'dark') {
@@ -1232,13 +1232,13 @@ $(document).ready(function() {
 	} else if($.cookie('theme') == 'light') {
 		$('link#theme').attr('href', '<#ROOTHTML#>3rdparty/bootstrap/css/bootstrap.min.css');
 	} */
-	
-	
+
+
 	if ($(window).scrollTop() > 200 && (document.documentElement.scrollHeight - window.innerHeight) >= 200) {
 		$("nav").addClass("navbar-fixed-top");
 		$("nav").attr('style', 'box-shadow: 0px 1px 10px rgb(0 0 0 / 25%);z-index: 99999;border-radius: 4px;border-bottom: 2px solid #4792d1;');
 	}
-		
+
 	$(window).on("scroll", function(e) {
 		if ($(window).scrollTop() > 200 && (document.documentElement.scrollHeight - window.innerHeight) >= 200) {
 			$("nav").addClass("navbar-fixed-top");
@@ -1249,12 +1249,12 @@ $(document).ready(function() {
 			$("nav").removeAttr('style');
 			$("body").css('padding-top', '0px');
 		}
-		
+
 		//if(window.pageYOffset < 500) {
 		//	$('#partLoadContent').css('margin-top', ''+(window.pageYOffset*1)+'px');
 		//}
 	});
-	
+
 	$('#mdmGlobalSearchModal').on('shown.bs.modal', function() {
 		$('input#filter_modules').focus();
 	})

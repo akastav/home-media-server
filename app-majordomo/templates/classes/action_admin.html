@@ -12,7 +12,7 @@ $(window).load(function() {
 	[#begin HISTORY_LIST#]
 		$('.breadcrumb:eq(0)').append('<li><a href="?view_mode=<#VIEW_MODE#>&id=[#ID#]&tab=<#TAB#>">[#TITLE#]</a></li>');
 	[#end HISTORY_LIST#]
-	
+
 	$('.breadcrumb:eq(0)').append('<li><a href="?md=classes&action=classes&inst=adm&data_source=&view_mode=edit_classes&id=[#ID#]&tab=objects">[#TITLE#]</a></li>');
 });
 </script>
@@ -50,7 +50,7 @@ $(window).load(function() {
 
  [#endif VIEW_MODE#]
  <!-- / table classes edit -->
- <!-- table classes view --> 
+ <!-- table classes view -->
  [#if VIEW_MODE="view_classes"#]
    [#if TAB=""#]
     [#inc classes_view_default.html#]

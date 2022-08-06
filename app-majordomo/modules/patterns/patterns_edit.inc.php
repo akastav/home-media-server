@@ -5,7 +5,7 @@
 
   global $parent_id;
   $out['PARENT_ID']=$parent_id;
-  
+
   if(defined('SETTINGS_CODEEDITOR_TURNONSETTINGS')) {
 	$out['SETTINGS_CODEEDITOR_TURNONSETTINGS'] = SETTINGS_CODEEDITOR_TURNONSETTINGS;
 	$out['SETTINGS_CODEEDITOR_UPTOLINE'] = SETTINGS_CODEEDITOR_UPTOLINE;
@@ -35,10 +35,10 @@
 
    $old_code=$rec['SCRIPT'];
    $rec['SCRIPT'] = trim($script);
-   
+
    if ($rec['SCRIPT']!='') {
 	   $errors = php_syntax_error($rec['SCRIPT']);
-		
+
         if ($errors) {
             $out['ERR_LINE'] = preg_replace('/[^0-9]/', '', substr(stristr($errors, 'php on line '), 0, 18))-2;
             $out['ERR_CODE'] = 1;
@@ -209,7 +209,7 @@
   $out['LOG']=nl2br($rec['LOG']);
 
   $out['CONTEXTS']=SQLSelect("SELECT ID, TITLE FROM patterns WHERE IS_CONTEXT=1 AND ID!=".(int)$rec['ID']." ORDER BY PARENT_ID, TITLE");
-  
+
   if ($rec['ID']) {
    $out['CHILDREN']=SQLSelect("SELECT ID, TITLE FROM patterns WHERE PARENT_ID='".(int)$rec['ID']."'");
    $out['SAME_LEVEL']=SQLSelect("SELECT ID, TITLE FROM patterns WHERE PARENT_ID='".(int)$rec['PARENT_ID']."'");

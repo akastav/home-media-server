@@ -41,7 +41,7 @@ else
    // Get username and password
    $username = $xml->username;
    $password = $xml->password;
-   
+
    // Optional: You can check the username and password against your database
    // Uncomment for hardcoded testing
    // if (($username != 'user') && ($password != 'test'))
@@ -49,15 +49,15 @@ else
    //    echo '{ "id":1, "error":true, "valid":true }';
    //    exit();
    // }
-   
+
    // Get device identification
    $deviceId = $xml->devId;
 
    $_REQUEST['deviceid'] = $deviceId;
-   
+
    // Prepare list of points
    $goodPointsList = "";
-   
+
    // Start processing each travel
    foreach ($xml->travel as $travel)
    {
@@ -67,10 +67,10 @@ else
       $travelLength  = $travel->length;
       $travelTime    = $travel->time;
       $travelTPoints = $travel->tpoints;
-      
+
       // Prepare the succesful points
       $goodPointsList = '';
-      
+
       // Process each point
       foreach ($travel->point as $point)
       {
@@ -100,9 +100,9 @@ else
          $p['ALTITUDE']  = $point->altitude;
 
          $all_points[] = $p;
-         
+
          // Create SQL sentence
-         
+
          /*
          $sql = "INSERT INTO tblBtracedTripsData(DevID, TripID, TripName, TripLength, TripTime, TripTotalPoints,
                                                  PointID, PointDate, PointLat, PointLon, PointSpeed, PointCourse,
@@ -112,20 +112,20 @@ else
                          '$pointId', '$pointDate', '$pointLat', '$pointLon', '$pointSpeed', '$pointCourse',
                          '$pointHAccu', '$pointBatt', '$pointVAccu', '$pointAltitude', '$pointContinous',
                          '$pointTDist', '$pointRDist', '$pointTTime')";
-         
+
          $insertResult = mysql_query($sql, $conexion);
          */
-         
+
          $goodPointsList .= $pointId . ",";
       }
    }
-   
+
    // Check if there was points
    if ($goodPointsList != "")
    {
       // Remove last comma
       $goodPointsList = substr($goodPointsList, 0, -1);
-      
+
       // Send back the answer for the saved points
       echo '{"id":0, "tripid":' . $travelId . ',"points":[' . $goodPointsList . '],"valid":true}';
    }
@@ -147,7 +147,7 @@ function cmp($a, $b)
 {
    if ($a['TM'] == $b['TM'])
       return 0;
-   
+
    return ($a['TM'] > $b['TM']) ? -1 : 1;
 }
 

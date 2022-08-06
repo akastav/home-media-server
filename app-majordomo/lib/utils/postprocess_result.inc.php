@@ -32,7 +32,7 @@ $result = preg_replace('/%rand%/is', rand(), $result);
 if (preg_match_all('/%(\w{2,}?)\.(\w{2,}?)%/isu', $result, $m))
 {
    $total = count($m[0]);
-   
+
    for ($i = 0; $i < $total; $i++)
    {
       $result = str_replace($m[0][$i], getGlobal($m[1][$i] . '.' . $m[2][$i]), $result);
@@ -42,7 +42,7 @@ if (preg_match_all('/%(\w{2,}?)\.(\w{2,}?)%/isu', $result, $m))
 if (preg_match_all('/%(\w{2,}?)\.(\w{2,}?)\|(\d+)%/isu', $result, $m))
 {
 
-  if (!defined('DISABLE_WEBSOCKETS') || DISABLE_WEBSOCKETS==0) 
+  if (!defined('DISABLE_WEBSOCKETS') || DISABLE_WEBSOCKETS==0)
   {
    $tracked_properties=array();
    $total = count($m[0]);
@@ -51,7 +51,7 @@ if (preg_match_all('/%(\w{2,}?)\.(\w{2,}?)\|(\d+)%/isu', $result, $m))
    for ($i = 0; $i < $total; $i++)
    {
       $var=mb_strtolower($m[1][$i] . '.' . $m[2][$i], 'UTF-8');
-      if (!$seen[$var]) 
+      if (!$seen[$var])
       {
        $tracked_properties[]=$var;
       }
@@ -82,7 +82,7 @@ if (preg_match_all('/%(\w{2,}?)\.(\w{2,}?)\|(\d+)%/isu', $result, $m))
           if (response.action=='properties') {
            processPropertiesUpdate(response.data);
           }
-          });"; 
+          });";
    $js.='</script>';
 
 
@@ -92,7 +92,7 @@ if (preg_match_all('/%(\w{2,}?)\.(\w{2,}?)\|(\d+)%/isu', $result, $m))
 
    $total = count($m[0]);
    $seen  = array();
-   
+
    for ($i = 0; $i < $total; $i++)
    {
       $var      = $m[1][$i] . '.' . $m[2][$i];
@@ -100,7 +100,7 @@ if (preg_match_all('/%(\w{2,}?)\.(\w{2,}?)\|(\d+)%/isu', $result, $m))
 
       if (!$interval)
          $interval = 10000;
-      
+
       $id = 'var_' . preg_replace('/\W/', '_', $var) . $seen[$var];
       $seen[$var]++;
 
@@ -121,14 +121,14 @@ if (preg_match_all('/%(\w{2,}?)\.(\w{2,}?)\|(\d+)%/isu', $result, $m))
 if (preg_match_all('/&\#060\#LANG_(.+?)\#&\#062/is', $result, $matches))
 {
    $total = count($matches[0]);
-   
+
    for ($i = 0; $i < $total; $i++)
    {
       /*
       if (preg_match('/value=["\']' . preg_quote($matches[0][$i]) . '["\']/is', $result))
          continue;
          */
-      
+
       $languageConstant = 'LANG_' . $matches[1][$i];
       if (defined($languageConstant))
       {

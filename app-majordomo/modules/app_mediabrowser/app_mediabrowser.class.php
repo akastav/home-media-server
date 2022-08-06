@@ -150,7 +150,7 @@ function admin(&$out) {
  }
 
  if ($this->view_mode=='clear_history') {
-  SQLExec("DELETE FROM media_history");  
+  SQLExec("DELETE FROM media_history");
   $this->redirect("?");
  }
 
@@ -268,7 +268,7 @@ function usual(&$out) {
  if ($collection_id) {
   $collection=SQLSelectOne("SELECT * FROM collections WHERE ID='".(int)$collection_id."'");
   $path=($collection['PATH']);//addslashes
-  $out['COLLECTION_ID']=$collection['ID']; 
+  $out['COLLECTION_ID']=$collection['ID'];
  } else {
   return;
  }
@@ -286,7 +286,7 @@ function usual(&$out) {
   } else {
    $this->folder=base64_encode($folder);
   }
-  
+
 
   $favorites=SQLSelect("SELECT * FROM media_favorites WHERE 1 ORDER BY ID DESC");
   if ($favorites) {
@@ -455,7 +455,7 @@ function usual(&$out) {
 
  /*
    function sort_files($a, $b) {
-    return strcmp(strtoupper($a["TITLE"]), strtoupper($b["TITLE"])); 
+    return strcmp(strtoupper($a["TITLE"]), strtoupper($b["TITLE"]));
    }
 */
 
@@ -643,16 +643,16 @@ function usual(&$out) {
 function setDescription($dir, $file, $descr)
 {
    $descriptions = self::getDescriptions($dir);
-   
+
    $descriptions[$file] = $descr;
-   
+
    $data = array();
-  
+
    foreach($descriptions as $k => $v)
    {
       $data[] = "\"$k\"\t$v";
    }
-   
+
    SaveFile($dir . "Descript.ion", join("\n", $data));
 }
 
@@ -679,8 +679,8 @@ function setDescription($dir, $file, $descr)
    $biggest_size=0;
    $biggest_file='';
    while ($file=readDir($d)) {
-   if (preg_match('/\.jpg$/is', $file) 
-      || preg_match('/\.jpeg$/is', $file) 
+   if (preg_match('/\.jpg$/is', $file)
+      || preg_match('/\.jpeg$/is', $file)
       || preg_match('/\.gif$/is', $file)
       || preg_match('/\.png$/is', $file)
    ) {

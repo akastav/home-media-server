@@ -40,7 +40,7 @@ class xml_data
    {
       // class constructor
       if ($in == "") return;
-      
+
       if (is_array($in))
       {
          $this->hash   = $in;
@@ -62,7 +62,7 @@ class xml_data
    {
       // set data to object
       if ($in == "") return;
-      
+
       if (is_array($in))
       {
          $this->hash   = $in;
@@ -211,6 +211,6 @@ function toXML($hash)
 function fromXML($str)
 {
    $tmp = new xml_data($str);
-   
+
    return $tmp->hash;
 }

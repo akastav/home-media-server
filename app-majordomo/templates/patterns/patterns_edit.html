@@ -2,7 +2,7 @@
  @version 0.2 (auto-set)
 #-->
 <ul class="breadcrumb">
-<li> 
+<li>
 <a href="?"><#LANG_HOME#></a>
 </li>
 <span class="divider">/</span>
@@ -20,7 +20,7 @@
 	<div class="alert alert-success" id="alert_msg"><#LANG_DATA_SAVED#></div>
 [#endif OK#]
 [#if ERR#]
-	<div class="alert alert-danger" id="alert_msg"><#LANG_FILLOUT_REQURED#></div> 
+	<div class="alert alert-danger" id="alert_msg"><#LANG_FILLOUT_REQURED#></div>
 	<script>
 	$(window).load(function() {
 		[#if SETTINGS_CODEEDITOR_SHOWERROR == '1' AND SETTINGS_CODEEDITOR_TURNONSETTINGS == '1'#]
@@ -29,16 +29,16 @@
 			if(error_line == 0) error_line = 1;
 			find = $('div pre.CodeMirror-line:eq('+error_line_find+')');
 			find.attr('id', 'errorline_'+error_line);
-		
+
 			var newElems = $("<div class='cm-error' style='border-top: 1px solid red;font-weight: bold;font-style: italic;'>Ошибка компилятора -> [#ERRORS#]</div>");
 			$('div pre.CodeMirror-line:eq('+error_line_find+')').append(newElems);
 		[#endif#]
-		
+
 		[#if SETTINGS_CODEEDITOR_UPTOLINE == '1' AND SETTINGS_CODEEDITOR_TURNONSETTINGS == '1'#]
-			location.href='#errorline_'+error_line; 
+			location.href='#errorline_'+error_line;
 		[#endif#]
 	});
-			
+
 	</script>
 [#endif ERR#]
 <style>
@@ -101,7 +101,7 @@
 <div class="form-group">
         <label class="col-lg-4 control-label" for="inputTitle">&nbsp;</label>
         <div class="col-lg-8">
-                                
+
                 <div class="checkbox">
                         <label>
                                 <input type="checkbox" value="1" name="is_last" [#if IS_LAST="1"#] checked[#endif#]> <#LANG_LAST_RULE#>
@@ -123,14 +123,14 @@
                 <input type="text" class="form-control" name="linked_object" id="linked_object" size="10" value="[#LINKED_OBJECT#]">
         </div>
         </div>
-     
+
         <div class="form-group">
         <label class="col-lg-4 control-label"><#LANG_PROPERTY#><#LANG_HCB#>linked_property<#LANG_HCE#></label>
         <div class="col-lg-3">
                  <input type="text" class="form-control" name="linked_property" id="linked_property" size="10" value="[#LINKED_PROPERTY#]">
         </div>
         </div>
-        
+
     <div class="form-group">
         <label class="col-lg-4 control-label"><#LANG_CONDITION#><#LANG_HCB#>pattern_condition<#LANG_HCE#></label>
         <div class="col-lg-3">
@@ -150,8 +150,8 @@
         </div>
         </div>
         [#module name="linkedobject" object_field="linked_object" property_field="linked_property"#]
-  
-   
+
+
 
 
 [#endif PATTERN_TYPE#]
@@ -162,7 +162,7 @@
 <div class="form-group">
         <label class="col-lg-4 control-label" for="inputTitle">&nbsp;</label>
         <div class="col-lg-8">
-                                
+
                 <div class="checkbox">
                         <label>
                                 <input type="checkbox" value="1" name="usemorphy" [#if USEMORPHY="1"#] checked[#endif#]> Use morphology
@@ -177,7 +177,7 @@
 <div class="form-group">
         <label class="col-lg-4 control-label" for="inputTitle">&nbsp;</label>
         <div class="col-lg-8">
-                                
+
                 <div class="checkbox">
                         <label>
                                 <input type="checkbox" value="1" name="skipsystem" [#if SKIPSYSTEM="1"#] checked[#endif#]> <#LANG_SKIP_SYSTEM#>
@@ -191,7 +191,7 @@
 <div class="form-group">
         <label class="col-lg-4 control-label" for="inputTitle">&nbsp;</label>
         <div class="col-lg-8">
-                                
+
                 <div class="checkbox">
                         <label>
                                 <input type="checkbox" value="1" name="onetime" [#if ONETIME="1"#] checked[#endif#]> <#LANG_ONETIME_PATTERN#>
@@ -225,7 +225,7 @@
     [#begin SCRIPTS#]
         <option value="[#ID#]"[#if ID="<#SCRIPT_ID#>"#] selected[#endif#]>[#TITLE#]
         [#end SCRIPTS#]
-   </select>    
+   </select>
    <br>
    <input type="radio" name="run_type" value="code"[#if SCRIPT_ID="0"#] checked[#endif#] onClick="$('#code_option').show();"> <#LANG_CODE#>
  <div id="code_option"[#if SCRIPT_ID!="0"#] style="display:none"[#endif#]>
@@ -271,7 +271,7 @@
  <div id="code_option"[#if SCRIPT_ID!="0"#] style="display:none"[#endif#]>
  [#if ERRORS_EXIT!=""#]
  <font color='red'>[#ERRORS_EXIT#]</font><br>
- [#endif ERRORS#]  
+ [#endif ERRORS#]
 
  [#module name="blockly_code" system_name="pattern<#ID#>_exit" code_field="script_exit" action=""#]
  <div id="script_area">
@@ -298,7 +298,7 @@
 <div class="form-group">
         <label class="col-lg-4 control-label" for="inputTitle">&nbsp;</label>
         <div class="col-lg-8">
-                                
+
                 <div class="checkbox">
                         <label>
                                 <input type="checkbox" name="is_context" value="1"[#if IS_CONTEXT="1"#] checked[#endif#] onClick='$("#context_details").toggle();'> <#LANG_IS_CONTEXT#>
@@ -313,9 +313,9 @@
  [#endif ID#]
 
 
-  
-  
-  
+
+
+
   <div id='context_details'[#if IS_CONTEXT!="1"#] style="display:none"[#endif#]>
 
    <table border="0">
@@ -341,7 +341,7 @@
   <td valign="top">
  [#if TIMEOUT_SCRIPT_ERRORS!=""#]
  <font color='red'>[#TIMEOUT_SCRIPT_ERRORS#]</font><br>
- [#endif TIMEOUT_SCRIPT_ERRORS#]  
+ [#endif TIMEOUT_SCRIPT_ERRORS#]
   <textarea name="timeout_script"  rows=6 cols=100 class="field span6">[#TIMEOUT_SCRIPT#]</textarea></td>
  </tr>
 
@@ -356,13 +356,13 @@
    </table>
 
   </div>
- 
+
 
 [#if ID!="" && PATTERN_TYPE!="1"#]
 <div class="form-group ">
         <label class="col-lg-4 control-label" for="inputTitle"><#LANG_ACCESS_CONTROL#>:<#LANG_HCB#>access_control<#LANG_HCE#></label>
         <div class="col-lg-8">
-         
+
                 <a class="btn btn-default " href="?(panel:{action=security_rules})&object_type=pattern&object_id=[#ID#]&print=1" onClick="return openModalTWindow('security', '<#LANG_ACCESS_CONTROL#>', this.href, 800, 600);" target=_blank><#LANG_SET#></a>
  </div>
 </div>

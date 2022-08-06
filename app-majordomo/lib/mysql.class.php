@@ -35,31 +35,31 @@ class mysql
     * @access private
     */
    var $host;
-   
+
    /**
     * @var string database port
     * @access private
     */
    var $port;
-   
+
    /**
     * @var string database access username
     * @access private
     */
    var $user;
-   
+
    /**
     * @var string database access password
     * @access private
     */
    var $password;
-   
+
    /**
     * @var string database name
     * @access private
     */
    var $dbName; // database name
-   
+
    /**
     * @var int database handler
     * @access private
@@ -77,7 +77,7 @@ class mysql
     * @access private
     */
    var $pingTimeout;
-   
+
    /**
     * MySQL constructor
     * used to create mysql database object and connect to database
@@ -139,7 +139,7 @@ class mysql
       {
          $this->latestTransaction=time();
          mysql_query("set NAMES 'utf8', CHARACTER SET 'utf8', character_set_client='utf8', character_set_results='utf8', collation_connection='utf8_unicode_ci';");
-         
+
          return 1;
       }
    }
@@ -153,20 +153,20 @@ class mysql
    public function Exec($query, $ignore_errors = false)
    {
       if (!$this->dbh && !$this->Connect()) return false;
-      
+
       if ((time()-$this->latestTransaction)>$this->pingTimeout) {
        $this->Ping();
       }
 
       $this->latestTransaction=time();
       $result = mysql_query($query, $this->dbh);
-      
+
       if (!$result && !$ignore_errors)
       {
          $this->Error($query,0);
          return 0;
       }
-      
+
       return $result;
    }
 
@@ -182,7 +182,7 @@ class mysql
    public function Select($query)
    {
       $res = array();
-      
+
       if ($result = $this->Exec($query))
       {
          while ($rec = mysql_fetch_array($result, MYSQL_ASSOC))
@@ -212,7 +212,7 @@ class mysql
       if ($result = $this->Exec($query))
       {
          $rec = mysql_fetch_array($result, MYSQL_ASSOC);
-         
+
          return $rec;
       }
       else
@@ -224,7 +224,7 @@ class mysql
    public function Ping()
    {
       if (!$this->dbh && !$this->Connect()) return false;
-      
+
       $test_query = "SHOW TABLES FROM ".$this->dbName;
       $result = @mysql_query($test_query,$this->dbh);
       $tblCnt = 0;
@@ -252,13 +252,13 @@ class mysql
    public function Update($table, $data, $ndx = "ID")
    {
       $qry = "UPDATE `$table` SET ";
-      
+
       foreach ($data as $field => $value)
       {
          if (!is_Numeric($field))
             $qry .= "`$field`='" . $this->DBSafe1($value) . "', ";
       }
-      
+
       $qry  = substr($qry, 0, strlen($qry) - 2);
 
       if (!isset($data[$ndx])) {
@@ -267,13 +267,13 @@ class mysql
 
       $qry .= " WHERE $ndx = '" . $data[$ndx] . "'";
 
-     
+
       if (!$this->Exec($qry))
       {
          $this->Error($qry);
          return 0;
       }
-      
+
       return 1;
    }
 
@@ -291,7 +291,7 @@ class mysql
    {
       $fields = "";
       $values = "";
-      
+
       foreach ($data as $field => $value)
       {
          if (!is_numeric($field))
@@ -300,18 +300,18 @@ class mysql
             $values .= "'" . $this->DBSafe1($value) . "', ";
          }
       }
-      
+
       $fields = substr($fields, 0, strlen($fields) - 2);
       $values = substr($values, 0, strlen($values) - 2);
-      
+
       $qry = "INSERT INTO `$table`($fields) VALUES($values)";
-      
+
       if (!$this->Exec($qry))
       {
          $this->Error($qry);
          return 0;
       }
-      
+
       return mysql_insert_id($this->dbh);
    }
 
@@ -350,7 +350,7 @@ class mysql
    public function DbSafe1($str)
    {
       $str = mysql_real_escape_string((string)$str);
-      
+
       return $str;
    }
 
@@ -385,23 +385,23 @@ class mysql
    public function get_mysql_def($table)
    {
       $result = $this->Exec('SHOW CREATE TABLE ' . $table);
-      
+
       if ($result)
       {
          $row = mysql_fetch_row($result);
-         
+
          if (!$row)
             return '';
-         
+
          $row[1] = preg_replace('/DEFAULT CHARSET=(\w+)/', '', $row[1]);
          $row[1] = str_replace(' default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP', '', $row[1]);
          $row[1] = str_replace("\n", ' ', $row[1]);
-         
+
          $strs = trim($row[1]);
-            
+
          return (empty($strs)) ? '' : 'DROP TABLE IF EXISTS ' . $table . ';' . "\n" . $row[1] . ';' . "\n";
       }
-      
+
       return '';
    }
 
@@ -416,11 +416,11 @@ class mysql
    {
       $content = "";
       $result  = $this->Exec("SELECT * FROM $table");
-      
+
       while ($row = mysql_fetch_row($result))
       {
          $insert = "INSERT INTO $table VALUES (";
-         
+
          $filedsNum = mysql_num_fields($result);
 
          for ($j = 0; $j < $filedsNum; $j++)
@@ -429,12 +429,12 @@ class mysql
             else if ($row[$j] != "") $insert .= "'" . $this->DbSafe($row[$j]) . "',";
             else                     $insert .= "'',";
          }
-         
+
          $insert   = preg_replace("/,$/", "", $insert);
          $insert  .= ");\n";
          $content .= $insert;
       }
-      
+
       return $content;
    }
 }

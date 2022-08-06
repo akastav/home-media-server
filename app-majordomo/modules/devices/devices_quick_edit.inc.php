@@ -76,7 +76,7 @@ if ($this->mode=='update') {
             }
         }
     }
-    
+
     addToOperationsQueue('connect_sync_devices', 'required');
     $this->homebridgeSync();
 

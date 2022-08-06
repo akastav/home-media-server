@@ -1456,7 +1456,7 @@ $dictionary = array(
     'REMINDER_INTRO' => 'May I remind you that',
 
     'TEST' => 'test',
-    
+
     /* end module names */
 
 
@@ -1468,7 +1468,7 @@ $dictionary = array(
 	'RUN_SCRIPT_BTN' => 'RUN',
 	'SCRIPT_HOW_TO_RUN' => 'How to run?',
 	'SCRIPT_RUN_IN_METHOD' => 'From method (PHP)',
-	
+
 	'CODEEDITOR_TURNONSETTINGS' => 'Enable these settings',
 	'CODEEDITOR_SHOWLINE' => 'Show line',
 	'CODEEDITOR_MIXLINE' => 'Minimal show line',
@@ -1500,8 +1500,8 @@ $dictionary = array(
 	'CODEEDITOR_AUTOSAVE_PARAMS_EVERY_15' => 'Every 15 seconds',
 	'CODEEDITOR_AUTOSAVE_PARAMS_EVERY_30' => 'Every 30 seconds',
 	'CODEEDITOR_AUTOSAVE_PARAMS_EVERY_60' => 'Every 60 seconds',
-	
-	
+
+
 	// New dashboard!
 	'NEWDASH_CONNECTED' => 'Connected',
 	'NEWDASH_DISCONNECTED' => 'No connection',
@@ -1553,7 +1553,7 @@ $dictionary = array(
 	'NEWDASH_DMB_TITLE_MODAL_STEP1' => '1. Create a script named: ',
 	'NEWDASH_DMB_TITLE_MODAL_STEP2' => '2. The script should return the following JSON object: ',
 	'NEWDASH_DMB_TITLE_MODAL_STEP3' => '3. That\'s all. The control panel will pick up the script by itself and display the content on the main page. ',
-	
+
 	'NEWDASH_CONSOLE_CHOOSE_MODULE' => 'Select a module ...',
 	'NEWDASH_CONSOLE_SIZE_HINT' => 'This console can be resized',
 	'NEWDASH_SEARCH_HINT' => 'System-wide global search. Start typing ... ',
@@ -1562,10 +1562,10 @@ $dictionary = array(
 
 	'NEWDASH_RESULT' => 'Result',
 	'NEWDASH_MJDM_VERSION' => 'Current MJDM version',
-	
+
 	'NEWDASH_OBJ_ADD_NEW_PROP_NAME' => 'Name for new propertie',
 	'NEWDASH_OBJ_ADD_NEW_PROP_VALUE' => 'Property value',
-	
+
 	'NEWSAVERESTORE_NONE_UPDATE_HEADER' => 'It\'s okay!',
 	'NEWSAVERESTORE_NONE_UPDATE_TEXT' => 'It\'s great that you update on time. You now have the latest available version of the system. But if necessary, you can download files from the GitHub repository. ',
 	'NEWSAVERESTORE_NONE_UPDATE_BTN' => 'Update anyway',
@@ -1609,7 +1609,7 @@ $dictionary = array(
 	'UPDATEBACKUP_SAVE_FILES' => 'Saving files ...',
 	'UPDATEBACKUP_BACKUP_PACKEGE_TO' => 'The backup is packed into archive:',
 	'UPDATEBACKUP_COPY_TO' => 'Copy to',
-	
+
 	'XRAY_WORKING' => 'Works',
 	'XRAY_DO_WORKING' => 'Doesn\'t work',
 	'XRAY_WORKING_CYCLE' => 'cycles',
@@ -1625,7 +1625,7 @@ $dictionary = array(
 	'XRAY_CONTINUE' => 'Resume',
 	'XRAY_SOURCE' => 'Source',
 	'XRAY_PARAMS' => 'Parameters',
-	
+
 	'NEWSYSTEM_ERROR_FIND_ERROR' => 'Something went wrong ...',
 	'NEWSYSTEM_ERROR_FIND_ERROR_TEXT' => 'MajorDoMo is unstable. The system has detected several errors in the operation of the modules. They may not be critical, but we recommend paying attention to them. ',
 	'NEWSYSTEM_ERROR_CHECK_ALL_READ' => 'Mark all as viewed',
@@ -1640,7 +1640,7 @@ $dictionary = array(
 	'NEWSYSTEM_ERROR_DESC' => 'description',
 	'NEWSYSTEM_ERROR_SEE_BTN' => 'View',
 	'NEWSYSTEM_ERROR_NOT_FOUND' => 'No information about system or module errors found in the database!',
-	
+
 	'NEWMARKET_BANNER' => 'This is a market!',
 	'NEWMARKET_BANNER_TEXT' => 'The MajorDoMo add-ons market contains a variety of add-on modules that allow you to expand the system\'s functionality. Update add-ons in time to avoid mistakes in work. If you didn’t find the module you need, try using the forum or write the module yourself. ',
 	'NEWMARKET_BANNER_BTN' => 'For Developers',

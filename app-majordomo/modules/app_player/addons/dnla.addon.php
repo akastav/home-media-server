@@ -13,7 +13,7 @@ class dnla extends app_player_addon
         $this->description .= 'на всех устройства поддерживающих протокол DLNA. ';
         $this->terminal = $terminal;
         $this->reset_properties();
-        
+
         // proverka na otvet
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $this->terminal['PLAYER_CONTROL_ADDRESS']);
@@ -22,7 +22,7 @@ class dnla extends app_player_addon
         $content = curl_exec($ch);
         $retcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
-        
+
         // автозаполнение поля PLAYER_CONTROL_ADDRESS при его отсутствии
         if ($retcode != 200 OR !stripos($content, 'AVTransport')) {
             // сделано специально для тех устройств которые периодически меняют свои порты и ссылки  на CONTROL_ADDRESS
@@ -38,10 +38,10 @@ class dnla extends app_player_addon
         }
         include_once(DIR_MODULES . 'app_player/libs/MediaRenderer/MediaRenderer.php');
         include_once(DIR_MODULES . 'app_player/libs/MediaRenderer/MediaRendererVolume.php');
-        
+
     }
-    
-    
+
+
     // Get player status
     function status()
     {
@@ -56,7 +56,7 @@ class dnla extends app_player_addon
         $repeat        = FALSE;
         $current_speed = 1;
         $curren_url    = '';
-        
+
         // создаем хмл документ
         $doc          = new \DOMDocument();
         //  для получения уровня громкости
@@ -85,18 +85,18 @@ class dnla extends app_player_addon
             $this->message = 'OK';
             $this->data    = array(
                 'track_id' => (int) $track_id, //ID of currently playing track (in playlist). Integer. If unknown (playback stopped or playlist is empty) = -1.
-                'length' => (int) $length, //Track length in seconds. Integer. If unknown = 0. 
-                'time' => (int) $time, //Current playback progress (in seconds). If unknown = 0. 
-                'state' => (string) strtolower($state), //Playback status. String: stopped/playing/paused/unknown 
+                'length' => (int) $length, //Track length in seconds. Integer. If unknown = 0.
+                'time' => (int) $time, //Current playback progress (in seconds). If unknown = 0.
+                'state' => (string) strtolower($state), //Playback status. String: stopped/playing/paused/unknown
                 'volume' => (int) $volume, // Volume level in percent. Integer. Some players may have values greater than 100.
-                'random' => (boolean) $random, // Random mode. Boolean. 
+                'random' => (boolean) $random, // Random mode. Boolean.
                 'loop' => (boolean) $loop, // Loop mode. Boolean.
                 'repeat' => (boolean) $repeat //Repeat mode. Boolean.
             );
         }
         return $this->success;
     }
-    
+
     // Say
     function say_message($message, $terminal) //SETTINGS_SITE_LANGUAGE_CODE=код языка
     {
@@ -132,7 +132,7 @@ class dnla extends app_player_addon
             $message_link = BASE_URL . $m[0];
         }
         //DebMes("Url to file " . $message_link);
-        // конец блока получения ссылки на файл 
+        // конец блока получения ссылки на файл
         $remote = new MediaRenderer($this->terminal['PLAYER_CONTROL_ADDRESS']);
         $response = $remote->play($message_link);
         if ($response) {
@@ -145,7 +145,7 @@ class dnla extends app_player_addon
         sleep($message['TIME_MESSAGE']);
         return $this->success;
     }
-    
+
     // Playlist: Get
     function pl_get()
     {
@@ -154,7 +154,7 @@ class dnla extends app_player_addon
         $track_id      = -1;
         $name          = 'unknow';
         $curren_url    = '';
-        
+
         // создаем хмл документ
         $doc      = new \DOMDocument();
         // Для получения состояния плеера
@@ -180,7 +180,7 @@ class dnla extends app_player_addon
         }
         return $this->success;
     }
-    
+
     // Get media volume level
     function get_volume()
     {
@@ -200,7 +200,7 @@ class dnla extends app_player_addon
         }
         return $this->success;
     }
-    
+
     ////////////////////////////////////////////////////////////////////////////// obrbotano
     // Pause
     function pause()
@@ -217,7 +217,7 @@ class dnla extends app_player_addon
         }
         return $this->success;
     }
-    
+
     // Next
     function next()
     {
@@ -233,7 +233,7 @@ class dnla extends app_player_addon
         }
         return $this->success;
     }
-    
+
     // Previous
     function previous()
     {
@@ -249,7 +249,7 @@ class dnla extends app_player_addon
         }
         return $this->success;
     }
-    
+
     // Set volume
     function set_volume($level)
     {
@@ -265,7 +265,7 @@ class dnla extends app_player_addon
         }
         return $this->success;
     }
-    
+
     // Stop
     function stop()
     {
@@ -281,7 +281,7 @@ class dnla extends app_player_addon
         }
         return $this->success;
     }
-    
+
     // Play
     function play($input)
     {
@@ -301,7 +301,7 @@ class dnla extends app_player_addon
         }
         return $this->success;
     }
-    
+
     // Seek
     function seek($position)
     {
@@ -317,7 +317,7 @@ class dnla extends app_player_addon
         }
         return $this->success;
     }
-    
+
     // функция автозаполнения поля PLAYER_CONTROL_ADDRESS при его отсутствии
     private function search($ip = '239.255.255.250')
     {
@@ -335,9 +335,9 @@ class dnla extends app_player_addon
         $request .= 'ST: ssdp:all' . "\r\n";
         $request .= 'USER-AGENT: Majordomo/ver-x.x UDAP/2.0 Win/7' . "\r\n";
         $request .= "\r\n";
-        
+
         @socket_sendto($socket, $request, strlen($request), 0, $ip, 1900);
-        
+
         // send the data from socket
         socket_set_option($socket, SOL_SOCKET, SO_RCVTIMEO, array(
             'sec' => '1',

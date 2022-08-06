@@ -14,7 +14,7 @@ if ($details['source']) {
 	if ($terminal['LOCATION_ID']) {
 		$location_id = $terminal['LOCATION_ID'];
 	}
-} 
+}
 
 $command = $details['message'];
 
@@ -236,7 +236,7 @@ $total = count($devices);
 for ($i = 0; $i < $total; $i++) {
     $device_matched = 0;
 
-   // если есть местоположение терминала 
+   // если есть местоположение терминала
     if ($location_id) {
         // ищем строгое соответствие по названию и местоположению
         foreach($devices as $key => $value) {

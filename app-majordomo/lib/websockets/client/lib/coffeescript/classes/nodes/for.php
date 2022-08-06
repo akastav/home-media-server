@@ -54,7 +54,7 @@ class yy_For extends yy_Base
   function compile_node($options)
   {
     $body = yy_Block::wrap(array($this->body));
-    
+
     $last_jumps = last($body->expressions);
     $last_jumps = $last_jumps ? $last_jumps->jumps() : FALSE;
 
@@ -187,7 +187,7 @@ class yy_For extends yy_Base
       $body = "\n{$body}\n";
     }
 
-    return 
+    return
         "{$def_part}"
       . (isset($result_part) ? $result_part : '')
       . "{$this->tab}for ({$for_part}) {{$guard_part}{$var_part}{$body}{$this->tab}}"
@@ -229,7 +229,7 @@ class yy_For extends yy_Base
                ($val instanceof yy_Value) &&
                (isset($val->base) && $val->base && ($val->base->unwrap_all() instanceof yy_Code) &&
                 count($val->properties) === 1 &&
-                isset($val->properties[0]->name) && 
+                isset($val->properties[0]->name) &&
                 in_array($val->properties[0]->name['value'], array('call', 'apply'), TRUE))))
       {
         continue;

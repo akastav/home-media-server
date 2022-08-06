@@ -1,6 +1,6 @@
 /* ie6 trash */
 * html #gritter-notice-wrapper {
-        position:absolute; 
+        position:absolute;
 }
 * html .gritter-top {
         margin-bottom:-10px;
@@ -30,7 +30,7 @@
 .gritter-item-wrapper {
         position:relative;
         margin:0 0 10px 0;
-        background:url('.'); /* ie7/8 fix */ 
+        background:url('.'); /* ie7/8 fix */
 }
 .gritter-top {
         background:url(../images/gritter.png) no-repeat left -30px;

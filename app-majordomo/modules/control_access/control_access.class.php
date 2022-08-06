@@ -95,7 +95,7 @@ function getParams() {
      $session->data['USER_LEVEL']=$user['PRIVATE'];
      $session->data['USER_ID']=$user['ID'];
 
-     
+
 
      if (!$session->data["cp_requested_url"]) {
       if (file_exists(DIR_MODULES.'dashboard/dashboard.class.php')) {
@@ -150,7 +150,7 @@ function getParams() {
 
    $on_row = 0;
    $newCnt = count($new);
-   
+
    for ($i = 0; $i < $newCnt; $i++)
    {
       if ($new[$i]['CATEGORY'] != $new_category)
@@ -258,7 +258,7 @@ function getParams() {
 
 
      if (count($sel)>0) {
-      $user['ACCESS']=join(",", $sel);    
+      $user['ACCESS']=join(",", $sel);
      } else {
       $user['ACCESS']="";
      }
@@ -313,9 +313,9 @@ function getParams() {
       }
       global $session;
 
-      if ($session->data['USER_ID'] == 1) 
+      if ($session->data['USER_ID'] == 1)
          return 1;
-  
+
       $user = SQLSelectOne("SELECT ID FROM admin_users WHERE LOGIN='".$session->data['USER_NAME']."'");
       if (!$user['ID'])
       {
@@ -324,12 +324,12 @@ function getParams() {
          $this->redirect("?");
       }
 
-      if ($action != "") 
+      if ($action != "")
          $user=SQLSelectOne("SELECT ID FROM admin_users WHERE LOGIN='".$session->data['USER_NAME']."' AND (ACCESS LIKE '$action' OR ACCESS LIKE '$action,%' OR ACCESS LIKE '%,$action' OR ACCESS LIKE '%,$action,%')");
-    
+
       if (isset($user['ID']))
          return 1;
-  
+
       return 0;
    }
 
@@ -337,10 +337,10 @@ function getParams() {
  function dbInstall($data) {
   $data = <<<EOD
    admin_users: ID tinyint(3) unsigned NOT NULL auto_increment
-   admin_users: NAME varchar(100)  DEFAULT '' NOT NULL 
-   admin_users: LOGIN varchar(100)  DEFAULT '' NOT NULL 
-   admin_users: PASSWORD varchar(100)  DEFAULT '' NOT NULL 
-   admin_users: EMAIL varchar(100)  DEFAULT '' NOT NULL 
+   admin_users: NAME varchar(100)  DEFAULT '' NOT NULL
+   admin_users: LOGIN varchar(100)  DEFAULT '' NOT NULL
+   admin_users: PASSWORD varchar(100)  DEFAULT '' NOT NULL
+   admin_users: EMAIL varchar(100)  DEFAULT '' NOT NULL
    admin_users: COMMENTS text
    admin_users: ACCESS text
    admin_users: PRIVATE tinyint(3) unsigned DEFAULT '0' NOT NULL

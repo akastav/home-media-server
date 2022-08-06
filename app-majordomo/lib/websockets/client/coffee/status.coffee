@@ -1,9 +1,9 @@
 $(document).ready ->
-	log = (msg) -> $('#log').prepend("#{msg}<br />")	
+	log = (msg) -> $('#log').prepend("#{msg}<br />")
 	serverUrl = 'ws://localhost:8000/status'
-	if window.MozWebSocket		
+	if window.MozWebSocket
 		socket = new MozWebSocket serverUrl
-	else if window.WebSocket		
+	else if window.WebSocket
 		socket = new WebSocket serverUrl
 
 	socket.onopen = (msg) ->
@@ -14,7 +14,7 @@ $(document).ready ->
 		switch response.action
 			when "statusMsg"			then statusMsg response.data
 			when "clientConnected"		then clientConnected response.data
-			when "clientDisconnected"	then clientDisconnected response.data			
+			when "clientDisconnected"	then clientDisconnected response.data
 			when "clientActivity"		then clientActivity response.data
 			when "serverInfo"			then refreshServerinfo response.data
 
@@ -29,7 +29,7 @@ $(document).ready ->
 			when "info" then log msgData.text
 			when "warning" then log "<span class=\"warning\">#{msgData.text}</span>"
 
-	clientConnected = (data) ->		
+	clientConnected = (data) ->
 		$('#clientListSelect').append(new Option("#{data.ip}:#{data.port}", data.port))
 		$('#clientCount').text(data.clientCount)
 
@@ -37,13 +37,13 @@ $(document).ready ->
 		$("#clientListSelect option[value='#{data.port}']").remove()
 		$('#clientCount').text(data.clientCount)
 
-	refreshServerinfo = (serverinfo) ->	
+	refreshServerinfo = (serverinfo) ->
 		$('#clientCount').text(serverinfo.clientCount)
 		$('#maxClients').text(serverinfo.maxClients)
 		$('#maxConnections').text(serverinfo.maxConnectionsPerIp)
 		$('#maxRequetsPerMinute').text(serverinfo.maxRequetsPerMinute)
-		for port, ip of serverinfo.clients			
-			$('#clientListSelect').append(new Option(ip + ':' + port, port));	
+		for port, ip of serverinfo.clients
+			$('#clientListSelect').append(new Option(ip + ':' + port, port));
 
 	clientActivity = (port) ->
 		$("#clientListSelect option[value='#{port}']").css("color", "red").animate({opacity: 100}, 600, ->

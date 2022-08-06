@@ -109,8 +109,8 @@ if(defined('SETTINGS_CODEEDITOR_TURNONSETTINGS')) {
 		$out['ERRORS_OFFLINE']=nl2br($errors);
 		$ok=0;
 	}
-	
-	
+
+
    }
 
 

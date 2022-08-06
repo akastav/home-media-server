@@ -62,7 +62,7 @@ for($i=0;$i<$total;$i++) {
 }
 
   function sort_zones($a, $b) {
-   if ($a['OFFSET'] == $b['OFFSET']) return strcmp($a["TITLE"], $b["TITLE"]); 
+   if ($a['OFFSET'] == $b['OFFSET']) return strcmp($a["TITLE"], $b["TITLE"]);
    return ($a['OFFSET'] < $b['OFFSET']) ? -1 : 1;
   }
   usort($zones, 'sort_zones');
@@ -98,51 +98,51 @@ for($i=0;$i<$total;$i++) {
 
   $settings=array(
    array(
-    'NAME'=>'SITE_LANGUAGE', 
-    'TITLE'=>'Language', 
+    'NAME'=>'SITE_LANGUAGE',
+    'TITLE'=>'Language',
     'TYPE'=>'text',
     'DEFAULT'=>'en',
     'VALUE'=>$language
-    ), 
+    ),
    array(
-    'NAME'=>'VOICE_LANGUAGE', 
-    'TITLE'=>'Voice notifications language', 
+    'NAME'=>'VOICE_LANGUAGE',
+    'TITLE'=>'Voice notifications language',
     'TYPE'=>'text',
     'DEFAULT'=>'en',
     'VALUE'=>$language
-    ), 
+    ),
    array(
-    'NAME'=>'SITE_TIMEZONE', 
-    'TITLE'=>'Time zone', 
+    'NAME'=>'SITE_TIMEZONE',
+    'TITLE'=>'Time zone',
     'TYPE'=>'text',
     'DEFAULT'=>'Europe/Moscow',
     'VALUE'=>$tz
    ),
    array(
-    'NAME'=>'THEME', 
-    'TITLE'=>'Color theme', 
+    'NAME'=>'THEME',
+    'TITLE'=>'Color theme',
     'TYPE'=>'text',
     'DEFAULT'=>'dark',
     'VALUE'=>$theme
    ),
     array(
     'NAME'=>'SPEAK_SIGNAL',
-    'TITLE'=>'Play sound signal before speaking', 
+    'TITLE'=>'Play sound signal before speaking',
     'TYPE'=>'onoff',
     'DEFAULT'=>'1',
     'PRIORITY'=>'0'
    ),
     array(
     'NAME'=>'HOOK_BEFORE_SAY',
-    'TITLE'=>'Before SAY (code)', 
+    'TITLE'=>'Before SAY (code)',
     'TYPE'=>'text',
     'DEFAULT'=>'',
     'PRIORITY'=>'30'
-   ), 
+   ),
 
     array(
     'NAME'=>'HOOK_AFTER_SAY',
-    'TITLE'=>'After SAY (code)', 
+    'TITLE'=>'After SAY (code)',
     'TYPE'=>'text',
     'DEFAULT'=>'',
     'PRIORITY'=>'29'
@@ -182,7 +182,7 @@ for($i=0;$i<$total;$i++) {
    SaveFile(ROOT.'reboot', '1');
 
    $this->redirect("/");
-  
+
  }
 
 ?>

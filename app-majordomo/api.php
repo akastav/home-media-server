@@ -427,7 +427,7 @@ function find_module($module_name) {
     if (count($moduleArr) == 0)
       return '';
 
-    foreach ($moduleArr as $f) 
+    foreach ($moduleArr as $f)
     {
       if (strtolower($f) == $moduleName)
          return $f;

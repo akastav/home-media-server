@@ -110,4 +110,3 @@ if ($out['TITLE']) {
 		$out['SUB_CLASSES'] = $subClasses;
 	}
   }
-

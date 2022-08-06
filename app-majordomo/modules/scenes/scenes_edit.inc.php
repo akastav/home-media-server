@@ -846,5 +846,3 @@ $out['CONTAINERS'] = $containers;
 
 $out['SCENES'] = SQLSelect("SELECT * FROM scenes ORDER BY TITLE");
 $out['DEVICES'] = SQLSelect("SELECT ID, TITLE FROM devices ORDER BY TITLE");
-
-

@@ -175,11 +175,11 @@ if ($this->tab == 'properties') {
         $props[$i]['VALUE_HTML'] = htmlspecialchars($props[$i]['VALUE']);
         $props[$i]['SOURCE'] = $value['SOURCE'];
         $props[$i]['UPDATED'] = date('d.m.Y H:i:s', strtotime($value['UPDATED']));
-		
+
 		$value['LINKED_MODULES'] = explode(',', $value['LINKED_MODULES']);
 		if(is_array($value['LINKED_MODULES'])) {
 			foreach($value['LINKED_MODULES'] as $prop_link) {
-				if(!$prop_link) break; 
+				if(!$prop_link) break;
 				$props[$i]['LINKED_MODULES'] .= '<span class="label label-success" style="margin-right: 3px;"><a style="color: white;text-decoration: none;" href="?(panel:{action='.$prop_link.'})&md='.$prop_link.'&go_linked_object='.urlencode($rec['TITLE']).'&go_linked_property='.urlencode($props[$i]['TITLE']).'">'.$prop_link.'</a></span>';
 			}
 		}
@@ -187,22 +187,22 @@ if ($this->tab == 'properties') {
     if ($this->mode == 'update') {
         $this->redirect("?view_mode=" . $this->view_mode . "&id=" . $rec['ID'] . "&tab=" . $this->tab);
     }
-	
+
     $out['PROPERTIES'] = $props;
 }
 // step: methods
 if ($this->tab == 'methods') {
-	
+
 
     global $overwrite;
     global $delete_meth;
-	
+
 	if(defined('SETTINGS_CODEEDITOR_TURNONSETTINGS')) {
 		$out['SETTINGS_CODEEDITOR_TURNONSETTINGS'] = SETTINGS_CODEEDITOR_TURNONSETTINGS;
 		$out['SETTINGS_CODEEDITOR_UPTOLINE'] = SETTINGS_CODEEDITOR_UPTOLINE;
 		$out['SETTINGS_CODEEDITOR_SHOWERROR'] = SETTINGS_CODEEDITOR_SHOWERROR;
 	}
-	
+
     if ($delete_meth) {
         $method = SQLSelectOne("SELECT * FROM methods WHERE ID='" . (int)$delete_meth . "'");
         $my_meth = SQLSelectOne("SELECT * FROM methods WHERE OBJECT_ID='" . $rec['ID'] . "' AND TITLE LIKE '" . DBSafe($method['TITLE']) . "'");
@@ -236,7 +236,7 @@ if ($this->tab == 'methods') {
 
 			$old_code=$my_meth['CODE'];
 			$my_meth['CODE'] = $code;
-			
+
             $my_meth['CALL_PARENT'] = $call_parent;
             $my_meth['TITLE'] = $method['TITLE'];
             $my_meth['OBJECT_ID'] = $rec['ID'];
@@ -252,9 +252,9 @@ if ($this->tab == 'methods') {
                 //echo $content;
                 if (!defined('PYTHON_PATH') and !isItPythonCode($my_meth['CODE'])) {
 
-           
+
                     $errors = php_syntax_error($my_meth['CODE']);
-			
+
                     if ($errors) {
                         $out['ERR_LINE'] = preg_replace('/[^0-9]/', '', substr(stristr($errors, 'php on line '), 0, 18))-2;
                         $out['ERR_CODE'] = 1;
@@ -269,7 +269,7 @@ if ($this->tab == 'methods') {
                     }
                 } else {
                     // chek python code
-                }					
+                }
                 $out['CODE'] = $my_meth['CODE'];
             }
 

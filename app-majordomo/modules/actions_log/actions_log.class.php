@@ -227,13 +227,13 @@ class actions_log extends module
         */
         $data = <<<EOD
  actions_log: ID int(10) unsigned NOT NULL auto_increment
- actions_log: ADDED datetime 
- actions_log: ACTION_TYPE varchar(100) NOT NULL DEFAULT '' 
+ actions_log: ADDED datetime
+ actions_log: ACTION_TYPE varchar(100) NOT NULL DEFAULT ''
  actions_log: TITLE varchar(255) NOT NULL DEFAULT ''
  actions_log: USER varchar(255) NOT NULL DEFAULT ''
  actions_log: TERMINAL varchar(255) NOT NULL DEFAULT ''
  actions_log: IP varchar(100) NOT NULL DEFAULT ''
- actions_log: INDEX (ACTION_TYPE)  
+ actions_log: INDEX (ACTION_TYPE)
 EOD;
         parent::dbInstall($data);
     }

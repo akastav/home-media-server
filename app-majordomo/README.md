@@ -31,5 +31,5 @@ One of the things we really proud of is supportive and friendly world-wide commu
 Contribution
 =========
 
-Feel free to join our team! Join discussions on forums below or mail us directly at ip@mdmi.by 
-Any help is much appreciated. 
+Feel free to join our team! Join discussions on forums below or mail us directly at ip@mdmi.by
+Any help is much appreciated.

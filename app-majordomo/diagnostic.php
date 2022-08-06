@@ -78,7 +78,7 @@ function collectData() {
    }
    $result['cycles']=$cycles;
 
-   global $db; 
+   global $db;
    if ($db) {
 
       $result['LatestUpdateId']=gg('LatestUpdateId');
@@ -200,7 +200,7 @@ if (isset($_POST['send'])) {
       removeTree('./cms/saverestore/temp');
 
    }
-   
+
    $url = 'https://connect.smartliving.ru/market/';
    $fields=array(
        'op'=>'diagnostic',
@@ -276,11 +276,11 @@ $result=collectData();
 if($_GET['ajax'] == 1) {
 	//echo '<pre>';
 	//var_dump($result);
-	
+
 	foreach($result["cycles"] as $key => $value) {
 		$result["cycles"][$key]['run_time'] = date('d.m.Y H:i:s', $value['run']);
 	}
-	
+
 	//echo '<pre>';
 	//var_dump($result["cycles"]);
 	echo json_encode($result);

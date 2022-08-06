@@ -5,7 +5,7 @@ version: '3.9'
 # 32 GB RAM
 # 480 GB SSD for Proxmox
 # 3 TB HDD for Proxmox Dumps, Rclone Cache, MerferFS Local and Downloads
- 
+
 ########################### NETWORKS
 # There is no need to create any networks outside this docker-compose file.
 # You may customize the network subnets (192.168.90.0/24 and 91.0/24) below as you please.
@@ -76,7 +76,7 @@ services:
       # HTTP Services
       - "traefik.http.routers.majordomo-rtr.service=majordomo-svc"
       - "traefik.http.routers.majordomo-rtr-bypass.service=majordomo-svc"
-      - "traefik.http.services.majordomo-svc.loadbalancer.server.port=80" 
+      - "traefik.http.services.majordomo-svc.loadbalancer.server.port=80"
 
   mysql:
     image: mariadb
@@ -84,7 +84,7 @@ services:
     networks:
       t2_proxy:
         ipv4_address: 192.168.10.221 # You can specify a static IP
-      socket_proxy: 
+      socket_proxy:
     volumes:
       - /$DOCKERDIR/appdata/mysql:/var/lib/mysql
     environment:
@@ -162,8 +162,8 @@ services:
   #     # HTTP Services
   #     - "traefik.http.routers.homeassistant-rtr.service=homeassistant-svc"
   #     - "traefik.http.routers.homeassistant-rtr-bypass.service=homeassistant-svc"
-  #     - "traefik.http.services.homeassistant-svc.loadbalancer.server.port=8123" 
-      
+  #     - "traefik.http.services.homeassistant-svc.loadbalancer.server.port=8123"
+
   # Traefik 2 - Reverse Proxy
   # Touch (create empty files) traefik.log and acme/acme.json. Set acme.json permissions to 600.
   # touch $DOCKERDIR/traefik2/acme/acme.json
@@ -380,7 +380,7 @@ services:
       - LIGHTWAY_CIPHER=auto
     cap_add:
       - NET_ADMIN
-    devices: 
+    devices:
        - /dev/net/tun
     stdin_open: true
     tty: true
@@ -789,7 +789,7 @@ services:
     restart: always
     network_mode: host
 
- 
+
   # Docker-GC - Automatic Docker Garbage Collection
   # Create docker-gc-exclude file
   dockergc:

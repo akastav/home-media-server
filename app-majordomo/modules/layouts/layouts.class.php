@@ -1,6 +1,6 @@
 <?php
 /**
-* Layouts 
+* Layouts
 *
 * Layouts
 *
@@ -228,9 +228,9 @@ function usual(&$out) {
    if ($rec['BACKGROUND_IMAGE']) {
     $url.="&background_image=".urlencode($rec['BACKGROUND_IMAGE']);
    }
-   echo "<head>      
-    <title>Page</title>      
-    <meta http-equiv=\"refresh\" content=\"0;URL='".$url."'\" />    
+   echo "<head>
+    <title>Page</title>
+    <meta http-equiv=\"refresh\" content=\"0;URL='".$url."'\" />
   </head><body>Redirecting...</body>";
    exit;
    //$this->redirect($url);

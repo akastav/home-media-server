@@ -1131,5 +1131,3 @@ class Smarty_Internal_Templatelexer
     }
 
 }
-
-     

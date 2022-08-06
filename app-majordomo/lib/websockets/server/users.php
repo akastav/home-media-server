@@ -12,7 +12,7 @@ class WebSocketUser {
 
   public $sendingContinuous = false;
   public $partialMessage = "";
-  
+
   public $hasSentClose = false;
 
   function __construct($id, $socket) {
@@ -28,16 +28,16 @@ class MyUser extends WebSocketUser {
 
   function __construct($id, $socket) {
     parent::__construct($id, $socket);
-    
-    socket_getpeername($socket,$this->ip,$this->port);          
+
+    socket_getpeername($socket,$this->ip,$this->port);
     $this->myId = md5($this->ip . $this->port .  uniqid('u'));
  }
-  
+
   function getClientID()
   {
       return $this->myId;
   }
-  
+
   function getClientIP()
   {
       return $this->ip;

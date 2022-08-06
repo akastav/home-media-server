@@ -13,7 +13,7 @@ THREE.CTMLoader = function () {
 	THREE.Loader.call( this );
 
 	// Deprecated
-	
+
 	Object.defineProperties( this, {
 		statusDomElement: {
 			get: function () {

@@ -42,15 +42,15 @@ if ($this->mode == 'update') {
     $rec['MIN_MSG_LEVEL'] = gr('min_msg_level');
 
     //$rec['MAJORDROID_API'] = gr('majordroid_api', 'int');
-	
+
     if ($location_id = SQLSelectOne("SELECT * FROM locations WHERE TITLE = '" . gr('location') . "'")) {
         $rec['LOCATION_ID'] = $location_id['ID'];
         $out['LOCATION_TITLE'] = gr('location');
     } else {
         $rec['LOCATION_ID'] = 0;
-        $out['LOCATION_TITLE'] = gr('location');		
+        $out['LOCATION_TITLE'] = gr('location');
     }
-    
+
     $rec['TTS_TYPE'] = gr('tts_type');
     $rec['PLAYER_TYPE'] = gr('player_type');
     $rec['PLAYER_PORT'] = gr('player_port');

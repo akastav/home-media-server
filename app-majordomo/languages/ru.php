@@ -1423,7 +1423,7 @@ $dictionary = array(
     'STYLE_FADEOUT0' => 'Прозрачность 0%',
     'SEE_ALSO' => 'Смотрите также',
     'PLAN_COMPONENTS' => 'Компоненты',
-    
+
     'CONNECT_LOGIN_FAILED' => 'Не удалось подключиться к сервису CONNECT. Пожалуйста, проверьте указанные имя пользователя и пароль',
     'CONNECT_ABOUT' => 'Cервис CONNECT позволяет Вам с помощью Облачной Синхронизации организовать простой доступ к домашней системе через сеть Интернет, а так же обеспечить работу других облачных сервисов (резервная копия, работа голосовых помощников и т.п.). Подробная информация о сервисе доступна <a href="https://connect.smartliving.ru/services/s2.html">по ссылке</a>',
     'CONNECT_REGISTER' => 'Регистрация на сервисе CONNECT',
@@ -1463,12 +1463,12 @@ $dictionary = array(
     'ENABLE_AUTO_UPDATE' => 'Включить автоматическое обновление',
     'AUTO_UPDATE_DELAY' => 'Задержка автоматического обновлния (дней)',
     'AUTO_UPDATE_TIME' => 'Время проверки и установки обновлений',
-    
+
 	'CODEEDITOR_NOTY_TURNOFF' => 'Расширьте возможности редактора кода в настройках системы, <a href="/admin.php?pd=pz_&md=panel&inst=&action=settings&filter_name=codeeditor" target="_blank">перейти в настройки</a>',
 	'RUN_SCRIPT_BTN' => 'Выполнить',
 	'SCRIPT_HOW_TO_RUN' => 'Как запустить?',
 	'SCRIPT_RUN_IN_METHOD' => 'Из метода (PHP)',
-	
+
 	'CODEEDITOR_TURNONSETTINGS' => 'Включить эти настройки',
 	'CODEEDITOR_SHOWLINE' => 'Показывать строк без скролла',
 	'CODEEDITOR_MIXLINE' => 'Минимальное количество строк для отображения',
@@ -1500,7 +1500,7 @@ $dictionary = array(
 	'CODEEDITOR_AUTOSAVE_PARAMS_EVERY_15' => 'Через 15 секунд',
 	'CODEEDITOR_AUTOSAVE_PARAMS_EVERY_30' => 'Через 30 секунд',
 	'CODEEDITOR_AUTOSAVE_PARAMS_EVERY_60' => 'Через 1 минуту',
-	
+
 	//Новый дашборд!
 	'NEWDASH_CONNECTED' => 'Подключено',
 	'NEWDASH_DISCONNECTED' => 'Нет подключения',
@@ -1544,7 +1544,7 @@ $dictionary = array(
 	'NEWDASH_DB_REQ_SEC' => 'Запросов к БД в секунду',
 	'NEWDASH_DB_REQ_MIN' => 'Запросов к БД в минуту',
 	'NEWDASH_DB_REQ_HOUR' => 'Запросов к БД в час',
-	
+
 	'NEWDASH_DMB_TITLE' => 'Добавить свой блок',
 	'NEWDASH_DMB_TITLE_MODAL' => 'Добавление своего блока',
 	'NEWDASH_DMB_TITLE_MODAL_HINT' => 'Описание функционала и подробное описание доступно на нашем форуме:',
@@ -1552,19 +1552,19 @@ $dictionary = array(
 	'NEWDASH_DMB_TITLE_MODAL_STEP1' => '1. Создайте сценарий с именем:',
 	'NEWDASH_DMB_TITLE_MODAL_STEP2' => '2. Сценарий должен отдавать следующий JSON объект:',
 	'NEWDASH_DMB_TITLE_MODAL_STEP3' => '3. На этом все. Панель управления сама подхватит скрипт и выведет содержимое на главную страницу.',
-	
+
 	'NEWDASH_CONSOLE_CHOOSE_MODULE' => 'Выберите модуль...',
 	'NEWDASH_CONSOLE_SIZE_HINT' => 'Размер консоли можно изменить',
 	'NEWDASH_SEARCH_HINT' => 'Глобальный поиск по всей системе. Начните вводить...',
 	'NEWDASH_CONNECT_CONNECT_ERROR_1' => 'Ваша копия MajorDoMo не может связаться с сервером Connect. Ввиду этого, маркет и некоторые другие функции будут недоступны.',
 	'NEWDASH_CONNECT_CONNECT_ERROR_2' => 'Обычно, ситуация налаживаться спустя несколько минут.',
-	
+
 	'NEWDASH_RESULT' => 'Результат',
 	'NEWDASH_MJDM_VERSION' => 'Текущая версия MJDM',
-	
+
 	'NEWDASH_OBJ_ADD_NEW_PROP_NAME' => 'Имя для нового свойства',
 	'NEWDASH_OBJ_ADD_NEW_PROP_VALUE' => 'Значение свойства',
-	
+
 	'NEWSAVERESTORE_NONE_UPDATE_HEADER' => 'Все хорошо!',
 	'NEWSAVERESTORE_NONE_UPDATE_TEXT' => 'Классно, что вы вовремя обновляетесь. Сейчас у вас последняя доступная версия системы. Но в случае необходимости, вы можете перекачать файлы из репозитория GitHub.',
 	'NEWSAVERESTORE_NONE_UPDATE_BTN' => 'Все равно обновить',
@@ -1581,7 +1581,7 @@ $dictionary = array(
 	'NEWSAVERESTORE_BACKUP_HINT' => 'Выберите разделы системы для создания резервной копии.',
 	'NEWSAVERESTORE_CHOUSE_FILE' => 'Выберите файл',
 	'NEWSAVERESTORE_CHOUSES_FILES' => 'Выбрано файлов:',
-	
+
 	'UPDATEBACKUP_DONE' => 'Готово!',
 	'UPDATEBACKUP_BACKUP_DONE' => 'Резервная копия готова!',
 	'UPDATEBACKUP_DELETE_TEMP_FILES' => 'Удаляем временные файлы...',
@@ -1609,7 +1609,7 @@ $dictionary = array(
 	'UPDATEBACKUP_SAVE_FILES' => 'Сохраняем файлы...',
 	'UPDATEBACKUP_BACKUP_PACKEGE_TO' => 'Резервная копия пакуется в архив:',
 	'UPDATEBACKUP_COPY_TO' => 'Копируем в',
-	
+
 	'XRAY_WORKING' => 'Работает',
 	'XRAY_DO_WORKING' => 'Не работает',
 	'XRAY_WORKING_CYCLE' => 'циклов',
@@ -1625,7 +1625,7 @@ $dictionary = array(
 	'XRAY_CONTINUE' => 'Возобновить',
 	'XRAY_SOURCE' => 'Источник',
 	'XRAY_PARAMS' => 'Параметры',
-	
+
 	'NEWSYSTEM_ERROR_FIND_ERROR' => 'Что-то пошло не так...',
 	'NEWSYSTEM_ERROR_FIND_ERROR_TEXT' => 'MajorDoMo работает нестабильно. Система обнаружила несколько ошибок в работе модулей. Возможно, он не критичные, однако рекомендуем обратить на них внимание.',
 	'NEWSYSTEM_ERROR_CHECK_ALL_READ' => 'Отметить все как просмотренные',
@@ -1640,7 +1640,7 @@ $dictionary = array(
 	'NEWSYSTEM_ERROR_DESC' => 'описание',
 	'NEWSYSTEM_ERROR_SEE_BTN' => 'Посмотреть',
 	'NEWSYSTEM_ERROR_NOT_FOUND' => 'В базе данных не найдено информации об ошибках системы или модулей.',
-	
+
 	'NEWMARKET_BANNER' => 'Это маркет!',
 	'NEWMARKET_BANNER_TEXT' => 'В маркете дополнений MajorDoMo собраны разнообразные модули дополнений позволяющие расширить функционал системы. Вовремя обновляйте дополнения — это позволит избежать ошибок в работе. Если вы не нашли нужного вам модуля - попробуйте обратиться на форум или написать модуль самостоятельно.',
 	'NEWMARKET_BANNER_BTN' => 'Для разработчиков',
@@ -1651,7 +1651,7 @@ $dictionary = array(
 	'NEWMARKET_UPDATE_ALAIL' => 'Доступно обновление',
 	'NEWMARKET_MODULE_DISCUSS' => 'Обсуждение',
 	'NEWMARKET_BUY_FOR' => 'Купить за',
-	
+
 );
 
 foreach ($dictionary as $k => $v) {

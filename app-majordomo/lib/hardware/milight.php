@@ -844,7 +844,3 @@ class Milight
     }
 
 }
-
-
-
-

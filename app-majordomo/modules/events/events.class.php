@@ -517,16 +517,16 @@ class events extends module
  events: EXPIRE datetime
  events: PROCESSED int(3) NOT NULL DEFAULT '0'
  events: DESCRIPTION varchar(255) NOT NULL DEFAULT ''
- 
+
  events_params: ID int(10) unsigned NOT NULL auto_increment
  events_params: EVENT_ID int(10) unsigned NOT NULL DEFAULT '0'
- events_params: TITLE varchar(255) NOT NULL DEFAULT ''  
+ events_params: TITLE varchar(255) NOT NULL DEFAULT ''
  events_params: VALUE varchar(255) NOT NULL DEFAULT ''
  events_params: UPDATED datetime
- events_params: LINKED_OBJECT varchar(255) NOT NULL DEFAULT '' 
- events_params: LINKED_PROPERTY varchar(255) NOT NULL DEFAULT '' 
- events_params: LINKED_METHOD varchar(255) NOT NULL DEFAULT '' 
- 
+ events_params: LINKED_OBJECT varchar(255) NOT NULL DEFAULT ''
+ events_params: LINKED_PROPERTY varchar(255) NOT NULL DEFAULT ''
+ events_params: LINKED_METHOD varchar(255) NOT NULL DEFAULT ''
+
 EOD;
         parent::dbInstall($data);
     }

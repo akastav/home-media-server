@@ -5,25 +5,25 @@
 */
 
 class app_player_addon {
-	
+
 	/*
 		Properties
 	*/
-	
+
 	// Addon info
 	public $title = NULL;
 	public $description = NULL;
-	
+
 	// Informations
 	public $terminal = NULL;
 	public $success = FALSE;
 	public $message = NULL;
 	public $data = NULL;
-	
+
 	/*
 		Service methods
 	*/
-	
+
 	// Constructor
 	function __construct($terminal) {
 		/*
@@ -32,23 +32,23 @@ class app_player_addon {
 		$this->terminal = $terminal;
 		$this->reset_properties();
 	}
-	
+
 	// Destructor
 	public function destroy() {
 		/*
 			Some code...
 		*/
 	}
-	
+
 	/*
 		Playback methods
 	*/
-	
+
 	// Get player status
 	public function status() {
 		/*
 			$this->data format (array):
-			
+
 			'track_id'	 -	ID of currently playing track (in playlist).
 							Integer. If unknown (playback stopped or playlist is empty) = -1.
 			'length'	 -	Track length in seconds. Integer. If unknown = 0.
@@ -66,12 +66,12 @@ class app_player_addon {
 	public function play($input) {
 		/*
 			$input - The path to the file for playback. String.
-			
+
 			$this->data format (integer): ID of currently playing track (in playlist). If unknown = -1.
 		*/
 		return $this->not_supported();
 	}
-	
+
 	// Pause/Resume
 	public function pause() {
 		/*
@@ -87,32 +87,32 @@ class app_player_addon {
 		*/
 		return $this->not_supported();
 	}
-	
+
 	// Next track
 	public function next() {
 		/*
 			$input - The path to the file for playback. String.
-			
+
 			$this->data format (integer): ID of currently playing track (in playlist). If unknown = -1.
 		*/
 		return $this->not_supported();
 	}
-	
+
 	// Previous track
 	public function previous() {
 		/*
 			$input - The path to the file for playback. String.
-			
+
 			$this->data format (integer): ID of currently playing track (in playlist). If unknown = -1.
 		*/
 		return $this->not_supported();
 	}
-	
+
 	// Set playback position
 	public function seek($position) {
 		/*
 			$position - Position in seconds. Integer.
-			
+
 			$this->data format: NULL.
 		*/
 		return $this->not_supported();
@@ -122,12 +122,12 @@ class app_player_addon {
 	public function set_volume($level) {
 		/*
 			$level - Volume level in percent. Integer.
-			
+
 			$this->data format: NULL.
 		*/
 		return $this->not_supported();
 	}
-	
+
 	// Get media volume level
 	public function get_volume() {
 		/*
@@ -145,12 +145,12 @@ class app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Playlist: Get
 	public function pl_get() {
 		/*
 			$this->data format (array):
-			
+
 			'id'	- track ID;
 			'name'	- title;
 			'file'	- file path.
@@ -162,22 +162,22 @@ class app_player_addon {
 	public function pl_add($input) {
 		/*
 			$input - The path to the file for add to the playlist. String.
-			
+
 			$this->data format (integer): ID of currently playing track (in playlist). If unknown = -1.
 		*/
 		return $this->not_supported();
 	}
-	
+
 	// Playlist: Delete
 	public function pl_delete($id) {
 		/*
 			$id - The track number to remove from the playlist. Integer. See status() function (track_id).
-			
+
 			$this->data format: NULL.
 		*/
 		return $this->not_supported();
 	}
-	
+
 	// Playlist: Empty
 	public function pl_empty() {
 		/*
@@ -185,12 +185,12 @@ class app_player_addon {
 		*/
 		return $this->not_supported();
 	}
-	
+
 	// Playlist: Play
 	public function pl_play($id) {
 		/*
 			$id - The position of the playback track. Integer. See status() function (track_id).
-			
+
 			$this->data format: NULL.
 		*/
 		return $this->not_supported();
@@ -225,21 +225,21 @@ class app_player_addon {
 		/*
 			$command - Command name. String.
 			$parameter - Command parameter. String.
-			
+
 			$this->data format (string): result of the command.
 		*/
 		return $this->not_supported($command);
 	}
-	
+
 	/*
 		Final methods
 	*/
-	
+
 	// Reset properties
 	final public function reset_properties($defaults=array()) {
 		/*
 			$defaults - Associative array with default property values.
-			
+
 			Example:
 				array('message'=>'Hello')
 		*/
@@ -253,7 +253,7 @@ class app_player_addon {
 		}
 		return $this;
 	}
-	
+
 	// Unknown method
 	final public function __call($name, $parameters) {
 		/*
@@ -261,7 +261,7 @@ class app_player_addon {
 		*/
 		return $this->command($name, $parameters[0]);
 	}
-	
+
 	// Command not supported
 	final public function not_supported($command=NULL) {
 		/*
@@ -278,12 +278,12 @@ class app_player_addon {
 		$this->reset_properties(array('success'=>FALSE, 'message'=>'Command "'.(string)$command.'" is not supported for this player type!'));
 		return $this->success;
 	}
-	
+
 	// Set system volume level
 	final public function set_system_volume($level) {
 		/*
 			$level - Volume level in percent. Integer.
-			
+
 			$this->data format: NULL.
 		*/
 		$this->reset_properties();
@@ -298,7 +298,7 @@ class app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Get system volume level
 	final public function get_system_volume() {
 		/*
@@ -308,17 +308,17 @@ class app_player_addon {
 		$this->data = (int)getGlobal('ThisComputer.volumeLevel');
 		return $this->success;
 	}
-	
+
 	// Play the specified file without breaking the current playlist
 	final public function safe_play($input) {
 		/*
 			$input - The path to the file for playback. String.
-			
+
 			$this->data format (boolean): Playback result (TRUE = successful, FALSE = unable to safely play)
 		*/
 		return $this->play($input); // FIXME
 	}
-	
+
 }
 
 ?>

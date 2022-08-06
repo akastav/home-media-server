@@ -151,4 +151,3 @@ function PerformanceReport($hidden = 0)
     }
     return $tmp;
 }
-

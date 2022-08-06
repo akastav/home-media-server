@@ -82,7 +82,7 @@ class yy_Block extends yy_Base
 
     $code = $this->compile_with_declarations($options);
 
-    return (isset($options['bare']) && $options['bare']) ? $code : 
+    return (isset($options['bare']) && $options['bare']) ? $code :
       "(function() {\n{$code}\n}).call(this);\n";
   }
 

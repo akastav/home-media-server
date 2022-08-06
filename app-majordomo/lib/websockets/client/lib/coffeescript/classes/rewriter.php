@@ -72,10 +72,10 @@ class Rewriter
 
       $tag = $token[0];
 
-      return 
+      return
         (in_array($tag, t('TERMINATOR', 'OUTDENT')) &&
           ! ($two[0] === t(':') || $one[0] === t('@') && $three[0] === t(':')) ) ||
-        ($tag === t(',') && ! is_null($one[0]) && 
+        ($tag === t(',') && ! is_null($one[0]) &&
           ! in_array($one[0], t('IDENTIFIER', 'NUMBER', 'STRING', '@', 'TERMINATOR', 'OUTDENT')));
     };
 
@@ -160,7 +160,7 @@ class Rewriter
         return 4;
       }
 
-      if (in_array($tag, t(Rewriter::$SINGLE_LINERS)) && $self->tag($i + 1) !== t('INDENT') && 
+      if (in_array($tag, t(Rewriter::$SINGLE_LINERS)) && $self->tag($i + 1) !== t('INDENT') &&
         ! ($tag === t('ELSE') && $self->tag($i + 1) === t('IF')))
       {
         $starter = $tag;
@@ -221,7 +221,7 @@ class Rewriter
     $this->scan_tokens(function( & $token, $i, & $tokens) use ( & $action, & $no_call, & $self )
     {
       $tag = $token[0];
-      
+
       if (in_array($tag, t('CLASS', 'IF')))
       {
         $no_call = TRUE;
@@ -243,7 +243,7 @@ class Rewriter
 
       $seen_single = FALSE;
       $seen_control = FALSE;
-      
+
       if (in_array($tag, t(Rewriter::$LINEBREAKS)))
       {
         $no_call = FALSE;
@@ -259,9 +259,9 @@ class Rewriter
         return 1;
       }
 
-      if ( ! ($call_object || ($prev && (isset($prev['spaced']) && $prev['spaced'])) && 
+      if ( ! ($call_object || ($prev && (isset($prev['spaced']) && $prev['spaced'])) &&
         ( (isset($prev['call']) && $prev['call']) || in_array($prev[0], t(Rewriter::$IMPLICIT_FUNC)) ) &&
-        ( in_array($tag, t(Rewriter::$IMPLICIT_CALL)) || ! ( (isset($token['spaced']) && $token['spaced']) || 
+        ( in_array($tag, t(Rewriter::$IMPLICIT_CALL)) || ! ( (isset($token['spaced']) && $token['spaced']) ||
           (isset($token['newLine']) && $token['newLine']) ) &&
           in_array($tag, t(Rewriter::$IMPLICIT_UNSPACED_CALL)) )
         ))
@@ -295,13 +295,13 @@ class Rewriter
           return TRUE;
         }
 
-        return 
-          ! (isset($token['generated']) && $token['generated']) && $self->tag($i - 1) !== t(',') && 
+        return
+          ! (isset($token['generated']) && $token['generated']) && $self->tag($i - 1) !== t(',') &&
           (in_array($tag, t(Rewriter::$IMPLICIT_END))) &&
-          ($tag !== t('INDENT') || 
-            ( $self->tag($i - 2) !== t('CLASS') && 
-              ! in_array($self->tag($i - 1), t(Rewriter::$IMPLICIT_BLOCK)) && 
-              ! ( (isset($self->tokens[$i + 1]) && ($post = $self->tokens[$i + 1])) && 
+          ($tag !== t('INDENT') ||
+            ( $self->tag($i - 2) !== t('CLASS') &&
+              ! in_array($self->tag($i - 1), t(Rewriter::$IMPLICIT_BLOCK)) &&
+              ! ( (isset($self->tokens[$i + 1]) && ($post = $self->tokens[$i + 1])) &&
                   (isset($post['generated']) && $post['generated']) && $post[0] === t('{') )
           ));
       },
@@ -322,7 +322,7 @@ class Rewriter
 
     $condition = function($token, $i) use ( & $self)
     {
-      return in_array($token[0], t(')', 'CALL_END')) || $token[0] === t('OUTDENT') && 
+      return in_array($token[0], t(')', 'CALL_END')) || $token[0] === t('OUTDENT') &&
         $self->tag($i - 1) === t(')');
     };
 
@@ -533,7 +533,7 @@ class Rewriter
     {
       $debt[$k] = 0;
     }
-    
+
     $self = $this;
 
     $this->scan_tokens(function( & $token, $i, & $tokens) use ( & $self, & $stack, & $debt, $inverses)
@@ -607,7 +607,7 @@ class Rewriter
 
   function tag_postfix_conditionals()
   {
-    $condition = function($token, $i) 
+    $condition = function($token, $i)
     {
       return in_array($token[0], t('TERMINATOR', 'INDENT'));
     };

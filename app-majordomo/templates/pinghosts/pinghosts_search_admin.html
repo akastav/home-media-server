@@ -38,15 +38,15 @@
 					[#if STATUS="1"#]<i onmouseout="$('#statusUpdate_[#ID#]').hide();$('#statusUpdateTitle_[#ID#]').show();" onmouseover="$('#statusUpdate_[#ID#]').show();$('#statusUpdateTitle_[#ID#]').hide();" class="glyphicon glyphicon glyphicon-ok-sign text-success" style="font-size: 2rem;margin-right: 10px;vertical-align: sub;"></i>[#endif#]
 					[#if STATUS="2"#]<i onmouseout="$('#statusUpdate_[#ID#]').hide();$('#statusUpdateTitle_[#ID#]').show();" onmouseover="$('#statusUpdate_[#ID#]').show();$('#statusUpdateTitle_[#ID#]').hide();" class="glyphicon glyphicon-remove-circle text-danger" style="font-size: 2rem;margin-right: 10px;vertical-align: sub;"></i>[#endif#]
 					[#if STATUS="0"#]<i onmouseout="$('#statusUpdate_[#ID#]').hide();$('#statusUpdateTitle_[#ID#]').show();" onmouseover="$('#statusUpdate_[#ID#]').show();$('#statusUpdateTitle_[#ID#]').hide();" class="glyphicon glyphicon-refresh  text-primary" style="font-size: 2rem;margin-right: 10px;vertical-align: sub;"></i>[#endif#]
-					
-					
+
+
 					[#if TITLE!=""#]<b>[#TITLE#]</b>[#endif#]
 					<span id="statusUpdateTitle_[#ID#]">
 						<i style="margin: 0px;color: gray;font-size: 1.2rem;">[#HOSTNAME#]</i>
 					</span>
 					<i id="statusUpdate_[#ID#]" style="margin: 0px;color: gray;font-size: 1.2rem;display:none;">Last check: [#CHECK_LATEST#], next check: [#CHECK_NEXT#]</i>
-					
-					
+
+
 					<span class="badge" id="btnAction" style="background: transparent;margin-top: -4px;">
 						<a href="?view_mode=edit_pinghosts&id=[#ID#]" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-pencil"></i></a>
 						<a href="?view_mode=delete_pinghosts&id=[#ID#]" class="btn btn-danger btn-xs" onClick="return confirm('<#LANG_ARE_YOU_SURE#>')"><i class="glyphicon glyphicon-remove"></i></a>
@@ -54,7 +54,7 @@
 				</li>
 				[#end RESULT#]
 			</ul>
-			
+
 			<input type="hidden" name="data_source" value="<#DATA_SOURCE#>">
 			<input type="hidden" name="view_mode" value="multiple_pinghosts">
         </form>

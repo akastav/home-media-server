@@ -128,25 +128,25 @@ Blockly.Blocks['test_color'] = {
    */
   init: function() {
     // Assign 'this' to a variable for use in the closure below.
-	
+
 this.COLOR_OPTIONS =
         [['Red', 'RED'],
          ['Green', 'GREEN'],
-         ['Blue', 'BLUE']];	
-	
+         ['Blue', 'BLUE']];
+
     var thisBlock = this;
     this.setColour(220);
 
     this.appendDummyInput()
         .appendField('Set color of Block 5');
-		
-    var menu = new Blockly.FieldDropdown(this.COLOR_OPTIONS, function(value) {});		
-	
+
+    var menu = new Blockly.FieldDropdown(this.COLOR_OPTIONS, function(value) {});
+
 	this.appendDummyInput('AT');
 	this.getInput('AT').appendField(menu, 'COLOR');
-	
-    //this.appendField(menu, 'COLOR');		
-		
+
+    //this.appendField(menu, 'COLOR');
+
     this.setOutput(false);
 
     this.setPreviousStatement(true);

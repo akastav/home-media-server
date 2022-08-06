@@ -21,7 +21,7 @@ class yy_Range extends yy_Base
 
   function compile_array($options)
   {
-    if ( (isset($this->from_num) && $this->from_num) && 
+    if ( (isset($this->from_num) && $this->from_num) &&
          (isset($this->to_num) && $this->to_num) && abs($this->from_num - $this->to_num) <= 20)
     {
       $range = range($this->from_num, $this->to_num);
@@ -39,7 +39,7 @@ class yy_Range extends yy_Base
     $result = $options['scope']->free_variable('result');
     $pre = "\n{$idt}{$result} = [];";
 
-    if ( (isset($this->from_num) && $this->from_num) && 
+    if ( (isset($this->from_num) && $this->from_num) &&
          (isset($this->to_num) && $this->to_num))
     {
       $options['index'] = $i;

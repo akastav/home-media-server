@@ -8,15 +8,15 @@ class ghn extends app_player_addon {
 
 	// Private properties
 	private $address;
-	
+
 	// Constructor
 	function __construct($terminal) {
 		$this->title = 'Google Home Notifier';
 		$this->description = 'Умная колонка от Google.';
-		
+
 		$this->terminal = $terminal;
 		$this->reset_properties();
-		
+
 		// Network
 		$this->terminal['PLAYER_PORT'] = (empty($this->terminal['PLAYER_PORT'])?8091:$this->terminal['PLAYER_PORT']);
 		$this->address = 'http://'.$this->terminal['HOST'].':'.$this->terminal['PLAYER_PORT'];

@@ -10,10 +10,10 @@ class majordroid extends app_player_addon {
 	function __construct($terminal) {
 		$this->title = 'MajorDroid';
 		$this->description = 'Официальное приложение для Android.';
-		
+
 		$this->terminal = $terminal;
 		$this->reset_properties();
-		
+
 		// Network
 		$this->terminal['PLAYER_PORT'] = (empty($this->terminal['PLAYER_PORT'])?7999:$this->terminal['PLAYER_PORT']);
 	}
@@ -77,7 +77,7 @@ class majordroid extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Pause
 	function pause() {
 		$this->reset_properties();
@@ -132,7 +132,7 @@ class majordroid extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 }
 
 ?>

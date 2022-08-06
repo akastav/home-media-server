@@ -26,10 +26,10 @@ def timeBetween(tm1, tm2):
     if trueTime1 > trueTime2:
         if trueTime2 < time.time():
             trueTime2 += 24 * 60 * 60
-            
+
         else:
             trueTime1 -= 24 * 60 * 60
-           
+
     if time.time() >= trueTime1 and time.time() <= trueTime2:
         return True
     else:

@@ -2,7 +2,7 @@
 <script language="javascript">
 	var wsTimer=0;
 	var startedWebSockets=0;
-	
+
 	window.onbeforeunload = function() {
 		wsSocket.close();
 	};
@@ -17,7 +17,7 @@
 		serverUrl += "//" + loc.hostname + ':<#WEBSOCKETS_PORT#>/majordomo';
 		try {
 			console.log('%c%s', 'color: gray;', '... Подключение к серверу '+serverUrl);
-			
+
 			$('#wsStatus').html('<#LANG_NEWDASH_DISCONNECTED#>');
 			$('#wsStatus').attr('style', 'background: lightcoral');
 		if (window.MozWebSocket) {
@@ -36,7 +36,7 @@
 			startedWebSockets=1;
 			clearTimeout(wsTimer);
 			$.publish('wsConnected');
-			
+
 			$('#wsStatus').html('<#LANG_NEWDASH_CONNECTED#>');
 			$('#wsStatus').attr('style', 'background: #5cb85c');
 		};
@@ -47,7 +47,7 @@
 			//Групировка лога для вывода в консоль
 			wsRespArr = [response.data];
 			console.log('%c%s', 'color: blue;', '⟶ Получены данные: ' + response.action + ' ', wsRespArr );
-			
+
 			$.publish('wsData', response);
 			return;
 		};
@@ -57,14 +57,14 @@
 			wsTimer=setTimeout('startWebSockets();', 5*1000);
 			$.publish('wsDisconnected', []);
 			console.error('%c%s', 'color: red;', '❌ Отключен от сервера, повтор подключения через 5 секунд...');
-			
+
 			$('#wsStatus').html('<#LANG_NEWDASH_DISCONNECTED#>');
 			$('#wsStatus').attr('style', 'background: lightcoral');
-			
+
 			return;
 		};
 	}
-	
+
 	$(document).ready(function(){
 		[#if "<#DISABLE_WEBSOCKETS#>"!="1"#]
 		console.clear();
@@ -73,4 +73,3 @@
 	});
 
 </script>
-

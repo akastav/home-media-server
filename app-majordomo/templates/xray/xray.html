@@ -67,7 +67,7 @@ $(document).ready(function() {
 							<a href="#" class="btn btn-primary" onClick="return playPauseXRay();" id="playpausebtn"><i class="glyphicon glyphicon-pause"></i> <#LANG_XRAY_PAUSE#></a>
 						</span>
 					</div>
-						
+
 					<input type="hidden" name="tab" value="<#TAB#>">
 					<input type="hidden" name="view_mode" value="<#VIEW_MODE#>">
 				</div>
@@ -110,7 +110,7 @@ $(document).ready(function() {
 			}
 			return false;
 		}
-		
+
 		function progressAmin() {
 			var $progressBar = $("#reloadProgress")
 
@@ -121,7 +121,7 @@ $(document).ready(function() {
 				easing: 'linear'
 			});
 		}
-		
+
 		function checkAllStates() {
 			playingXray=1;
 			progressAmin();
@@ -207,7 +207,7 @@ $(document).ready(function() {
 							tr_style = 'background: linear-gradient(to right, lightcoral, white);';
 							btn_group = '<div class="btn-group btn-group-xs"><button type="button" onClick="location.href=\''+dataJSON.LIST[i].CNT_START+'\'" class="btn btn-success">Запуск</button></div>';
 						}
-						
+
 						$("#propContent").prepend('<tr style="'+tr_style+'"><td>'+dataJSON.LIST[i].TITLE+'</td><td style="vertical-align: middle;text-align: center;">'+cycleUpdate+'</td><td style="vertical-align: middle;text-align: right;">'+btn_group+'</td></tr>');
 						i++;
 					}
@@ -217,7 +217,7 @@ $(document).ready(function() {
 					} else {
 						$('#xrayContent').html(dataJSON.CONTENT);
 					}
-				} 
+				}
 				checkTimer=setTimeout('checkAllStates()', checkTimeout);
 			});
 			return false;
@@ -235,7 +235,7 @@ $(document).ready(function() {
 	  var url="<#ROOTHTML#>popup/xray.html?action=context";
 	  var bodyText='';
 	  [#if CODE_ID!=""#]bodyText=$('#[#CODE_ID#]').val();[#endif CODE_ID#]
-	  $.post(url, 
+	  $.post(url,
 	  { action:"context", ajax: "1", op: "process", keyword: "<#KEYWORD#>", type: "<#TYPE#>", body: bodyText},
 	   function(data) {
 		$('#contextBody').html(data);

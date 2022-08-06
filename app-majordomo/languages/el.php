@@ -336,7 +336,7 @@ $dictionary = array(
 'CUSTOM_HTML_BOX' => 'μπλοκ HTML',
 'ICON' => 'Εικονίδιο',
 
-                           
+
 'MIN_VALUE' => 'Ελάχ. αξία',
 
 
@@ -952,7 +952,7 @@ $dictionary = array(
 'WEEK_WED' => 'Περιβάλλον',
 'WEEK_THU' => 'Πέμπτη',
 'WEEK_FRI' => 'Παρασκευή',
-'WEEK_SAT' => 'Σάββατο',   
+'WEEK_SAT' => 'Σάββατο',
 
 
 

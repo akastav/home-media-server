@@ -13,14 +13,14 @@ class mpd extends app_player_addon {
 	function __construct($terminal) {
 		$this->title = 'Music Player Daemon (MPD)';
 		$this->description = 'Кроссплатформенный музыкальный проигрыватель, имеющий клиент-серверную архитектуру.';
-		
+
 		$this->terminal = $terminal;
 		$this->reset_properties();
-		
+
 		// Network
 		$this->terminal['PLAYER_PORT'] = (empty($this->terminal['PLAYER_PORT'])?6600:$this->terminal['PLAYER_PORT']);
 		$this->terminal['PLAYER_PASSWORD'] = (empty($this->terminal['PLAYER_PASSWORD'])?NULL:$this->terminal['PLAYER_PASSWORD']);
-		
+
 		// MPD
 		include_once(DIR_MODULES.'app_player/libs/mpd/mpd.class.php');
 	}
@@ -42,7 +42,7 @@ class mpd extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Get player status
 	function status() {
 		if($this->mpd_connect()) {
@@ -84,7 +84,7 @@ class mpd extends app_player_addon {
 		}
 
 	}
-	
+
 	// Play
 	function play($input) {
 		$this->reset_properties();
@@ -129,7 +129,7 @@ class mpd extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Next
 	function next() {
 		if($this->mpd_connect()) {
@@ -141,7 +141,7 @@ class mpd extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Previous
 	function previous() {
 		if($this->mpd_connect()) {
@@ -153,7 +153,7 @@ class mpd extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Seek
 	function seek($position) {
 		$this->reset_properties();
@@ -188,7 +188,7 @@ class mpd extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Get volume
 	public function get_volume() {
 		if($this->mpd_connect()) {
@@ -218,7 +218,7 @@ class mpd extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Playlist: Get
 	function pl_get() {
 		if($this->mpd_connect()) {
@@ -263,7 +263,7 @@ class mpd extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Playlist: Delete
 	function pl_delete($id) {
 		$this->reset_properties();
@@ -281,7 +281,7 @@ class mpd extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Playlist: Empty
 	function pl_empty() {
 		if($this->mpd_connect()) {
@@ -294,7 +294,7 @@ class mpd extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Playlist: Play
 	function pl_play($id) {
 		$this->reset_properties();

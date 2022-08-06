@@ -1,6 +1,6 @@
 <?php
 /**
-* General Settings 
+* General Settings
 *
 * Settings
 *

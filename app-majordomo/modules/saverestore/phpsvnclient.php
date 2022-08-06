@@ -6,7 +6,7 @@
  *   cesar@sixdegrees.com.br                                               *
  *   "Working with freedom"                                                *
  *   http://www.sixdegrees.com.br                                          *
- *                                                                         *  
+ *                                                                         *
  *   Permission is hereby granted, free of charge, to any person obtaining *
  *   a copy of this software and associated documentation files (the       *
  *   "Software"), to deal in the Software without restriction, including   *
@@ -39,7 +39,7 @@ require_once PHPSVN_DIR .  "/xml2Array.php";
  *  PHP SVN CLIENT
  *
  *  This class is a SVN client. It can perform read operations
- *  to a SVN server (over Web-DAV). 
+ *  to a SVN server (over Web-DAV).
  *  It can get directory files, file contents, logs. All the operaration
  *  could be done for a specific version or for the last version.
  *
@@ -118,7 +118,7 @@ class phpsvnclient {
     private $file_size_founded = false;
 
     /**
-     * The path to the file to perform after update procedure 
+     * The path to the file to perform after update procedure
      * or checkout of a local repository.
      * @var String
      */
@@ -200,11 +200,11 @@ class phpsvnclient {
 
     /**
      * Performs a checkout and creates files and folders.
-     * 
+     *
      * @param string $folder Defaults to disk root
      * @param string $outPath Defaults to current folder (.)
-     * @param boolean $checkFiles Whether it is necessary to check the received 
-     * files in the sizes. Can be useful in case often files are accepted 
+     * @param boolean $checkFiles Whether it is necessary to check the received
+     * files in the sizes. Can be useful in case often files are accepted
      * with an error.
      */
     public function checkOut($folder = '/', $outPath = '.', $checkFiles = false) {
@@ -266,8 +266,8 @@ class phpsvnclient {
      * Function to easily create and update a working copy of the repository.
      * @param type $folder Folder in remote repository
      * @param type $outPath Folder for storing files
-     * @param boolean $checkFiles Whether it is necessary to check the received 
-     * files in the sizes. Can be useful in case often files are accepted 
+     * @param boolean $checkFiles Whether it is necessary to check the received
+     * files in the sizes. Can be useful in case often files are accepted
      * with an error.
      */
     public function createOrUpdateWorkingCopy($folder = '/', $outPath = '.', $checkFiles = false) {
@@ -485,12 +485,12 @@ class phpsvnclient {
     /**
      *  getDirectoryFiles
      *
-     *  Returns all the files in $folder in the version $version of 
+     *  Returns all the files in $folder in the version $version of
      *  the repository.
      *
      *  @param string  $folder Folder to get files
      *  @param integer $version Repository version, -1 means actual
-     *  @return array List of files.     
+     *  @return array List of files.
      */
     public function getDirectoryFiles($folder = '/', $version = -1) {
         if ($arrOutput = $this->rawDirectoryDump($folder, $version)) {
@@ -509,7 +509,7 @@ class phpsvnclient {
      *  getDirectoryTree
      *
      *   Returns the complete tree of files and directories in $folder from the
-     *  version $version of the repository. Can also be used to get the info 
+     *  version $version of the repository. Can also be used to get the info
      *  for a single file or directory.
      *
      *  @param string  $folder Folder to get tree
@@ -566,7 +566,7 @@ class phpsvnclient {
         }
 
         // check if this is a directory... if so, return false, otherwise we
-        // get the HTML output of the directory listing from the SVN server. 
+        // get the HTML output of the directory listing from the SVN server.
         // This is maybe a bit heavy since it makes another connection to the
         // SVN server. Maybe add this as an option/parameter? ES 23/06/08
         $fileInfo = $this->getDirectoryTree($file, $version, false);
@@ -888,7 +888,7 @@ class phpsvnclient {
             if (($this->lastDirectoryFiles == 'D:HREF') && (isset($this->storeDirectoryFiles['type'])))
                 return;
 
-            // Dump into the array 
+            // Dump into the array
             switch ($this->lastDirectoryFiles) {
                 case 'D:HREF':
                     $var = 'type';
@@ -1018,7 +1018,7 @@ class phpsvnclient {
     }
 
     /**
-     * Function to specify a script that should be executed 
+     * Function to specify a script that should be executed
      * after the checkout or update a local repository.
      * @param type $path_to_file - Path to file (script) for execution
      */
@@ -1031,9 +1031,9 @@ class phpsvnclient {
         $lines = file("ext/mime/mime.types", FILE_IGNORE_NEW_LINES);
         foreach ($lines as $line) {
             if (substr($line, 0, 1) == '#')
-                continue; // skip comments 
+                continue; // skip comments
             if (!preg_match($regex, $line, $matches))
-                continue; // skip mime types w/o any extensions 
+                continue; // skip mime types w/o any extensions
             $mime = $matches[1];
             $extensions = explode(" ", $matches[2]);
             foreach ($extensions as $ext)

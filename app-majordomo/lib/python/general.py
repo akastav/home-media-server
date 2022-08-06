@@ -31,12 +31,12 @@ def callAPI(api_url, method="GET", params={}):
         response = urllib2.urlopen(req)
     else:
         data=data.decode("utf-8")
-        
+
         url += "?" + data
         response = urllib2.urlopen(url)
 
     the_page = response.read()
-    
+
     return the_page
 
 
@@ -257,4 +257,3 @@ def getObjects(name,info):
         if con:
             con.close()
     return str(result)
-

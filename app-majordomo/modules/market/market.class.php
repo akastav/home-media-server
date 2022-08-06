@@ -147,7 +147,7 @@ class market extends module
         if (!$this->mode && $mode) {
             $this->mode = $mode;
         }
-		
+
         $this->can_be_updated = array();
         $this->can_be_updated_new = array();
         $this->have_updates = array();
@@ -191,14 +191,14 @@ class market extends module
             $out['NAME'] = urlencode($name);
 
             $out['MODE2'] = $mode2;
-			
+
 			if($mode2 == 'dontupdate' && $name) {
 				if(!$value) {
 					$this->redirect(SERVER_URL."/panel/market.html");
 				}
 				$this->dontupdate($name, $value);
 			}
-			
+
             return;
         }
 
@@ -213,7 +213,7 @@ class market extends module
             }
             exit;
         }
-		
+
 		if ($this->ajax && $_GET['op'] == 'readNoty' && !empty($this->id)) {
             echo $this->readnotification($this->id);
             exit;
@@ -232,13 +232,13 @@ class market extends module
 					} else {
 						$bgColor = '';
 					}
-					
+
 					if(substr($data[$i]['LINK'], 0, 39) == 'https://connect.smartliving.ru/profile/') {
 						$postType = '<i>Блог</i> <i class="glyphicon glyphicon-arrow-right" style="color: darkgray;font-size: 10pt;"></i>';
 					} else {
 						$postType = '<i>Новость</i> <i class="glyphicon glyphicon-arrow-right" style="color: darkgray;font-size: 10pt;"></i>';
 					}
-					
+
 					if(time()-950400 <= $data[$i]['ADDED_TM']) {
 						$actualNews = 'background-color: #dff0d8;';
 						$actualNews_Label = '<span class="label label-success" style="margin-right: 10px;">New</span>';
@@ -247,37 +247,37 @@ class market extends module
 						$actualNews = '';
 						$actualNews_Label = '';
 					}
-					
+
 					if ($data[$i]['LINK'] != '') {
                         $linkDetail = "<a href='" . $data[$i]['LINK'] . "' target='_blank'>Читать полностью...</a>";
                     }  else {
 						$linkDetail = '';
 					}
-					
+
 					$addLinks = preg_replace('/(https?:\/\/[\w\d\-\/\.\?&=#]+)/', '<a href="$1" target=_blank>$1</a>', $data[$i]['BODY']);
 					if($addLinks) {
 						$body = $addLinks;
 					} else {
 						$body = htmlspecialchars($data[$i]['BODY']);
 					}
-					
+
 					echo '<li class="list-group-item '.$bgColor.'" style="margin-bottom: 5px;'.$actualNews.'">';
 					echo '<span class="badge">'.date('d.m.Y H:i:s', $data[$i]['ADDED_TM']).'</span>';
-					echo '<div onclick="$(\'#news_title_'.$i.'\').toggle(\'slow\');" style="cursor:pointer;">'.$actualNews_Label.$postType.' '.htmlspecialchars($data[$i]['TITLE']).'</div>';			
+					echo '<div onclick="$(\'#news_title_'.$i.'\').toggle(\'slow\');" style="cursor:pointer;">'.$actualNews_Label.$postType.' '.htmlspecialchars($data[$i]['TITLE']).'</div>';
 					echo '<div class="fullTextNewsClass" id="news_title_'.$i.'" style="display: none;margin-top: 10px;padding-top: 10px;border-top: 1px solid lightgray;"><blockquote style="border-left: 5px solid #4d96d3;">'.$body.' '.$linkDetail.'</blockquote></div>';
 					echo '</li>';
-					
-					
+
+
 					//echo '<a href="javascript://" onclick="$(\'#news_title_'.$i.'\').toggle(\'slow\');" class="list-group-item" style="padding-top: 10px;padding-bottom: 5px;">';
 					//echo '<h5 id="news_head_'.$i.'" class="list-group-item-heading">'.(htmlspecialchars($data[$i]['TITLE'])).'</h5>';
 					//$body = nl2br(htmlspecialchars($data[$i]['BODY']));
                     //$body = str_replace('&amp;', '&', $body);
                     //$body = preg_replace('/(https?:\/\/[\w\d\-\/\.\?&=#]+)/', '<a href="$1" target=_blank>$1</a>', $body);
-					
+
 					//echo '<p id="news_title_'.$i.'" style="display: none;" class="list-group-item-text">'.(htmlspecialchars($data[$i]['BODY'])).'</p>';
 					//echo '</a>';
-					
-					
+
+
 					/* if ($data[$i]['LINK'] != '') {
                         echo "<br/><a href='" . $data[$i]['LINK'] . "' target='_blank'>" . LANG_DETAILS . "</a>";
                     } */
@@ -423,7 +423,7 @@ class market extends module
                         if (($rec['EXISTS'] && !$rec['IGNORE_UPDATE']) || $missing[$rec['MODULE_NAME']]) {
                             $this->can_be_updated[] = array('NAME' => $rec['MODULE_NAME'], 'URL' => $rec['REPOSITORY_URL'], 'VERSION' => $rec['LATEST_VERSION']);
                         }
-						
+
 						//var_dump($rec["LATEST_VERSION"]);
                         /*
                         if (in_array($rec['MODULE_NAME'], $names)) {
@@ -436,10 +436,10 @@ class market extends module
                         } elseif ($category_id=='updates') {
                             continue;
                         }
-						
+
                         $plugins[] = $rec;
                     }
-					
+
 					if ($this->ajax && $_GET['op'] == 'check_updates') {
 						$total = count($this->have_updates);
 						if ($total > 0) {
@@ -582,7 +582,7 @@ class market extends module
         }
         $out['CATEGORY'] = $cat;
 
-        
+
 
 
         if ($this->mode == 'install_multiple') {
@@ -593,7 +593,7 @@ class market extends module
         if ($this->mode == 'update_all') {
             $this->updateAll($this->can_be_updated);
         }
-        
+
         if ($this->mode == 'update_new') {
             $this->updateAll($this->can_be_updated_new);
         }
@@ -650,8 +650,8 @@ class market extends module
         return $result;
 
     }
-    
-    
+
+
     /**
      * Title
      *
@@ -876,7 +876,7 @@ class market extends module
 		SQLExec("UPDATE plugins SET CURRENT_VERSION = '".DBSafe($value)."' WHERE MODULE_NAME = '".DBSafe($name)."' LIMIT 1");
 		$this->redirect(SERVER_URL."/panel/market.html");
 	}
-	
+
 	function uninstallPlugin($name, $frame = 0)
     {
         if ($frame) {

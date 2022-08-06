@@ -89,7 +89,7 @@ class parser
        */
 
       startMeasure('Parse template ' . $template);
-      
+
       $jTempl = new jTemplate($template, $data, $this->owner);
       $result = $jTempl->result;
 
@@ -109,15 +109,15 @@ class parser
    public function xslt_parse($template, &$data)
    {
       $new_data["ROOT"] = $data;
-      
+
       $xml = new xml_data($new_data);
-      
+
       $arguments = array('/_xml' => $xml->string, '/_xsl' => $template);
-      
+
       $xh = xslt_create();
-      
+
       $result = xslt_process($xh, 'arg:/_xml', 'arg:/_xsl', NULL, $arguments);
-      
+
       xslt_free($xh);
 
       return $result;
@@ -134,11 +134,11 @@ class parser
    public function smarty_parse($template_file, &$data)
    {
       define('SMARTY_DIR',ROOT . 'lib/smarty/');
-      
+
       require_once(SMARTY_DIR . 'Smarty.class.php');
 
       $smarty = new Smarty;
-      
+
       $smarty->compile_dir = SMARTY_DIR . 'templates_c/';
 
       if (isset($this->owner))

@@ -198,5 +198,3 @@ function ask($prompt, $target = '')
 {
     processSubscriptionsSafe('ASK', array('prompt' => $prompt, 'message' => $prompt, 'target' => $target, 'destination' => $target));
 }
-
-

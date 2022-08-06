@@ -78,7 +78,7 @@
     }
     return "string";
   }
-		
+
    var phpKeywords = "abstract and array as break case catch class clone const continue declare default " +
     "do else elseif enddeclare endfor endforeach endif endswitch endwhile extends final " +
     "for foreach function global goto if implements interface instanceof namespace " +

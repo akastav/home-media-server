@@ -10,7 +10,7 @@ $(window).load(function() {
 	border: 2px solid #f7f7f7;
 }
 </style>
-		
+
 <div class="row" style="margin-right: -15px;margin-left: -15px;">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 		 [#if OK#]
@@ -31,13 +31,13 @@ $(window).load(function() {
 					if(error_line == 0) error_line = 1;
 					find = $('div pre.CodeMirror-line:eq('+error_line_find+')');
 					find.attr('id', 'errorline_'+error_line);
-				
+
 					var newElems = $("<div class='cm-error' style='border-top: 1px solid red;font-weight: bold;font-style: italic;'><#LANG_STRING_ERROR#> -> [#ERRORS_ONLINE#]</div>");
 					$('div pre.CodeMirror-line:eq('+error_line_find+')').append(newElems);
 				[#endif#]
-				
+
 				[#if SETTINGS_CODEEDITOR_UPTOLINE == '1' AND SETTINGS_CODEEDITOR_TURNONSETTINGS == '1'#]
-					location.href='#errorline_'+error_line; 
+					location.href='#errorline_'+error_line;
 				[#endif#]
 			[#endif#]
 			[#if ERR_LINE_OFFLINE#]
@@ -47,20 +47,20 @@ $(window).load(function() {
 					if(error_line == 0) error_line = 1;
 					find = $('div pre.CodeMirror-line:eq('+error_line_find+')');
 					find.attr('id', 'errorline_'+error_line);
-				
+
 					var newElems = $("<div class='cm-error' style='border-top: 1px solid red;font-weight: bold;font-style: italic;'><#LANG_STRING_ERROR#> -> [#ERRORS_OFFLINE#]</div>");
 					$('div pre.CodeMirror-line:eq('+error_line_find+')').append(newElems);
 				[#endif#]
-				
+
 				[#if SETTINGS_CODEEDITOR_UPTOLINE == '1' AND SETTINGS_CODEEDITOR_TURNONSETTINGS == '1'#]
-					location.href='#errorline_'+error_line; 
+					location.href='#errorline_'+error_line;
 				[#endif#]
 			[#endif#]
 		});
-				
+
 		</script>
 		[#endif ERR#]
-			
+
         <form action="?" method="post" enctype="multipart/form-data" name="frmEdit" class="form-horizontal" style="border: 1px solid #f2f2f2;padding: 10px;border-radius: 5px;">
 			<div class="form-group " style="margin-right: 0px;margin-left: 0px;">
 				<label class="col-lg-2 col-md-4" style="max-width: 240px;float: left;padding: 5px 10px 0px 0px;text-align: right;"><#LANG_TITLE#>: <font color="red">*</font></label>
@@ -114,7 +114,7 @@ $(window).load(function() {
 				</div>
 			</div>
 			[#module name="linkedobject" object_field="linked_object" property_field="linked_property" width="100%"#]
-			
+
 			<div class="form-group " style="margin-right: 0px;margin-left: 0px;">
 				<label class="col-lg-2 col-md-4" style="max-width: 240px;float: left;padding: 5px 10px 0px 0px;text-align: right;"><#LANG_ONLINE_ACTION#>: </label>
 				<div class="col-lg-10 col-md-8">
@@ -126,15 +126,15 @@ $(window).load(function() {
 						<input type="radio" onchange="$('#online_script').hide();$('#online_code').show();" name="run_type_online" value="code"[#if SCRIPT_ID_ONLINE="0"#] checked[#endif#]>
 						<#LANG_CODE#>
 					</label>
-					
+
 					<select name="script_id_online" id="online_script" class="form-control" [#if SCRIPT_ID_ONLINE="0"#]style="display:none;"[#endif#]>
 						<option value="0">Select...</option>
 						[#begin SCRIPTS#]
 							<option value="[#ID#]"[#if ID="<#SCRIPT_ID_ONLINE#>"#] selected[#endif#]>[#TITLE#]</option>
 						[#end SCRIPTS#]
-					</select> 
-				   
-					<div id="online_code" [#if SCRIPT_ID_ONLINE!="0"#]style="display:none;"[#endif#]>	
+					</select>
+
+					<div id="online_code" [#if SCRIPT_ID_ONLINE!="0"#]style="display:none;"[#endif#]>
 						[#module name="blockly_code" system_name="ph_code_online<#ID#>" onlycode="1" code_field="code_online" action=""#]
 						[#if ERRORS_ONLINE#]
 							<div id="error_noty" style="margin-top: 10px;color: #ff574b;border: 1px solid;border-radius: 5px;padding: 5px;background: #ffffff;width: 100%;">
@@ -150,7 +150,7 @@ $(window).load(function() {
 									<#LANG_CODEEDITOR_NOTY_TURNOFF#>
 								</div>
 							[#endif SETTINGS_CODEEDITOR_TURNONSETTINGS#]
-							
+
 							<div id="autosave_code_in_time_div" style="color: gray;font-style: italic;font-size: 1rem;display:none;margin-left: 5px;margin-bottom: 4px;">
 								<i class="glyphicon glyphicon-floppy-saved" style="vertical-align: top;"></i> <#LANG_CODEEDITOR_AUTOSAVE_CODE#> <span id="autosave_code_in_time"></span>. <#LANG_CODEEDITOR_AUTOSAVE_CODE_HELP#>
 							</div>
@@ -160,7 +160,7 @@ $(window).load(function() {
 					</div>
 				</div>
 			</div>
-			
+
 			<div class="form-group " style="margin-right: 0px;margin-left: 0px;">
 				<label class="col-lg-2 col-md-4" style="max-width: 240px;float: left;padding: 5px 10px 0px 0px;text-align: right;"><#LANG_OFFLINE_ACTION#>: </label>
 				<div class="col-lg-10 col-md-8">
@@ -172,14 +172,14 @@ $(window).load(function() {
 						<input type="radio" onchange="$('#offline_script').hide();$('#offline_code').show();" name="run_type_offline" value="code"[#if SCRIPT_ID_OFFLINE="0"#] checked[#endif#]>
 						<#LANG_CODE#>
 					</label>
-					
+
 					<select name="script_id_offline" id="offline_script" class="form-control" [#if SCRIPT_ID_OFFLINE="0"#]style="display:none;"[#endif#]>
 						<option value="0">Select...</option>
 						[#begin SCRIPTS#]
 							<option value="[#ID#]"[#if ID="<#SCRIPT_ID_OFFLINE#>"#] selected[#endif#]>[#TITLE#]</option>
 						[#end SCRIPTS#]
-					</select> 
-					
+					</select>
+
 					<div id="offline_code" [#if SCRIPT_ID_OFFLINE!="0"#]style="display:none;"[#endif#]>
 						[#module name="blockly_code" system_name="ph_code_offline<#ID#>" onlycode="1" code_field="code_offline" action=""#]
 						[#if ERRORS_OFFLINE#]
@@ -196,7 +196,7 @@ $(window).load(function() {
 									<#LANG_CODEEDITOR_NOTY_TURNOFF#>
 								</div>
 							[#endif SETTINGS_CODEEDITOR_TURNONSETTINGS#]
-							
+
 							<div id="autosave_code_in_time_div" style="color: gray;font-style: italic;font-size: 1rem;display:none;margin-left: 5px;margin-bottom: 4px;">
 								<i class="glyphicon glyphicon-floppy-saved" style="vertical-align: top;"></i> <#LANG_CODEEDITOR_AUTOSAVE_CODE#> <span id="autosave_code_in_time"></span>. <#LANG_CODEEDITOR_AUTOSAVE_CODE_HELP#>
 							</div>
@@ -204,10 +204,10 @@ $(window).load(function() {
 
 						</div>
 					</div>
-					
+
 				</div>
 			</div>
-			
+
 			<div class="form-group " style="margin-right: 0px;margin-left: 0px;">
 				<label class="col-lg-2 col-md-4" style="max-width: 240px;float: left;padding: 5px 10px 0px 0px;text-align: right;"><#LANG_ONLINE_CHECK_INTERVAL#>: </label>
 				<div class="col-lg-10 col-md-8">
@@ -239,7 +239,7 @@ $(window).load(function() {
 				</div>
 			</div>
 			[#endif#]
-			
+
 			<div class="form-group" style="margin-right: 0px;margin-left: 0px;">
 				<div class="col-md-12 text-center">
 					[#if ID!=""#]
@@ -268,4 +268,3 @@ $(window).load(function() {
         </form>
     </div>
 </div>
-

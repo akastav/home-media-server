@@ -1,6 +1,6 @@
 <?php
 /**
-* Myblocks 
+* Myblocks
 *
 * Myblocks
 *

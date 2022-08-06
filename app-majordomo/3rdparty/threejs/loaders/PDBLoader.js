@@ -183,4 +183,3 @@ THREE.PDBLoader.prototype = {
 	}
 
 };
-

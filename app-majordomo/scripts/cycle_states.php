@@ -30,7 +30,7 @@ if (is_array($objects) || $objects instanceof Countable) {
 
 if ($_GET['once'])
 {
-	
+
    echo "Runing once.......";
    $last_run = getGlobal((str_replace('.php', '', basename(__FILE__))) . 'Run');
 

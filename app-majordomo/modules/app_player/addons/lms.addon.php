@@ -7,31 +7,31 @@
 */
 
 class lms extends app_player_addon {
-	
+
 	// Private properties
 	private $curl;
 	private $address;
-	
+
 	// Constructor
 	function __construct($terminal) {
 		$this->title = 'Logitech Media Server';
 		$this->description = 'Logitech Media Server - это потоковый аудиосервер,разработанный, в частности, для поддержки цифровых аудиоприемников Squeezebox.<br>';
 		$this->description .= 'В поле <i>Имя пользователя</i> необходимо указать IP или MAC адрес плеера.';
-		
+
 		$this->terminal = $terminal;
 		$this->reset_properties();
-		
+
 		// Curl
 		$this->curl = curl_init();
 		$this->address = 'http://'.$this->terminal['HOST'].':'.(empty($this->terminal['PLAYER_PORT'])?9000:$this->terminal['PLAYER_PORT']);
 		curl_setopt($this->curl, CURLOPT_RETURNTRANSFER, TRUE);
 	}
-	
+
 	// Destructor
 	function destroy() {
 		curl_close($this->curl);
 	}
-	
+
 	// Private: LMS JSON-RPC request
 	private function lms_jsonrpc_request($data) {
 		$jsonrpc = array(
@@ -62,7 +62,7 @@ class lms extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Private: LMS get track position
 	private function lms_get_track_position($id) {
 		if($this->pl_get()) {
@@ -78,7 +78,7 @@ class lms extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Private: LMS get track id
 	private function lms_get_track_id($position=-1) {
 		if($this->pl_get()) {
@@ -147,7 +147,7 @@ class lms extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Pause
 	function pause() {
 		if($this->lms_jsonrpc_request(array('pause'))) {
@@ -169,7 +169,7 @@ class lms extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Next
 	function next() {
 		if($this->lms_jsonrpc_request(array('button', 'jump_fwd'))) {
@@ -183,7 +183,7 @@ class lms extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Previous
 	function previous() {
 		if($this->lms_jsonrpc_request(array('button', 'jump_rew'))) {
@@ -197,7 +197,7 @@ class lms extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Seek
 	function seek($position) {
 		$this->reset_properties();
@@ -225,7 +225,7 @@ class lms extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Playlist: Get
 	function pl_get() {
 		if($this->lms_jsonrpc_request(array('status', 0, PHP_INT_MAX, 'tags:u'))) {
@@ -264,7 +264,7 @@ class lms extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Playlist: Delete
 	function pl_delete($id) {
 		$this->reset_properties();
@@ -278,7 +278,7 @@ class lms extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Playlist: Empty
 	function pl_empty() {
 		if($this->lms_jsonrpc_request(array('playlist', 'clear'))) {
@@ -286,7 +286,7 @@ class lms extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Playlist: Play
 	function pl_play($id) {
 		$this->reset_properties();
@@ -317,7 +317,7 @@ class lms extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Playlist: Loop
 	function pl_loop() {
 		if($this->status()) {
@@ -331,7 +331,7 @@ class lms extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Playlist: Repeat
 	function pl_repeat() {
 		if($this->status()) {
@@ -345,13 +345,13 @@ class lms extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Default command
 	function command($command, $parameter) {
 		$data = array($command, $parameter);
 		return $this->lms_jsonrpc_request($data);
 	}
-	
+
 }
 
 ?>

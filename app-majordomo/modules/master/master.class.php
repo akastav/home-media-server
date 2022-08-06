@@ -1,6 +1,6 @@
 <?php
 /**
-* Master Login Setup 
+* Master Login Setup
 *
 * Master
 *

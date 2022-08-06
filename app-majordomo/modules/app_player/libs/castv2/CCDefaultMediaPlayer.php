@@ -7,7 +7,7 @@ require_once("CCBaseSender.php");
 class CCDefaultMediaPlayer extends CCBaseSender
 {
 	public $appid="CC1AD845";
-	
+
 	public function play($url,$streamType,$contentType,$autoPlay,$currentTime) {
 		// Start a playing
 		// First ensure there's an instance of the DMP running
@@ -35,7 +35,7 @@ class CCDefaultMediaPlayer extends CCBaseSender
 		}
 		$this->mediaid=$this->chromecast->sessionid;
 	}
-	
+
 	public function pause() {
 		// Pause
 		$this->launch(); // Auto-reconnects
@@ -52,14 +52,14 @@ class CCDefaultMediaPlayer extends CCBaseSender
 		$this->chromecast->sendMessage("urn:x-cast:com.google.cast.media",'{"type":"PLAY", "mediaSessionId":' . $this->mediaid . ', "requestId":'.$this->chromecast->requestId.'}');
 		$this->chromecast->getCastMessage();
 	}
-	
+
 	public function seek($secs) {
 		// Seek
 		$this->launch(); // Auto-reconnects
 		$this->chromecast->sendMessage("urn:x-cast:com.google.cast.media",'{"type":"SEEK", "mediaSessionId":' . $this->mediaid . ', "currentTime":' . $secs . ',"requestId":'.$this->chromecast->requestId.'}');
 		$this->chromecast->getCastMessage();
 	}
-	
+
 	public function stop() {
 		// Stop
 		$this->launch(); // Auto-reconnects
@@ -69,7 +69,7 @@ class CCDefaultMediaPlayer extends CCBaseSender
 			$this->chromecast->getCastMessage();
 		}
 	}
-	
+
 	public function getStatus() {
 		// Stop
 		$this->launch(); // Auto-reconnects
@@ -86,21 +86,21 @@ class CCDefaultMediaPlayer extends CCBaseSender
         $r = substr($r, strpos($r,'{"type'),50000);
         return json_decode($r,TRUE);
 	}
-	
+
 	public function Mute() {
 		// Mute a video
 		$this->launch(); // Auto-reconnects
 		$this->chromecast->sendMessage("urn:x-cast:com.google.cast.receiver", '{"type":"SET_VOLUME", "volume": { "muted": true }, "requestId":'.$this->chromecast->requestId.' }');
 		$this->chromecast->getCastMessage();
 	}
-	
+
 	public function UnMute() {
 		// Mute a video
 		$this->launch(); // Auto-reconnects
 		$this->chromecast->sendMessage("urn:x-cast:com.google.cast.receiver", '{"type":"SET_VOLUME", "volume": { "muted": false }, "requestId":1 }');
 		$this->chromecast->getCastMessage();
 	}
-	
+
 	public function SetVolume($volume) {
 		// Mute a video
 		$this->launch(); // Auto-reconnects

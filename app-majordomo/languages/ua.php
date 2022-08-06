@@ -1276,7 +1276,7 @@ $dictionary = array (
     'DEVICES_ROOMS_NOBODYHOME' => 'Нікого немає.',
     'DEVICES_ROOMS_SOMEBODYHOME' => 'Хтось є',
     'DEVICES_ROOMS_ACTIVITY' => 'Активність',
-    
+
     'DEVICES_PASSED_INCORRECT_TIME' => 'Невірний час',
     'DEVICES_PASSED_AGO' => 'назад',
     'DEVICES_PASSED_TODAY_IN' => 'Сьогодні, в',
@@ -1534,7 +1534,7 @@ $dictionary = array (
     'NEWDASH_DB_REQ_SEC' => 'Запитів до БД за секунду',
 	'NEWDASH_DB_REQ_MIN' => 'Запитів до БД за хвилину',
 	'NEWDASH_DB_REQ_HOUR' => 'Запитів до БД за годину',
-	
+
 	'NEWDASH_DMB_TITLE' => 'Добавити свій блок',
 	'NEWDASH_DMB_TITLE_MODAL' => 'Добавляння свого блоку',
 	'NEWDASH_DMB_TITLE_MODAL_HINT' => 'Описание функционала и подробное описание доступно на нашем форуме:',
@@ -1542,16 +1542,16 @@ $dictionary = array (
 	'NEWDASH_DMB_TITLE_MODAL_STEP1' => '1. Створіть сценарій з ім\`ям:',
 	'NEWDASH_DMB_TITLE_MODAL_STEP2' => '2. Сценарій повинен віддавати слідуючий JSON об\`єкт:',
 	'NEWDASH_DMB_TITLE_MODAL_STEP3' => '3. На цьому все. Панель керування сама підхватить скрипт и выведе содержимое на головну сторінку.',
-	
+
 	'NEWDASH_CONSOLE_CHOOSE_MODULE' => 'Оберіть модуль...',
 	'NEWDASH_CONSOLE_SIZE_HINT' => 'Розмір консолі можна змінити',
 	'NEWDASH_SEARCH_HINT' => 'Глобальний пошук по всій системі. Почніть вводити...',
 	'NEWDASH_CONNECT_CONNECT_ERROR_1' => 'Ваша копія MajorDoMo не може зв\`язатися з сервером Connect. Через це, маркет та деякі інші функції неможливо виконати.',
 	'NEWDASH_CONNECT_CONNECT_ERROR_2' => 'Зазвичай, ситуайція виправляється за декілька хвилин.',
-	
+
 	'NEWDASH_RESULT' => 'Результат',
 	'NEWDASH_MJDM_VERSION' => 'Теперішня версія MJDM',
-	
+
 	'NEWDASH_OBJ_ADD_NEW_PROP_NAME' => 'Ім\`я для нової властивості',
 	'NEWDASH_OBJ_ADD_NEW_PROP_VALUE' => 'Значення властивості',
 

@@ -154,7 +154,7 @@
 	function [#APP_PLAYER_ID#]_terminals_label() {
 		var terminals = new Array();
 		$('#[#APP_PLAYER_ID#] .content .controls .column.select.terminal .slide_panel ul li input[name="session_terminals[]"]').filter(':checked').each(function(i, element) {
-			terminals.push($(element).closest('li').text());	
+			terminals.push($(element).closest('li').text());
 		});
 		var label = terminals.join().trim();
 		if(label.length == 0) {
@@ -267,7 +267,7 @@
 	function [#APP_PLAYER_ID#]_cmd(command, param, terminal, callback) {
 		var session_terminals = new Array();
 		$('#[#APP_PLAYER_ID#] .content .controls .column.select.terminal .slide_panel ul li input[name="session_terminals[]"]').filter(':checked').each(function(i, element) {
-			session_terminals.push($(element).val());	
+			session_terminals.push($(element).val());
 		});
 		var session_terminal = session_terminals.join();
 		$.ajax({

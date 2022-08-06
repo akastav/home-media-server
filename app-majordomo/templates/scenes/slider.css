@@ -7,8 +7,8 @@
                 list-style:none;
                 }
         #slider2{margin-top:1em;}
-        #slider li, #slider2 li{ 
-                /* 
+        #slider li, #slider2 li{
+                /*
                         define width and height of list item (slide)
                         entire slider area will adjust according to the parameters provided here
                 */
@@ -16,10 +16,10 @@
                 width:{$smarty.const.SETTINGS_SCENES_WIDTH}px;
                 height:{$smarty.const.SETTINGS_SCENES_HEIGHT}px;
 {literal}
-                overflow:hidden; 
-                }       
+                overflow:hidden;
+                }
         #prevBtn, #nextBtn,
-        #slider1next, #slider1prev{ 
+        #slider1next, #slider1prev{
                 display:block;
                 width:30px;
                 height:77px;
@@ -27,31 +27,31 @@
                 left:-30px;
                 top:71px;
                 z-index:1000;
-                }       
-        #nextBtn, #slider1next{ 
+                }
+        #nextBtn, #slider1next{
                 left:1080px;
-                }                                                                                                               
+                }
         #prevBtn a, #nextBtn a,
-        #slider1next a, #slider1prev a{  
+        #slider1next a, #slider1prev a{
                 display:block;
                 position:relative;
                 width:30px;
                 height:77px;
-                background:url(../images/btn_prev.gif) no-repeat 0 0;   
-                }       
-        #nextBtn a, #slider1next a{ 
-                background:url(../images/btn_next.gif) no-repeat 0 0;   
-                }       
-                
-        /* numeric controls */  
+                background:url(../images/btn_prev.gif) no-repeat 0 0;
+                }
+        #nextBtn a, #slider1next a{
+                background:url(../images/btn_next.gif) no-repeat 0 0;
+                }
+
+        /* numeric controls */
 
         ol#controls{
                 margin:1em 0;
                 padding:0;
-                height:28px;    
+                height:28px;
                 }
         ol#controls li{
-                margin:0 10px 0 0; 
+                margin:0 10px 0 0;
                 padding:0;
                 float:left;
                 list-style:none;
@@ -78,14 +78,14 @@
         ol#controls_vertical{
                 margin:1em 0;
                 padding:0;
-                width:28px;    
+                width:28px;
                 position:absolute;
                 top:10px;
                 left:10px;
                 }
 
         ol#controls_vertical li{
-                margin:0 10px 0 0; 
+                margin:0 10px 0 0;
                 padding:0;
                 list-style:none;
                 height:32px;

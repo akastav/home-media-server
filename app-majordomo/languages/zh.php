@@ -870,5 +870,3 @@ foreach ($dictionary as $k=>$v) {
   define('LANG_'.$k, $v);
  }
 }
-
-	

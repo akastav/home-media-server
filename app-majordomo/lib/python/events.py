@@ -216,7 +216,7 @@ def registeredEventTime(eventName):
 
 def registeredEventDetails(eventName):
     '''Получениеполучение деталий эвента
-    Пример ввода registeredEventTime("adminEvent") 
+    Пример ввода registeredEventTime("adminEvent")
     '''
 
     try:

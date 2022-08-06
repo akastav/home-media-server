@@ -200,17 +200,17 @@ if ($this->filter_name == 'hook' && !defined('SETTINGS_HOOK_BARCODE')) {
 }
 
 if ($this->filter_name == 'codeeditor') {
-	
-	if(!defined('SETTINGS_CODEEDITOR_TURNONSETTINGS') || !defined('SETTINGS_CODEEDITOR_SHOWLINE') || 
-		!defined('SETTINGS_CODEEDITOR_MIXLINE') || !defined('SETTINGS_CODEEDITOR_UPTOLINE') || 
-		!defined('SETTINGS_CODEEDITOR_SHOWERROR') || !defined('SETTINGS_CODEEDITOR_AUTOCLOSEQUOTES') || 
-		!defined('SETTINGS_CODEEDITOR_WRAPLINES') || !defined('SETTINGS_CODEEDITOR_AUTOCOMPLETE') || 
+
+	if(!defined('SETTINGS_CODEEDITOR_TURNONSETTINGS') || !defined('SETTINGS_CODEEDITOR_SHOWLINE') ||
+		!defined('SETTINGS_CODEEDITOR_MIXLINE') || !defined('SETTINGS_CODEEDITOR_UPTOLINE') ||
+		!defined('SETTINGS_CODEEDITOR_SHOWERROR') || !defined('SETTINGS_CODEEDITOR_AUTOCLOSEQUOTES') ||
+		!defined('SETTINGS_CODEEDITOR_WRAPLINES') || !defined('SETTINGS_CODEEDITOR_AUTOCOMPLETE') ||
 		!defined('SETTINGS_CODEEDITOR_AUTOCOMPLETE_TYPE') || !defined('SETTINGS_CODEEDITOR_THEME') || !defined('SETTINGS_CODEEDITOR_AUTOSAVE')) {
-			
+
 			$cmd = "DELETE FROM `settings` WHERE `NAME` LIKE '%CODEEDITOR_%'";
 			SQLExec($cmd);
 	}
-	
+
 	$options = array(
 		'CODEEDITOR_TURNONSETTINGS' => LANG_CODEEDITOR_TURNONSETTINGS,
         'CODEEDITOR_SHOWLINE' => LANG_CODEEDITOR_SHOWLINE,
@@ -224,8 +224,8 @@ if ($this->filter_name == 'codeeditor') {
 		'CODEEDITOR_THEME' => LANG_CODEEDITOR_THEME,
 		'CODEEDITOR_AUTOSAVE' => LANG_CODEEDITOR_AUTOSAVE,
     );
-	
-	
+
+
     foreach ($options as $k => $v) {
         $tmp = SQLSelectOne("SELECT ID FROM settings WHERE NAME LIKE '" . $k . "'");
         if (!$tmp['ID']) {
@@ -234,7 +234,7 @@ if ($this->filter_name == 'codeeditor') {
             $tmp['TITLE'] = $v;
 			$tmp['DATA'] = '';
 			$tmp['DEFAULTVALUE'] = '';
-			
+
 			if ($k == 'CODEEDITOR_SHOWLINE') {
 				$tmp['TYPE'] = 'select';
 				$tmp['DATA'] = '10=10|35=35|45=45|100=100|500=500|1000=1000|99999='.LANG_CODEEDITOR_BYCODEHEIGHT;
@@ -255,8 +255,8 @@ if ($this->filter_name == 'codeeditor') {
 			} else {
 				$tmp['TYPE'] = 'onoff';
 			}
-			
-			
+
+
             $tmp['NOTES'] = '';
             SQLInsert('settings', $tmp);
         }
@@ -383,7 +383,7 @@ if ($this->section_title != '') {
 }
 
 if (($this->filter_name == '') and ($this->name == 'settings')) {
-    $qry .= " and NAME IN('GENERAL_START_LAYOUT','SCENES_WIDTH','SCENES_HEIGHT','VOICE_LANGUAGE','THEME','SPEAK_SIGNAL','HOOK_BEFORE_SAY',	
+    $qry .= " and NAME IN('GENERAL_START_LAYOUT','SCENES_WIDTH','SCENES_HEIGHT','VOICE_LANGUAGE','THEME','SPEAK_SIGNAL','HOOK_BEFORE_SAY',
 'HOOK_AFTER_SAY','BACKUP_PATH',	'GENERAL_ALICE_NAME','SITE_TIMEZONE','TTS_GOOGLE','SITE_LANGUAGE','HOOK_EVENT_SAY','HOOK_EVENT_HOURLY',
 'HOOK_BARCODE',	'HOOK_PLAYMEDIA','HOOK_BEFORE_PLAYSOUND','HOOK_AFTER_PLAYSOUND','HOOK_EVENT_COMMAND','HOOK_EVENT_SAYREPLY','HOOK_EVENT_SAYTO','HOOK_EVENT_ASK')";
 }

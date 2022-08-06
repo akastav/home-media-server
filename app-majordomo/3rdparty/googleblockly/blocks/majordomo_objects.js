@@ -317,5 +317,3 @@ Blockly.Blocks['majordomo_getobjects'] = {
 
   }
 };
-
-

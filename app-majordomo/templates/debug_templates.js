@@ -29,19 +29,19 @@ function grabTemplateNames(elem) {
 			if (elem.name!=null && elem.name.indexOf('.html')>0) {
 			        nm=elem.name.replace("<#DIR_TEMPLATES#>", "");
 			        if (counter>0) {
-					templates = nm + " > " + templates 
+					templates = nm + " > " + templates
 			        } else {
 	 				templates = nm
 			        }
 			        counter++;
 			}
-		}	
+		}
 		elem = elem.parentElement
 	}
 	return templates
 }
 function setStatus(templates, id) {
-	window.status = templates+id 
+	window.status = templates+id
 }
 
 function findAElement(elem) {
@@ -87,7 +87,7 @@ function setLabel(){
 				allElem[a].innerHTML = labelWindow.lf.val.value
 			}
 		}
-	}	
+	}
 	// document.all[labelWindow.lf.name.value].innerHTML = labelWindow.lf.val.value
 }
 
@@ -141,7 +141,7 @@ function markTemplate(tmplt, remove){
 						borderStyle = "0pt none black"
 					} else {
 						borderStyle = "1pt solid black"
-					}	
+					}
 					var firstRow = allelem[a].children[0]
 					for (col=0;col<firstRow.children.length;col++) firstRow.children[col].style.borderTop = borderStyle
 					var lastRow = allelem[a].children[allelem[a].children.length-1]
@@ -154,7 +154,7 @@ function markTemplate(tmplt, remove){
 						child.children[0].style.borderLeft = borderStyle
 						child.children[child.children.length-1].style.borderRight = borderStyle
 					}
-				} else {	
+				} else {
 					markElement(allelem[a], remove)
 				}
 			}

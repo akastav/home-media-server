@@ -115,7 +115,7 @@
    if ((new_type=='menuitem')) {
     $('#menuitem_select').show();
    }
-   
+
 
 
  }
@@ -664,14 +664,14 @@
                 <input type="text" class="form-control" name="linked_object_new" id="linked_object_new" size="10" value="[#STATE_LINKED_OBJECT#]">
         </div>
         </div>
-     
+
         <div class="form-group">
         <label class="col-lg-4 control-label"><#LANG_LINKED_PROPERTY#><#LANG_HCB#>linked_property<#LANG_HCE#></label>
         <div class="controls">
                  <input type="text" class="form-control" name="linked_property_new" id="linked_property_new" size="10" value="[#STATE_LINKED_PROPERTY#]">
         </div>
         </div>
-        
+
     <div class="form-group">
         <label class="col-lg-4 control-label"><#LANG_CONDITION#></label>
         <div class="controls">
@@ -690,8 +690,8 @@
                  <input type="text" class="form-control" name="condition_value_new" size="10" value="[#STATE_CONDITION_VALUE#]">
         </div>
         </div>
-  
-   
+
+
   </div>
   <div id="condition_advanced_block_new"[#if STATE_IS_DYNAMIC!="2"#] style="display:none"[#endif#]>
    <div class="form-group">
@@ -779,7 +779,7 @@
  [#endif ID#]
 
 </div>
- 
+
 <input type="hidden" name="element_id" value="<#ELEMENT_ID#>">
 <input type="hidden" name="id" value="<#ID#>">
 <input type="hidden" name="view_mode" value="<#VIEW_MODE#>">
@@ -802,7 +802,7 @@
 
 [#if ELEMENT_ID!=""#]
 <script language="javascript">
- $(document).ready(function(){ 
+ $(document).ready(function(){
   element_type_switched();
  });
 </script>

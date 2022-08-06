@@ -29,16 +29,16 @@
 
 
 .type_informer.state_low span {
-color:#92e7ff; 
+color:#92e7ff;
 }
 .type_informer.state_high span {
-color:#f1b001; 
+color:#f1b001;
 }
 .type_informer.state_high.style_humidity span {
-color:#92e7ff; 
+color:#92e7ff;
 }
 .type_informer.state_low.style_humidity span {
-color:#f1b001; 
+color:#f1b001;
 }
 
 {foreach $TYPE.STYLES as $STYLE}

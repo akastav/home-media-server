@@ -348,8 +348,8 @@ class Lexer
       return strlen($id);
     }
 
-    $forced_identifier = $colon || ($prev = last($this->tokens)) && 
-      (in_array($prev[0], t('.', '?.', '::')) || 
+    $forced_identifier = $colon || ($prev = last($this->tokens)) &&
+      (in_array($prev[0], t('.', '?.', '::')) ||
       ( ! (isset($prev['spaced']) && $prev['spaced']) && $prev[0] === t('@')));
 
     $tag = 'IDENTIFIER';
@@ -400,8 +400,8 @@ class Lexer
     {
       if ($forced_identifier)
       {
-        // TODO: Doing this seems to work just fine. Sometime in the future I 
-        // will take out the nastiness of attaching properties to the token 
+        // TODO: Doing this seems to work just fine. Sometime in the future I
+        // will take out the nastiness of attaching properties to the token
         // rather than directly to the value like below.
         $id = wrap($id);
         $id->reserved = $reserved = TRUE;
@@ -483,7 +483,7 @@ class Lexer
         continue;
       }
 
-      if ( ! ($letter === '#' && $str{$i + 1} === '{' && 
+      if ( ! ($letter === '#' && $str{$i + 1} === '{' &&
         ($expr = $this->balanced_string(substr($str, $i + 1), '}'))) )
       {
         continue;
@@ -851,7 +851,7 @@ class Lexer
 
     if ($prev)
     {
-      if (in_array($prev[0], t((isset($prev['spaced']) && $prev['spaced']) ? 
+      if (in_array($prev[0], t((isset($prev['spaced']) && $prev['spaced']) ?
         self::$NOT_REGEX : self::$NOT_SPACED_REGEX)))
       {
         return 0;
@@ -945,7 +945,7 @@ class Lexer
       }
 
       break;
-    
+
     default:
       return 0;
     }
@@ -1027,7 +1027,7 @@ class Lexer
         $token[$k] = $v;
       }
     }
-    
+
     return ($this->tokens[] = $token);
   }
 
@@ -1035,7 +1035,7 @@ class Lexer
   {
     while ( ($this->chunk = substr($this->code, $this->index)) !== FALSE )
     {
-      $types = array('identifier', 'comment', 'whitespace', 'line', 'heredoc', 
+      $types = array('identifier', 'comment', 'whitespace', 'line', 'heredoc',
         'string', 'number', 'regex', 'js', 'literal');
 
       foreach ($types as $type)

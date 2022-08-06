@@ -16,7 +16,7 @@ $session=new session("prj");
 
 include_once("./load_settings.php");
 include_once(DIR_MODULES . "control_modules/control_modules.class.php");
- 
+
 $ctl = new control_modules();
 
 $scripts=SQLSelect("SELECT * FROM scripts");
@@ -40,7 +40,7 @@ Blockly.Blocks['majordomo_script_<?php echo $scripts[$i]['ID'];?>'] = {
         .setCheck("Array");
     this.setInputsInline(true);
 
-    <?php 
+    <?php
     $tmp=explode("\n", $scripts[$i]['CODE']);
     $last_line=$tmp[count($tmp)-1];
     if (preg_match('/return/is', $last_line)) {?>
@@ -60,7 +60,7 @@ Blockly.Blocks['majordomo_script_<?php echo $scripts[$i]['ID'];?>'] = {
 };
 
 <?php
- 
+
 }
 
 $session->save();

@@ -90,7 +90,7 @@ function yy($type)
   $inst = new $type;
   $inst = call_user_func_array(array($inst, 'constructor'), $args);
 
-  return $inst; 
+  return $inst;
 }
 
 // Base class.

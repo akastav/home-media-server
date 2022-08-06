@@ -5,7 +5,7 @@
 	[#endif ERR_MSG#]
 	[#if OK_MSG!=""#]
 		<div class="col-md-12"><div class="alert alert-success">[#OK_MSG#]</div></div>
-	[#endif OK_MSG#] 
+	[#endif OK_MSG#]
 
 	<div class="col-md-6">
 		[#if NO_NEED_TO_UPDATE#]
@@ -27,12 +27,12 @@
 			</p>
 		</div>
 		[#endif#]
-		
+
 		[#if MODE="getlatest_iframe"#]
 			<script>
 				$(document).ready(function() {
 					$('#myModal').modal('show');
-					
+
 					$("#myModal").on("hidden.bs.modal", function () {
 						$('#myModal').modal('show');
 					});
@@ -60,7 +60,7 @@
 						[#if MODE!="getlatest_iframe"#]
 						<div class="modal-footer">
 							<input type="hidden" name="mode" value="getlatest_iframe">
-							
+
 							<button type="button" class="btn btn-default" data-dismiss="modal"><#LANG_CLOSE#></button>
 							<input style="border-color: #ffffff;" type="submit" name="submit" value="<#LANG_NEWSAVERESTORE_UPDATE_BTN#>" onClick="" class="btn btn-danger btn-md">
 						</div>
@@ -82,7 +82,7 @@
 						<div>
 							[#if MYVERSION == 1#]<span class="label label-success" id="mysystemversion">Моя версия</span> [#endif#]<a href="[#LINK#]" target="_blank">[#TITLE#]</a>
 							<div>↳ <span class="label label-default">[#DESC_UPDATE#]</span></div>
-							
+
 						</div>
 					</li>
 					[#end UPDATES#]
@@ -97,7 +97,7 @@
 			</div>
 		</div>
 		[#endif UPDATES#]
-		
+
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3 class="panel-title"><#LANG_SECTION_SETTINGS#></h3>
@@ -221,7 +221,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="panel panel-default restoreMainBlock" style="">
 			<div class="panel-body">
 				<div id="createBackup" class="restoreBlock" style="display: none;">
@@ -246,31 +246,31 @@
 							</span>
 							<input type="text" id="input_design" class="form-control" value="<#LANG_DESIGN#> (templates, css, images)" style="height: 36px;" disabled>
 						</div>
-						
+
 						<div class="input-group" style="margin-bottom: 5px;">
 							<span class="input-group-addon" id="checkbox_code">
 								<input type="checkbox" name="code" value="1" onChange="checkboxStyle('code', $(this).prop('checked'));">
 							</span>
 							<input type="text" id="input_code" class="form-control" value="<#LANG_CODE#> (modules)" style="height: 36px;" disabled>
 						</div>
-						
+
 						<div class="input-group" style="margin-bottom: 5px;">
 							<span class="input-group-addon" id="checkbox_data">
 								<input type="checkbox" name="data" value="1" onChange="checkboxStyle('data', $(this).prop('checked'));">
 							</span>
 							<input type="text" id="input_data" class="form-control" value="<#LANG_DATA#> (database)" style="height: 36px;" disabled>
 						</div>
-						
+
 						<div class="input-group" style="margin-bottom: 5px;">
 							<span class="input-group-addon" id="checkbox_save_files">
 								<input type="checkbox" name="save_files" onChange="checkboxStyle('save_files', $(this).prop('checked'));" value="1">
 							</span>
 							<input type="text" id="input_save_files" class="form-control" value="<#LANG_FILES_UPLOADED#>" style="height: 36px;" disabled>
 						</div>
-						
+
 						<input type="hidden" name="backup" value="1">
 						<input type="hidden" name="mode" value="getlatest_iframe">
-						
+
 						<div class="text-center" style="margin-top: 15px">
 							<input type="submit" name="submit" value="<#LANG_CREATE_BACKUP#>" class="btn btn-success">
 						</div>
@@ -284,13 +284,13 @@
 						  margin: 15px 0;
 						  text-align: center;
 						}
-						 
+
 						.input__file {
 						  opacity: 0;
 						  visibility: hidden;
 						  position: absolute;
 						}
-						 
+
 						.input__file-icon-wrapper {
 						  height: 60px;
 						  width: 60px;
@@ -306,12 +306,12 @@
 								  justify-content: center;
 						  border-right: 1px solid #fff;
 						}
-						 
+
 						.input__file-button-text {
 						  line-height: 1;
 						  margin-top: 1px;
 						}
-						 
+
 						.input__file-button {
 						  width: 100%;
 						  max-width: 290px;
@@ -342,7 +342,7 @@
 							  <span class="input__file-button-text"><#LANG_NEWSAVERESTORE_CHOUSE_FILE#></span>
 						   </label>
 						</div>
-						
+
 						<div class="text-center" style="margin-top: 15px">
 							<input type="submit" name="submit" value="<#LANG_CONTINUE#>" class="btn btn-success">
 						</div>
@@ -353,7 +353,7 @@
 						Array.prototype.forEach.call(inputs, function (input) {
 						  let label = input.nextElementSibling,
 							labelVal = label.querySelector('.input__file-button-text').innerText;
-					  
+
 						  input.addEventListener('change', function (e) {
 							let countFiles = '';
 							if (this.files && this.files.length >= 1)

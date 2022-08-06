@@ -1,6 +1,6 @@
 <?php
 /**
-* Pinghosts 
+* Pinghosts
 *
 * Pinghosts
 *
@@ -336,9 +336,9 @@ function usual(&$out) {
     }
 
    }
-   
 
-  } 
+
+  }
 
 
  }

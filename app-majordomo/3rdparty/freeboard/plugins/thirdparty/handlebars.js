@@ -23,9 +23,9 @@
 
         //unregister (in case it's already been registered)
         Handlebars.unregisterHelper(newValue);
-        
+
         Handlebars.registerHelper(newValue);
-      }      
+      }
 
       //the template needs to be re-compiled when the view changes
       if (settingName === 'view') {
@@ -37,7 +37,7 @@
 
       //the model is injected into the compiled template to be rendered as HTML
       if (settingName === 'model') {
-        console.log('model changed');        
+        console.log('model changed');
 
         //evaluate the handlebars template by executing the template with a context
         var html = template(newValue);
@@ -57,18 +57,18 @@
 
   freeboard.loadWidgetPlugin({
     "type_name": "handlebarsWidget",
-    "display_name": "Handlebars",    
+    "display_name": "Handlebars",
     "fill_size": true,
     "external_scripts": [
       "http://builds.handlebarsjs.com.s3.amazonaws.com/handlebars-v2.0.0.js"
-    ],    
+    ],
     "settings": [
       {
         "name": "helpers",
         "display_name": "Helpers",
         "type": "calculated",
         "description": "Code that gets passed to Handlebars.registerHelper().  See Handlebars docs."
-      },    
+      },
       {
         "name": "view",
         "display_name": "view",

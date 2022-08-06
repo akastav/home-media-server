@@ -1,7 +1,7 @@
 <?php
 /**
  * Dynamically convert coffeescript to javascript.
- * 
+ *
  * @author Simon Samtleben <web@lemmingzshadow.net>
  */
 include_once 'coffeescript.php';
@@ -10,7 +10,7 @@ class JsToCoffee
 {
 	const CACHING = true;
 	const CACHING_TYPE = 'file'; // @todo support for memcache
-	
+
 	private $_cacheDir = '';
 	private $_coffeeDir = array();
 
@@ -20,22 +20,22 @@ class JsToCoffee
 		{
 			return false;
 		}
-		
-		return $this->_getJs($coffeeFile);		
+
+		return $this->_getJs($coffeeFile);
 	}
-	
+
 	private function _getJs($coffeeFile)
 	{
 		// get file from cache if possible:
 		if(self::CACHING === true)
-		{			
+		{
 			$coffeeHash = sha1_file($coffeeFile);
 			if(file_exists($this->_cacheDir . $coffeeHash))
 			{
-				return file_get_contents($this->_cacheDir . $coffeeHash);			
+				return file_get_contents($this->_cacheDir . $coffeeHash);
 			}
 		}
-		
+
 		// file not cached or cache disabled -> covert, cache, return:
 		$coffee = file_get_contents($coffeeFile);
 		try
@@ -51,15 +51,15 @@ class JsToCoffee
 		{
 			var_dump($e);
 		}
-				
+
 		return false;
 	}
-	
+
 	private function _cacheJs($js, $coffeeFile, $coffeeHash)
 	{
 		// save to cache:
 		file_put_contents($this->_cacheDir . $coffeeHash, $js);
-		
+
 		// register in cache-content and delete possible old version:
 		if(!file_exists($this->_cacheDir . 'cache_content'))
 		{
@@ -69,7 +69,7 @@ class JsToCoffee
 		$temp = file_get_contents($this->_cacheDir . 'cache_content');
 		$cacheConent = unserialize($temp);
 		unset($temp);
-		
+
 		if(isset($cacheConent[$coffeeFile]))
 		{
 			unlink($this->_cacheDir . $cacheConent[$coffeeFile]);
@@ -96,7 +96,7 @@ class JsToCoffee
 
 	/**
 	 * Sets cache folder.
-	 * 
+	 *
 	 * @param string $path Path to cache folder.
 	 * @return bool True if cache path could be set.
 	 */
@@ -113,10 +113,10 @@ class JsToCoffee
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Adds a path with is searched for coffeescripts.
-	 * 
+	 *
 	 * @param string $path Path containing coffeescript.
 	 * @return bool True if path was added.
 	 */

@@ -35,31 +35,31 @@ class mysql
     * @access private
     */
    var $host;
-   
+
    /**
     * @var string database port
     * @access private
     */
    var $port;
-   
+
    /**
     * @var string database access username
     * @access private
     */
    var $user;
-   
+
    /**
     * @var string database access password
     * @access private
     */
    var $password;
-   
+
    /**
     * @var string database name
     * @access private
     */
    var $dbName; // database name
-   
+
    /**
     * @var int database handler
     * @access private
@@ -81,7 +81,7 @@ class mysql
 
    public $connected;
 
-   
+
    /**
     * MySQL constructor
     * used to create mysql database object and connect to database
@@ -177,20 +177,20 @@ class mysql
    {
 
       if (!$this->dbh && !$this->Connect()) return false;
-      
+
       if ((time()-$this->latestTransaction)>$this->pingTimeout) {
        $this->Ping();
       }
 
-      $this->latestTransaction=time(); 
+      $this->latestTransaction=time();
       $result = mysqli_query($this->dbh, $query);
-      
+
       if (!$result && !$ignore_errors)
       {
          $this->Error($query,0);
          return 0;
       }
-      
+
       return $result;
    }
 
@@ -235,7 +235,7 @@ class mysql
       if ($result = $this->Exec($query))
       {
          $rec = mysqli_fetch_array($result, MYSQL_ASSOC);
-         
+
          return $rec;
       }
       else
@@ -248,7 +248,7 @@ class mysql
    public function Ping()
    {
       if (!$this->dbh && !$this->Connect()) return false;
-      
+
       $test_query = "SHOW TABLES FROM ".$this->dbName;
       $result = @mysqli_query($this->dbh, $test_query);
       $tblCnt = 0;
@@ -277,7 +277,7 @@ class mysql
    public function Update($table, $data, $ndx = "ID")
    {
       $qry = "UPDATE `$table` SET ";
-      
+
       foreach ($data as $field => $value)
       {
          if (is_Numeric($field)) continue;
@@ -287,7 +287,7 @@ class mysql
           $qry .= "`$field`=NULL, ";
          }
       }
-      
+
       $qry  = substr($qry, 0, strlen($qry) - 2);
 
       if (!isset($data[$ndx])) {
@@ -301,7 +301,7 @@ class mysql
          $this->Error($qry);
          return 0;
       }
-      
+
       return 1;
    }
 
@@ -325,18 +325,18 @@ class mysql
          $fields .= "`$field`, ";
          $values .= "'" . $this->DBSafe1($value) . "', ";
       }
-      
+
       $fields = substr($fields, 0, strlen($fields) - 2);
       $values = substr($values, 0, strlen($values) - 2);
-      
+
       $qry = "INSERT INTO `$table`($fields) VALUES($values)";
-      
+
       if (!$this->Exec($qry))
       {
          $this->error($qry);
          return 0;
       }
-      
+
       return mysqli_insert_id($this->dbh);
    }
 
@@ -423,23 +423,23 @@ class mysql
    public function get_mysql_def($table)
    {
       $result = $this->Exec('SHOW CREATE TABLE ' . $table);
-      
+
       if ($result)
       {
          $row = mysqli_fetch_row($result);
-         
+
          if (!$row)
             return '';
-         
+
          $row[1] = preg_replace('/DEFAULT CHARSET=(\w+)/', '', $row[1]);
          $row[1] = str_replace(' default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP', '', $row[1]);
          $row[1] = str_replace("\n", ' ', $row[1]);
-         
+
          $strs = trim($row[1]);
-            
+
          return (empty($strs))?'':'DROP TABLE IF EXISTS '.$table.';'."\n".$row[1].';'."\n";
       }
-      
+
       return '';
    }
 
@@ -454,11 +454,11 @@ class mysql
    {
       $content = "";
       $result  = $this->Exec("SELECT * FROM $table");
-      
+
       while ($row = mysqli_fetch_row($result))
       {
          $insert = "INSERT INTO $table VALUES (";
-         
+
          $filedsNum = mysqli_num_fields($result);
 
          for ($j = 0; $j < $filedsNum; $j++)
@@ -467,12 +467,12 @@ class mysql
             else if ($row[$j] != "") $insert .= "'" . $this->DbSafe($row[$j]) . "',";
             else                     $insert .= "'',";
          }
-         
+
          $insert   = preg_replace("/,$/", "", $insert);
          $insert  .= ");\n";
          $content .= $insert;
       }
-      
+
       return $content;
    }
 }

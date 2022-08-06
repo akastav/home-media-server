@@ -87,12 +87,12 @@ foreach($requests as $key => $value)
       $link = $value;
 
       $matchesCount = count($matches);
-      
+
       for ($i = 1; $i < $matchesCount; $i++)
       {
          $link = str_replace("\\$i", $matches[$i], $link);
       }
-  
+
       $link  = preg_replace('/\\\\(\d+?)/is', '', $link);
       $found = 1;
    }
@@ -117,7 +117,7 @@ if ($link != '')
 {
    $mdl       = new module();
    $param_str = $mdl->parseLinks("<a href=\"$link\">");
- 
+
    if (preg_match("/<a href=\".+?\?pd=(.*?)&(.+)\">/", $param_str, $matches))
    {
       $pd    = $matches[1];
@@ -149,4 +149,3 @@ if (preg_match('/^'.$rootHTML.'panel\//is', $_SERVER['REQUEST_URI']))
    include_once("admin.php");
 else
    include_once("index.php");
-

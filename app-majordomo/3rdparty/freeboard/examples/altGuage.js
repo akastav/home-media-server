@@ -1,5 +1,5 @@
 window.dyngaugeID = 0;
-(function() {    
+(function() {
         var dynamicGaugeWidget = function (settings) {
         var self = this;
         thisDynGaugeID = "dyngauge-" + window.dyngaugeID++;
@@ -104,6 +104,5 @@ window.dyngaugeID = 0;
             newInstanceCallback(new dynamicGaugeWidget(settings));
         }
     });
-    
-}());
 
+}());

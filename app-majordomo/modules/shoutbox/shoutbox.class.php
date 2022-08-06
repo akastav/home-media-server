@@ -1,6 +1,6 @@
 <?php
 /**
-* Shoutbox 
+* Shoutbox
 *
 * Shoutbox
 *
@@ -133,7 +133,7 @@ function admin(&$out) {
   unset($session->data['SHOUT_ROOM_ID']);
   $this->redirect("/chat.html");
  }
- 
+
  global $change_visibility;
  if ($change_visibility && LOGGED_USER)
  {
@@ -145,7 +145,7 @@ function admin(&$out) {
         }
         $this->redirect("/chat/room".$room['ID'].'.html');
  }
- 
+
  if ($this->mode=='newroom' && $session->data['LOGGED_USER_ID']) {
   $rec=array();
   global $room_title;

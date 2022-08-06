@@ -44,4 +44,3 @@ class Smarty_Variable
         return (string) $this->value;
     }
 }
-

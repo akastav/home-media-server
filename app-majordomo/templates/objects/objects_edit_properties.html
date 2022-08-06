@@ -5,7 +5,7 @@
 	[#if ERR#]
 		<div class="alert alert-danger"><#LANG_FILLOUT_REQURED#></div>
 	[#endif ERR#]
-	
+
 	<div class="row" style="margin-right: -15px;margin-left: -15px;">
 		<div class="col-md-6">
 			<script>
@@ -19,7 +19,7 @@
 				$('ul#proplist>li').each(function(index) {
 					textForSearch = $(this).children().children().text().trim();
 					searchResult = textForSearch.toLowerCase().indexOf(term);
-					
+
 					if(searchResult >= 0) {
 						$(this).attr('style', 'color: red;background: #fff2f2;');
 						$($(this).prev()).attr('id', 'foundSearch');
@@ -28,10 +28,10 @@
 						$(this).removeAttr('id');
 					}
 				});
-				
+
 				if($('#foundSearch').length == 1) {
-					$('html, body').stop().animate({ 
-						scrollTop: $('#foundSearch').offset().top 
+					$('html, body').stop().animate({
+						scrollTop: $('#foundSearch').offset().top
 					}, 1000);
 				}
 			 }
@@ -60,7 +60,7 @@
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
 						<input type="submit" name="submit" value="<#LANG_ADD#>" class="btn btn-success">
 						<input type="button" value="<#LANG_CANCEL#>" class="btn btn-warning" onclick="$('#addnewprop').hide('slow');$('#proplist>li').css('opacity', '1');">
-						
+
 						<input type="hidden" name="view_mode" value="<#VIEW_MODE#>">
 						<input type="hidden" name="id" value="<#ID#>">
 						<input type="hidden" name="tab" value="<#TAB#>">
@@ -72,9 +72,9 @@
 		[#begin PROPERTIES#]
 		<li class="list-group-item">
 			<div class="row" style="margin-right: -15px;margin-left: -15px;">
-				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" style="margin-bottom: 5px;"> 
+				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" style="margin-bottom: 5px;">
 					<i class="glyphicon glyphicon-search" style="color: silver;margin-right: 10px;vertical-align: top;cursor: pointer;" onclick="$('#filter_modules').val('<#TITLE#>.[#TITLE#]');filterSearch();$('#mdmGlobalSearchModal').modal('show');"></i>
-					
+
 					[#if CLASS_ID!="0"#]<b>[#endif#]
 					<#TITLE#>.[#TITLE#]
 					[#if CLASS_ID!="0"#]</b>[#endif#]
@@ -85,7 +85,7 @@
 					[#endif#]
 					[#if DESCRIPTION!=""#]<p style="font-size: 1rem;color: gray;margin: 0px;">[#DESCRIPTION#]</p>[#endif#]
 					[#if LINKED_MODULES!=""#]<p style="color: gray;font-size: 1.2rem;margin: 0px;">↳ [#LINKED_MODULES#]</p>[#endif#]
-					
+
 					[#if KEEP_HISTORY != 0#]<p style="color: gray;font-size: 1.2rem;margin: 0px;">↳ <span class="label label-warning">История: [#KEEP_HISTORY#] дней</span></p>[#endif#]
 					[#if VALIDATION_TYPE != 0#]<p style="color: gray;font-size: 1.2rem;margin: 0px;">↳ <span class="label label-info">Валидация</span></p>[#endif#]
 					[#if ONCHANGE != ''#]<p style="color: gray;font-size: 1.2rem;margin: 0px;">↳ <span class="label label-primary">Запуск метода: [#ONCHANGE#]</span></p>[#endif#]

@@ -9,7 +9,7 @@ $session=new session("prj");
 
 include_once("./load_settings.php");
 include_once(DIR_MODULES . "control_modules/control_modules.class.php");
- 
+
 $ctl = new control_modules();
 
 ?>
@@ -137,8 +137,8 @@ $ctl = new control_modules();
         // Let the top-level application know that Blockly is ready.
     //    window.parent.blocklyLoaded(Blockly);
 
-  var doc=window.opener.document;  
-  var elem2=doc.getElementById('xml_code');  
+  var doc=window.opener.document;
+  var elem2=doc.getElementById('xml_code');
   var xmlText=elem2.value;
   if (xmlText) {
     var xmlDom = null;
@@ -347,17 +347,17 @@ $ctl = new control_modules();
         <value name="TIME">
           <block type="text"></block>
         </value>
-      </block>     
+      </block>
       <block type="majordomo_timebefore">
         <value name="TIME">
           <block type="text"></block>
         </value>
-      </block>     
+      </block>
       <block type="majordomo_timeafter">
         <value name="TIME">
           <block type="text"></block>
         </value>
-      </block>     
+      </block>
       <block type="majordomo_timebetween">
         <value name="TIME1">
           <block type="text"></block>
@@ -365,12 +365,12 @@ $ctl = new control_modules();
         <value name="TIME2">
           <block type="text"></block>
         </value>
-      </block>     
+      </block>
       <block type="majordomo_cleartimeout">
         <value name="TIMER">
           <block type="text"></block>
         </value>
-      </block>     
+      </block>
       <block type="majordomo_settimeout">
         <value name="TIMER">
           <block type="text"></block>
@@ -378,7 +378,7 @@ $ctl = new control_modules();
         <value name="DELAY">
           <block type="text"></block>
         </value>
-      </block>     
+      </block>
 
       <block type="majordomo_timenow"></block>
       <block type="majordomo_isweekend"></block>
@@ -527,7 +527,7 @@ $ctl = new control_modules();
         echo '<block type="majordomo_device_'.$res[$i]['ID'].'_maxValue"></block>'."\n";
       }
     }
-    
+
    echo '</category>';
   }
   }

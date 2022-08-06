@@ -25,7 +25,7 @@ if ($op == 'console') {
 
     global $command;
 	$code = explode('PHP_EOL', $command);
-	
+
 	foreach($code as $value) {
 		$value = trim($value);
 		if (substr(mb_strtolower($value), 0, 4) == 'echo' || $value[0] == '$' || preg_match('/include/', $value)) {
@@ -39,9 +39,9 @@ if ($op == 'console') {
 
 if ($op == 'filter') {
     global $title;
-	
+
 	//if(!$title) die();
-	
+
     $object_title = '';
     $property_title = '';
 
@@ -62,11 +62,11 @@ if ($op == 'filter') {
             $properties = SQLSelect("SELECT properties.ID, properties.TITLE, classes.TITLE AS CLASS, objects.TITLE AS OBJECT FROM properties LEFT JOIN classes ON properties.CLASS_ID=classes.ID LEFT JOIN objects ON properties.OBJECT_ID=objects.ID WHERE (properties.OBJECT_ID = '" . DBSafe($object['ID']) . "' OR properties.CLASS_ID = '" . DBSafe($object['CLASS_ID']) . "') ORDER BY properties.TITLE");
             $total = count($properties);
             $base_link = '/panel/class/' . $object['CLASS_ID'] . '/object/' . $object['ID'] . '/properties.html';
-        
+
 			$res .= '<div style="padding-left: 10px">
 				<p style="color: gray;font-size: 1.2rem;margin: 0px;">↳ <span class="label label-success"><a style="color: white;" target="_blank" href="'.$base_link.'">' . LANG_PROPERTIES . '</a></span></p>
 			</div>';
-			
+
             for ($i = 0; $i < $total; $i++) {
                $res .= '<div style="padding-left: 20px">
 					<p style="color: gray;font-size: 1.2rem;margin: 0px;">↳ <a target="_blank" href="'.$base_link.'">' . $class['TITLE']. '.' . $properties[$i]['TITLE'] . '</a></p>
@@ -77,14 +77,14 @@ if ($op == 'filter') {
 			$res .= '<div style="padding-left: 10px">
 				<p style="color: gray;font-size: 1.2rem;margin: 0px;">↳ <span class="label label-primary"><a style="color: white;" target="_blank" href="/panel/class/' . $class['ID'] . '/methods.html">' . LANG_METHODS . '</a></span></p>
 			</div>';
-			
+
             for ($i = 0; $i < $total; $i++) {
                 $key = $object['TITLE'] . '.' . $methods[$i]['TITLE'];
                 if ($seen[$key]) {
                     continue;
                 }
                 $seen[$key] = 1;
-				
+
                 if ($methods[$i]['OBJECT']) {
 					$res .= '<div style="padding-left: 20px">
 						<p style="color: gray;font-size: 1.2rem;margin: 0px;">↳ <a target="_blank" href="/panel/class/' . $methods[$i]['OBJECT_CLASS_ID'] . '/object/' . $methods[$i]['OBJECT_ID'] . '/methods/' . $methods[$i]['ID'] . '.html">' . $methods[$i]['OBJECT'] . '.' . $methods[$i]['TITLE'] . '</a></p>
@@ -108,7 +108,7 @@ if ($op == 'filter') {
             $res .= '<div style="padding-left: 10px">
 				<p style="color: gray;font-size: 1.2rem;margin: 0px;">↳ <span class="label label-success"><a style="color: white;" target="_blank" href="/panel/class/' . $class['ID'] . '/properties.html">' . LANG_PROPERTIES . '</a></span></p>
 			</div>';
-			
+
             for ($i = 0; $i < $total; $i++) {
 				$res .= '<div style="padding-left: 20px">
 					<p style="color: gray;font-size: 1.2rem;margin: 0px;">↳ <a target="_blank" href="?action=properties&md=properties&view_mode=edit_properties&id=' . $properties[$i]['ID'] . '">' . $class['TITLE']. '.' . $properties[$i]['TITLE'] . '</a></p>
@@ -116,18 +116,18 @@ if ($op == 'filter') {
             }
             $methods = SQLSelect("SELECT methods.ID, methods.TITLE, classes.TITLE AS CLASS, objects.TITLE AS OBJECT FROM methods LEFT JOIN classes ON methods.CLASS_ID=classes.ID LEFT JOIN objects ON methods.OBJECT_ID=objects.ID WHERE (methods.CLASS_ID = '" . DBSafe($class['ID']) . "') ORDER BY methods.OBJECT_ID DESC, methods.TITLE");
             $total = count($methods);
-			
+
 			$res .= '<div style="padding-left: 10px">
 				<p style="color: gray;font-size: 1.2rem;margin: 0px;">↳ <span class="label label-primary"><a style="color: white;" target="_blank" href="/panel/class/' . $class['ID'] . '/methods.html">' . LANG_METHODS . '</a></span></p>
 			</div>';
-			
+
             for ($i = 0; $i < $total; $i++) {
                 $key = $class['TITLE'] . '.' . $methods[$i]['TITLE'];
                 if ($seen[$key]) {
                     continue;
                 }
                 $seen[$key] = 1;
-				
+
 				$res .= '<div style="padding-left: 20px">
 					<p style="color: gray;font-size: 1.2rem;margin: 0px;">↳ <a target="_blank" href="/panel/class/' . $class['ID'] . '/methods/' . $methods[$i]['ID'] . '.html">' . $class['TITLE'] . '.' . $methods[$i]['TITLE'] . '</a></p>
 				</div>';
@@ -145,7 +145,7 @@ if ($op == 'filter') {
     }
 
     //Project Modules
- 
+
     $items = SQLSelect("SELECT NAME,TITLE FROM project_modules WHERE TITLE LIKE '%".DBSafe($title)."%' AND HIDDEN=0");
 	$iter = 0;
 	$totalMod = count($items);
@@ -260,11 +260,11 @@ if ($op == 'filter') {
 
 	//$arrayResult = explode('<br>', $res);
 	//$arraySlice = array_slice($arrayResult, 0, 20);
-	
+
 	//echo '<pre>';
 	//var_dump($arraySlice);
-	
-	if($res) { 
+
+	if($res) {
 		echo '
 		<style>
 		a {
@@ -290,7 +290,7 @@ if ($op == 'filter') {
 		</style>
 		';
 	}
-	
+
     echo $res;
 }
 exit;

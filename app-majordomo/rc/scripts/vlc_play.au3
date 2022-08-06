@@ -8,4 +8,3 @@ $param = StringReplace($param, "'", '"')
 ;$param = StringReplace($param, "'", '"', -1)
 
 ShellExecute ("\_majordomo\apps\vlc\vlc.exe", $param)
-

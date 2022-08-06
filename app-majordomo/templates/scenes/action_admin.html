@@ -15,7 +15,7 @@
  [#if VIEW_MODE="edit_scenes"#]
 
 <ul class="breadcrumb">
-<li> 
+<li>
 <a href="?"><#LANG_HOME#></a>
 </li>
 [#if ID!=""#]
@@ -68,7 +68,7 @@
 
  [#endif VIEW_MODE#]
  <!-- / table scenes edit -->
- <!-- table scenes view --> 
+ <!-- table scenes view -->
  [#if VIEW_MODE="view_scenes"#]
    [#if TAB=""#]
     [#inc scenes_view_default.html#]
@@ -88,7 +88,7 @@
    [#inc elements_edit.html#]
  [#endif VIEW_MODE#]
  <!-- / table elements edit -->
- <!-- table elements view --> 
+ <!-- table elements view -->
  [#if VIEW_MODE="view_elements"#]
    [#inc elements_view.html#]
  [#endif VIEW_MODE#]
@@ -106,7 +106,7 @@
    [#inc elm_states_edit.html#]
  [#endif VIEW_MODE#]
  <!-- / table elm_states edit -->
- <!-- table elm_states view --> 
+ <!-- table elm_states view -->
  [#if VIEW_MODE="view_elm_states"#]
    [#inc elm_states_view.html#]
  [#endif VIEW_MODE#]

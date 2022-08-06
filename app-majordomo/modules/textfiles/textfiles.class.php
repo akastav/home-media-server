@@ -1,6 +1,6 @@
 <?php
 /**
-* Textfiles 
+* Textfiles
 *
 * Textfiles
 *
@@ -126,12 +126,12 @@ function admin(&$out) {
 
  $dir=ROOT.'cms/texts';
  $handle = opendir( $dir );
- while ( false !== $thing = readdir( $handle ) ) { 
+ while ( false !== $thing = readdir( $handle ) ) {
   if( $thing == '.' || $thing == '..' ) continue;
   if (preg_match('/(.+?)\.txt$/', $thing, $m))  {
    $files[]=array('FILENAME'=>$m[1], 'FILENAME_URL'=>urlencode($m[1]));
   }
- } 
+ }
  closedir( $handle );
 
 

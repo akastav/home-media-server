@@ -19,7 +19,7 @@ if(!empty($command) && file_exists('./rc/commands/'.$command.'.bat')) {
 	$commandPath = DOC_ROOT.'/rc/commands/'.$_GET['command'].'.bat';
 	if(!empty($param))
 		$commandPath .= ' "'.$param.'"';
-	
+
 	if(safe_exec($commandPath)) {
 		$done = TRUE;
 	} else {
@@ -29,7 +29,7 @@ if(!empty($command) && file_exists('./rc/commands/'.$command.'.bat')) {
 	$commandPath = DOC_ROOT.'/rc/commands/'.$_GET['command'].'.sh';
 	if(!empty($param))
 		$commandPath .= ' "'.$param.'"';
-	
+
 	if(exec($commandPath.' > /dev/null &')) {
 		$done = TRUE;
 	} else {
@@ -39,7 +39,7 @@ if(!empty($command) && file_exists('./rc/commands/'.$command.'.bat')) {
 	$commandPath = SERVER_ROOT.'/apps/autoitv3/AutoIt3.exe '.DOC_ROOT.'/rc/scripts/'.$_GET['command'].'.aut';
 	if(!empty($param))
 		$commandPath .= ' "'.$param.'"';
-	
+
 	if(safe_exec('start '.$commandPath, 1)) {
 		$done = TRUE;
 	} else {

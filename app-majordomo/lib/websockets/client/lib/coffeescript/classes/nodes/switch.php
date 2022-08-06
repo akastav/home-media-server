@@ -50,7 +50,7 @@ class yy_Switch extends yy_Base
 
       $expr = $this->last_non_comment($block->expressions);
 
-      if ($expr instanceof yy_Return || 
+      if ($expr instanceof yy_Return ||
          ($expr instanceof yy_Literal && $expr->jumps() && ''.$expr->value !== 'debugger'))
       {
         continue;

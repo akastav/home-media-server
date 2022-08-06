@@ -38,7 +38,7 @@
          * The zIndex value for window arranging
          */
         var zIndex = 100;
-        
+
         /**
          * The array containing all of the defined windows
          */
@@ -50,7 +50,7 @@
          * A counter for tabs IDs
          */
         var tabCounter = 0;
-        
+
         /**
          * The jWindow object is what controls the entire widget.
          * @param params options an object containing the options values.
@@ -104,7 +104,7 @@
                 this.get = function (param) {
                         return options[param];
                 };
-                
+
                 // different states of the window
                 var state = {
                         minimised: false,
@@ -112,7 +112,7 @@
                         hidden: true,
                         focus: false
                 };
-                
+
                 // create the DOM structure for the jWindow
                 var domNodes = {
                         parentElement:   $(options.parentElement),
@@ -133,7 +133,7 @@
                         iframeCover:     $('<div class="jWindow-iframeCover"></div>').css({position: 'absolute', width: '100%', height: '100%', zIndex: 10002}),
                         output:          null
                 };
-                
+
                 domNodes.container.appendTo(domNodes.modalBackground);
                 domNodes.titleBar.appendTo(domNodes.container);
                 domNodes.tabs.appendTo(domNodes.tabsBar);
@@ -146,7 +146,7 @@
                 if (options.minimiseButton) domNodes.minimiseButton.appendTo(domNodes.titleBar);
                 if (options.maximiseButton) domNodes.maximiseButton.appendTo(domNodes.titleBar);
                 if (options.closeButton) domNodes.closeButton.appendTo(domNodes.titleBar);
-                
+
                 if (options.modal) {
                         domNodes.output = domNodes.modalBackground;
                         domNodes.container.css('zIndex',10001);
@@ -154,11 +154,11 @@
                         domNodes.output = domNodes.container.css('zIndex',++zIndex);
                 }
                 domNodes.output.css({opacity: '0'});
-                
+
                 // ----------------------------------
                 // BIND EVENTS TO DIFFERENT DOM NODES
                 // ----------------------------------
-                
+
                 // click on anything
                 $.each(domNodes,function () {
                         if (this != domNodes.parentElement) {
@@ -169,14 +169,14 @@
                                 });
                         }
                 });
-                
+
                 // click on the close button
                 domNodes.closeButton.on({
                         click: function () {
                                 $jWindow.hide(options.onClose);
                         }
                 });
-                
+
                 // click on the minimise button
                 domNodes.minimiseButton.on({
                         click: function () {
@@ -190,7 +190,7 @@
                                 }
                         }
                 });
-                
+
                 // click on the maximise button
                 domNodes.maximiseButton.on({
                         click: function (event) {
@@ -204,7 +204,7 @@
                                 }
                         }
                 });
-                
+
                 // click on the refresh button
                 domNodes.refreshButton.on({
                         click: function () {
@@ -213,7 +213,7 @@
                                 }
                         }
                 });
-                
+
                 // double click on the title bar to maximise, mousedown for dragging
                 domNodes.titleBar.on({
                         dblclick: function () {
@@ -227,7 +227,7 @@
                                 }
                         }
                 });
-                
+
                 // --------------
                 // SPECIAl EVENTS
                 // --------------
@@ -241,7 +241,7 @@
                                 domNodes.iframeCover.detach();
                         }
                 });
-                
+
                 // resize the window (using a custom event) -> adjust the windows:
                 $(window).resize(function () {
                         if(this.resizeTO) clearTimeout(this.resizeTO);
@@ -255,11 +255,11 @@
                                 }
                         }
                 });
-                
+
                 // -----------------------
                 // JWINDOW PRIVATE METHODS
                 // -----------------------
-                
+
                 /**
                  * Perform a cleanup after dragging or resizing a window or the viewport - adjust the position and size of the window to fit the viewport.
                  * @return jWindow Provides a fluent interface
@@ -268,7 +268,7 @@
                         // calculate margins
                         var marginX = domNodes.container.outerWidth() - options.width;
                         var marginY = domNodes.container.outerHeight() - options.height;
-                        
+
                         // step 1: check if the size isn't larger than the viewport:
                         if (domNodes.container.outerWidth() > $(window).width() - options.marginLeft - options.marginRight) {
                                 options.width = $(window).width() - options.marginLeft - options.marginRight - marginX;
@@ -276,7 +276,7 @@
                         if (domNodes.container.outerHeight() > $(window).height() - options.marginTop - options.marginBottom) {
                                 options.height = $(window).height() - options.marginTop - options.marginBottom - marginY;
                         }
-                        
+
                         // step 2: check if the size isn't too small:
                         if (options.width < 50) {
                                 options.width = 50;
@@ -284,7 +284,7 @@
                         if (options.height < 0) {
                                 options.height = 0;
                         }
-                        
+
                         // step 3: check if the window doesn't go outside the right/bottom edge of the viewport:
                         if (options.posx + domNodes.container.outerWidth() > $(window).width() - options.marginRight) {
                                 options.posx = $(window).width() - options.marginRight - options.width - marginX;
@@ -292,7 +292,7 @@
                         if (options.posy + domNodes.container.outerHeight() > $(window).height() - options.marginBottom) {
                                 options.posy = $(window).height() - options.marginBottom - options.height - marginY;
                         }
-                        
+
                         // step 4: make sure the window doesn't go outside the left/top edge of the viewport:
                         if (options.posx < options.marginLeft) {
                                 options.posx = options.marginLeft;
@@ -300,21 +300,21 @@
                         if (options.posy < options.marginTop) {
                                 options.posy = options.marginTop;
                         }
-                        
+
                         // adjust the window:
                         domNodes.container.animate({top: options.posy + 'px', left: options.posx + 'px', width: options.width + 'px'}, 350, 'swing');
                         domNodes.content.animate({height: options.height + 'px'}, 350, 'swing');
                 };
-                
+
                 /**
                  * Sets the draggable option on a window, and attaches or detaches a onmousedown event associated with it.
                  * @param draggable whether to make the window draggable or not draggable (optional parametre; defaults to true)
-                 * @return jWindow Provides a fluent interface 
+                 * @return jWindow Provides a fluent interface
                  */
                 var setDraggable = function (draggable) {
                         if (typeof draggable == 'undefined' || draggable == undefined) draggable = true;
                         options.draggable = !!draggable; // double negation to ensure the parametre is a boolean
-                        
+
                         var startX = 0, startY = 0;
                         var startPosX = 0, startPosY = 0;
 
@@ -326,7 +326,7 @@
                                                 startY = event.screenY;
                                                 startPosX = options.posx;
                                                 startPosY = options.posy;
-                                                
+
                                                 domNodes.content.trigger('jWindowCover');
 
                                                 $(document).on({
@@ -376,7 +376,7 @@
 
                 // make the window draggable (or not)
                 setDraggable(options.draggable);
-                
+
                 /**
                  * Sets the resizeable option on a window, and attaches or detaches the events associated with it.
                  * @param resizeable whether to make the window resizeable or static-sized (optional parametre; defaults to true)
@@ -385,7 +385,7 @@
                 var setResizeable = function (resizeable) {
                         if (typeof resizeable == 'undefined' || resizeable == undefined) resizeable = true;
                         options.resizeable = !!resizeable; // double negation to ensure the parametre is a boolean
-                        
+
                         var startX = 0, startY = 0;
                         var startW = 0, startH = 0;
 
@@ -398,9 +398,9 @@
                                                 startY = event.screenY;
                                                 startW = domNodes.container.width();
                                                 startH = domNodes.content.height();
-                                                
+
                                                 domNodes.content.trigger('jWindowCover');
-                                                
+
                                                 $(document).on({
                                                         mousemove: function (event) {
                                                                 if (options.resizeable) {
@@ -448,7 +448,7 @@
 
                         return $jWindow;
                 };
-                
+
                 // make the window resizeable (or not)
                 setResizeable(options.resizeable);
 
@@ -469,11 +469,11 @@
                         } while (!done && focusList.length > 0);
                         return $jWindow;
                 };
-                
+
                 // ----------------------
                 // JWINDOW PUBLIC METHODS
                 // ----------------------
-                
+
                 /**
                  * Add the window widget to the DOM tree and fade it in
                  * @param params can be one of several things:<br>
@@ -481,7 +481,7 @@
                  *        a string - denotes the animation's easing<br>
                  *        a function - a complete callback to the animation<br>
                  *        an object - duration, easing and complete properties will be used
-                 * @return jWindow Provides a fluent interface 
+                 * @return jWindow Provides a fluent interface
                  */
                 $jWindow.show = function (params) {
                         if (!state.hidden) return $jWindow;
@@ -506,7 +506,7 @@
 
                         return $jWindow;
                 };
-                
+
                 /**
                  * Fade the window widget out and detach it from the DOM tree
                  * @param params can be one of several things:<br>
@@ -514,7 +514,7 @@
                  *        a string - denotes the animation's easing<br>
                  *        a function - a complete callback to the animation<br>
                  *        an object - duration, easing and complete properties will be used
-                 * @return jWindow Provides a fluent interface 
+                 * @return jWindow Provides a fluent interface
                  */
                 $jWindow.hide = function (params) {
                         if (state.hidden) return $jWindow;
@@ -550,7 +550,7 @@
                 $jWindow.isHidden = function () {
                         return state.hidden;
                 };
-                
+
                 /**
                  * Minimise the window
                  * @param params can be one of several things:<br>
@@ -558,7 +558,7 @@
                  *        a string - denotes the animation's easing<br>
                  *        a function - a complete callback to the animation<br>
                  *        an object - duration, easing and complete properties will be used
-                 * @return jWindow Provides a fluent interface 
+                 * @return jWindow Provides a fluent interface
                  */
                 $jWindow.minimise = function (params) {
                         if (state.minimised) return $jWindow;
@@ -579,12 +579,12 @@
                         domNodes.wrapper.slideUp(_options.duration, _options.easing, _options.complete);
                         domNodes.container.addClass('minimised');
                         state.minimised = true;
-                        
+
                         setResizeable(options.resizeable);
 
                         return $jWindow;
                 };
-                
+
                 /**
                  * Maximise the window
                  * @param params can be one of several things:<br>
@@ -592,7 +592,7 @@
                  *        a string - denotes the animation's easing<br>
                  *        a function - a complete callback to the animation<br>
                  *        an object - duration, easing and complete properties will be used
-                 * @return jWindow Provides a fluent interface 
+                 * @return jWindow Provides a fluent interface
                  */
                 $jWindow.maximise = function (params) {
                         if (state.maximised) return $jWindow;
@@ -617,13 +617,13 @@
                         domNodes.content.animate({height: h + 'px'}, _options.duration, _options.easing);
                         domNodes.container.addClass('maximised');
                         state.maximised = true;
-                        
+
                         setResizeable(options.resizeable);
                         setDraggable(options.draggable);
 
                         return $jWindow;
                 };
-                
+
                 /**
                  * Restore the window from the minimised or maximised state
                  * @param params can be one of several things:<br>
@@ -631,7 +631,7 @@
                  *        a string - denotes the animation's easing<br>
                  *        a function - a complete callback to the animation<br>
                  *        an object - duration, easing, complete and type ('min', 'max' or 'both') properties will be used
-                 * @return jWindow Provides a fluent interface 
+                 * @return jWindow Provides a fluent interface
                  */
                 $jWindow.restore = function (params) {
                         if (!state.minimised && !state.maximised) return $jWindow;
@@ -661,25 +661,25 @@
                                 domNodes.container.removeClass('maximised');
                                 state.maximised = false;
                         }
-                        
+
                         setResizeable(options.resizeable);
                         setDraggable(options.draggable);
 
                         return $jWindow;
                 };
-                
+
                 /**
                  * Set focus on the window. Remove focus from all other windows.
                  * @param focus whether to add or remove focus from the window
-                 * @return jWindow Provides a fluent interface 
+                 * @return jWindow Provides a fluent interface
                  */
                 $jWindow.focus = function (focus) {
                         if (typeof focus == 'undefined' || focus == undefined) focus = true;
                         focus = !!focus; //make sure focus is a boolean
-                        
+
                         // if the window's focus is already set correctly, do nothing
                         if (state.focus == focus) return $jWindow;
-                        
+
                         if (focus) {
                                 // blur all windows
                                 for (var i = 0; i < jWindows.length; ++i) {
@@ -702,7 +702,7 @@
                                 if (!options.modal) {
                                         domNodes.container.removeClass('focus').addClass('blur');
                                         domNodes.content.trigger('jWindowCover');
-                                        
+
                                         state.focus = false;
                                 }
                         }
@@ -714,9 +714,9 @@
                  * @return boolean
                  */
                 $jWindow.hasFocus = function () {
-                        return state.focus;     
+                        return state.focus;
                 };
-                
+
                 /**
                  * Update the content of a window.
                  * @param param In case of an iframe window, this parametre is optional. If specified, it will be treated as an URL that will be loaded in the iframe. If left empty, the iframe's content will just be loaded (if the URL option has been passed to the jWindow's constructor) or reloaded (if the iframe has been loaded previously).<br>
@@ -760,7 +760,7 @@
                         }
                         return $jWindow;
                 };
-                
+
                 /**
                  * Refresh the content of the iframe
                  * @return jWindow Provides a fluent interface
@@ -769,7 +769,7 @@
                         if (options.type == 'iframe') domNodes.content.find('iframe').get(0).contentWindow.location.reload();
                         return $jWindow;
                 };
-                
+
                 /**
                  * A universal setter for jWindow options
                  * @param param Either the name of the value to change or an object with name-value pairs.
@@ -785,7 +785,7 @@
                         if (typeof param != 'object') {
                                 param = {};
                         }
-                        
+
                         $.each(param, function (prop, val) {
                                 switch (prop) {
                                         case 'title':
@@ -858,7 +858,7 @@
                  * Array of tabs
                  */
                 var _tabs = [];
-                
+
                 // ----------------------------
                 // JWINDOW TABS PRIVATE METHODS
                 // ----------------------------
@@ -875,7 +875,7 @@
                         $tab.title = params.title;
                         var isActive = false;
                         var id = tabCounter++;
-                        
+
                         $tab.name = (typeof params.name != 'undefined') ? params.name : null;
 
                         /**
@@ -885,7 +885,7 @@
                         $tab.getId = function () {
                                 return id;
                         };
-                        
+
                         /**
                          * Get or set the active status. Without a parametre, the function acts as a getter. Otherwise, it is a setter.
                          * @param active whether the tab is to be activated or deactivated.
@@ -895,21 +895,21 @@
                         $tab.active = function(active, update) {
                                 if (typeof active != 'undefined') {
                                         active = !!active;
-                                        
+
                                         update = (typeof update != 'undefined') ? !!update : false;
-                                        
+
                                         // remove the window content if a currently active tab is being deactivated
                                         if (isActive && !active && update) {
                                                 $jWindow.update(null);
                                         }
-                                        
+
                                         // update the window contents if an inactive tab is being activated
                                         if (!isActive && active && update) {
                                                 $jWindow.update($tab.href);
                                         }
-                                        
+
                                         isActive = active;
-                                        
+
                                         // add/remove classes as needed
                                         if (active) $tab.domNode.addClass('active');
                                         else $tab.domNode.removeClass('active');
@@ -942,7 +942,7 @@
                                 }
                         });
                 };
-                
+
                 /**
                  * Check whether the tab name is already taken.
                  * @param params The parametres, as passed to the appendTab/prependTab methods
@@ -960,7 +960,7 @@
                         }
                         return ret;
                 }
-                
+
                 // ---------------------------
                 // JWINDOW TABS PUBLIC METHODS
                 // ---------------------------
@@ -1009,7 +1009,7 @@
                         }
                         return $jWindow;
                 };
-                
+
                 /**
                  * Activate a tab and load the contents its href points to
                  * @param name The name of the tab to open
@@ -1024,7 +1024,7 @@
                         });
                         return $jWindow;
                 };
-                
+
                 /**
                  * Deactivate and remove a tab
                  * @param name The name of the tab to close
@@ -1040,7 +1040,7 @@
                         return $jWindow;
                 };
         }
-        
+
         // Extend the jQuery object with the jWindow function
         $.extend({
                 jWindow: function (param) {

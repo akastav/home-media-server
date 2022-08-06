@@ -16,7 +16,7 @@ $session=new session("prj");
 
 include_once("./load_settings.php");
 include_once(DIR_MODULES . "control_modules/control_modules.class.php");
- 
+
 $ctl = new control_modules();
 
 $blocks=SQLSelect("SELECT * FROM myblocks");
@@ -49,7 +49,7 @@ Blockly.PHP['majordomo_myblock_<?php echo $blocks[$i]['ID'];?>'] = function(bloc
 
 };
 <?php
- 
+
 }
 
 $session->save();

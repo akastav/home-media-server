@@ -26,7 +26,7 @@ if (defined('MASTER_URL') && MASTER_URL != '')
    } else {
       $url = 'http://' . MASTER_HOST . $_SERVER['REQUEST_URI'];
    }
-   
+
    $ch = curl_init();
    curl_setopt($ch, CURLOPT_URL, $url);
    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
@@ -35,10 +35,10 @@ if (defined('MASTER_URL') && MASTER_URL != '')
    curl_setopt($ch, CURLOPT_TIMEOUT_MS, 5000);
    curl_setopt($ch, CURLOPT_HEADER, 0);
    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-   
+
    $data = curl_exec($ch);
    curl_close($ch);
-   
+
    exit;
 }
 
@@ -67,7 +67,7 @@ if ($argv[1] != '') {
    }
 
    $total = count($argv);
-   
+
    for ($i = 1; $i < $total; $i++) {
       if (preg_match('/^(.+?)[:=](.*?)$/is', $argv[$i], $matches)) {
          $matchesParsed = trim(win2utf($matches[2]));
@@ -109,25 +109,25 @@ if ($module != '') {
 
 if ($object != '') {
    $obj = getObject($object);
-   
+
    if ($obj) {
       //DebMes("object [".$object."] FOUND");
       if ($op == 'get') {
          $value = $obj->getProperty($p);
          echo $value;
       }
-      
+
       if ($op == 'set') {
          $obj->setProperty($p, $v);
          echo "OK";
       }
-      
+
       if ($op == 'm') {
          $params = array();
          foreach ($_GET as $k => $v) {
             $params[$k] = ${$k};
          }
-         
+
          //DebMes("Calling method: ".$m.' '.serialize($params));
          //print_r($params);
          $obj->callMethod($m, $params);
@@ -138,7 +138,7 @@ if ($object != '') {
    }
 } elseif ($job != '') {
    $job = SQLSelectOne("SELECT * FROM jobs WHERE ID='" . (int)$job . "'");
-   
+
    if ($job['ID']) {
       define('CALL_SOURCE','Job: '.$job['TITLE']);
       try {

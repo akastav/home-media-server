@@ -1,6 +1,6 @@
 <?php
 /**
-* Date Selector 
+* Date Selector
 *
 * Use this module to place date picker on form
 *
@@ -9,7 +9,7 @@
 * @copyright http://www.activeunit.com/ (c)
 * @version 0.1 (wizard)
 */
-// 
+//
 class dateselect extends module {
 /**
 * dateselect

@@ -71,7 +71,7 @@ function & last( & $array, $back = 0)
   else
   {
     // Make sure $NULL is really NULL.
-    $NULL = NULL; 
+    $NULL = NULL;
 
     return $NULL;
   }
@@ -152,7 +152,7 @@ function t_canonical($token)
     'ACCESSOR'              => '.',
 
     // These are separate from INDEX_START and INDEX_END.
-    'ARRAY_START'           => '[', 
+    'ARRAY_START'           => '[',
     'ARRAY_END'             => ']',
 
     'AT_SIGN'               => '@',

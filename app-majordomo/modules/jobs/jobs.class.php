@@ -1,6 +1,6 @@
 <?php
 /**
-* jobs 
+* jobs
 *
 * jobs
 *
@@ -182,7 +182,7 @@ function usual(&$out) {
 * @access public
 */
  function edit_jobs(&$out, $id) {
-  
+
  }
 /**
 * jobs delete record

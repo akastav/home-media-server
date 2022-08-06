@@ -61,7 +61,7 @@ class control_modules extends module
             global $mode2;
             $rec = SQLSelectOne("SELECT * FROM project_modules WHERE NAME='" . $name . "'");
             $rec['NAME'] = $name;
-			
+
             if ($mode2 == "update") {
                 global $title;
                 global $category;
@@ -127,37 +127,37 @@ class control_modules extends module
                 }
                 $this->redirect("?");
             }
-			
+
 			if(preg_match('|<#(.*?)#>|si', $rec['TITLE'], $arr)) {
 				$rec['TITLE'] = constant($arr[1]);
 			} else {
 				$rec['TITLE'] = $rec['TITLE'];
 			}
-			
+
             outHash($rec, $out);
-			
+
 			//Получим конфиг модуля
-			
+
 			include_once(DIR_MODULES . $name . '/' . $name . '.class.php');
 			$module = $name;
 			$module = new ${module}();
-			
+
 			$genConfig = [];
 			$iter = 0;
-			
+
 			foreach($module->getConfig() as $key => $value) {
 				$genConfig[$iter]['KEY'] = $key;
 				$genConfig[$iter]['VALUE'] = $value;
 				$iter++;
 			}
-			
+
 			$out['MODULE_CONFIG'] = $genConfig;
-			
+
 			//Выгружаем инфо из коннекта
 			$marketInfo = file_get_contents("https://connect.smartliving.ru/market/?op=list&search=".urlencode($rec['TITLE']));
 			$marketInfo = json_decode($marketInfo, TRUE);
 			$marketInfo = $marketInfo["PLUGINS"][0];
-			
+
 			if(is_array($marketInfo)) {
 				$out['MARKET_ID'] = $marketInfo['ID'];
 				$out['MARKET_REPOSITORY_URL'] = $marketInfo['REPOSITORY_URL'];

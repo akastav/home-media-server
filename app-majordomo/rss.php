@@ -39,7 +39,7 @@ $total = count($res);
 if ($total)
 {
    $result = "<?xml version=\"1.0\" encoding=\"windows-1251\"?>";
-   
+
    $result .= "<rss version=\"2.0\"";
    $result .= " xmlns:dc=\"http://purl.org/dc/elements/1.1/\"";
    $result .= " xmlns:annotate=\"http://purl.org/rss/1.0/modules/annotate/\"";
@@ -59,20 +59,19 @@ if ($total)
       $rsult  .= "     <title>" . substr($res[$i]['MESSAGE'], 0, 500) . "</title>";
       $result .= "     <pubDate>" . date('r', $res[$i]['TM']) . "</pubDate>";
       $result .= "     <description>" . str_replace("\r", '', $res[$i]['MESSAGE']) . "</description>";
-      
+
       if ($res[$i]['NAME'])
          $result .= "  <dc:creator>" . $res[$i]['NAME'] . "</dc:creator>";
-      
+
       $result .= "     <link>" . $res[$i]['LINK'] . "</link>";
       $result .= "     <guid>" . $res[$i]['LINK'] . "</guid>\n";
       $result .= " </item>";
    }
-   
+
    $result .= "</channel>";
    $result .= "</rss>";
 
    Header("Content-type:text/xml; charset=utf-8");
-   
+
    echo $result;
 }
-

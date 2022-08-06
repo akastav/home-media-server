@@ -20,7 +20,7 @@ THREE.BinaryLoader.prototype = {
 	constructor: THREE.BinaryLoader,
 
 	// Deprecated
-	
+
 	get statusDomElement () {
 
 		if ( this._statusDomElement === undefined ) {

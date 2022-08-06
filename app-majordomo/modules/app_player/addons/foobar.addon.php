@@ -5,25 +5,25 @@
 */
 
 class foobar extends app_player_addon {
-	
+
 	// Private properties
 	private $curl;
 	private $address;
-	
+
 	// Constructor
 	function __construct($terminal) {
 		$this->title = 'Foobar2000';
 		$this->description = 'Мощный медиаплеер, созданный одним из разработчиков WinAmp.';
-		
+
 		$this->terminal = $terminal;
 		$this->reset_properties();
-		
+
 		// Curl
 		$this->curl = curl_init();
 		$this->address = 'http://'.$this->terminal['HOST'].':'.(empty($this->terminal['PLAYER_PORT'])?8888:$this->terminal['PLAYER_PORT']);
 		curl_setopt($this->curl, CURLOPT_RETURNTRANSFER, 1);
 	}
-	
+
 	// Destructor
 	function destroy() {
 		curl_close($this->curl);
@@ -51,7 +51,7 @@ class foobar extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Pause
 	function pause() {
 		$this->reset_properties();
@@ -79,7 +79,7 @@ class foobar extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Next
 	function next() {
 		$this->reset_properties();
@@ -93,7 +93,7 @@ class foobar extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Previous
 	function previous() {
 		$this->reset_properties();
@@ -121,7 +121,7 @@ class foobar extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 }
 
 ?>

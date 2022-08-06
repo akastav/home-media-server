@@ -14,7 +14,7 @@ class yy_Comment extends yy_Base
   function compile_node($options, $level = NULL)
   {
     $code = '/*'.multident($this->comment, $this->tab).'*/';
-    
+
     if ($level === LEVEL_TOP || $options['level'] === LEVEL_TOP)
     {
       $code = $options['indent'].$code;

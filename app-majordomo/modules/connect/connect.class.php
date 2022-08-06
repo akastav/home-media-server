@@ -1019,16 +1019,16 @@ class connect extends module
                 $this->requestReverseFull($msg);
             }
         }
-		
+
 		if ($this->ajax && $_GET['op'] == 'status') {
 			$status = gg('ThisComputer.cycle_connectRun');
-			
+
             if ($status == '') {
 				echo json_encode(array('status' => 0));
             } else {
 				echo json_encode(array('status' => 1));
 			}
-            
+
 			exit;
         }
     }

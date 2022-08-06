@@ -91,7 +91,7 @@ class yy_Base
   {
     $src = $tmp = $this->compile($options, LEVEL_LIST);
 
-    if ( ! (abs($src) < INF || preg_match(IDENTIFIER, $src) && 
+    if ( ! (abs($src) < INF || preg_match(IDENTIFIER, $src) &&
       $options['scope']->check($src, TRUE)))
     {
       $src = ($tmp = $options['scope']->free_variable($name)).' = '.$src;

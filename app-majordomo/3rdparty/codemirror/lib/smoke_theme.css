@@ -20,8 +20,8 @@
 .cm-s-smoke_theme span.cm-comment.cm-tag { color: #39bae6; }
 .cm-s-smoke_theme span.cm-comment.cm-type { color: #5998a6; }
 
-.cm-s-smoke_theme span.cm-property, .cm-s-smoke_theme span.cm-attribute { color: #ffb454; }  
-.cm-s-smoke_theme span.cm-keyword { color: #ff0000; } 
+.cm-s-smoke_theme span.cm-property, .cm-s-smoke_theme span.cm-attribute { color: #ffb454; }
+.cm-s-smoke_theme span.cm-keyword { color: #ff0000; }
 .cm-s-smoke_theme span.cm-builtin { color: #14712d; }
 .cm-s-smoke_theme span.cm-string { color: #d64747; }
 
@@ -34,7 +34,7 @@
 .cm-s-smoke_theme span.cm-tag { color: rgba(57, 186, 230, 80); }
 .cm-s-smoke_theme span.cm-header { color: #c2d94c; }
 .cm-s-smoke_theme span.cm-link { color: #39bae6; }
-.cm-s-smoke_theme div.cm-error { color: #ff3333; } 
+.cm-s-smoke_theme div.cm-error { color: #ff3333; }
 
 .cm-s-smoke_theme .CodeMirror-activeline-background { background: #01060e; }
 .cm-s-smoke_theme .CodeMirror-matchingbracket {

@@ -246,7 +246,7 @@ class scripts extends module
                 $this->redirect("?data_source=" . $this->data_source);
             }
         }
-		
+
     }
 
 
@@ -526,8 +526,8 @@ class scripts extends module
  scripts: RUN_PERIODICALLY int(3) unsigned NOT NULL DEFAULT 0
  scripts: RUN_DAYS char(30) NOT NULL DEFAULT ''
  scripts: RUN_TIME char(30) NOT NULL DEFAULT ''
- scripts: AUTO_LINK int(3) unsigned NOT NULL DEFAULT 0 
- scripts: AUTO_LINK_AVAILABLE int(3) unsigned NOT NULL DEFAULT 0 
+ scripts: AUTO_LINK int(3) unsigned NOT NULL DEFAULT 0
+ scripts: AUTO_LINK_AVAILABLE int(3) unsigned NOT NULL DEFAULT 0
  scripts: LINKED_OBJECT varchar(255) NOT NULL DEFAULT ''
  scripts: LINKED_PROPERTY varchar(255) NOT NULL DEFAULT ''
 
@@ -541,7 +541,7 @@ class scripts extends module
  safe_execs: EXCLUSIVE int(3) NOT NULL DEFAULT 0
  safe_execs: PRIORITY int(10) NOT NULL DEFAULT 0
  safe_execs: ADDED datetime
- 
+
  plugins_noty: ID int(15) unsigned NOT NULL auto_increment
  plugins_noty: PLUGINS_ID int(15) NOT NULL DEFAULT 0
  plugins_noty: MESSAGE varchar(80) NOT NULL DEFAULT ''

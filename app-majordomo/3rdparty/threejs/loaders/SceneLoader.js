@@ -109,7 +109,7 @@ THREE.SceneLoader.prototype = {
 
                 };
 
- 
+
 
                 if ( data.transform ) {
 
@@ -554,7 +554,7 @@ THREE.SceneLoader.prototype = {
 
                                 }
 
-                                
+
 
                         }
 
@@ -1251,7 +1251,7 @@ THREE.SceneLoader.prototype = {
                 // defaults
 
                 console.log(result);
-                
+
                 //alert(data.defaults);
 
                 if ( result.cameras && data.defaults && data.defaults.camera) {

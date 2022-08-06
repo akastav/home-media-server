@@ -5,9 +5,9 @@ function twoDigits(num) {
 
 function timeConvert(unixtime) {
 	unixtime = unixtime*1000;
-	
+
 	date = new Date(unixtime);
-	
+
 	returnArr = [
 		twoDigits(date.getDate()),
 		twoDigits((date.getMonth()+1)),
@@ -16,8 +16,8 @@ function timeConvert(unixtime) {
 		twoDigits(date.getMinutes()),
 		twoDigits(date.getSeconds()),
 	];
-	
-	return returnArr;	
+
+	return returnArr;
 }
 
 function secondsToHms(d, lang_h = '', lang_m = '', lang_s = '') {
@@ -29,10 +29,10 @@ function secondsToHms(d, lang_h = '', lang_m = '', lang_s = '') {
 	var hDisplay = h > 0 ? h + " " + lang_h + " " : "";
 	var mDisplay = m > 0 ? m + " " + lang_m + " " : "";
 	var sDisplay = !h ? (s > 0 ? s + " " + lang_s + " " : "") : "";
-	
+
 	//Собираем строку
 	genString = '';
-	
+
 	if(lang_h) {
 		genString = genString + hDisplay;
 	}
@@ -42,10 +42,10 @@ function secondsToHms(d, lang_h = '', lang_m = '', lang_s = '') {
 	if(lang_s) {
 		genString = genString + sDisplay;
 	}
-	
-	return genString; 
+
+	return genString;
 }
-	
+
 function simple_hash(s) {
  return s.split("").reduce(function(a,b){a=((a<<5)-a)+b.charCodeAt(0);return a&a},0);
 }
@@ -286,7 +286,7 @@ function startFlashing(block_id) {
   url+='objects/?method='+encodeURIComponent(method_name)+'&'+optional_params;
   $.ajax({
    url: url
-  }).done(function(data) { 
+  }).done(function(data) {
     //alert(data);
    });
  }
@@ -297,7 +297,7 @@ function startFlashing(block_id) {
   url+='objects/?script='+encodeURIComponent(script_name)+'&'+optional_params;
   $.ajax({
    url: url
-  }).done(function(data) { 
+  }).done(function(data) {
     //alert(data);
    });
  }
@@ -307,7 +307,7 @@ function startFlashing(block_id) {
   url+='?md=application&action=ajaxgetglobal&var='+encodeURIComponent(varname);
   $.ajax({
    url: url
-  }).done(function(data) { 
+  }).done(function(data) {
    var obj=jQuery.parseJSON(data);
     if (obj.DATA) {
       $('#'+id).html(obj.DATA);
@@ -325,7 +325,7 @@ function startFlashing(block_id) {
   url+='?md=application&action=ajaxsetglobal&var='+encodeURIComponent(varname)+'&value='+encodeURIComponent(value);
   $.ajax({
    url: url
-  }).done(function(data) { 
+  }).done(function(data) {
    var obj=jQuery.parseJSON(data);
     if (obj.DATA) {
       //

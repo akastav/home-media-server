@@ -106,10 +106,10 @@ class gauge extends plan_component {
 
 
         $this->processProperties($properties);
-        
+
         return $properties;
     }
-    
+
     function getSVG($attributes)
     {
 
@@ -140,7 +140,7 @@ EOD;
         }
         return $svg;
     }
-    
+
     function getJavascript($attributes)
     {
         $data=$this->getData();
@@ -171,14 +171,14 @@ EOD;
         }
 
         $code = <<<EOD
-        
+
     function componentUpdated{$this->component_id}(property_name,property_value) {
-    
+
         if (property_name.toLowerCase()=='$prop_name') {
           gauge{$this->component_id}.redraw(property_value);
         }
     }
-    
+
 function Gauge{$this->component_id}(placeholderName, configuration)
 {
 	this.placeholderName = placeholderName;
@@ -215,7 +215,7 @@ function Gauge{$this->component_id}(placeholderName, configuration)
         .attr("class", "gauge")
         .attr("width", this.config.diameter)
         .attr("height", this.config.diameter)
-        
+
         this.gauge.append("svg:circle")
         .attr("cx", this.config.cx)
         .attr("cy", this.config.cy)
@@ -490,9 +490,9 @@ function createGauge{$this->component_id}(name, label, min, max,majorTicks,minor
     gauge{$this->component_id}.render();
     gauge{$this->component_id}.redraw($current_value);
 }
-    
+
     createGauge{$this->component_id}("gauge{$this->component_id}", "{$data['title']['VALUE']}",{$data['value_min']['VALUE']},{$data['value_max']['VALUE']},5,10,"{$data['ring_color']['VALUE']}","{$data['face_color']['VALUE']}",{$width},{$orange_range},{$red_range},{$green_range},"{$data['units']['VALUE']}");
-    
+
 EOD;
         return $code;
     }

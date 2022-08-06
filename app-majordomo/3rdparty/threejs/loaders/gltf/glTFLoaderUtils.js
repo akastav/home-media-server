@@ -16,7 +16,7 @@ THREE.GLTFLoaderUtils = Object.create(Object, {
     _streams : { value:{}, writable: true },
 
     _streamsStatus: { value: {}, writable: true },
-    
+
     _resources: { value: {}, writable: true },
 
     _resourcesStatus: { value: {}, writable: true },
@@ -106,16 +106,16 @@ THREE.GLTFLoaderUtils = Object.create(Object, {
 	{
 		this._resourcesStatus[request.id] = 1;
 	}
-            
+
 	var streamStatus = this._streamsStatus[request.path];
 	if (streamStatus && streamStatus.status === "loading" )
             {
 		streamStatus.requests.push(request);
 		return;
 	}
-            
+
 	this._streamsStatus[request.path] = { status : "loading", requests : [ request ] };
-    		
+
 	var self = this;
 	var processResourceDelegate = {};
 
@@ -130,7 +130,7 @@ THREE.GLTFLoaderUtils = Object.create(Object, {
 			-- self._resourcesStatus[req_.id];
 
 		}, this);
-            	
+
 		delete self._streamsStatus[path];
 
 	};
@@ -184,9 +184,9 @@ THREE.GLTFLoaderUtils = Object.create(Object, {
                                     "ctx" : ctx }, null);
         }
     },
-    
+
     getBuffer: {
-    	
+
             value: function(wrappedBufferView, delegate, ctx) {
 
 	var savedBuffer = this._getResource(wrappedBufferView.id);
@@ -201,7 +201,7 @@ THREE.GLTFLoaderUtils = Object.create(Object, {
     },
 
     getFile: {
-    	
+
         value: function(request, delegate, ctx) {
 
 	request.delegate = delegate;
@@ -213,8 +213,8 @@ THREE.GLTFLoaderUtils = Object.create(Object, {
                 "type" : "text",
                 "delegate" : delegate,
                 "ctx" : ctx }, null);
-    	
+
 	return null;
 }
-	},    
+	},
 });

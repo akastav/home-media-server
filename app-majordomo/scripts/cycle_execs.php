@@ -38,7 +38,7 @@ while (1) {
             exec($command);
         } catch (Exception $e) {
             DebMes('Command - '. $command . '. Error: exception ' . get_class($e) . ', ' . $e->getMessage() ,'execs');
-        }    
+        }
         if ($exclusive['ON_COMPLETE']) {
             //DebMes("On complete code: ".$exclusive['ON_COMPLETE'], 'execs');
             try {

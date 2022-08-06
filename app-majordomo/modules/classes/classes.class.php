@@ -1,6 +1,6 @@
 <?php
 /**
-* Classes 
+* Classes
 *
 * Classes
 *
@@ -125,7 +125,7 @@ function admin(&$out) {
  if ($this->data_source=='classes' || $this->data_source=='') {
   if ($this->view_mode=='' || $this->view_mode=='search_classes') {
    $this->search_classes($out);
-  } 
+  }
   if ($this->view_mode=='export_classes') {
    $this->export_classes($out, $this->id);
   }
@@ -471,7 +471,7 @@ function admin(&$out) {
   } else {
    $res=array();
   }
-  
+
 
 
   if (!is_array($def)) {
@@ -544,7 +544,7 @@ function usual(&$out) {
   $objects=SQLSelect("SELECT * FROM objects WHERE CLASS_ID='".$rec['ID']."'");
   $total=count($objects);
   for($i=0;$i<$total;$i++) {
-   $o->delete_objects($objects[$i]['ID']);   
+   $o->delete_objects($objects[$i]['ID']);
   }
   SQLExec("DELETE FROM classes WHERE ID='".$rec['ID']."'");
   $this->updateTree_classes();

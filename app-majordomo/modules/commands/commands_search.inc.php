@@ -63,7 +63,7 @@
    if ($paret_rec['SUB_PRELOAD']) {
     $parent_rec['ID']=$parent_rec['PARENT_ID'];
    }
- 
+
    if (!$parent_rec['AUTO_UPDATE'] && (!defined('DISABLE_WEBSOCKETS') || DISABLE_WEBSOCKETS==0)) {
      $parent_rec['AUTO_UPDATE']=10;
     }
@@ -118,4 +118,3 @@
     $out['RESULT']=$res;
     //$out['RESULT_HTML']=$this->buildHTML($out['RESULT']);
    }
-

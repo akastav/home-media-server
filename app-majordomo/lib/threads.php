@@ -8,7 +8,7 @@ class Threads
 {
    public $phpPath = 'php';
    private $lastId = 0;
-   
+
    private $descriptorSpec = array(
        0 => array('pipe', 'r'),
        1 => array('pipe', 'w')
@@ -94,7 +94,7 @@ class Threads
       stream_set_blocking($pipes[1], 0);
       stream_set_timeout($pipes[0], $this->timeout);
       stream_set_timeout($pipes[1], $this->timeout);
-      
+
       $this->streams[$this->lastId] = $pipes[1];
       $this->pipes[$this->lastId]   = $pipes;
 
@@ -121,19 +121,19 @@ class Threads
 
       $params  = addcslashes(serialize($params), '"');
       $command = 'DISPLAY=:' . $display . ' ' . $this->phpPath . ' ' . $filename . ' --params "' . $params . '"';
-      
+
       ++$this->lastId;
 
       $this->commandLines[$this->lastId] = $command;
 
       echo date('H:i:s') . " Starting threadx: " . $command . "\n";
       $this->handles[$this->lastId]      = proc_open($command, $this->descriptorSpec, $pipes);
-      
+
       stream_set_timeout($pipes[0], $this->timeout);
       stream_set_timeout($pipes[1], $this->timeout);
       stream_set_blocking($pipes[0], 0);
       stream_set_blocking($pipes[1], 0);
-      
+
       $this->streams[$this->lastId] = $pipes[1];
       $this->pipes[$this->lastId]   = $pipes;
 
@@ -156,7 +156,7 @@ class Threads
    public function iteration()
    {
       $result = '';
-      
+
       if (!count($this->streams))
       {
          return false;
@@ -191,16 +191,16 @@ class Threads
 
          stream_set_blocking($stream, 1);
          stream_set_timeout($stream, $this->timeout);
-         
+
          $stream_status = stream_get_meta_data($stream);
          $proc_status   = proc_get_status($this->handles[$id]);
 
          if ($output_show[$this->commandLines[$id]] != $now)
          {
             $output_show[$this->commandLines[$id]] = $now;
-            
+
             $name = $this->commandLines[$id];
-            
+
             if (preg_match('/cycle_.+?\.php/', $name, $m))
             {
                $name = $m[0];
@@ -217,9 +217,9 @@ class Threads
             //feof($stream)
             echo date('H:i:s') . " Closing thread: " . $this->commandLines[$id] . "\n";
             DebMes("Closing thread: " . $this->commandLines[$id],'threads');
-            
+
             $result .= "THREAD CLOSED: [" . $this->commandLines[$id] . "]\n";
-            
+
             fclose($this->pipes[$id][0]);
             fclose($this->pipes[$id][1]);
 
@@ -291,4 +291,3 @@ class Threads
 class ThreadsException extends Exception
 {
 }
-

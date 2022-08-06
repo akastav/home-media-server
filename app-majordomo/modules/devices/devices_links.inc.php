@@ -102,4 +102,3 @@ $avail_links=$this->getTypeLinks($rec['TYPE']);
 if (isset($avail_links[0])) {
     $out['AVAIL_LINKS']=$avail_links;
 }
-

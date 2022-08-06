@@ -122,7 +122,7 @@ class linkedobject extends module
         if ($this->width) {
 			$ifPX = substr($this->width, -1);
 			if($ifPX != 'x' && $ifPX != '%') $this->width = $this->width.'px';
-			
+
             $out['WIDTH'] = $this->width;
         } else {
             $out['WIDTH'] = '90%';
@@ -240,17 +240,17 @@ class linkedobject extends module
 
 			foreach($objects as $key => $object) {
 				if($object['CLASS_ID'] != $objects[$key-1]['CLASS_ID']) {
-					$objects[$key]['NEW_GROUP_START'] = 1; 
+					$objects[$key]['NEW_GROUP_START'] = 1;
 				} else {
-					$objects[$key]['NEW_GROUP_START'] = 0; 
+					$objects[$key]['NEW_GROUP_START'] = 0;
 				}
 				if($object['CLASS_ID'] != $objects[$key+1]['CLASS_ID']) {
-					$objects[$key]['NEW_GROUP_END'] = 1; 
+					$objects[$key]['NEW_GROUP_END'] = 1;
 				} else {
-					$objects[$key]['NEW_GROUP_END'] = 0; 
+					$objects[$key]['NEW_GROUP_END'] = 0;
 				}
 			}
-			
+
             $objects[]=array('ID'=>'scripts','TITLE'=>'AllScripts','DESCRIPTION'=>LANG_SCRIPTS);
 			//echo '<pre>';
 			//var_dump($objects);

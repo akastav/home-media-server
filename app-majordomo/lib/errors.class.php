@@ -59,7 +59,7 @@ class custom_error
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 <!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>          
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
           </head>
           <body>
           <div class="container">
@@ -69,7 +69,7 @@ class custom_error
           <h3>Backtrace</h3>
           <div><pre>{$e->getTraceAsString()}</pre></div>
           <div>
-           <a href="#" class="btn btn-default" onclick="window.history.go(-1);return false;">&lt;&lt;&lt; Back</a>          
+           <a href="#" class="btn btn-default" onclick="window.history.go(-1);return false;">&lt;&lt;&lt; Back</a>
            <a href="/diagnostic.php" class="btn btn-success">Submit Diagnostic info</a>
            <a href="#" class="btn btn-default" onclick="window.location.reload();return false;">Reload page</a>
            <a href="/admin.php?md=panel&action=saverestore" class="btn btn-default">Go to Backup section</a>

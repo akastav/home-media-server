@@ -10,7 +10,7 @@
 function laurent_command($host, $command, $password = 'Laurent')
 {
    $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
-   
+
    if ($socket === false)
    {
       echo "socket_create() failed: reason: " . socket_strerror(socket_last_error()) . "\n";
@@ -48,7 +48,7 @@ function laurent_command($host, $command, $password = 'Laurent')
    while ($out = socket_read($socket, 2048, PHP_NORMAL_READ))
    {
       $res .= $out;
-      
+
       if (is_integer(strpos($out, "\n")))
       {
          break;
@@ -69,7 +69,7 @@ function laurent_command($host, $command, $password = 'Laurent')
    }
 
    socket_close($socket);
-   
+
    return trim($res);
 }
 
@@ -96,7 +96,7 @@ function laurent_getStat($host, $password = 'Laurent')
       $errorMessage  = "socket_connect( $socket , $host , 2424) failed.\nReason: ($result) ";
       $errorMessage .= socket_strerror(socket_last_error($socket)) . "\n";
       echo $errorMessage;
-      
+
       return 0;
    }
 
@@ -127,7 +127,7 @@ function laurent_getStat($host, $password = 'Laurent')
    }
 
    $command = '$KE,DAT,ON';
-   
+
    $in = $command . "\r\n";
 
    socket_write($socket, $in, strlen($in));
@@ -152,7 +152,7 @@ function laurent_getStat($host, $password = 'Laurent')
    }
 
    $command = '$KE,DAT,OFF';
-   
+
    $in = $command . "\r\n";
 
    socket_write($socket, $in, strlen($in));
@@ -161,6 +161,6 @@ function laurent_getStat($host, $password = 'Laurent')
    socket_write($socket, $in, strlen($in));
 
    socket_close($socket);
-   
+
    return trim($res);
 }

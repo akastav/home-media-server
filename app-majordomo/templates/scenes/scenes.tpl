@@ -115,7 +115,7 @@ $.fn.customContextMenu = function(callBack){
              e.preventDefault();
              callBack(e);
         });
-    }); 
+    });
 }
 */
 
@@ -266,18 +266,18 @@ $.fn.customContextMenu = function(callBack){
 
 
 
-          var jWindowObj{$STATE.ID} = $.jWindow({ 
-           id: 'state{$STATE.ID}', 
-           title: '{$ELEMENT.TITLE}', 
-           posx: x, 
-           posy: y, 
-           width: wdth, 
-           height: hdth, 
-           type: 'iframe', 
-           marginTop:0, 
-           marginBottom:0, 
-           marginLeft:0, 
-           marginRight:0, 
+          var jWindowObj{$STATE.ID} = $.jWindow({
+           id: 'state{$STATE.ID}',
+           title: '{$ELEMENT.TITLE}',
+           posx: x,
+           posy: y,
+           width: wdth,
+           height: hdth,
+           type: 'iframe',
+           marginTop:0,
+           marginBottom:0,
+           marginLeft:0,
+           marginRight:0,
            url: window_url,
            onResizeEnd:function () {
             //Size changed
@@ -292,7 +292,7 @@ $.fn.customContextMenu = function(callBack){
             {literal}
             $.ajax({url: url1});
             {/literal}
-           }, 
+           },
            onDragEnd:function () {
             //Position changed
             ignoreClick=0;
@@ -324,7 +324,7 @@ $.fn.customContextMenu = function(callBack){
          url+='&id='+id;
          $.ajax({
           url: url,
-          }).done(function(data) { 
+          }).done(function(data) {
            processCheckStates(data);
           });
 
@@ -338,7 +338,7 @@ $.fn.customContextMenu = function(callBack){
 
            var obj=jQuery.parseJSON(data);
            if (typeof obj !='object') return false;
-           
+
 
            clearTimeout(noUpdatesTimer);
            noUpdatesTimer=setTimeout("$.publish('scenesNoUpdates');", 30*60*1000);
@@ -411,7 +411,7 @@ $.fn.customContextMenu = function(callBack){
                         }).onComplete(function () {
 
                          camera.lookAt(newlookAtVector);
-        
+
                         }).easing( TWEEN.Easing.Sinusoidal.Out).start();
                }
               }
@@ -447,7 +447,7 @@ $.fn.customContextMenu = function(callBack){
          var url="{$smarty.const.ROOTHTML}ajax/scenes.html?op=checkAllStates{if $SCENE_ID!=""}&scene_id={$SCENE_ID}{/if}{$PARAMS}";
          $.ajax({
           url: url,
-          }).done(function(data) { 
+          }).done(function(data) {
            processCheckStates(data);
            firstRun=0;
            refreshRun=0;
@@ -538,7 +538,7 @@ $(".draggable" ).draggable({ cursor: "move", snap: true , snapTolerance: 5, grid
                          {literal}
                          $.ajax({
                           url: url,
-                          }).done(function(data) { 
+                          }).done(function(data) {
                            //alert(data);
                           });
                           {/literal}
@@ -555,7 +555,7 @@ $(".draggable" ).draggable({ cursor: "move", snap: true , snapTolerance: 5, grid
                            {literal}
                             $.ajax({
                              url: url,
-                             }).done(function(data) { 
+                             }).done(function(data) {
                              //alert(data);
                              });
                             {/literal}
@@ -579,7 +579,7 @@ $(".draggable" ).draggable({ cursor: "move", snap: true , snapTolerance: 5, grid
       });
       */
       {/foreach}
- 
+
                  {/if}
                  {if $SCENE_WALLPAPER!=""}
                  if (inIframe) {
@@ -601,7 +601,7 @@ $(".draggable" ).draggable({ cursor: "move", snap: true , snapTolerance: 5, grid
                     });
                     {/if}
                 {/if}
-                 
+
                  checkAllStates();
 
 
@@ -667,7 +667,7 @@ $(".draggable" ).draggable({ cursor: "move", snap: true , snapTolerance: 5, grid
  {foreach $items as $ELEMENT}
  <!-- element {$ID} -->
  {if $ELEMENT.ELEMENTS}
- <div 
+ <div
    class="element_{$ELEMENT.ID} type_{$ELEMENT.TYPE}{if $ELEMENT.CSS_STYLE!=""} style_{$ELEMENT.CSS_STYLE}{/if}{if $ELEMENT.BACKGROUND=="1"} container_background{/if}{if $DRAGGABLE=="1"} draggable{/if}"
    style="{if $ELEMENT.POSITION_TYPE=="0"}position:absolute;left:{$ELEMENT.LEFT}px;top:{$ELEMENT.TOP}px;{/if}
    {if $ELEMENT.ZINDEX!=""}z-index:{$ELEMENT.ZINDEX};{/if}
@@ -681,8 +681,8 @@ $(".draggable" ).draggable({ cursor: "move", snap: true , snapTolerance: 5, grid
  {else}
 
  {if $ELEMENT.TYPE=="s3d"}
-  <div 
-   class="element_{$ELEMENT.ID} type_{$ELEMENT.TYPE}{if $ELEMENT.CSS_STYLE!=""} style_{$ELEMENT.CSS_STYLE}{/if} state_{$TITLE}{if $ELEMENT.BACKGROUND=="1"} html_background{/if}{if $ELEMENT.POSITION_TYPE=="1"} inlineblock{/if}{if $DRAGGABLE=="1" && $ELEMENT.POSITION_TYPE=="0"} draggable{/if}" 
+  <div
+   class="element_{$ELEMENT.ID} type_{$ELEMENT.TYPE}{if $ELEMENT.CSS_STYLE!=""} style_{$ELEMENT.CSS_STYLE}{/if} state_{$TITLE}{if $ELEMENT.BACKGROUND=="1"} html_background{/if}{if $ELEMENT.POSITION_TYPE=="1"} inlineblock{/if}{if $DRAGGABLE=="1" && $ELEMENT.POSITION_TYPE=="0"} draggable{/if}"
    id='canvas_{$ELEMENT.ID}'
    style="
    background-color:red;
@@ -774,7 +774,7 @@ function onDocumentMouseDown( event ) {
                 mouse.y = - ( (event.clientY-{$ELEMENT.TOP}) / renderer.domElement.height ) * 2 + 1;
                 raycaster.setFromCamera( mouse, camera );
 
-        var intersects = raycaster.intersectObjects( objects ); 
+        var intersects = raycaster.intersectObjects( objects );
 
     if ( intersects.length > 0 ) {
      console.log('Clicked on '+intersects[0].object.name);
@@ -786,7 +786,7 @@ function onDocumentMouseDown( event ) {
      {/foreach}
     }
 }
- 
+
 
    </script>
    <div style="display:none">
@@ -801,14 +801,14 @@ function onDocumentMouseDown( event ) {
  {else}
 
  {foreach $ELEMENT.STATES as $STATE}
-  <div 
-   class="element_{$ELEMENT.ID} type_{$ELEMENT.TYPE}{if $ELEMENT.CSS_STYLE!=""} style_{$ELEMENT.CSS_STYLE}{/if} state_{$STATE.TITLE}{if $ELEMENT.BACKGROUND=="1"} html_background{/if}{if $ELEMENT.POSITION_TYPE=="1"} inlineblock{/if}{if $DRAGGABLE=="1" && $ELEMENT.POSITION_TYPE=="0"} draggable{/if}" 
+  <div
+   class="element_{$ELEMENT.ID} type_{$ELEMENT.TYPE}{if $ELEMENT.CSS_STYLE!=""} style_{$ELEMENT.CSS_STYLE}{/if} state_{$STATE.TITLE}{if $ELEMENT.BACKGROUND=="1"} html_background{/if}{if $ELEMENT.POSITION_TYPE=="1"} inlineblock{/if}{if $DRAGGABLE=="1" && $ELEMENT.POSITION_TYPE=="0"} draggable{/if}"
    id="state_{$STATE.ID}"
-   {if $STATE.SCRIPT_ID!="0" || $STATE.HOMEPAGE_ID!="0" || $STATE.OPEN_SCENE_ID!="0" || $STATE.EXT_URL!="" || $STATE.MENU_ITEM_ID!="0" || $STATE.ACTION_METHOD!="" || $STATE.CODE!=""} 
+   {if $STATE.SCRIPT_ID!="0" || $STATE.HOMEPAGE_ID!="0" || $STATE.OPEN_SCENE_ID!="0" || $STATE.EXT_URL!="" || $STATE.MENU_ITEM_ID!="0" || $STATE.ACTION_METHOD!="" || $STATE.CODE!=""}
    {if $DRAGGABLE!="1"}
     onClick="stateClicked('{$STATE.ID}');"
    {/if}
-   {/if} 
+   {/if}
    style="
    {if $DRAGGABLE=="1"}border:1px solid blue;{/if}
    {if $ELEMENT.POSITION_TYPE=="0"}position:absolute;left:{$ELEMENT.LEFT}px;top:{$ELEMENT.TOP}px;{/if}
@@ -850,4 +850,3 @@ function onDocumentMouseDown( event ) {
  </tr>
 </table>
 </div>
-

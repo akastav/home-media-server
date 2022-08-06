@@ -69,7 +69,7 @@
     $out['OK']=1;
 
     $user_title=getUserObjectByTitle($rec['ID'],1);
-    
+
    } else {
     $out['ERR']=1;
    }

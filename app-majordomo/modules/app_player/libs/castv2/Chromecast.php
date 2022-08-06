@@ -24,7 +24,7 @@ class GChromecast
 	// Store the last connected port
 	public $lastactivetime;
 	// store the time we last did something
-	
+
 	public function __construct($ip, $port)
 	{
 		// Establish Chromecast connection
@@ -43,15 +43,15 @@ class GChromecast
 		$this->lastport = $port;
 		$this->lastactivetime = time();
 	}
-	
+
 		public static function scan($wait = 2)
 	{
 		// Wrapper for scan
 		$result = Chromecasts::scansub($wait);
 		return $result;
 	}
-	
-		
+
+
 	function testLive()
 	{
 		//return;
@@ -74,7 +74,7 @@ class GChromecast
 			$this->connect();
 		}
 	}
-	
+
 	function cc_connect($tl = 0)
 	{
 
@@ -96,7 +96,7 @@ class GChromecast
 		fflush($this->socket);
 		$this->lastactivetime = time();
 	}
-	
+
 	public function launch($appid)
 	{
 		// Launches the chromecast app on the connected chromecast
@@ -122,7 +122,7 @@ class GChromecast
 			usleep(10);
 		}
 	}
-	
+
 	function getStatus()
 	{
 
@@ -148,9 +148,9 @@ class GChromecast
 		}
 		return json_decode($response,TRUE);
 	}
-	
+
 	public function getMediaSession() {
-		$this->getStatus(); 
+		$this->getStatus();
 		if ($this->appid) {
 			$this->connect(); // Auto-reconnects
 		} else {
@@ -188,7 +188,7 @@ class GChromecast
 			return ;
 		}
 	}
-	
+
 	function connect()
 	{
 		// This connects to the transport of the currently running app
@@ -208,7 +208,7 @@ class GChromecast
 		$this->lastactivetime = time();
 		$this->requestId++;
 	}
-	
+
 	public function getCastMessage()
 	{
 		// Get the Chromecast Message/Response
@@ -228,7 +228,7 @@ class GChromecast
 
 			// Wait infinitely for a packet.
 			//set_time_limit(30);
-		} 
+		}
 		// get transport id
 		if (preg_match("/transportId/s", $response)) {
 			preg_match("/transportId\"\:\"([^\"]*)/", $response, $matches);
@@ -243,7 +243,7 @@ class GChromecast
 		}
 		return $response;
 	}
-	
+
 	public function sendMessage($urn, $message)
 	{
 		// Send the given message to the given urn
@@ -270,7 +270,7 @@ class GChromecast
 		$response = $this->getCastMessage();
 		return $response;
 	}
-	
+
 	public function pingpong()
 	{
 		// Officially you should run this every 5 seconds or so to keep
@@ -288,7 +288,7 @@ class GChromecast
 		$this->requestId++;
 		$response = $this->getCastMessage();
 	}
-	
+
 	public function pong()
 	{
 		// To answer a pingpong
@@ -303,28 +303,28 @@ class GChromecast
 		$this->lastactivetime = time();
 		$this->requestId++;
 	}
-	
+
 	public function Mute() {
 		// Mute a video
 		$this->getMediaSession(); // Auto-reconnects
 		$this->sendMessage("urn:x-cast:com.google.cast.receiver", '{"type":"SET_VOLUME", "volume": { "muted": true }, "requestId":'.$this->requestId.' }');
 		$this->getCastMessage();
 	}
-	
+
 	public function UnMute() {
-		
+
 		$this->getMediaSession(); // Auto-reconnects
 		$this->sendMessage("urn:x-cast:com.google.cast.receiver", '{"type":"SET_VOLUME", "volume": { "muted": false }, "requestId":'.$this->requestId.' }');
 		$this->getCastMessage();
 	}
-	
+
 	public function SetVolume($volume) {
 		// Mute a video
         $this->getMediaSession(); // Auto-reconnects
 		$this->sendMessage("urn:x-cast:com.google.cast.receiver", '{"type":"SET_VOLUME", "volume": { "level": ' . $volume . ' }, "requestId":'.$this->requestId.' }');
 		$this->getCastMessage();
 	}
-	
+
 	public function seek($secs) {
 		// Seek
         $this->getMediaSession(); // Auto-reconnects
@@ -333,7 +333,7 @@ class GChromecast
 		    $this->getCastMessage();
 		}
 	}
-	
+
 	public function stop() {
 		// Stop
 		$this->getMediaSession(); // Auto-reconnects
@@ -342,7 +342,7 @@ class GChromecast
 			$this->getCastMessage();
 		}
 	}
-	
+
 	public function pause() {
 		// Pause
 		$this->getMediaSession(); // Auto-reconnects
@@ -354,7 +354,7 @@ class GChromecast
 		}
 		$this->getCastMessage();
 	}
-	
+
 	public function play() {
 		// Restart (after pause)
 		$this->getMediaSession(); // Auto-reconnects
@@ -363,10 +363,10 @@ class GChromecast
 		}
 		$this->getCastMessage();
 	}
-	
+
 	public function load($url, $currentTime) {
 		$this->getMediaSession(); // Auto-reconnects
-		
+
 		if (preg_match('/\.mp3/', $url)) {
             $content_type = 'audio/mp3';
         } elseif (preg_match('/mp4/', $url)) {

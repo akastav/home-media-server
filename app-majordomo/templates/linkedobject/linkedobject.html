@@ -116,12 +116,12 @@ function linked_object_chaged<#UNIQ#>() {
 
 	$('#linked_object_link<#UNIQ#>').attr("href", "<#ROOTHTML#>panel/linkedobject.html?op=redirect&object="+selected_object<#UNIQ#>);
 	$('#linked_object_link<#UNIQ#>').show();
-  
+
 	[#if PROPERTY_FIELD!=""#]
 	if (skip_property<#UNIQ#>!=1) {
 		url="<#ROOTHTML#>panel/linkedobject.html?ajax=1&op=properties";
 		url+='&object='+selected_object<#UNIQ#>;
-  
+
 		$.get(url, function(obj) {
 			//var obj=jQuery.parseJSON(data);
 			$('#linked_property_copy<#UNIQ#>').empty();
@@ -182,7 +182,7 @@ function linked_object_chaged<#UNIQ#>() {
 	return true;
 }
 
-$(document).ready(function() { 
+$(document).ready(function() {
 	[#if PROPERTY_FIELD!=""#]
 		if ($('#[#PROPERTY_FIELD#]').length) {
 			selected_property<#UNIQ#>=$("#[#PROPERTY_FIELD#]").val();
@@ -230,7 +230,7 @@ $(document).ready(function() {
 			//$("#[#METHOD_FIELD#]").replaceWith($('#linked_method_copy<#UNIQ#>'));
 			$("#[#METHOD_FIELD#]").replaceWith($('#linked_method_replace<#UNIQ#>'));
 			$("#linked_method_copy<#UNIQ#>").select2({placeholder: "<#LANG_LINKED_METHOD#>",allowClear: true});
-		}  
+		}
 	[#endif#]
  });
 </script>

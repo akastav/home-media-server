@@ -3,10 +3,10 @@
 // Base class to extend to provide functionality for different receivers
 
 class CCBaseSender {
-	
+
 	public $chromecast; // The chromecast the initiated this instance.
 	public $mediaid; // The media session id.
-	
+
 	public function __construct($hostchromecast) {
 		$this->chromecast = $hostchromecast;
 	}
@@ -71,7 +71,7 @@ class CCBaseSender {
 
 
 	}
-	
+
 }
 
 ?>

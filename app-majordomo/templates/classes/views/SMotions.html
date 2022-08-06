@@ -3,7 +3,7 @@ function setInsertData_%.object_id%() {
 	if(window.intervalUpdateDate_%.object_id%) {
 		window.clearInterval(intervalUpdateDate_%.object_id%);
 	}
-	
+
 	var currentTime = parseInt(new Date().getTime()/1000);
 	var sID = '%.object_id%';
 	var sDATA = '%.updated%';
@@ -16,48 +16,48 @@ function setInsertData_%.object_id%() {
 		//Только что
 		beautyText = '<#LANG_DEVICES_PASSED_NOW#>';
 		$('.updatedText-JS-' + sID).text(beautyText);
-		
+
 		window.intervalUpdateDate_%.object_id% = setInterval(function() {
 			setInsertData_%.object_id%();
 		}, 1000);
 	} else if(diff > 10 && diff <= 600) {
 		beautyText = secondsToHms(diff, '', '<#LANG_DEVICES_PASSED_NEW_MINUTES_AGO#>', '<#LANG_DEVICES_PASSED_NEW_SECONDS_AGO#>') + ' <#LANG_DEVICES_PASSED_AGO#>';
 		$('.updatedText-JS-' + sID).text(beautyText);
-		
+
 		window.intervalUpdateDate_%.object_id% = setInterval(function() {
 			var currentTime = parseInt(new Date().getTime()/1000);
 			var diff = currentTime-sDATA;
 
 			beautyText = secondsToHms(diff, '', '<#LANG_DEVICES_PASSED_NEW_MINUTES_AGO#>', '<#LANG_DEVICES_PASSED_NEW_SECONDS_AGO#>') + ' <#LANG_DEVICES_PASSED_AGO#>';
 			$('.updatedText-JS-' + sID).text(beautyText);
-			
+
 			setInsertData_%.object_id%();
 		}, 1000);
 	} else if(diff > 600 && diff <= 7200) {
 		beautyText = secondsToHms(diff, '<#LANG_DEVICES_PASSED_NEW_HOURS_AGO#>', '<#LANG_DEVICES_PASSED_NEW_MINUTES_AGO#>', '') + ' <#LANG_DEVICES_PASSED_AGO#>';
 		$('.updatedText-JS-' + sID).text(beautyText);
-		
+
 		window.intervalUpdateDate_%.object_id% = setInterval(function() {
 			var currentTime = parseInt(new Date().getTime()/1000);
 			var diff = currentTime-sDATA;
 
 			beautyText = secondsToHms(diff, '<#LANG_DEVICES_PASSED_NEW_HOURS_AGO#>', '<#LANG_DEVICES_PASSED_NEW_MINUTES_AGO#>', '') + ' <#LANG_DEVICES_PASSED_AGO#>';
 			$('.updatedText-JS-' + sID).text(beautyText);
-			
+
 			setInsertData_%.object_id%();
 		}, 61000);
 	} else if(diff > 7200 && diff < 25200) {
 		beautyText = secondsToHms(diff, '<#LANG_DEVICES_PASSED_NEW_HOURS_AGO#>', '', '') + ' <#LANG_DEVICES_PASSED_AGO#>';
 		$('.updatedText-JS-' + sID).text(beautyText);
-			
-		window.intervalUpdateDate_%.object_id% = setInterval(function() {	
+
+		window.intervalUpdateDate_%.object_id% = setInterval(function() {
 			var currentTime = parseInt(new Date().getTime()/1000);
 			var diff = currentTime-sDATA;
-			
+
 			//Считаем и делаем красиво
 			beautyText = secondsToHms(diff, '<#LANG_DEVICES_PASSED_NEW_HOURS_AGO#>', '', '') + ' <#LANG_DEVICES_PASSED_AGO#>';
 			$('.updatedText-JS-' + sID).text(beautyText);
-			
+
 			setInsertData_%.object_id%();
 		}, 1800000);
 	} else {
@@ -65,7 +65,7 @@ function setInsertData_%.object_id%() {
 		if(window.intervalUpdateDate_%.object_id%) {
 			window.clearInterval(intervalUpdateDate_%.object_id%);
 		}
-		
+
 		timeConvertVar = timeConvert(sDATA);
 		currentTime = new Date();
 
@@ -76,7 +76,7 @@ function setInsertData_%.object_id%() {
 		} else {
 			beautyText = timeConvertVar[0] + '.' + timeConvertVar[1] + '.' + timeConvertVar[2] + ' ' + timeConvertVar[3] + ':' + timeConvertVar[4] + ':' + timeConvertVar[5];
 		}
-		
+
 		$('.updatedText-JS-' + sID).text(beautyText);
 	}
 }
@@ -85,12 +85,12 @@ $(function() {
 	if(window.intervalUpdateDate_%.object_id%) {
 		window.clearInterval(intervalUpdateDate_%.object_id%);
 	}
-	
+
 	setInsertData_%.object_id%();
-	window.intervalUpdateDate_%.object_id% = setInterval(function() {	
+	window.intervalUpdateDate_%.object_id% = setInterval(function() {
 		setInsertData_%.object_id%();
 	}, 1000);
-}); 
+});
 
 </script>
 

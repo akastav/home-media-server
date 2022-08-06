@@ -8,12 +8,12 @@ require_once("CCBaseSender.php");
 class CCPlexPlayer extends CCBaseSender
 {
 	public $appid="9AC194DC";
-	
+
 	public function play($json) {
 		// Start a playing
 		// First ensure there's an instance of the DMP running
 		$this->launch();
-                
+
 		$this->chromecast->sendMessage("urn:x-cast:com.google.cast.media", $json);
 		$r = "";
 		while (!preg_match("/\"playerState\":\"PAUSED\"/",$r)) {
@@ -26,7 +26,7 @@ class CCPlexPlayer extends CCBaseSender
 		$this->mediaid = $m[1];
                 $this->restart();
 	}
-        
+
 	public function launch() {
 		// Launch the player or connect to an existing instance if one is already running
 		// First connect to the chromecast
@@ -53,7 +53,7 @@ class CCPlexPlayer extends CCBaseSender
 			$this->chromecast->connect();
 		}
 	}
-	
+
 	public function pause() {
 		// Pause
 		$this->launch(); // Auto-reconnects
@@ -65,29 +65,29 @@ class CCPlexPlayer extends CCBaseSender
 		$this->launch(); // Auto-reconnects
                 $this->chromecast->sendMessage("urn:x-cast:plex",'{"type":"PLAY"}');
 	}
-        
+
         public function stepForward() {
                 $this->launch();
                 $this->chromecast->sendMessage("urn:x-cast:plex",'{"type":"STEPFORWARD"}');
         }
-	
+
 	public function stop() {
 		// Stop
 		$this->launch(); // Auto-reconnects
                 $this->chromecast->sendMessage("urn:x-cast:plex",'{"type":"STOP"}');
 		//$this->chromecast->getCastMessage();
 	}
-	
+
         public function skipBack() {
                 $this->launch();
                 $this->chromecast->sendMessage("urn:x-cast:plex",'{"type":"PREVIOUS"}');
         }
-        
+
         public function skipForward() {
                 $this->launch();
                 $this->chromecast->sendMessage("urn:x-cast:plex",'{"type":"NEXT"}');
         }
-        
+
         public function plexStatus() {
                 $this->launch();
 		$this->chromecast->sendMessage("urn:x-cast:com.google.cast.media",'{"type":"GET_STATUS", "requestId":1}');
@@ -95,28 +95,28 @@ class CCPlexPlayer extends CCBaseSender
                 $r = substr($r, strpos($r,'{"type'),50000);
                 return json_encode($r);
         }
-        
+
 	public function Mute() {
 		// Mute a video
 		$this->launch(); // Auto-reconnects
 		$this->chromecast->sendMessage("urn:x-cast:com.google.cast.receiver", '{"type":"SET_VOLUME", "volume": { "muted": true }, "requestId":1 }');
 		$this->chromecast->getCastMessage();
 	}
-	
+
 	public function UnMute() {
 		// Mute a video
 		$this->launch(); // Auto-reconnects
 		$this->chromecast->sendMessage("urn:x-cast:com.google.cast.receiver", '{"type":"SET_VOLUME", "volume": { "muted": false }, "requestId":1 }');
 		$this->chromecast->getCastMessage();
 	}
-	
+
 	public function SetVolume($volume) {
 		// Mute a video
 		$this->launch(); // Auto-reconnects
 		$this->chromecast->sendMessage("urn:x-cast:com.google.cast.receiver", '{"type":"SET_VOLUME", "volume": { "level": ' . $volume . ' }, "requestId":1 }');
 		//$this->chromecast->getCastMessage();
 	}
-        
+
 	public function getStatus() {
 		// Stop
 		$this->chromecast->sendMessage("urn:x-cast:com.google.cast.media",'{"type":"GET_STATUS", "mediaSessionId":' . $this->mediaid . ', "requestId":1}');
@@ -124,7 +124,7 @@ class CCPlexPlayer extends CCBaseSender
 		preg_match("/{\"type.*/",$r,$m);
 		return json_decode($m[0]);
 	}
-	
+
 }
 
 ?>

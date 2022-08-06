@@ -1,4 +1,4 @@
-<?php   
+<?php
  chdir('../../');
  include_once("./config.php");
  include_once("./lib/loader.php");
@@ -17,8 +17,8 @@
    $w=(int)$width;
   }
 
-  
-  // Dataset definition   
+
+  // Dataset definition
   //$DataSet = new pData;
 
   if ($p!='') {
@@ -48,7 +48,7 @@
    } else {
     $px_per_point=6;
    }
-   
+
 
  if (preg_match('/(\d+)d/', $type, $m)) { //days
 
@@ -87,7 +87,7 @@
 
    $dt=date('Y-m-d', $start_time);
 
-   
+
 
    $history=SQLSelect("SELECT ID, VALUE, UNIX_TIMESTAMP(ADDED) as UNX, ADDED FROM phistory WHERE VALUE_ID='".$pvalue['ID']."' AND ADDED>=('".date('Y-m-d H:i:s', $start_time)."') AND ADDED<=('".date('Y-m-d H:i:s', $end_time)."') ORDER BY ADDED");
 
@@ -130,7 +130,7 @@
      $t_values[]=0;
     }
 
-   
+
    if ($_GET['op']=='timed') {
    //header("Content-type: text/json");
     $tret = array();
@@ -201,7 +201,7 @@
      $px_passed+=$px_per_point;
    }
    */
-   
+
 
   if ($_GET['fil01']) {
    $fil01=$_GET['fil01'];
@@ -227,8 +227,8 @@
  }
 
    /*
-   $DataSet->AddPoint($values,"Serie1");  
-   $DataSet->AddPoint($hours,"Serie3");  
+   $DataSet->AddPoint($values,"Serie1");
+   $DataSet->AddPoint($hours,"Serie3");
    */
 
 
@@ -238,7 +238,7 @@
    $DataSet->AddPoint(0,"Serie1");
    $DataSet->AddPoint(0,"Serie3");
    */
-  
+
   }
 
 
@@ -262,9 +262,9 @@
   if ($unit) {
    $DataSet->SetYAxisUnit($unit);
   } else {
-   $DataSet->SetYAxisUnit("�C");  
+   $DataSet->SetYAxisUnit("�C");
   }
-  $DataSet->SetXAxisUnit("");  
+  $DataSet->SetXAxisUnit("");
   */
 
 require_once ('./3rdparty/jpgraph/jpgraph.php');
@@ -274,7 +274,7 @@ require_once ('./3rdparty/jpgraph/jpgraph_line.php');
 $ydata=&$t_values;
 $xdata=&$t_times;
 
-  
+
   if (!$height) {
    $h=210;
   } else {
@@ -334,7 +334,7 @@ $graph->SetShadow();
 $graph->Stroke();
 
   /*
-  $Test = new pChart($w,$h);  
+  $Test = new pChart($w,$h);
 
   if ($_GET['gcolor']=='red') {
    $Test->setColorPalette(0,220,50,50);
@@ -361,11 +361,11 @@ $graph->Stroke();
   if (SETTINGS_THEME=='light' || $_GET['bg']=='light') {
    $Test->drawGraphAreaGradient(240,240,240,25,TARGET_BACKGROUND);
   } else {
-   $Test->drawGraphAreaGradient(132,153,172,50,TARGET_BACKGROUND);  
+   $Test->drawGraphAreaGradient(132,153,172,50,TARGET_BACKGROUND);
   }
 
 
-  $Test->setFontProperties("./pChart/Fonts/tahoma.ttf",10);  
+  $Test->setFontProperties("./pChart/Fonts/tahoma.ttf",10);
 
   if (SETTINGS_THEME=='light' || $_GET['bg']=='light') {
    if ($_GET['title']) {
@@ -389,50 +389,50 @@ $graph->Stroke();
   }
 
 
-  $Test->setFontProperties("./pChart/Fonts/tahoma.ttf",8);  
-  $Test->setGraphArea(60,20,$w-25,$h-30);  
+  $Test->setFontProperties("./pChart/Fonts/tahoma.ttf",8);
+  $Test->setGraphArea(60,20,$w-25,$h-30);
 
   if (SETTINGS_THEME=='light' || $_GET['bg']=='light') {
    $Test->drawScale($DataSet->GetData(),$DataSet->GetDataDescription(),$scale,100,100,100,TRUE,0,2);
    $Test->drawGraphAreaGradient(240,240,240,5);
-   $Test->drawGrid(1,TRUE,230,230,230,10); 
+   $Test->drawGrid(1,TRUE,230,230,230,10);
    if ($_GET['scale']=='zero') {
     $Test->drawTreshold(0,100,100,100,FALSE,FALSE);
    }
   } else {
-   $Test->drawGraphArea(213,217,221,FALSE);  
-   $Test->drawScale($DataSet->GetData(),$DataSet->GetDataDescription(),$scale,213,217,221,TRUE,0,2);  
-   $Test->drawGraphAreaGradient(162,183,202,50);  
-   $Test->drawGrid(1,TRUE,230,230,230,10); 
+   $Test->drawGraphArea(213,217,221,FALSE);
+   $Test->drawScale($DataSet->GetData(),$DataSet->GetDataDescription(),$scale,213,217,221,TRUE,0,2);
+   $Test->drawGraphAreaGradient(162,183,202,50);
+   $Test->drawGrid(1,TRUE,230,230,230,10);
    if ($_GET['scale']=='zero') {
     $Test->drawTreshold(0,230,230,230,FALSE,FALSE);
    }
   }
 
-  //$Test->setShadowProperties(3,3,0,0,0,30,4);       
-  // Draw the line chart  
-  $Test->drawPlotGraph($DataSet->GetData(),$DataSet->GetDataDescription(),2);  
+  //$Test->setShadowProperties(3,3,0,0,0,30,4);
+  // Draw the line chart
+  $Test->drawPlotGraph($DataSet->GetData(),$DataSet->GetDataDescription(),2);
 
   if ($_GET['gtype']=='curve') {
    $Test->drawCubicCurve($DataSet->GetData(),$DataSet->GetDataDescription());
-   $Test->clearShadow();  
-   $Test->drawFilledCubicCurve($DataSet->GetData(),$DataSet->GetDataDescription(),.1,30, FALSE); 
+   $Test->clearShadow();
+   $Test->drawFilledCubicCurve($DataSet->GetData(),$DataSet->GetDataDescription(),.1,30, FALSE);
   } elseif ($_GET['gtype']=='bar') {
    $Test->drawBarGraph($DataSet->GetData(),$DataSet->GetDataDescription(),TRUE);
   } else {
-   $Test->drawLineGraph($DataSet->GetData(),$DataSet->GetDataDescription());  
-   $Test->clearShadow();  
-   $Test->drawFilledLineGraph($DataSet->GetData(),$DataSet->GetDataDescription(), 30);  
+   $Test->drawLineGraph($DataSet->GetData(),$DataSet->GetDataDescription());
+   $Test->clearShadow();
+   $Test->drawFilledLineGraph($DataSet->GetData(),$DataSet->GetDataDescription(), 30);
   }
 
   //
-  
 
- // Render the picture  
+
+ // Render the picture
  if (SETTINGS_THEME=='light' || $_GET['bg']=='light') {
-  $Test->AddBorder(1, 200,200,200); 
+  $Test->AddBorder(1, 200,200,200);
  } else {
-  $Test->AddBorder(1); 
+  $Test->AddBorder(1);
  }
 
  $path_to_file='./cms/cached/'.md5($_SERVER['REQUEST_URI']).'.png';

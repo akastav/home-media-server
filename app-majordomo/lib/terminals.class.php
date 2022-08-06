@@ -119,7 +119,7 @@ function getTerminalsByCANTTS($order = 'ID', $sort = 'ASC') {
 	}
 	return $terminals;
 }
-// Get local ip 
+// Get local ip
 function getLocalIp() {
 	global $local_ip_address_cached;
 	if (isset($local_ip_address_cached)) {

@@ -152,7 +152,7 @@ if (!function_exists('SQLUpdateInsert')) {
    function SQLUpdateInsert($table, &$record, $ndx = 'ID')
    {
       global $db;
-   
+
       if (isset($record[$ndx]))
       {
          if ($db instanceof mysql) {
@@ -251,7 +251,7 @@ if (!function_exists('fromDBDate')) {
    function fromDBDate($source, $delim = '-', $dst_delim = '/')
    {
       $tmp = explode($delim, $source);
-      
+
       $str  = str_pad($tmp[1], 2, "0", STR_PAD_LEFT) . $dst_delim;
       $str .= str_pad($tmp[2], 2, "0", STR_PAD_LEFT) . $dst_delim;
       $str .= str_pad($tmp[0], 2, "0", STR_PAD_LEFT);
@@ -271,11 +271,11 @@ if (!function_exists('toDBDate')) {
    function toDBDate($source, $delim = '/', $dst_delim = '-')
    {
       $tmp = explode($delim, $source);
-      
+
       $str  = str_pad($tmp[2], 2, "0", STR_PAD_LEFT) . $dst_delim;
       $str .= str_pad($tmp[0], 2, "0", STR_PAD_LEFT) . $dst_delim;
       $str .= str_pad($tmp[1], 2, "0", STR_PAD_LEFT);
-      
+
       return $str;
    }
 }

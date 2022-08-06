@@ -100,23 +100,23 @@ if ($this->tab == 'logic') {
         $method_rec['CALL_PARENT'] = 1;
         $method_rec['ID'] = SQLInsert('methods', $method_rec);
     }
-	
+
 	if(defined('SETTINGS_CODEEDITOR_TURNONSETTINGS')) {
 		$out['SETTINGS_CODEEDITOR_TURNONSETTINGS'] = SETTINGS_CODEEDITOR_TURNONSETTINGS;
 		$out['SETTINGS_CODEEDITOR_UPTOLINE'] = SETTINGS_CODEEDITOR_UPTOLINE;
 		$out['SETTINGS_CODEEDITOR_SHOWERROR'] = SETTINGS_CODEEDITOR_SHOWERROR;
 	}
-	
+
     if ($this->mode == 'update') {
         global $code;
-		
+
 		$old_code=$method_rec['CODE'];
 		$method_rec['CODE'] = $code;
-		
+
         $ok = 1;
         if ($method_rec['CODE'] != '') {
             $errors = php_syntax_error($method_rec['CODE']);
-		
+
 			if ($errors) {
 				$out['ERR_LINE'] = preg_replace('/[^0-9]/', '', substr(stristr($errors, 'php on line '), 0, 18))-2;
 				$out['ERR_CODE'] = 1;
@@ -431,7 +431,7 @@ if ($this->mode == 'update' && $this->tab == '') {
         $object_rec['DESCRIPTION'] = $rec['TITLE'];
         $object_rec['LOCATION_ID'] = $rec['LOCATION_ID'];
         $class_changed = 0;
-        
+
         $class_2b_changed = 1;
         $tmp_class_id = $object_rec['CLASS_ID'];
         while(IsSet($tmp_class_id)) {

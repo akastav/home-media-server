@@ -1,6 +1,6 @@
 <?php
 /**
-* Methods 
+* Methods
 *
 * Methods
 *

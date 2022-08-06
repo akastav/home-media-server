@@ -93,14 +93,14 @@ $method_code
         return 1;
 
 thisObject = mjdThisObject("$object")
-thisObject.thisMethod(params)        
+thisObject.thisMethod(params)
 CL;
 
         $code=$class_code;
     }
 
     $code =<<<FF
-# -*- coding: utf-8 -*-    
+# -*- coding: utf-8 -*-
 import os
 import sys
 import re
@@ -120,7 +120,7 @@ try:
 except ImportError:
     import urllib2
     from urllib import urlencode
-	
+
 sys.path.append(os.path.abspath("$lib_path"))
 
 from events import *

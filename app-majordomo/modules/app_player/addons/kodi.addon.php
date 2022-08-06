@@ -3,19 +3,19 @@
 	Addon Kodi (XBMC) for app_player
 */
 class kodi extends app_player_addon {
-	
+
 	// Private properties
 	private $curl;
 	private $address;
-	
+
 	// Constructor
 	function __construct($terminal) {
 		$this->title = 'Kodi (XBMC)';
 		$this->description = 'Бесплатный кроссплатформенный медиаплеер и программное обеспечение для организации HTPC с открытым исходным кодом.';
-		
+
 		$this->terminal = $terminal;
 		$this->reset_properties();
-		
+
 		// Curl
 		$this->curl = curl_init();
 		$this->address = 'http://'.$this->terminal['HOST'].':'.(empty($this->terminal['PLAYER_PORT'])?8080:$this->terminal['PLAYER_PORT']);
@@ -32,7 +32,7 @@ class kodi extends app_player_addon {
 	function destroy() {
 		curl_close($this->curl);
 	}
-	
+
 	// Private: Kodi request
 	private function kodi_request($method, $params=array()) {
 		$this->reset_properties();
@@ -71,7 +71,7 @@ class kodi extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Private: Kodi get player id
 	private function kodi_player_id($type='audio') {
 		if($this->kodi_request('Player.GetActivePlayers')) {
@@ -99,7 +99,7 @@ class kodi extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Private: Kodi get playlist id
 	private function kodi_playlist_id($type='audio') {
 		if($this->kodi_request('Playlist.GetPlaylists')) {
@@ -127,7 +127,7 @@ class kodi extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Private: Kodi get track position
 	private function kodi_track_position($track_id) {
 		if($this->pl_get()) {
@@ -205,7 +205,7 @@ class kodi extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Play
 	function play($input) {
 		$this->reset_properties();
@@ -220,7 +220,7 @@ class kodi extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Pause
 	function pause() {
 		if($this->kodi_player_id()) {
@@ -254,7 +254,7 @@ class kodi extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Next
 	function next() {
 		if($this->kodi_player_id()) {
@@ -271,7 +271,7 @@ class kodi extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Previous
 	function previous() {
 		if($this->kodi_player_id()) {
@@ -288,7 +288,7 @@ class kodi extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Seek
 	function seek($position) {
 		$this->reset_properties();
@@ -329,7 +329,7 @@ class kodi extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Playlist: Get
 	function pl_get() {
 		if($this->kodi_playlist_id()) {
@@ -380,7 +380,7 @@ class kodi extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Playlist: Delete
 	function pl_delete($id) {
 		$this->reset_properties();
@@ -406,7 +406,7 @@ class kodi extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Playlist: Empty
 	function pl_empty() {
 		if($this->kodi_playlist_id()) {
@@ -423,7 +423,7 @@ class kodi extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Playlist: Play
 	function pl_play($id) {
 		$this->reset_properties();
@@ -466,7 +466,7 @@ class kodi extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Playlist: Loop
 	function pl_loop() {
 		if($this->kodi_player_id()) {
@@ -490,7 +490,7 @@ class kodi extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Playlist: Repeat
 	function pl_repeat() {
 		if($this->kodi_player_id()) {
@@ -514,7 +514,7 @@ class kodi extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 	// Default command
 	function command($command, $parameter) {
 		if(!$json = json_decode($parameter)) {
@@ -526,5 +526,5 @@ class kodi extends app_player_addon {
 		}
 		return $this->success;
 	}
-	
+
 }

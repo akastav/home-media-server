@@ -20,7 +20,7 @@
 }
 
 li.ui-state-default.ui-tabs-paging-prev {
-    border-top-left-radius: 4px; 
+    border-top-left-radius: 4px;
     border-top-right-radius: 4px;
 }
 
@@ -29,7 +29,7 @@ li.ui-state-default.ui-tabs-paging-prev:hover {
     border-top: 1px solid #59b4d4;
     border-left: 1px solid #59b4d4;
     border-right: 1px solid #59b4d4;
-    border-top-left-radius: 4px; 
+    border-top-left-radius: 4px;
     border-top-right-radius: 4px;
 }
 
@@ -39,7 +39,7 @@ li.ui-state-default.ui-tabs-paging-prev:hover {
     border-top: 1px solid #cccccc;
     border-left: 1px solid #cccccc;
     border-right: 1px solid #cccccc;
-    border-top-left-radius: 4px; 
+    border-top-left-radius: 4px;
     border-top-right-radius: 4px;
 }
 
@@ -47,7 +47,7 @@ li.ui-state-default.ui-tabs-paging-prev:hover {
     border-top: 1px solid #cccccc;
     border-left: 1px solid #cccccc;
     border-right: 1px solid #cccccc;
-    border-top-left-radius: 4px; 
+    border-top-left-radius: 4px;
     border-top-right-radius: 4px;
 }
 
@@ -68,4 +68,4 @@ li.ui-state-default.ui-tabs-paging-next:hover {
     border-right: 1px solid #59b4d4;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
-} 
+}

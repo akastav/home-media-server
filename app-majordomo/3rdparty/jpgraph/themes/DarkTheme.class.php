@@ -3,7 +3,7 @@
 /**
 * Universal Theme class
 */
-class DarkTheme extends Theme 
+class DarkTheme extends Theme
 {
     private $font_color       = '#444444';
     private $background_color = '#242424';
@@ -55,17 +55,17 @@ class DarkTheme extends Theme
         $graph->legend->SetMarkAbsSize(5);
 
         // xaxis
-        $graph->xaxis->title->SetColor($this->font_color);  
-        $graph->xaxis->SetColor($this->axis_color, $this->font_color);    
+        $graph->xaxis->title->SetColor($this->font_color);
+        $graph->xaxis->SetColor($this->axis_color, $this->font_color);
         $graph->xaxis->SetTickSide(SIDE_BOTTOM);
         $graph->xaxis->SetLabelMargin(10);
         $graph->xaxis->HideTicks();
         $graph->xaxis->SetTitleMargin(15);
         //$graph->xaxis->SetLabelMargin(30);
-                
+
         // yaxis
-        $graph->yaxis->title->SetColor($this->font_color);  
-        $graph->yaxis->SetColor($this->axis_color, $this->font_color);    
+        $graph->yaxis->title->SetColor($this->font_color);
+        $graph->yaxis->SetColor($this->axis_color, $this->font_color);
         $graph->yaxis->SetTickSide(SIDE_LEFT);
         $graph->yaxis->SetLabelMargin(8);
 //        $graph->yaxis->SetTickPositions(array(50, 100, 150));
@@ -117,9 +117,9 @@ class DarkTheme extends Theme
             $img = $graph->img;
             $height = $img->height;
             $graph->SetMargin(
-                $img->raw_left_margin, 
-                $img->raw_right_margin, 
-                $img->raw_top_margin, 
+                $img->raw_left_margin,
+                $img->raw_right_margin,
+                $img->raw_top_margin,
                 $height * 0.25
             );
         }
@@ -128,7 +128,7 @@ class DarkTheme extends Theme
     function ApplyPlot($plot) {
 
         switch (get_class($plot))
-        { 
+        {
             case 'GroupBarPlot':
             {
                 foreach ($plot->plots as $_plot) {
@@ -177,7 +177,7 @@ class DarkTheme extends Theme
                 $plot->SetSliceColors($this->GetThemeColors());
                 break;
             }
-    
+
             default:
             {
             }

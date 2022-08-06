@@ -30,9 +30,9 @@
 							$('#li_search').remove();
 							//Вставляем вкладку
 							$('#tab').prepend('<li id="li_search_hint"><a data-toggle="tab" href="javascript://" onclick="$(\'#filter\').val(\'\');filterPlugins();"><#LANG_NEWMARKET_CLOSE_SEACRH#></a></li>');
-							
+
 							$('#tab').prepend('<li id="li_search" class="active"><a data-toggle="tab" href="#panel_installed" id="panel_installed" onclick="refreshPluginsList(\'installed\',\'\');" class="active"><#LANG_NEWMARKET_SEARCH#></a></li>');
-							
+
 							refreshPluginsList(0,str);
 							$('#filter').removeAttr('style');
 						} else {
@@ -44,7 +44,7 @@
 							$('#panel_installed').click();
 						}
 					}
-					
+
 					function searchKeyUp() {
 						$('#filter').attr('style', 'background-image: url(<#ROOTHTML#>img/ajax-loader.gif);background-repeat: no-repeat;background-position: 10px;padding-left: 40px;');
 						clearTimeout(upTimer);
@@ -98,8 +98,8 @@
 					function refreshPluginsList(category_id,search_text) {
 						$('#search_result').html('<div class="text-center" style="margin-top: 20px;margin-bottom: 20px;"><img src="<#ROOTHTML#>img/ajax-loader.gif" border="0"> <#LANG_NEWDASH_LOADING#></div>');
 						if(!search_text) $('#li_search').remove();
-						
-						
+
+
 						var urlCheckUpdatesMarket = '<#ROOTHTML#>ajax/market.html?op=check_updates';
 						$.ajax({
 							url: urlCheckUpdatesMarket
@@ -110,7 +110,7 @@
 								$('#problemLinkToConnect').show();
 								//return false;
 							}
-							
+
 							var url="<#ROOTHTML#>ajax/market.html?op=list&category_id="+category_id+"&search="+encodeURIComponent(search_text);
 							$.ajax({
 								url: url
@@ -140,7 +140,7 @@
 						[#end CATEGORIES#]
 					</ul>
 					<div class="tab-content" id="search_result" style="border-left: 1px solid #ddd;border-right: 1px solid #ddd;border-bottom: 1px solid #ddd;padding: 10px;">
-						
+
 					</div>
 				</form>
 				<script type="text/javascript">
@@ -155,7 +155,7 @@
 <script>
 	$(document).ready(function() {
 		$('#myModal').modal('show');
-		
+
 	});
 	window.onbeforeunload = function() {
 		return true;
@@ -178,5 +178,3 @@
 </div>
 
 [#endif MODE#]
-
-

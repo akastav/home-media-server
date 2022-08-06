@@ -42,7 +42,7 @@ if ($im === false)
 
 $background_color = ImageColorAllocate($im, 255, 255, 255);
 $text_color       = ImageColorAllocate($im, 233, 14, 91);
-  
+
 imagefill($im, 0, 0, $background_color);
 
 $xpos  = rand(1, IWIDTH - 50);
@@ -55,7 +55,7 @@ for ($i = 0; $i < 500; $i++)
 }
 
 imagestring($im, 5, $xpos, rand(0, IHEIGHT - 16), $text, $color);
-  
+
 // comment if not works
 /*
    for ($i = 0; $i < strlen($text); $i++)
@@ -80,4 +80,3 @@ ImagePng($im);
 ImageDestroy($im);
 
 // print_r($text);
-

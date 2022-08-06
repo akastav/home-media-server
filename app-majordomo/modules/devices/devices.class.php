@@ -357,8 +357,8 @@ class devices extends module
     function renderStructure()
     {
 
-        if (defined('DISABLE_SIMPLE_DEVICES') && DISABLE_SIMPLE_DEVICES==1) { 
-            unsubscribeFromEvent('devices', 'COMMAND'); 
+        if (defined('DISABLE_SIMPLE_DEVICES') && DISABLE_SIMPLE_DEVICES==1) {
+            unsubscribeFromEvent('devices', 'COMMAND');
             unsubscribeFromEvent('devices', 'MINUTELY');
             return;
         }
@@ -713,7 +713,7 @@ class devices extends module
         }
 
         $out['UNIQ']=uniqid('dev'.$this->id);
-        
+
         if ($this->id) {
             $qry.=" AND devices.ID=".(int)$this->id;
             $out['SINGLE_DEVICE']=1;
@@ -1488,8 +1488,8 @@ class devices extends module
  devices: ALT_TITLES varchar(255) NOT NULL DEFAULT ''
  devices: TYPE varchar(100) NOT NULL DEFAULT ''
  devices: LINKED_OBJECT varchar(100) NOT NULL DEFAULT ''
- devices: LOCATION_ID int(10) unsigned NOT NULL DEFAULT 0  
- devices: FAVORITE int(3) unsigned NOT NULL DEFAULT 0 
+ devices: LOCATION_ID int(10) unsigned NOT NULL DEFAULT 0
+ devices: FAVORITE int(3) unsigned NOT NULL DEFAULT 0
  devices: SYSTEM_DEVICE int(3) unsigned NOT NULL DEFAULT 0
  devices: CLICKED datetime DEFAULT NULL
  devices: ARCHIVED int(3) unsigned NOT NULL DEFAULT 0
@@ -1507,7 +1507,7 @@ class devices extends module
  devices_linked: LINK_TYPE varchar(100) NOT NULL DEFAULT ''
  devices_linked: LINK_SETTINGS text
  devices_linked: COMMENT varchar(255) NOT NULL DEFAULT ''
-  
+
  devices_groups: ID int(10) unsigned NOT NULL auto_increment
  devices_groups: SYS_NAME varchar(100) NOT NULL DEFAULT ''
  devices_groups: TITLE varchar(255) NOT NULL DEFAULT ''
@@ -1517,7 +1517,7 @@ class devices extends module
  devices_scheduler_points: LINKED_METHOD varchar(255) NOT NULL DEFAULT ''
  devices_scheduler_points: VALUE varchar(255) NOT NULL DEFAULT ''
  devices_scheduler_points: SET_TIME varchar(50) NOT NULL DEFAULT ''
- devices_scheduler_points: SET_DAYS varchar(50) NOT NULL DEFAULT '' 
+ devices_scheduler_points: SET_DAYS varchar(50) NOT NULL DEFAULT ''
  devices_scheduler_points: DEVICE_ID int(10) NOT NULL DEFAULT '0'
  devices_scheduler_points: ACTIVE int(3) NOT NULL DEFAULT '1'
  devices_scheduler_points: LATEST_RUN datetime

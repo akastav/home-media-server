@@ -4,7 +4,7 @@ namespace WebSocket\Application;
 /**
  * Shiny WSS Status Application
  * Provides live server infos/messages to client/browser.
- * 
+ *
  * @author Simon Samtleben <web@lemmingzshadow.net>
  */
 class StatusApplication extends Application
@@ -24,15 +24,15 @@ class StatusApplication extends Application
 
     public function onDisconnect($client)
     {
-        $id = $client->getClientId();		
-		unset($this->_clients[$id]);     
+        $id = $client->getClientId();
+		unset($this->_clients[$id]);
     }
 
     public function onData($data, $client)
-    {		
+    {
         // currently not in use...
     }
-	
+
 	public function setServerInfo($serverInfo)
 	{
 		if(is_array($serverInfo))
@@ -57,7 +57,7 @@ class StatusApplication extends Application
 		$encodedData = $this->_encodeData('clientConnected', $data);
 		$this->_sendAll($encodedData);
 	}
-	
+
 	public function clientDisconnected($ip, $port)
 	{
 		if(!isset($this->_serverClients[$port]))
@@ -67,14 +67,14 @@ class StatusApplication extends Application
 		unset($this->_serverClients[$port]);
 		$this->_serverClientCount--;
 		$this->statusMsg('Client disconnected: ' .$ip.':'.$port);
-		$data = array(			
+		$data = array(
 			'port' => $port,
 			'clientCount' => $this->_serverClientCount,
 		);
 		$encodedData = $this->_encodeData('clientDisconnected', $data);
 		$this->_sendAll($encodedData);
 	}
-	
+
 	public function clientActivity($port)
 	{
 		$encodedData = $this->_encodeData('clientActivity', $port);
@@ -82,15 +82,15 @@ class StatusApplication extends Application
 	}
 
 	public function statusMsg($text, $type = 'info')
-	{		
+	{
 		$data = array(
 			'type' => $type,
 			'text' => '['. strftime('%m-%d %H:%M', time()) . '] ' . $text,
 		);
-		$encodedData = $this->_encodeData('statusMsg', $data);		
+		$encodedData = $this->_encodeData('statusMsg', $data);
 		$this->_sendAll($encodedData);
 	}
-	
+
 	private function _sendServerinfo($client)
 	{
 		if(count($this->_clients) < 1)
@@ -103,9 +103,9 @@ class StatusApplication extends Application
 		$encodedData = $this->_encodeData('serverInfo', $currentServerInfo);
 		$client->send($encodedData);
 	}
-	
+
 	private function _sendAll($encodedData)
-	{		
+	{
 		if(count($this->_clients) < 1)
 		{
 			return false;

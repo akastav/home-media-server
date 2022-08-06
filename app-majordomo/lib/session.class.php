@@ -54,7 +54,7 @@ class session
 
          // setting expiration time for session (the easiest way)
          $expiretime = 60 * 60 * 1; // 2 hours
-         
+
          if (isset($_SESSION['expire']) && ($_SESSION['expire'] < time()))
             $_SESSION['DATA'] = '';
 
@@ -72,7 +72,7 @@ class session
             $this->data = unserialize($_SESSION['DATA']);
 
          $this->started = 1;
-         
+
          if (!defined('SID')) {
 		       Define("SESSION_ID", session_name() . "=" . session_id());
              Define("SID", session_name() . "=" . session_id());

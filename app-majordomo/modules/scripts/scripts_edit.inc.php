@@ -45,12 +45,12 @@ if ($this->mode == 'update') {
 
     $old_code=$rec['CODE'];
     $rec['CODE'] = $code;
-	
+
     if ($rec['CODE'] != '') {
         //echo $content;
-		
+
         $errors = php_syntax_error($rec['CODE']);
-		
+
         if ($errors) {
             $out['ERR_LINE'] = preg_replace('/[^0-9]/', '', substr(stristr($errors, 'php on line '), 0, 18))-2;
             $out['ERR_CODE'] = 1;
@@ -68,8 +68,8 @@ if ($this->mode == 'update') {
     global $run_periodically;
     global $run_days;
     global $run_minutes;
-    global $run_hours;	
- 
+    global $run_hours;
+
     if ($run_periodically && isset($run_days)) {
         $rec['RUN_PERIODICALLY'] = (int)$run_periodically;
         $rec['RUN_DAYS'] = @implode(',', $run_days);
@@ -82,7 +82,7 @@ if ($this->mode == 'update') {
         $rec['RUN_DAYS'] = false;
         $rec['RUN_TIME'] = false;
 	}
-	
+
     //$rec['EXECUTED']='0000-00-00 00:00:00';
     unset($rec['EXECUTED']);
 
@@ -145,7 +145,7 @@ if ($this->mode == 'update') {
 			<pre>';
 			$this->runScript($rec['ID']);
 			echo '</pre></div>';
-           
+
 			$rec['EDIT_RUN'] = $edit_run;
         }
 

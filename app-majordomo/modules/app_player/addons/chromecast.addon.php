@@ -6,7 +6,7 @@ Addon Chromecast for app_player
 
 class chromecast extends app_player_addon
 {
-    
+
     // Constructor
     function __construct($terminal)
     {
@@ -15,7 +15,7 @@ class chromecast extends app_player_addon
         $this->terminal = $terminal;
         $this->terminal['PLAYER_PORT'] = (empty($this->terminal['PLAYER_PORT']) ? 8009 : $this->terminal['PLAYER_PORT']);
 
-        $this->reset_properties();        
+        $this->reset_properties();
         // Chromecast
         include_once(DIR_MODULES . 'app_player/libs/castv2/Chromecast.php');
     }
@@ -32,7 +32,7 @@ class chromecast extends app_player_addon
         $random   = FALSE;
         $loop     = FALSE;
         $repeat   = FALSE;
-        
+
         $cc = new GChromecast($this->terminal['HOST'], $this->terminal['PLAYER_PORT']);
         $cc->requestId = time();
         $status = $cc->getStatus();
@@ -45,20 +45,20 @@ class chromecast extends app_player_addon
             $this->message = 'OK';
             $this->data    = array(
                 'track_id' => (int) $result['status'][0]['media']['tracks'][0]['trackId'], //ID of currently playing track (in playlist). Integer. If unknown (playback stopped or playlist is empty) = -1.
-                'length' => (int) $result['status'][0]['media']['duration'], //Track length in seconds. Integer. If unknown = 0. 
-                'time' => (int) $result['status'][0]['currentTime'], //Current playback progress (in seconds). If unknown = 0. 
-                'state' => (string) strtolower($result['status'][0]['playerState']), //Playback status. String: stopped/playing/paused/unknown 
+                'length' => (int) $result['status'][0]['media']['duration'], //Track length in seconds. Integer. If unknown = 0.
+                'time' => (int) $result['status'][0]['currentTime'], //Current playback progress (in seconds). If unknown = 0.
+                'state' => (string) strtolower($result['status'][0]['playerState']), //Playback status. String: stopped/playing/paused/unknown
                 'volume' => intval($status['status']['volume']['level']*100), // Volume level in percent. Integer. Some players may have values greater than 100.
                 'muted' => (int) $result['status'][0]['volume']['muted'], // Volume level in percent. Integer. Some players may have values greater than 100.
-                'random' => (boolean) $random, // Random mode. Boolean. 
+                'random' => (boolean) $random, // Random mode. Boolean.
                 'loop' => (boolean) $loop, // Loop mode. Boolean.
                 'repeat' => (string) $result['status'][0]['repeatMode'] //Repeat mode. Boolean.
             );
         }
         return $this->success;
     }
-    
-    
+
+
     // Playlist: Get
     function pl_get()
     {
@@ -67,11 +67,11 @@ class chromecast extends app_player_addon
         $track_id      = -1;
         $name          = 'unknow';
         $curren_url    = '';
-        
+
         $cc            = new GChromecast($this->terminal['HOST'], $this->terminal['PLAYER_PORT']);
         $cc->requestId = time();
         $result        = $cc->getMediaSession();
-        
+
         if ($result) {
             // Results
             $this->reset_properties();
@@ -109,7 +109,7 @@ class chromecast extends app_player_addon
         }
         return $this->success;
     }
-    
+
 	// Say
     function say_message($message, $terminal) //SETTINGS_SITE_LANGUAGE_CODE=код языка
     {
@@ -143,7 +143,7 @@ class chromecast extends app_player_addon
         }
         return $this->success;
     }
-    
+
     // Pause
     function pause()
     {
@@ -161,7 +161,7 @@ class chromecast extends app_player_addon
         }
         return $this->success;
     }
-    
+
     // Stop
     function stop()
     {
@@ -179,7 +179,7 @@ class chromecast extends app_player_addon
         }
         return $this->success;
     }
-    
+
     // Set volume
     function set_volume($level)
     {
@@ -203,7 +203,7 @@ class chromecast extends app_player_addon
         }
         return $this->success;
     }
-    
+
 }
 
 ?>

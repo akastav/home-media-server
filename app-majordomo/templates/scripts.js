@@ -46,7 +46,7 @@ function Win2Escape(AStr)
       else
          Result += AStr.charAt(i);
    }
-   
+
    return Result;
 }
 
@@ -125,7 +125,7 @@ function startFlashing(block_id) {
  function getBlockDataForm(block_id, form) {
     params='';
     var formElementsCnt = form.elements.length;
-    
+
     for(i = 0; i < formElementsCnt; i++)
     {
        if (form.elements[i].type != 'radio' || form.elements[i].checked)
@@ -133,7 +133,7 @@ function startFlashing(block_id) {
          params += '&' + form.elements[i].name + '=' + URLencode(form.elements[i].value);
        }
     }
-  
+
     url = form.action;
 
  layer = document.getElementById(block_id);

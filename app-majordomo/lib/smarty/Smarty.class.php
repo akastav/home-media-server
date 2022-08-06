@@ -112,7 +112,7 @@ require_once SMARTY_SYSPLUGINS_DIR . 'smarty_template_resource_base.php';
 class Smarty extends Smarty_Internal_TemplateBase
 {
 	public $owner = null;
-	
+
     /**#@+
      * constant definitions
      */

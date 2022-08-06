@@ -117,7 +117,7 @@ class yy_Op extends yy_Base
   {
     $parts = array($op = $this->operator);
 
-    if (in_array($op, array('new', 'typeof', 'delete'), TRUE) || 
+    if (in_array($op, array('new', 'typeof', 'delete'), TRUE) ||
         in_array($op, array('+', '-'), TRUE) &&
         $this->first instanceof yy_Op && $this->first->operator === $op)
     {

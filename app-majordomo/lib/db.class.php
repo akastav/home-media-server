@@ -12,7 +12,7 @@ class DB {
 
     /**
      * PDO object
-     * @var type 
+     * @var type
      */
     private static $_instance=null;
 
@@ -20,15 +20,15 @@ class DB {
      * Singleton class
      */
     private function __construct() {
-        
+
     }
 
     private function __clone() {
-        
+
     }
 
     public function __sleep() {
-        
+
     }
 
     public static function getInstance() {
@@ -66,8 +66,8 @@ class DB {
         $stmt->execute($values);
     }
 
-    
-    
+
+
     public static function __callStatic($name,$args) {
         $callback=array(self::getInstance(),$name);
         return call_user_func_array($callback,$args);

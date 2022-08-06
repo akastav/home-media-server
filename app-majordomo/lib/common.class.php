@@ -457,22 +457,22 @@ function runScriptSafe($id, $params = 0)
             return 0;
         }
     }
-  
+
     if (!is_array($params)) {
         $params = array();
     }
 
     $call_stack[] = $current_call;
-    $params['raiseEvent'] = $raiseEvent;	 
-    $params['m_c_s'] = $call_stack;     
-    $params['r_s_s'] = $run_SafeScript;      
+    $params['raiseEvent'] = $raiseEvent;
+    $params['m_c_s'] = $call_stack;
+    $params['r_s_s'] = $run_SafeScript;
 
     if (IsSet($_SERVER['REQUEST_URI']) && ($_SERVER['REQUEST_URI'] != '') && !$raiseEvent && $run_SafeScript) {
         $result = runScript($id,$params);
     } else {
         $params['r_s_s'] = 1;
         $result = callAPI('/api/script/' . urlencode($id), 'GET', $params);
-    }  
+    }
     endMeasure('runScriptSafe');
     return $result;
 }

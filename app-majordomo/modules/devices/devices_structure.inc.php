@@ -462,7 +462,7 @@ $this->device_types=array(
         'CLASS'=>'SPowerSensors',
         'PROPERTIES'=>array(
             'loadStatusTimeout'=>array('DESCRIPTION'=>LANG_DEVICES_LOAD_TIMEOUT,'_CONFIG_TYPE'=>'text','_CONFIG_HELP'=>'SdLoadTimeout'),
-        ),        
+        ),
         'METHODS'=>array(
             'valueUpdated'=>array('DESCRIPTION'=>'Value Updated'),
             'loadStatusChanged'=>array('DESCRIPTION'=>'Load Status Changed'),

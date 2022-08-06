@@ -46,7 +46,7 @@ class parse_xml
    public function xml2array($strXml)
    {
       $this->mode = 'xml2array';
-      
+
       if (!preg_match('/^<xml>/i', $strXml))
       {
          $strXml = '<' . $this->ApplyTagRegister('xml') . '>' . $strXml . '</' . $this->ApplyTagRegister('xml') . '>';
@@ -57,7 +57,7 @@ class parse_xml
       xml_parser_set_option($hdlParser, XML_OPTION_SKIP_WHITE, 1);
       xml_parse_into_struct($hdlParser, $strXml, $arrVals, $arrIndex);
       xml_parser_free($hdlParser);
-      
+
       $arrTree = array();
       $i       = 0;
       $arrTree = $this->fromXml($arrVals, $i);
@@ -74,14 +74,14 @@ class parse_xml
    public function fromXml($arrVals, &$i)
    {
       $arrChildren = array();
-      
+
       if ($arrVals[$i]['value'])
       {
          array_push($arrChildren, $arrVals[$i]['value']);
       }
 
       $strPrevTag = '';
-      
+
       while (++$i < count($arrVals))
       {
          switch ($arrVals[$i]['type'])
@@ -92,7 +92,7 @@ class parse_xml
             case 'complete':
                $arrVals[$i]['value'] = $this->ApplyValueCoding($arrVals[$i]['value']);
                $strKey               = $this->ApplyTagRegister($arrVals[$i]['tag']);
-               
+
                // create elements
                if ($arrVals[$i]['tag'] == $arrVals[$i + 1]['tag'] || $arrVals[$i]['tag'] == $arrVals[$i - 1]['tag'])
                {
@@ -105,17 +105,17 @@ class parse_xml
                break;
             case 'open':
                $strKey = $this->ApplyTagRegister($arrVals[$i]['tag']);
-               
+
                //restartindex on unique tag-name
                $j++;
 
                if ($strPrevTag <> $arrVals[$i]['tag'])
                {
                   $j = 0;
-                  
+
                   $strPrevTag = $arrVals[$i]['tag'];
                }
-               
+
                // create elements
                $arrChildren[$strKey][$j] = $this->fromXml($arrVals, $i);
                break;
@@ -237,16 +237,16 @@ class parse_xml
       for ($c = 0; $c < $sLengh; $c++ )
       {
          $i = ord($s[$c]);
-         
+
          if ($i <= 127)
             $out .= $s[$c];
-         
+
          if ($byte2)
          {
             $new_c2 = ($c1 & 3) * 64 + ($i & 63);
             $new_c1 = ($c1 >> 2) & 5;
             $new_i  = $new_c1 * 256 + $new_c2;
-            
+
             if ($new_i == 1025)
             {
                $out_i = 168;

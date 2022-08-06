@@ -28,17 +28,17 @@
 			</div>
 			<div class="panel-collapse collapse out" id="row_myBlockDiv">
 				<div class="panel-body" id="myBlockOnDash_body"></div>
-				
+
 				<div class="panel-body" id="more_myBlockOnDash" style="display:none;">
 					<ul class="list-group" id="more_myBlockOnDash_body">
-						
+
 					</ul>
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="text-center" id="addMyBlockHint" style="display:none;margin-bottom: 20px;"><a style="color: lightgray;text-decoration: none;" href="javascript://" data-toggle="modal" data-target="#modalHowMyBlock"><#LANG_NEWDASH_DMB_TITLE#></a></div>
-		
+
 		<div class="modal fade" id="modalHowMyBlock" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -80,8 +80,8 @@
 			</div>
 		</div>
 		<!--- Генерация своего блока --->
-		
-		
+
+
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div style="float: left"><h3 class="panel-title"><#LANG_NEWDASH_SYSTEM_INFO#></h3></div>
@@ -95,7 +95,7 @@
 							<#LANG_DEVICES_STATUS#> WebSocket
 							<span id="wsStatus" class="badge" style="background:transparent;"><img src="<#ROOTHTML#>img/ajax-loader.gif"/></span>
 						</li>
-						
+
 						<li class="list-group-item" onclick="$('.reqPerMinHour').toggle('slow');" style="cursor:pointer">
 							<#LANG_NEWDASH_DB_REQ_SEC#>
 							<span id="dashInfoDBReqS" onmouseover="$('#dbreqdiscus').show('slow');" class="badge" style="background:transparent;"><img src="<#ROOTHTML#>img/ajax-loader.gif"/></span>
@@ -111,7 +111,7 @@
 						<li class="list-group-item text-center" id="dbreqdiscus" style="display:none;background: radial-gradient(circle farthest-corner at 100px 50px, #daffe5, #d6ecff);">
 							<a href="https://mjdm.ru/forum/viewtopic.php?f=6&t=7301" style="text-decoration:none;color: #333;" target="_blank"><i style="margin-right: 10px;vertical-align: top;" class="glyphicon glyphicon-send"></i>Обсуждение на форуме</a>
 						</li>
-						
+
 						<li class="list-group-item">
 							<span class="badge" id="dashInfoVersion" style="text-transform: uppercase;">
 								<img src="<#ROOTHTML#>img/ajax-loader.gif"/>
@@ -162,21 +162,21 @@
 					var chart = am4core.create("chartdiv_cycle", am4charts.PieChart);
 					chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
 					chart.logo.disabled = true;
-					
+
 					chart.dataSource.url = "?action=xray&md=xray&inst=adm&view_mode=services&ajax=1&op=getcontent&mode=chart";
 					chart.dataSource.parser = new am4core.JSONParser();
 					chart.dataSource.reloadFrequency = 30000;
-					
+
 					chart.radius = am4core.percent(60);
 					chart.innerRadius = am4core.percent(40);
 					chart.startAngle = 180;
-					chart.endAngle = 360;  
+					chart.endAngle = 360;
 
 					var series = chart.series.push(new am4charts.PieSeries());
 					series.dataFields.value = "cycle";
 					series.dataFields.category = "title";
 					series.dataFields.cyclename = "cyclename";
-					
+
 					series.slices.template.propertyFields.fill = "color";
 					series.slices.template.cornerRadius = 0;
 					series.slices.template.innerCornerRadius = 0;
@@ -195,8 +195,8 @@
 					marker.strokeOpacity = 1;
 					marker.stroke = am4core.color("#ccc");
 					chart.legend.labels.template.text = "[bold {color}]{cyclename}[/]";
-					
-					
+
+
 					}); // end am4core.ready()
 					</script>
 
@@ -220,7 +220,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 	</div>
 	<div class="col-md-7">
 		<script>
@@ -233,11 +233,11 @@
 
 		var chart = am4core.create("structureDB_chart", am4charts.XYChart);
 		chart.logo.disabled = true;
-		
+
 		chart.dataSource.url = "?action=xray&md=xray&inst=adm&view_mode=database&ajax=1&op=getcontent&mode=chart";
 		chart.dataSource.parser = new am4core.JSONParser();
 		chart.dataSource.reloadFrequency = 180000;
-		
+
 
 		chart.padding(20, 20, 20, 20);
 
@@ -262,7 +262,7 @@
 		valueAxis.max = 150000;
 		valueAxis.strictMinMax = true;
 		 */
-		
+
 		chart.cursor = new am4charts.XYCursor();
 		chart.scrollbarY = new am4core.Scrollbar();
 		chart.scrollbarY.parent = chart.leftAxesContainer;
@@ -304,11 +304,11 @@
 			<div class="alert" style="background: radial-gradient(circle farthest-corner at 450px 10px, #be5959, #caa417);color: white;text-align: center;border: 0px;"><i class="glyphicon glyphicon-exclamation-sign" style="font-weight: normal;font-size: 13pt;vertical-align: sub;margin-right: 10px;"></i><#LANG_NEWDASH_HINT_BIG_DATA_DB#> <i class="glyphicon glyphicon-arrow-right" style="color: darkgray;font-size: 10pt;vertical-align: text-top;"></i> <a style="text-decoration: none;color: white;" href="?(panel:{action=xray})&md=xray&inst=adm&view_mode=database">X-Ray</a></div>
 			<div class="hidden-xs" onclick="hideHintCookie('howmaxdbsizehint');" style="margin-bottom: 20px;cursor:pointer;text-align: center;font-size: 7pt;margin-top: 5px;color: gray;font-style: italic;"><#LANG_NEWDASH_DONTSHOW_THIS_BLOCK#> <i class="glyphicon glyphicon-arrow-up"></i></div>
 		</div>
-		
+
 		<div id="structureDB_chart" style="border: 1px solid #ddd;border-radius: 4px;width: 100%;height: 300px;margin-bottom:10px">
 			<center style="display: flex;justify-content: center;align-items: center;width: 100%;height: 100%;"><img src="<#ROOTHTML#>img/ajax-loader.gif"/ style="width: 20px;height: 20px;margin-right: 10px;"> <#LANG_NEWDASH_LOADING#></center>
 		</div>
-		
+
 		<!---
 		<div class="jumbotron" style="margin-bottom: 10px;border-radius: 5px;background-image: url(/img/main_img/scenario.png),radial-gradient(circle farthest-corner at 100px 50px, #ebfbf0, #69d147);background-size: contain;background-repeat: no-repeat;background-position: right center;">
 			<h2>Новые сценарии!</h2>
@@ -317,7 +317,7 @@
 			</p>
 			<p class="text-right"><a style="border-color: #ffffff;" href="https://mjdm.ru/forum/viewtopic.php?f=7&t=7294" target="_blank" class="btn btn-primary btn-md" role="button"><#LANG_NEWDASH_HELLO_NEW_BTN#></a></p>
 		</div>
-	
+
 		<style>
 		.onHoverAlfa:hover {
 			color: white;
@@ -329,7 +329,7 @@
 			<p class="text-right"><a style="border-color: #ffffff;" class="btn btn-danger btn-md" role="button">ОК, я с вами!</a></p>
 		</div>
 		--->
-		
+
 		<div id="getConnect" class="jumbotron hidden-xs" style="display:none!important;margin-bottom: 10px;padding-top: 20px;padding-bottom: 10px;border-radius: 5px;background-image: url(/img/connect_back_block.png), radial-gradient(circle farthest-corner at 100px 50px, #ffffff, #d6df4a);background-size: contain;background-repeat: no-repeat;background-position: right center;">
 			<h2 id="titleConnect"><#LANG_NEWDASH_CONNECT_ADS#></h2>
 			<p style="font-size: 11pt;" id="textConnect"><#LANG_NEWDASH_CONNECT_ADS_TEXT#></p>
@@ -347,7 +347,7 @@
 			</div>
 			<div class="hidden-xs" onclick="hideHintCookie('blockdidyouknow');" style="margin-bottom: 20px;cursor:pointer;text-align: center;font-size: 7pt;margin-top: 5px;color: gray;font-style: italic;"><#LANG_NEWDASH_DONTSHOW_THIS_BLOCK#> <i class="glyphicon glyphicon-arrow-up"></i></div>
 		</div>
-		
+
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div style="float: left"><h3 class="panel-title"><#LANG_NEWDASH_NEWS#> <i class="glyphicon glyphicon-arrow-right" style="color: darkgray;font-size: 10pt;"></i> <a href="https://connect.smartliving.ru/blog.html" target="_blank"><i><#LANG_NEWDASH_NEWS_MORE#></i></a></h3></div>
@@ -370,8 +370,8 @@
 		checkCategory('cycleBlockDiv');
 		checkCategory('scriptBlockDiv');
 		checkCategory('newsBlockDiv');
-		
-		
+
+
         checkUpdatesAvailable();
         checkDidYouKnow();
         checkNews();
@@ -383,10 +383,9 @@
 		setInterval(function() { checkSystemInfo(); }, 300000);
 		checkSystemInfo();
 		checkConnectStatus();
-		
+
 		myBlockOnDash();
     });
 </script>
 
 [#endif#]
-

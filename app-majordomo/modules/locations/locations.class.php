@@ -1,6 +1,6 @@
 <?php
 /**
-* Locations 
+* Locations
 *
 * Locations
 *

@@ -25,7 +25,7 @@ class switch_sample extends plan_component {
             'TYPE' => 'select',
             'DATA' => '#ff0000=Red|#00ff00=Green|#0000ff=Blue',
             'DEFAULT' => '#ff0000'
-        );        
+        );
         $properties[] = array(
             'NAME' => 'value',
             'TITLE' => LANG_VALUE,
@@ -45,12 +45,12 @@ class switch_sample extends plan_component {
             'DEFAULT' => '100'
         );
         */
-        
+
         $this->processProperties($properties);
-        
+
         return $properties;
     }
-    
+
     function getSVG($attributes)
     {
 
@@ -82,7 +82,7 @@ class switch_sample extends plan_component {
         }
         return $svg;
     }
-    
+
     function getJavascript($attributes)
     {
         $data=$this->getData();
@@ -102,7 +102,7 @@ class switch_sample extends plan_component {
             duration: 200
             }
             );
-    
+
         } else {
          elem.attr('widthNum','100');
          elem.animate(

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 if ($this->getProperty('status')) {
  $this->callmethodSafe('turnOff');

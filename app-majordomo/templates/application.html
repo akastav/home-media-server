@@ -82,7 +82,7 @@ $(document).ready(function() {
       openTWindow(event_window, 'Event '+event_id, event_details, 500, 500);
      }
      if (event_type=='openurl') {
-      openNewTab(event_window, event_details);      
+      openNewTab(event_window, event_details);
      }
 
      if (event_type=='maximize') {
@@ -132,8 +132,8 @@ $(document).ready(function() {
   if (obj.DATA!='' && noteLatest!=obj.DATA && noteLatest!='') {
      $.gritter.add({
          title: '[#if "<#SETTINGS_GENERAL_ALICE_NAME#>"!=""#]<#SETTINGS_GENERAL_ALICE_NAME#>[#else#]<#LANG_DEFAULT_COMPUTER_NAME#>[#endif#]',
-         text: obj.DATA, 
-         sticky: false, 
+         text: obj.DATA,
+         sticky: false,
          time: 8000
       });
     noteLatest=obj.DATA;

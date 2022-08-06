@@ -16,7 +16,7 @@ class CastMessage {
 		// Deliberately represent this as a binary first (for readability and so it's obvious what's going on.
 		// speed impact doesn't really matter!)
 		$r = "";
-	
+
 		// First the protocol version
 		$r = "00001"; // Field Number 1
 		$r .= "000"; // Int
@@ -47,7 +47,7 @@ class CastMessage {
 		$r .= "00110"; // Field Number 6
 		$r .= "010"; // String
 		$r .= $this->stringToBin($this->payloadutf8);
-		
+
 		// Ignore payload_binary field 7 as never used
 
 		// Now convert it to a binary packet

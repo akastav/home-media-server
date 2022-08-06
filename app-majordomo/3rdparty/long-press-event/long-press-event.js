@@ -68,17 +68,17 @@
     });
 
     // clear if the Wheel event is fired in the element
-    document.addEventListener(mouseWheel, function(e){ 
+    document.addEventListener(mouseWheel, function(e){
         clearTimeout(timer);
     });
 
     // clear if the Scroll event is fired in the element
-    document.addEventListener(wheel, function(e){ 
+    document.addEventListener(wheel, function(e){
         clearTimeout(timer);
     });
 
     // clear if the Scroll event is fired in the element
-    document.addEventListener(scrollEvent, function(e){ 
+    document.addEventListener(scrollEvent, function(e){
         clearTimeout(timer);
     });
 

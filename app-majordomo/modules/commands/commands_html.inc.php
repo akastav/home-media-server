@@ -12,7 +12,7 @@
   if ($rec['SUB_PRELOAD']) {
    //..
  $res.='<div data-role="collapsible" data-iconpos="right">';
-  
+
   $res.='<h2><span  id="label_'.$rec['ID'].'">';
   if ($rec['ICON']!='') {
    $res.='<img src="'.ROOTHTML.'cms/icons/'.$rec['ICON'].'" alt="" style="margin-right:10px;top:0.4em;max-height:32px;max-width:32px;height:32px;width:32px;vertical-align:middle;">';
@@ -72,4 +72,3 @@
 
 
  }
-

@@ -43,7 +43,7 @@ function mysort_array($ar, $field = "TITLE")
          {
             $temp = array();
             $temp = $ar[$i - 1];
-            
+
             $ar[$i - 1] = $ar[$i];
             $ar[$i]     = $temp;
 

@@ -1,11 +1,11 @@
 <?php
-/* 
+/*
  * maintained by
- * - Sven Ginka (sven.ginka@gmail.com) 
+ * - Sven Ginka (sven.ginka@gmail.com)
  *
  * Version mpd.class.php-1.3a 01/2013
  * - added property db_playtime
- * 
+ *
  * Version mpd.class.php-1.3 03/2010
  * - take over from Hendrik Stoetter
  * - removed "split()" as this function is marked depracted
@@ -13,17 +13,17 @@
  * - added property "bitrate" (used by phpMp+)
  * - added define "MPD_SEARCH_FILENAME"
  * - included sorting algorithm "msort"
- * - added function validateFile() for guessing a title if no ID3 data is given 
- * 
+ * - added function validateFile() for guessing a title if no ID3 data is given
+ *
  * Hendrik Stoetter 03/2008
  * - this a lightly modified version of mod.class Version 1.2.
  * - fixed some bugs and added some new functions
  * - Changes:
  * 		GetDir($url) -> GetDir(url,$sort)
  * 		var $stats
- * 
+ *
  *  Benjamin Carlisle 05/05/2004
- * 
+ *
  *  mpd.class.php - PHP Object Interface to the MPD Music Player Daemon
  *  Version 1.2, Released 05/05/2004
  *  Copyright (C) 2003-2004  Benjamin Carlisle (bcarlisle@24oz.com)
@@ -46,7 +46,7 @@
  *
  *
  *
- */ 
+ */
 
 /*
  * MPD command reference at http://www.musicpd.org/doc/protocol/index.html
@@ -102,7 +102,7 @@ define("MPD_SEARCH_ARTIST", "artist");
 define("MPD_SEARCH_TITLE",  "title");
 define("MPD_SEARCH_ALBUM",  "album");
 define("MPD_SEARCH_ANY",  	"any");
-define("MPD_SEARCH_FILENAME","filename"); 
+define("MPD_SEARCH_FILENAME","filename");
 
 // MPD Cache Tables
 define("MPD_TBL_ARTIST","artist");
@@ -149,16 +149,16 @@ class mpd_player {
 	var $playlist_count;
 	var $xfade;
 	var $bitrate;
-	
+
 	var $num_artists;
 	var $num_albums;
 	var $num_songs;
-	
+
 	var $playlist		= array();
-	
+
 	var $stats;
 
-	// Misc Other Vars	
+	// Misc Other Vars
 	var $mpd_class_version = "1.3";
 
 	var $debugging   = FALSE;    // Set to TRUE to turn extended debugging on.
@@ -169,7 +169,7 @@ class mpd_player {
     // =================== BEGIN OBJECT METHODS ================
 
 	/* mpd_player() : Constructor
-	 * 
+	 *
 	 * Builds the MPD object, connects to the server, and refreshes all local object properties.
 	 */
 	function mpd_player($srv,$port,$pwd = NULL, $debug = FALSE ) {
@@ -177,7 +177,7 @@ class mpd_player {
 		$this->port = $port;
         $this->password = $pwd;
         $this->debugging = $debug;
-        
+
         //$file = '/var/www/html/debug.log';
         //$line = "\n\n... mpd_player (HOST: $srv, PLAYER_PORT: $port, PLAYER_PASSWORD: $pwd)";
         //file_put_contents($file, $line, FILE_APPEND | LOCK_EX);
@@ -188,9 +188,9 @@ class mpd_player {
 		$resp = $this->Connect();
 		if ( is_null($resp) ) {
             addErr( "Could not connect" );
-            
+
             file_put_contents($file, "\n... Could not connect", FILE_APPEND | LOCK_EX);
-			
+
             return;
 		} else {
 			addLog( "connected");
@@ -213,18 +213,18 @@ class mpd_player {
     			if ( is_null($this->RefreshInfo()) ) { // no read access -- might as well be disconnected!
                     $this->connected = FALSE;
                     addErr("Password required to access server");
-                    return; 
+                    return;
                 }
             }
 		}
         $this->connected = TRUE;
 	}
-	
-	
+
+
 	/* Connect()
-	 * 
-	 * Connects to the MPD server. 
-     * 
+	 *
+	 * Connects to the MPD server.
+     *
 	 * NOTE: This is called automatically upon object instantiation; you should not need to call this directly.
 	 */
 	function Connect() {
@@ -243,7 +243,7 @@ class mpd_player {
 				}
 				$response =  fgets($this->mpd_sock,1024);
 				addLog( $response );
-								
+
 				if (strncmp(MPD_RESPONSE_OK,$response,strlen(MPD_RESPONSE_OK)) == 0) {
 					$this->connected = TRUE;
 					return $response;
@@ -265,9 +265,9 @@ class mpd_player {
 	}
 
 	/* SendCommand()
-	 * 
-	 * Sends a generic command to the MPD server. Several command constants are pre-defined for 
-	 * use (see MPD_CMD_* constant definitions above). 
+	 *
+	 * Sends a generic command to the MPD server. Several command constants are pre-defined for
+	 * use (see MPD_CMD_* constant definitions above).
 	 */
 	function SendCommand($cmdStr,$arg1 = "",$arg2 = "") {
 		addLog("mpd->SendCommand() / cmd: ".$cmdStr.", args: ".$arg1." ".$arg2 );
@@ -291,7 +291,7 @@ class mpd_player {
 			while(!feof($this->mpd_sock)) {
 				$response = fgets($this->mpd_sock,1024);
 				//addLog($response);
-				
+
 				// An OK signals the end of transmission -- we'll ignore it
 				if (strncmp(MPD_RESPONSE_OK,$response,strlen(MPD_RESPONSE_OK)) == 0) {
 					break;
@@ -312,11 +312,11 @@ class mpd_player {
 		return $respStr;
 	}
 
-	/* QueueCommand() 
+	/* QueueCommand()
 	 *
-	 * Queues a generic command for later sending to the MPD server. The CommandQueue can hold 
-	 * as many commands as needed, and are sent all at once, in the order they are queued, using 
-	 * the SendCommandQueue() method. The syntax for queueing commands is identical to SendCommand(). 
+	 * Queues a generic command for later sending to the MPD server. The CommandQueue can hold
+	 * as many commands as needed, and are sent all at once, in the order they are queued, using
+	 * the SendCommandQueue() method. The syntax for queueing commands is identical to SendCommand().
      */
 	function QueueCommand($cmdStr,$arg1 = "",$arg2 = "") {
 		if ( $this->debugging ) echo "mpd->QueueCommand() / cmd: ".$cmdStr.", args: ".$arg1." ".$arg2."\n";
@@ -337,7 +337,7 @@ class mpd_player {
 		return TRUE;
 	}
 
-	/* SendCommandQueue() 
+	/* SendCommandQueue()
 	 *
 	 * Sends all commands in the Command Queue to the MPD server. See also QueueCommand().
      */
@@ -358,10 +358,10 @@ class mpd_player {
 		return $respStr;
 	}
 
-	/* AdjustVolume() 
+	/* AdjustVolume()
 	 *
 	 * Adjusts the mixer volume on the MPD by <modifier>, which can be a positive (volume increase),
-	 * or negative (volume decrease) value. 
+	 * or negative (volume decrease) value.
      */
 	function AdjustVolume($modifier) {
 		if ( $this->debugging ) echo "mpd->AdjustVolume()\n";
@@ -378,7 +378,7 @@ class mpd_player {
 		return $ret;
 	}
 
-	/* SetVolume() 
+	/* SetVolume()
 	 *
 	 * Sets the mixer volume to <newVol>, which should be between 1 - 100.
      */
@@ -409,14 +409,14 @@ class mpd_player {
 		if ( $this->debugging ) echo "mpd->SetVolume() / return\n";
 		return $ret;
 	}
-	
 
-	
-	/* GetDir() 
-	 * 
+
+
+	/* GetDir()
+	 *
      * Retrieves a database directory listing of the <dir> directory and places the results into
-	 * a multidimensional array. If no directory is specified, the directory listing is at the 
-	 * base of the MPD music path. 
+	 * a multidimensional array. If no directory is specified, the directory listing is at the
+	 * base of the MPD music path.
 	 */
 	function GetDir($dir = "",$sort = "") {
 
@@ -427,37 +427,37 @@ class mpd_player {
 		if ($listArray==null){
 			return null;
 		}
-		
+
 		// we have 3 differnt items: directory, playlist and file
 		// we have to sort them individually and separate
 		// playlist and directory by name
 		// file by $sort
 
 		// 1st: subarrays
-		$array_directory 	= $listArray['directories'];		
-		$array_playlist 	= $listArray['playlists'];		
+		$array_directory 	= $listArray['directories'];
+		$array_playlist 	= $listArray['playlists'];
 		$array_file 		= $listArray['files'];
-		
+
 		// 2nd: sort them
 		natcasesort($array_directory);
 		natcasesort($array_playlist);
-		usort($array_file,"msort"); 
+		usort($array_file,"msort");
 		// 3rd: rebuild
-		$array_return= array( 
+		$array_return= array(
 						"directories"=> $array_directory,
 						"playlists"=> $array_playlist,
 						"files"=> $array_file
 								);
 /*
-									
+
 		foreach ($array_directory as $value) {
-			$array_return[]["directory"] = $value; 
+			$array_return[]["directory"] = $value;
 		}
 		foreach ($array_playlist as $value) {
-			$array_return[]["playlist"] = $value; 
+			$array_return[]["playlist"] = $value;
 		}
 		$array_return = array_merge($array_return,$array_file);
-*/		
+*/
 		addLog( "mpd->GetDir() / return ".print_r($array_return,true));
 		return $array_return;
 	}
@@ -472,18 +472,18 @@ class mpd_player {
 		if ( $this->debugging ) echo "mpd->GetDir()\n";
 		$resp = $this->SendCommand(MPD_CMD_LSDIR,$dir);
 
-         
+
 		#$dirlist = $this->_parseFileListResponse($resp);
         $dirlist = $this->_parseFileListResponseHumanReadable($resp);
 
 		if ( $this->debugging ) echo "mpd->GetDir() / return ".print_r($dirlist)."\n";
 		return $dirlist;
 	}
-	
-	/* PLAdd() 
-	 * 
-     * Adds each track listed in a single-dimensional <trackArray>, which contains filenames 
-	 * of tracks to add, to the end of the playlist. This is used to add many, many tracks to 
+
+	/* PLAdd()
+	 *
+     * Adds each track listed in a single-dimensional <trackArray>, which contains filenames
+	 * of tracks to add, to the end of the playlist. This is used to add many, many tracks to
 	 * the playlist in one swoop.
 	 */
 	function PLAddBulk($trackArray) {
@@ -498,9 +498,9 @@ class mpd_player {
 		return $resp;
 	}
 
-	/* PLAdd() 
-	 * 
-	 * Adds the file <file> to the end of the playlist. <file> must be a track in the MPD database. 
+	/* PLAdd()
+	 *
+	 * Adds the file <file> to the end of the playlist. <file> must be a track in the MPD database.
 	 */
 	function PLAdd($fileName) {
 		if ( $this->debugging ) echo "mpd->PLAdd()\n";
@@ -509,9 +509,9 @@ class mpd_player {
 		return $resp;
 	}
 
-	/* PLMoveTrack() 
-	 * 
-	 * Moves track number <origPos> to position <newPos> in the playlist. This is used to reorder 
+	/* PLMoveTrack()
+	 *
+	 * Moves track number <origPos> to position <newPos> in the playlist. This is used to reorder
 	 * the songs in the playlist.
 	 */
 	function PLMoveTrack($origPos, $newPos) {
@@ -519,21 +519,21 @@ class mpd_player {
 		if ( ! is_numeric($origPos) ) {
 			$this->errStr = "PLMoveTrack(): argument 1 must be numeric";
 			return NULL;
-		} 
+		}
 		if ( $origPos < 0 or $origPos > $this->playlist_count ) {
 			$this->errStr = "PLMoveTrack(): argument 1 out of range";
 			return NULL;
 		}
 		if ( $newPos < 0 ) $newPos = 0;
 		if ( $newPos > $this->playlist_count ) $newPos = $this->playlist_count;
-		
+
 		if ( ! is_null($resp = $this->SendCommand(MPD_CMD_PLMOVETRACK,$origPos,$newPos))) $this->RefreshInfo();
 		if ( $this->debugging ) echo "mpd->PLMoveTrack() / return\n";
 		return $resp;
 	}
 
-	/* PLShuffle() 
-	 * 
+	/* PLShuffle()
+	 *
 	 * Randomly reorders the songs in the playlist.
 	 */
 	function PLShuffle() {
@@ -543,9 +543,9 @@ class mpd_player {
 		return $resp;
 	}
 
-	/* PLLoad() 
-	 * 
-	 * Retrieves the playlist from <file>.m3u and loads it into the current playlist. 
+	/* PLLoad()
+	 *
+	 * Retrieves the playlist from <file>.m3u and loads it into the current playlist.
 	 */
 	function PLLoad($file) {
 		if ( $this->debugging ) echo "mpd->PLLoad()\n";
@@ -554,8 +554,8 @@ class mpd_player {
 		return $resp;
 	}
 
-	/* PLSave() 
-	 * 
+	/* PLSave()
+	 *
 	 * Saves the playlist to <file>.m3u for later retrieval. The file is saved in the MPD playlist
 	 * directory.
 	 */
@@ -566,8 +566,8 @@ class mpd_player {
 		return $resp;
 	}
 
-	/* PLClear() 
-	 * 
+	/* PLClear()
+	 *
 	 * Empties the playlist.
 	 */
 	function PLClear() {
@@ -577,8 +577,8 @@ class mpd_player {
 		return $resp;
 	}
 
-	/* PLRemove() 
-	 * 
+	/* PLRemove()
+	 *
 	 * Removes track <id> from the playlist.
 	 */
 	function PLRemove($id) {
@@ -591,9 +591,9 @@ class mpd_player {
 		if ( $this->debugging ) echo "mpd->PLRemove() / return\n";
 		return $resp;
 	}
-	
-	/* PLRemoveId() 
-	 * 
+
+	/* PLRemoveId()
+	 *
 	 * Removes track <id> from the playlist.
 	 */
 	function PLRemoveId($id) {
@@ -607,9 +607,9 @@ class mpd_player {
 		return $resp;
 	}
 
-	/* SetSingle() 
-	 * 
-	 * Enables 'single' mode -- tells MPD to play only the current track. The <singVal> parameter 
+	/* SetSingle()
+	 *
+	 * Enables 'single' mode -- tells MPD to play only the current track. The <singVal> parameter
 	 * is either 1 (on) or 0 (off).
 	 */
 	function SetSingle($singVal) {
@@ -619,10 +619,10 @@ class mpd_player {
 		if ( $this->debugging ) echo "mpd->SetSingle() / return\n";
 		return $sing;
 	}
-	
-	/* SetRepeat() 
-	 * 
-	 * Enables 'loop' mode -- tells MPD continually loop the playlist. The <repVal> parameter 
+
+	/* SetRepeat()
+	 *
+	 * Enables 'loop' mode -- tells MPD continually loop the playlist. The <repVal> parameter
 	 * is either 1 (on) or 0 (off).
 	 */
 	function SetRepeat($repVal) {
@@ -633,8 +633,8 @@ class mpd_player {
 		return $rpt;
 	}
 
-	/* SetRandom() 
-	 * 
+	/* SetRandom()
+	 *
 	 * Enables 'randomize' mode -- tells MPD to play songs in the playlist in random order. The
 	 * <rndVal> parameter is either 1 (on) or 0 (off).
 	 */
@@ -646,10 +646,10 @@ class mpd_player {
 		return $resp;
 	}
 
-	/* Shutdown() 
-	 * 
-	 * Shuts down the MPD server (aka sends the KILL command). This closes the current connection, 
-	 * and prevents future communication with the server. 
+	/* Shutdown()
+	 *
+	 * Shuts down the MPD server (aka sends the KILL command). This closes the current connection,
+	 * and prevents future communication with the server.
 	 */
 	function Shutdown() {
 		if ( $this->debugging ) echo "mpd->Shutdown()\n";
@@ -664,15 +664,15 @@ class mpd_player {
 		return $resp;
 	}
 
-	/* DBRefresh() 
-	 * 
-	 * Tells MPD to rescan the music directory for new tracks, and to refresh the Database. Tracks 
+	/* DBRefresh()
+	 *
+	 * Tells MPD to rescan the music directory for new tracks, and to refresh the Database. Tracks
 	 * cannot be played unless they are in the MPD database.
 	 */
 	function DBRefresh() {
 		if ( $this->debugging ) echo "mpd->DBRefresh()\n";
 		$resp = $this->SendCommand(MPD_CMD_REFRESH);
-		
+
 		// Update local variables
 		$this->RefreshInfo();
 
@@ -680,9 +680,9 @@ class mpd_player {
 		return $resp;
 	}
 
-	/* Play() 
-	 * 
-	 * Begins playing the songs in the MPD playlist. 
+	/* Play()
+	 *
+	 * Begins playing the songs in the MPD playlist.
 	 */
 	function Play() {
 		if ( $this->debugging ) echo "mpd->Play()\n";
@@ -690,10 +690,10 @@ class mpd_player {
 		if ( $this->debugging ) echo "mpd->Play() / return\n";
 		return $rpt;
 	}
-	
-	/* PlayId() 
-	 * 
-	 * Begins playing the song by id in the MPD playlist. 
+
+	/* PlayId()
+	 *
+	 * Begins playing the song by id in the MPD playlist.
 	 */
 	function PlayId($id) {
 		if ( $this->debugging ) echo "mpd->PlayId()\n";
@@ -706,9 +706,9 @@ class mpd_player {
 		return $pld;
 	}
 
-	/* Stop() 
-	 * 
-	 * Stops playing the MPD. 
+	/* Stop()
+	 *
+	 * Stops playing the MPD.
 	 */
 	function Stop() {
 		if ( $this->debugging ) echo "mpd->Stop()\n";
@@ -717,10 +717,10 @@ class mpd_player {
 		return $rpt;
 	}
 
-	/* Pause() 
-	 * 
+	/* Pause()
+	 *
 	 * Toggles pausing on the MPD. Calling it once will pause the player, calling it again
-	 * will unpause. 
+	 * will unpause.
 	 */
 	function Pause() {
 		if ( $this->debugging ) echo "mpd->Pause()\n";
@@ -728,12 +728,12 @@ class mpd_player {
 		if ( $this->debugging ) echo "mpd->Pause() / return\n";
 		return $rpt;
 	}
-	
-	/* SeekTo() 
-	 * 
-	 * Skips directly to the <idx> song in the MPD playlist. 
+
+	/* SeekTo()
+	 *
+	 * Skips directly to the <idx> song in the MPD playlist.
 	 */
-	function SkipTo($idx) { 
+	function SkipTo($idx) {
 		if ( $this->debugging ) echo "mpd->SkipTo()\n";
 		if ( ! is_numeric($idx) ) {
 			$this->errStr = "SkipTo() : argument 1 must be a numeric value";
@@ -744,13 +744,13 @@ class mpd_player {
 		return $idx;
 	}
 
-	/* SeekTo() 
-	 * 
+	/* SeekTo()
+	 *
 	 * Skips directly to a given position within a track in the MPD playlist. The <pos> argument,
 	 * given in seconds, is the track position to locate. The <track> argument, if supplied is
 	 * the track number in the playlist. If <track> is not specified, the current track is assumed.
 	 */
-	function SeekTo($pos, $track = -1) { 
+	function SeekTo($pos, $track = -1) {
 		if ( $this->debugging ) echo "mpd->SeekTo()\n";
 		if ( ! is_numeric($pos) ) {
 			$this->errStr = "SeekTo() : argument 1 must be a numeric value";
@@ -760,18 +760,18 @@ class mpd_player {
 			$this->errStr = "SeekTo() : argument 2 must be a numeric value";
 			return NULL;
 		}
-		if ( $track == -1 ) { 
+		if ( $track == -1 ) {
 			$track = $this->current_track_id;
-		} 
-		
+		}
+
 		if ( ! is_null($rpt = $this->SendCommand(MPD_CMD_SEEK,$track,$pos))) $this->RefreshInfo();
 		if ( $this->debugging ) echo "mpd->SeekTo() / return\n";
 		return $pos;
 	}
 
-	/* Next() 
-	 * 
-	 * Skips to the next song in the MPD playlist. If not playing, returns an error. 
+	/* Next()
+	 *
+	 * Skips to the next song in the MPD playlist. If not playing, returns an error.
 	 */
 	function Next() {
 		if ( $this->debugging ) echo "mpd->Next()\n";
@@ -780,9 +780,9 @@ class mpd_player {
 		return $rpt;
 	}
 
-	/* Previous() 
-	 * 
-	 * Skips to the previous song in the MPD playlist. If not playing, returns an error. 
+	/* Previous()
+	 *
+	 * Skips to the previous song in the MPD playlist. If not playing, returns an error.
 	 */
 	function Previous() {
 		if ( $this->debugging ) echo "mpd->Previous()\n";
@@ -790,13 +790,13 @@ class mpd_player {
 		if ( $this->debugging ) echo "mpd->Previous() / return\n";
 		return $rpt;
 	}
-	
-	/* Search() 
-	 * 
-     * Searches the MPD database. The search <type> should be one of the following: 
+
+	/* Search()
+	 *
+     * Searches the MPD database. The search <type> should be one of the following:
      *        MPD_SEARCH_ARTIST, MPD_SEARCH_TITLE, MPD_SEARCH_ALBUM
-     * The search <string> is a case-insensitive locator string. Anything that contains 
-	 * <string> will be returned in the results. 
+     * The search <string> is a case-insensitive locator string. Anything that contains
+	 * <string> will be returned in the results.
 	 */
 	function Search($type,$string) {
 		addLog("mpd->Search()");
@@ -814,13 +814,13 @@ class mpd_player {
 		return $searchlist;
 	}
 
-	/* Find() 
-	 * 
-	 * Find() looks for exact matches in the MPD database. The find <type> should be one of 
-	 * the following: 
+	/* Find()
+	 *
+	 * Find() looks for exact matches in the MPD database. The find <type> should be one of
+	 * the following:
      *         MPD_SEARCH_ARTIST, MPD_SEARCH_TITLE, MPD_SEARCH_ALBUM
-     * The find <string> is a case-insensitive locator string. Anything that exactly matches 
-	 * <string> will be returned in the results. 
+     * The find <string> is a case-insensitive locator string. Anything that exactly matches
+	 * <string> will be returned in the results.
 	 */
 	function Find($type,$string) {
 		if ( $this->debugging ) echo "mpd->Find()\n";
@@ -837,8 +837,8 @@ class mpd_player {
 		return $searchlist;
 	}
 
-	/* Disconnect() 
-	 * 
+	/* Disconnect()
+	 *
 	 * Closes the connection to the MPD server.
 	 */
 	function Disconnect() {
@@ -851,15 +851,15 @@ class mpd_player {
 		unset($this->mpd_sock);
 	}
 
-	/* GetArtists() 
-	 * 
+	/* GetArtists()
+	 *
 	 * Returns the list of artists in the database in an associative array.
 	*/
 	function GetArtists() {
 		if ( $this->debugging ) echo "mpd->GetArtists()\n";
 		if ( is_null($resp = $this->SendCommand(MPD_CMD_TABLE, MPD_TBL_ARTIST)))	return NULL;
         $arArray = array();
-        
+
         $arLine = strtok($resp,"\n");
         $arName = "";
         $arCounter = -1;
@@ -877,8 +877,8 @@ class mpd_player {
         return $arArray;
     }
 
-    /* GetAlbums() 
-	 * 
+    /* GetAlbums()
+	 *
 	 * Returns the list of albums in the database in an associative array. Optional parameter
      * is an artist Name which will list all albums by a particular artist.
 	*/
@@ -918,14 +918,14 @@ class mpd_player {
 		return ( 100 * $ver_maj ) + ( 10 * $ver_min ) + ( $ver_rel );
     }
 
-	/* _checkCompatibility() 
-	 * 
-	 * Check MPD command compatibility against our internal table. If there is no version 
+	/* _checkCompatibility()
+	 *
+	 * Check MPD command compatibility against our internal table. If there is no version
 	 * listed in the table, allow it by default.
 	*/
 	private function _checkCompatibility($cmd) {
         return TRUE;
-        
+
         // Check minimum compatibility
 		if (isset($this->COMPATIBILITY_MIN_TBL[$cmd])){
 			$req_ver_low = $this->COMPATIBILITY_MIN_TBL[$cmd];
@@ -934,7 +934,7 @@ class mpd_player {
 		}
 		// check max compatibility
 		if (isset($this->COMPATIBILITY_MAX_TBL[$cmd])){
-			$req_ver_hi = $this->COMPATIBILITY_MAX_TBL[$cmd];	
+			$req_ver_hi = $this->COMPATIBILITY_MAX_TBL[$cmd];
 		} else {
 			$req_ver_hi = "0.20.0";
 		}
@@ -965,7 +965,7 @@ class mpd_player {
 
 	/*
 	 * checks the file entry and complete it if necesarry
-	 * checked fields are 'Artist', 'Genre' and 'Title' 
+	 * checked fields are 'Artist', 'Genre' and 'Title'
 	 *
 	 */
 	private function _validateFile( $fileItem ){
@@ -974,53 +974,53 @@ class mpd_player {
 
 		if (!isset($fileItem['Artist'])){ $fileItem['Artist']=null; }
 		if (!isset($fileItem['Genre'])){ $fileItem['Genre']=null; }
-		
-		// special conversion for streams 				
+
+		// special conversion for streams
 		if (stripos($filename, 'http' )!==false){
 			if (!isset($fileItem['Title'])) $title = ''; else $title=$fileItem['Title'];
 			if (!isset($fileItem['Name'])) $name = ''; else $name=$fileItem['Name'];
 			if (!isset($fileItem['Artist'])) $artist = ''; else $artist=$fileItem['Artist'];
-			
+
 			if (strlen($title.$name.$artist)==0){
 				$fileItem['Title'] = $filename;
 			} else {
-				$fileItem['Title'] = 'stream://'.$title.' '.$name.' '.$artist;	
+				$fileItem['Title'] = 'stream://'.$title.' '.$name.' '.$artist;
 			}
-			
+
 		}
-				 				
-		if (!isset($fileItem['Title'])){ 
+
+		if (!isset($fileItem['Title'])){
 			$file_parts = explode('/', $filename);
 			$fileItem['Title'] = $filename;
 		 }
-				
-		return $fileItem;		
+
+		return $fileItem;
 	}
-	
+
 	/*
 	 * take the response of mpd and split it up into
-	 * items of types 'file', 'directory' and 'playlist' 
-	 * 
+	 * items of types 'file', 'directory' and 'playlist'
+	 *
 	 */
 	private function _extractItems( $resp ){
-	
+
 		if ( $resp == null ) {
 			addLog('empty file list');
 			return NULL;
-		} 
-		
+		}
+
 		// strip unwanted chars
 		$resp = trim($resp);
-		// split up into lines 
+		// split up into lines
 		$lineList = explode("\n", $resp );
-		
+
 		$array = array();
-		
+
 		$item=null;
 		foreach ($lineList as $line ){
 			list ( $element, $value ) = explode(": ",$line);
 
-			
+
 			// if one of the key words come up, store the item
 			if (($element == "directory") or ($element=="playlist") or ($element=="file")){
 				if ($item){
@@ -1028,70 +1028,70 @@ class mpd_player {
 				}
 				$item = array();
 			}
-			$item[$element] = $value;								
+			$item[$element] = $value;
 		}
 		// check if there is a last item to store
 		if (sizeof($item)>0){
 			$array[] = $item;
 		}
-		
-		return $array;			
+
+		return $array;
 	}
-	
-	
-	/* _parseFileListResponse() 
-	 * 
+
+
+	/* _parseFileListResponse()
+	 *
 	 * Builds a multidimensional array with MPD response lists.
      *
 	 * NOTE: This function is used internally within the class. It should not be used.
 	 */
 	private function _parseFileListResponse($resp) {
-		
+
 		$valuesArray = $this->_extractItems( $resp );
-		
+
 		if ($valuesArray == null ){
 			return null;
 		}
-		
-		
+
+
 		//1. create empty arrays
 		$directoriesArray = array();
 		$filesArray = array();
 		$playlistsArray = array();
-		
 
-		//2. sort the items 		
+
+		//2. sort the items
 		foreach ( $valuesArray as $item ) {
-			
+
 			if (isset($item['file'])){
 				$filesArray[] = $this->_validateFile($item);
 			} else if (isset($item['directory'])){
 				$directoriesArray[] = $item['directory'];
 			} else if (isset($item['playlist'])){
-				$playlistsArray[] = $item['playlist'];	
+				$playlistsArray[] = $item['playlist'];
 			} else {
 				addErr('should not enter this');
 			}
-		} 
-		
-		//3. create a combined list of items		
+		}
+
+		//3. create a combined list of items
 		$returnArray = array(
 							"directories"=>$directoriesArray,
 							"playlists"=>$playlistsArray,
 							"files"=>$filesArray
 						);
-		
+
 		addLog( print_r($valuesArray,true) );
-				
+
 		return $returnArray;
 
 	}
-	
-  
 
-	
-	/* RefreshInfo() 
-	 * 
+
+
+
+	/* RefreshInfo()
+	 *
 	 * Updates all class properties with the values from the MPD server.
      *
 	 * NOTE: This function is automatically called upon Connect() as of v1.1.
@@ -1109,7 +1109,7 @@ class mpd_player {
 			foreach ( $statLine as $line ) {
 				list ( $element, $value ) = explode(": ",$line);
 				$stats[$element] = $value;
-			} 
+			}
 		}
 
         // Get the Server Status
@@ -1172,13 +1172,13 @@ class mpd_player {
         else $this->xfade = FALSE;
 		if(isset($status['bitrate'])) $this->bitrate = $status['bitrate'];
         else $this->bitrate = FALSE;
-        		
+
 		return TRUE;
 	}
 
     /* ------------------ DEPRECATED METHODS -------------------*/
-	/* GetStatistics() 
-	 * 
+	/* GetStatistics()
+	 *
 	 * Retrieves the 'statistics' variables from the server and tosses them into an array.
      *
 	 * NOTE: This function really should not be used. Instead, use $this->[variable]. The function
@@ -1196,14 +1196,14 @@ class mpd_player {
 				list ( $element, $value ) = explode(": ",$statsLine);
 				$statsArray[$element] = $value;
 				$statsLine = strtok("\n");
-			} 
+			}
 		}
 		if ( $this->debugging ) echo "mpd->GetStatistics() / return: " . print_r($statsArray) ."\n";
 		return $statsArray;
 	}
 
-	/* GetStatus() 
-	 * 
+	/* GetStatus()
+	 *
 	 * Retrieves the 'status' variables from the server and tosses them into an array.
      *
 	 * NOTE: This function really should not be used. Instead, use $this->[variable]. The function
@@ -1227,8 +1227,8 @@ class mpd_player {
 		return $statusArray;
 	}
 
-	/* GetVolume() 
-	 * 
+	/* GetVolume()
+	 *
 	 * Retrieves the mixer volume from the server.
      *
 	 * NOTE: This function really should not be used. Instead, use $this->volume. The function
@@ -1246,8 +1246,8 @@ class mpd_player {
 		return $vol;
 	}
 
-	/* GetPlaylist() 
-	 * 
+	/* GetPlaylist()
+	 *
 	 * Retrieves the playlist from the server and tosses it into a multidimensional array.
      *
 	 * NOTE: This function really should not be used. Instead, use $this->playlist. The function
@@ -1269,8 +1269,8 @@ class mpd_player {
 		MPD_CMD_PLSWAPTRACK	=> "0.9.1"	,
 		MPD_CMD_PLMOVETRACK	=> "0.9.1"  ,
 		MPD_CMD_PASSWORD	=> "0.10.0" ,
-        MPD_CMD_SETVOL      => "0.10.0"	
-        
+        MPD_CMD_SETVOL      => "0.10.0"
+
 	);
 
     var $COMPATIBILITY_MAX_TBL = array(

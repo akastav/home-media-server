@@ -11,7 +11,7 @@
 //
 
 class app_player extends module {
-	
+
 	/**
 	* player
 	*
@@ -25,7 +25,7 @@ class app_player extends module {
 		$this->module_category = '<#LANG_SECTION_APPLICATIONS#>';
 		$this->checkInstalled();
 	}
-	
+
 	/**
 	* saveParams
 	*
@@ -49,7 +49,7 @@ class app_player extends module {
 		}
 		return parent::saveParams($p);
 	}
-	
+
 	/**
 	* getParams
 	*
@@ -79,7 +79,7 @@ class app_player extends module {
 			$this->tab = $tab;
 		}
 	}
-	
+
 	/**
 	* Run
 	*
@@ -113,7 +113,7 @@ class app_player extends module {
 		$p = new parser(DIR_TEMPLATES.$this->name.'/'.$this->name.'.html', $this->data, $this);
 		$this->result = $p->result;
 	}
-	
+
 	/**
 	* BackEnd
 	*
@@ -133,7 +133,7 @@ class app_player extends module {
 		$out['MODE'] = $this->mode;
 		$out['ENABLED'] = (int)($this->config['ENABLED']);
 	}
-	
+
 	/**
 	* FrontEnd
 	*
@@ -177,7 +177,7 @@ class app_player extends module {
 			}
 		}
 		$session->data['PLAY_TERMINAL'] = $terminal['NAME'];
-		
+
 		// Session terminal
 		$session_terminal = ($this->session_terminal?$this->session_terminal:gr('session_terminal'));
 		if($session_terminal != '') { // name in request
@@ -185,7 +185,7 @@ class app_player extends module {
 		} elseif($session->data['SESSION_TERMINAL'] == '') { // default
 			$session->data['SESSION_TERMINAL'] = $session->data['PLAY_TERMINAL'];
 		}
-		
+
 		// Terminal defaults
 		if(!$terminal['HOST']) {
 			$terminal['HOST'] = 'localhost';
@@ -208,14 +208,14 @@ class app_player extends module {
 		}
 
 		if($ajax) {
-			
+
 			// Command
 			if($this->command) {
 				$command = $this->command;
 			} else {
 				$command = trim(gr('command'));
 			}
-			
+
 			// Param
 			if($this->param) {
 				$param = $this->param;
@@ -232,7 +232,7 @@ class app_player extends module {
 				'message'			=> NULL,
 				'data'				=> NULL,
 			);
-			
+
 			if(strlen($command)) {
 
 				// Deprecated (backward compatibility)
@@ -258,20 +258,20 @@ class app_player extends module {
 
 				// Addons main class
 				include_once(DIR_MODULES.'app_player/addons.php');
-				
+
 				// Load addon
 				if(file_exists(DIR_MODULES.'app_player/addons/'.$terminal['PLAYER_TYPE'].'.addon.php')) {
 
 					include_once(DIR_MODULES.'app_player/addons/'.$terminal['PLAYER_TYPE'].'.addon.php');
 
 					if(class_exists($terminal['PLAYER_TYPE'])) {
-						
+
 						if(is_subclass_of($terminal['PLAYER_TYPE'], 'app_player_addon', TRUE)) {
 
 							if($player = new $terminal['PLAYER_TYPE']($terminal)) {
 
 								if($command == 'features') {
-									
+
 									// Get features
 									$json['success'] = TRUE;
 									$json['message'] = 'OK';
@@ -286,7 +286,7 @@ class app_player extends module {
 									}
 
 								} else {
-								
+
 									// Execute command
 									$result = $player->$command($param);
 
@@ -306,7 +306,7 @@ class app_player extends module {
 								$json['success'] = FALSE;
 								$json['message'] = 'Error of the addon "'.$terminal['PLAYER_TYPE'].'" object!';
 							}
-						
+
 						} else {
 							$json['success'] = FALSE;
 							$json['message'] = 'Addon "'.$terminal['PLAYER_TYPE'].'" does not inherit from class "app_player_addon"!';
@@ -319,7 +319,7 @@ class app_player extends module {
 					$json['success'] = FALSE;
 					$json['message'] = 'Addon "'.$terminal['PLAYER_TYPE'].'" is not installed!';
 				}
-				
+
 				// Set media volume level
 				if($command == 'set_volume' && strlen($param)) {
 					if(strtolower($terminal['HOST']) == 'localhost' || $terminal['HOST'] == '127.0.0.1') {
@@ -327,12 +327,12 @@ class app_player extends module {
 						callMethod('ThisComputer.VolumeMediaLevelChanged', array('VALUE' => (int)$param, 'HOST' => $terminal['HOST']));
 					}
 				}
-				
+
 			} else { // HTML5 Player
 				$json['success'] = TRUE;
 				$json['message'] = 'Nothing to do.';
 			}
-			
+
 			// Return json
 			if($this->intCall) {
 				$this->json = $json;
@@ -370,11 +370,11 @@ class app_player extends module {
 			$out['TERMINALS'][] = $temp_terminal;
 		}
 		//$out['TERMINALS'] = $terminals;
-		
+
 		// Unique ID
 		$out['APP_PLAYER_ID'] = uniqid('app_player_');
 	}
-	
+
 	/**
 	* Install
 	*

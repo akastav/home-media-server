@@ -396,7 +396,7 @@ gulp.task('package-node-core', function() {
  * A helper method for packaging a Blockly code generator into a UMD module.
  * @param {string} file Source file name.
  * @param {string} rename Destination file name.
- * @param {string} generator Generator export namespace. 
+ * @param {string} generator Generator export namespace.
  */
 function packageGenerator(file, rename, generator) {
   return gulp.src(file)
